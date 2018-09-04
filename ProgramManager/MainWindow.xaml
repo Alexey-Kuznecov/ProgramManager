@@ -1,0 +1,261 @@
+﻿<Window x:Class="ProgramManager.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ProgramManager"
+        mc:Ignorable="d"
+        Title="Witcher Mod Install" Height="606" Width="900" MinHeight="584" MinWidth="870" MaxHeight="700" MaxWidth="870" WindowStartupLocation="CenterScreen">
+    <Grid VerticalAlignment="Top">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.2*"></ColumnDefinition>
+            <ColumnDefinition Width="0.3*"></ColumnDefinition>
+            <ColumnDefinition Width="0.2*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"></RowDefinition>
+            <RowDefinition Height="35"></RowDefinition>
+            <RowDefinition Height="2"></RowDefinition>
+            <RowDefinition Height="45"></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="65"></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Menu Grid.ColumnSpan="3">
+            <MenuItem Header="Действие" FontSize="12" Height="20">
+                <MenuItem Header="Восстановить"></MenuItem>
+                <MenuItem Header="Создать резевную копию"></MenuItem>
+                <MenuItem Header="Обновить список"></MenuItem>
+                <MenuItem Header="Удалить из списка"></MenuItem>
+                <Separator/>
+                <MenuItem Header="Добавить">
+                    <MenuItem Header="Добавить в избранное"></MenuItem>
+                    <MenuItem Header="Добавить тег"></MenuItem>
+                    <MenuItem Header="Добавить категорию"></MenuItem>
+                    <MenuItem Header="Добавить информацию"></MenuItem>
+                </MenuItem>
+                <Separator/>
+                <MenuItem Header="Инпортировать"></MenuItem>
+                <MenuItem Header="Экспортировать"></MenuItem>
+                <Separator/>
+                <MenuItem Header="Выход"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="Команды" FontSize="12">
+                <MenuItem x:Name="menuCreatePack" Header="Собрать пакет" Click="CallWinCreatePack_Click"></MenuItem>
+                <MenuItem Header="Отредактировать пакет"></MenuItem>
+                <MenuItem Header="Переименовать пакет"></MenuItem>
+                <MenuItem Header="Устнановка пакета"></MenuItem>
+                <MenuItem Header="Удаление пакета"></MenuItem>
+                <Separator/>
+                <MenuItem Header="Редактировать теги"></MenuItem>
+                <MenuItem Header="Редактировать категории"></MenuItem>
+                <MenuItem Header="Редактировать избранные"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="Инструменты" FontSize="12">
+                <MenuItem Header="Мастер установки"></MenuItem>
+                <MenuItem Header="Редактор конфигурации"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="Настройки" FontSize="12">
+                <MenuItem Header="Параметры"></MenuItem>
+                <MenuItem Header="Скины">
+                    <MenuItem Header="По умолчанию"></MenuItem>
+                    <MenuItem Header="TotalCommander"></MenuItem>
+                    <MenuItem Header="Vista"></MenuItem>
+                    <MenuItem Header="Fenix Black"></MenuItem>
+                    <MenuItem Header="Fenix Light"></MenuItem>
+                    <MenuItem Header="Xoma"></MenuItem>
+                    <MenuItem Header="Monokai"></MenuItem>
+                    <MenuItem Header="Zirael Black"></MenuItem>
+                    <MenuItem Header="Zirael Light"></MenuItem>
+                </MenuItem>
+                <Separator/>
+                <MenuItem Header="Боковая панель"></MenuItem>
+                <MenuItem Header="Cтрока состояния"></MenuItem>
+                <MenuItem Header="Панель инструментов"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="Справка" FontSize="12">
+                <MenuItem Header="Руководство"></MenuItem>
+                <MenuItem Header="Скачать моды"></MenuItem>
+                <Separator/>
+                <MenuItem Header="О программе"></MenuItem>
+            </MenuItem>
+        </Menu>
+        <WrapPanel Grid.Row="1" Grid.ColumnSpan="3" VerticalAlignment="Center">
+            <Button x:Name="pToolsOpen"  Margin="5,0,0,0" Height="30" Style="{StaticResource btIcon}">
+                <Button.Content>
+                    <ContentControl>
+                        <WrapPanel>
+                            <Image Width="18" Source="Resources/Icons/Open_48px.png" ></Image>
+                            <Label Content="Открыть" BorderBrush="{x:Null}" Height="24"></Label>
+                        </WrapPanel>
+                    </ContentControl>
+                </Button.Content>
+            </Button>
+            <Button x:Name="pToolsCreate" Height="30" Style="{StaticResource btIcon}">
+                <Button.Content>
+                    <ContentControl>
+                        <WrapPanel>
+                            <Image Width="18" Source="Resources/Icons/Add_Folder_48px.png"></Image>
+                            <Label Content="Создать" BorderBrush="{x:Null}" Height="24"></Label>
+                        </WrapPanel>
+                    </ContentControl>
+                </Button.Content>
+            </Button>
+            <Button x:Name="pToolsEdit" Height="30" Style="{StaticResource btIcon}">
+                <Button.Content>
+                    <ContentControl>
+                        <WrapPanel>
+                            <Image Width="18" Source="Resources/Icons/Edit_48px.png"></Image>
+                            <Label Content="Редактировать" BorderBrush="{x:Null}" Height="24"></Label>
+                        </WrapPanel>
+                    </ContentControl>
+                </Button.Content>
+            </Button>
+            <Button x:Name="pToolsRename" Height="30" Style="{StaticResource btIcon}">
+                <Button.Content>
+                    <ContentControl>
+                        <WrapPanel>
+                            <Image Width="18" Source="Resources/Icons/Rename_48px.png"></Image>
+                            <Label Content="Переименовать" BorderBrush="{x:Null}" Height="24"></Label>
+                        </WrapPanel>
+                    </ContentControl>
+                </Button.Content>
+            </Button>
+            <Rectangle Margin="5" Width="1" Height="25" Fill="#CDCDCD"></Rectangle>
+            <Button x:Name="pToolsFavorites" Height="30" Style="{StaticResource btIcon}">
+                <Button.Content>
+                    <ContentControl>
+                        <WrapPanel>
+                            <Image Width="18" Source="Resources/Icons/Add_to_Favorites_48px.png"></Image>
+                            <Label Content="Добавить в избранное" BorderBrush="{x:Null}" Height="24"></Label>
+                        </WrapPanel>
+                    </ContentControl>
+                </Button.Content>
+            </Button>
+            <Button x:Name="pToolsCategorize" Height="30" Style="{StaticResource btIcon}">
+                <Button.Content>
+                    <ContentControl>
+                        <WrapPanel>
+                            <Image Width="18" Source="Resources/Icons/Categorize_48px.png"></Image>
+                            <Label Content="Добавить в категорию" BorderBrush="{x:Null}" Height="24"></Label>
+                        </WrapPanel>
+                    </ContentControl>
+                </Button.Content>
+            </Button>
+            <Button x:Name="pToolsTag" Height="30" Style="{StaticResource btIcon}">
+                <Button.Content>
+                    <ContentControl>
+                        <WrapPanel>
+                            <Image Width="18" Source="Resources/Icons/Add_Tag_48px.png"></Image>
+                            <Label Content="Добавить тег" BorderBrush="{x:Null}" Height="24"></Label>
+                        </WrapPanel>
+                    </ContentControl>
+                </Button.Content>
+            </Button>
+        </WrapPanel>
+        <Rectangle Grid.Row="2" Grid.ColumnSpan="3" Height="1" Fill="#CDCDCD"></Rectangle>
+        <ComboBox Grid.Row="3" Margin="5,5,5,5" Padding="10,7" SelectedIndex="1" VerticalAlignment="Center">
+            <ComboBoxItem Padding="5" Content="Моды"></ComboBoxItem>
+            <ComboBoxItem Padding="5" Content="Программы"></ComboBoxItem>
+            <ComboBoxItem Padding="5" Content="Плагины"></ComboBoxItem>
+            <ComboBoxItem Padding="5" Content="Драйверы"></ComboBoxItem>
+            <ComboBoxItem Padding="5" Content="Игры"></ComboBoxItem>
+        </ComboBox>
+        <ListBox Grid.Row="4" Grid.RowSpan="4" Margin="5,0,5,5">
+            <ListBoxItem Height="25" Margin="5,5,5,0" Content="Все"></ListBoxItem>
+            <ListBoxItem Height="25" Margin="5,5,5,0" Content="Оружие"></ListBoxItem>
+            <ListBoxItem Height="25" Margin="5,5,5,0" Content="Персонажи"></ListBoxItem>
+            <ListBoxItem Height="25" Margin="5,5,5,0" Content="Прически"></ListBoxItem>
+            <ListBoxItem Height="25" Margin="5,5,5,0" Content="Ретекстур"></ListBoxItem>
+            <ListBoxItem Height="25" Margin="5,5,5,0" Content="DLC"></ListBoxItem>
+            <ListBoxItem Height="25" Margin="5,5,5,0" Content="Ивентарь"></ListBoxItem>
+            <ListBoxItem Height="25" Margin="5,5,5,0" Content="Разное"></ListBoxItem>
+        </ListBox>
+        <!--Центральная панель-->
+        <StackPanel Grid.Column="1" Grid.Row="3" Margin="0,5,0,0" >
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="32"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="32"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Image Height="16" Source="Resources/Icons/Search_48px.png"></Image>
+                <TextBox Grid.Column="1" Tag="Искать..."/>
+                <Button Grid.Column="2" Style="{StaticResource btIcon}" Margin="4">
+                    <Button.Content>
+                        <ContentControl>
+                            <Image Grid.Column="2" Height="16" Source="Resources/Icons/Delete_48px.png"></Image>
+                        </ContentControl>
+                    </Button.Content>
+                </Button>
+            </Grid>
+        </StackPanel>
+        <ListBox Grid.Column="1" Grid.Row="4" Grid.RowSpan="5" Margin="0,0,0,5">
+            <ListBoxItem Height="45" Margin="5,0,5,0" Content="Плагин 1"></ListBoxItem>
+            <ListBoxItem Height="45" Margin="5,0,5,0" Content="Плагин 2"></ListBoxItem>
+            <ListBoxItem Height="45" Margin="5,0,5,0" Content="Плагин 3"></ListBoxItem>
+            <ListBoxItem Height="45" Margin="5,0,5,0" Content="Плагин 4"></ListBoxItem>
+            <ListBoxItem Height="45" Margin="5,0,5,0" Content="Плагин 5"></ListBoxItem>
+            <ListBoxItem Height="45" Margin="5,0,5,0" Content="Плагин 6"></ListBoxItem>
+            <ListBoxItem Height="45" Margin="5,0,5,0" Content="Плагин 7"></ListBoxItem>
+            <ListBoxItem Height="45" Margin="5,0,5,0" Content="Плагин 8"></ListBoxItem>
+            <ListBoxItem Height="45" Margin="5,0,5,0" Content="Плагин 9"></ListBoxItem>
+            <ListBoxItem Height="45" Margin="5,0,5,0" Content="Плагин 10"></ListBoxItem>
+            <ListBoxItem Height="45" Margin="5,0,5,0" Content="Плагин 11"></ListBoxItem>
+            <ListBoxItem Height="45" Margin="5,0,5,0" Content="Плагин 12"></ListBoxItem>
+            <ListBoxItem Height="45" Margin="5,0,5,0" Content="Плагин 13"></ListBoxItem>
+        </ListBox>
+        <!--Панель с информацией об моде-->
+        <Grid Grid.Column="2" Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+        </Grid>
+        <Image Grid.Column="2" Grid.Row="3" Grid.RowSpan="2" Source="Resources/Icons/19572.jpg" Width="250" Height="320" HorizontalAlignment="Right" Margin="10" OpacityMask="Black" RenderTransformOrigin="0.5,0.5">
+
+        </Image>
+        <StackPanel Grid.Column="2" Grid.Row="5" Margin="5">
+            <Rectangle Fill="#CDCDCD" Height="1" Width="240"></Rectangle>
+            <WrapPanel>
+                <Label Content="Имя:" FontWeight="Bold"></Label>
+                <Label Name="Title" Content="1.000 Times Better"></Label>
+            </WrapPanel>
+            <WrapPanel>
+                <Label Content="Автор:" FontWeight="Bold"></Label>
+                <Label Name="Author" Content="Mantista"></Label>
+            </WrapPanel>
+            <WrapPanel>
+                <Label Content="Категория:" FontWeight="Bold"></Label>
+                <Label Name="Category" Content="Ретекстур"></Label>
+            </WrapPanel>
+            <WrapPanel>
+                <Label Content="Версия:" FontWeight="Bold"></Label>
+                <Label Name="Version" Content="2.3.1"></Label>
+            </WrapPanel>
+            <WrapPanel>
+                <Label Content="Тип:" FontWeight="Bold"></Label>
+                <Label Name="Type" Content="Мод"></Label>
+            </WrapPanel>
+            <WrapPanel>
+                <Label Content="Описание:" FontWeight="Bold"></Label>
+                <TextBlock Name="Description" TextWrapping="Wrap"  Padding="5">
+                    <TextBlock.Text>
+                        Качественный мод для 3 Ведьмака, который улучшит качество графики в игре. Данная модификация совместима со всем. FPS (кадры в секунду) могут упасть на 5-10 единиц. Графика стала намного ярче, ночи реалистичней, закаты в разы красивее.
+                    </TextBlock.Text>
+                </TextBlock>
+            </WrapPanel>
+        </StackPanel>
+        <!--Область кнопки установить-->
+        <StackPanel Grid.Column="2" Grid.Row="6" Margin="5,0,0,10" HorizontalAlignment="Left">
+            <Button x:Name="Intstall" Width="100" Height="30" Content="Установить" Margin="5,10,5,10"/>
+            <Rectangle Height="1" Width="240"></Rectangle>
+        </StackPanel>
+        <!--Понель состояния-->
+        <WrapPanel  Grid.Column="2" Grid.Row="7" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,10">
+            <Label Content="Установлено: 5" FontSize="11" />
+            <Label Content="Пакеты: 13" FontSize="11" />
+        </WrapPanel>
+    </Grid>
+</Window>
