@@ -4,9 +4,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProgramManager"
+        xmlns:vm="clr-namespace:ProgramManager.ViewModel"
         mc:Ignorable="d"
         Title="Witcher Mod Install" Height="606" Width="900" MinHeight="584" MinWidth="870" MaxHeight="700" MaxWidth="870" WindowStartupLocation="CenterScreen">
-    <Grid VerticalAlignment="Top">
+    <Window.DataContext>
+        <vm:MainViewModel />
+    </Window.DataContext>
+
+    <Grid VerticalAlignment="Top" Height="566">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.2*"></ColumnDefinition>
             <ColumnDefinition Width="0.3*"></ColumnDefinition>
@@ -154,6 +159,7 @@
                 </Button.Content>
             </Button>
         </WrapPanel>
+        <!--Боковая панель-->
         <Rectangle Grid.Row="2" Grid.ColumnSpan="3" Height="1" Fill="#CDCDCD"></Rectangle>
         <ComboBox Grid.Row="3" Margin="5,5,5,5" Padding="10,7" SelectedIndex="1" VerticalAlignment="Center">
             <ComboBoxItem Padding="5" Content="Моды"></ComboBoxItem>
@@ -162,15 +168,24 @@
             <ComboBoxItem Padding="5" Content="Драйверы"></ComboBoxItem>
             <ComboBoxItem Padding="5" Content="Игры"></ComboBoxItem>
         </ComboBox>
-        <ListBox Grid.Row="4" Grid.RowSpan="4" Margin="5,0,5,5">
-            <ListBoxItem Height="25" Margin="5,5,5,0" Content="Все"></ListBoxItem>
-            <ListBoxItem Height="25" Margin="5,5,5,0" Content="Оружие"></ListBoxItem>
-            <ListBoxItem Height="25" Margin="5,5,5,0" Content="Персонажи"></ListBoxItem>
-            <ListBoxItem Height="25" Margin="5,5,5,0" Content="Прически"></ListBoxItem>
-            <ListBoxItem Height="25" Margin="5,5,5,0" Content="Ретекстур"></ListBoxItem>
-            <ListBoxItem Height="25" Margin="5,5,5,0" Content="DLC"></ListBoxItem>
-            <ListBoxItem Height="25" Margin="5,5,5,0" Content="Ивентарь"></ListBoxItem>
-            <ListBoxItem Height="25" Margin="5,5,5,0" Content="Разное"></ListBoxItem>
+        <ListBox Grid.Row="4" Grid.RowSpan="4" Margin="5,0,5,5" 
+                 SelectedItem="{Binding CurrentCategory, Mode=OneWayToSource}"
+                 ItemsSource="{Binding Category, Mode=TwoWay}"
+                 IsSynchronizedWithCurrentItem="True">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock Height="30" Width="auto" Padding="5,8" Text="{Binding SubcategoryName}">
+                            <TextBlock.InputBindings>
+                                <MouseBinding
+                                    Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Path=DataContext.InsertCommand}"
+                                    CommandParameter="{Binding Path}"
+                                    Gesture="LeftClick"/>
+                            </TextBlock.InputBindings>
+                        </TextBlock>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
         </ListBox>
         <!--Центральная панель-->
         <StackPanel Grid.Column="1" Grid.Row="3" Margin="0,5,0,0" >
@@ -191,20 +206,18 @@
                 </Button>
             </Grid>
         </StackPanel>
-        <ListBox Grid.Column="1" Grid.Row="4" Grid.RowSpan="5" Margin="0,0,0,5">
-            <ListBoxItem Height="45" Margin="5,0,5,0" Content="Плагин 1"></ListBoxItem>
-            <ListBoxItem Height="45" Margin="5,0,5,0" Content="Плагин 2"></ListBoxItem>
-            <ListBoxItem Height="45" Margin="5,0,5,0" Content="Плагин 3"></ListBoxItem>
-            <ListBoxItem Height="45" Margin="5,0,5,0" Content="Плагин 4"></ListBoxItem>
-            <ListBoxItem Height="45" Margin="5,0,5,0" Content="Плагин 5"></ListBoxItem>
-            <ListBoxItem Height="45" Margin="5,0,5,0" Content="Плагин 6"></ListBoxItem>
-            <ListBoxItem Height="45" Margin="5,0,5,0" Content="Плагин 7"></ListBoxItem>
-            <ListBoxItem Height="45" Margin="5,0,5,0" Content="Плагин 8"></ListBoxItem>
-            <ListBoxItem Height="45" Margin="5,0,5,0" Content="Плагин 9"></ListBoxItem>
-            <ListBoxItem Height="45" Margin="5,0,5,0" Content="Плагин 10"></ListBoxItem>
-            <ListBoxItem Height="45" Margin="5,0,5,0" Content="Плагин 11"></ListBoxItem>
-            <ListBoxItem Height="45" Margin="5,0,5,0" Content="Плагин 12"></ListBoxItem>
-            <ListBoxItem Height="45" Margin="5,0,5,0" Content="Плагин 13"></ListBoxItem>
+        <ListBox Grid.Column="1" Grid.Row="4" Grid.RowSpan="4" 
+                 ItemsSource="{Binding Packages, Mode=TwoWay}" 
+                 SelectedItem="{Binding CurrentPackage, Mode=TwoWay}" 
+                 Height="449" VerticalAlignment="Top">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock Height="45" Margin="5,0,0,0" 
+                                   Padding="0,15" Text="{Binding Name, Mode=TwoWay}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
         </ListBox>
         <!--Панель с информацией об моде-->
         <Grid Grid.Column="2" Grid.Row="2">
@@ -213,43 +226,39 @@
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
         </Grid>
-        <Image Grid.Column="2" Grid.Row="3" Grid.RowSpan="2" Source="Resources/Icons/19572.jpg" Width="250" Height="320" HorizontalAlignment="Right" Margin="10" OpacityMask="Black" RenderTransformOrigin="0.5,0.5">
+        <Image Grid.Column="2" Grid.Row="3" Grid.RowSpan="2" Source="Resources/19572.jpg" Width="250" Height="320" HorizontalAlignment="Right" Margin="10" OpacityMask="Black" RenderTransformOrigin="0.5,0.5">
 
         </Image>
         <StackPanel Grid.Column="2" Grid.Row="5" Margin="5">
             <Rectangle Fill="#CDCDCD" Height="1" Width="240"></Rectangle>
             <WrapPanel>
                 <Label Content="Имя:" FontWeight="Bold"></Label>
-                <Label Name="Title" Content="1.000 Times Better"></Label>
+                <Label Name="Name" Content="{Binding CurrentPackage.Name, UpdateSourceTrigger=PropertyChanged}"></Label>
             </WrapPanel>
             <WrapPanel>
                 <Label Content="Автор:" FontWeight="Bold"></Label>
-                <Label Name="Author" Content="Mantista"></Label>
+                <Label Name="Author" Content="{Binding CurrentPackage.Author, UpdateSourceTrigger=PropertyChanged}"></Label>
             </WrapPanel>
             <WrapPanel>
                 <Label Content="Категория:" FontWeight="Bold"></Label>
-                <Label Name="Category" Content="Ретекстур"></Label>
+                <Label Name="Category" Content="{Binding CurrentPackage.Category, Mode=OneWayToSource}"></Label>
             </WrapPanel>
             <WrapPanel>
                 <Label Content="Версия:" FontWeight="Bold"></Label>
-                <Label Name="Version" Content="2.3.1"></Label>
+                <Label Name="Version" Content="{Binding CurrentPackage.Version, Mode=TwoWay}"></Label>
             </WrapPanel>
             <WrapPanel>
                 <Label Content="Тип:" FontWeight="Bold"></Label>
-                <Label Name="Type" Content="Мод"></Label>
+                <Label Name="Type" Content="{Binding CurrentPackage.Subcategory, Mode=OneWay}"></Label>
             </WrapPanel>
             <WrapPanel>
                 <Label Content="Описание:" FontWeight="Bold"></Label>
-                <TextBlock Name="Description" TextWrapping="Wrap"  Padding="5">
-                    <TextBlock.Text>
-                        Качественный мод для 3 Ведьмака, который улучшит качество графики в игре. Данная модификация совместима со всем. FPS (кадры в секунду) могут упасть на 5-10 единиц. Графика стала намного ярче, ночи реалистичней, закаты в разы красивее.
-                    </TextBlock.Text>
-                </TextBlock>
+                <TextBlock Name="Description" TextWrapping="Wrap" Padding="5" Text="{Binding CurrentPackage.Description, UpdateSourceTrigger=Explicit}"/>
             </WrapPanel>
         </StackPanel>
         <!--Область кнопки установить-->
         <StackPanel Grid.Column="2" Grid.Row="6" Margin="5,0,0,10" HorizontalAlignment="Left">
-            <Button x:Name="Intstall" Width="100" Height="30" Content="Установить" Margin="5,10,5,10"/>
+            <Button x:Name="Intstall" Width="100" Height="30" Content="Установить" Margin="5,10,5,10" Command="{Binding InsertCommand}"/>
             <Rectangle Height="1" Width="240"></Rectangle>
         </StackPanel>
         <!--Понель состояния-->
