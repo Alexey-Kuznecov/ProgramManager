@@ -12,7 +12,10 @@ namespace ProgramManager.ViewModel
         private PackageModel _currentPackage;
         private CategoryModel _currentSubcategory;
         private CategoryModel _currentCategory;
-        private ObservableCollection<PackageModel> _package;
+        private string _filterPackages;
+        private ObservableCollection<PackageModel> _enstancePackage;
+        private ObservableCollection<PackageModel> _packages;
+        private ObservableCollection<PackageModel> _backupPackage;
         public ObservableCollection<CategoryModel> Subcategory { get; set; }
         public ObservableCollection<CategoryModel> Category { get; set; }
         /// <summary>
@@ -20,10 +23,10 @@ namespace ProgramManager.ViewModel
         /// </summary>
         public ObservableCollection<PackageModel> Packages
         {
-            get { return _package; }
+            get { return _packages; }
             set
             {
-                _package = value as ObservableCollection<PackageModel>;
+                _packages = value as ObservableCollection<PackageModel>;
                 OnPropertyChanged("Packages");
             }
         }
@@ -68,6 +71,36 @@ namespace ProgramManager.ViewModel
                 }   
             }
         }
+        public string FilterPackages
+        {
+            get { return _filterPackages; }
+            set
+            {
+                if (_filterPackages == null || _filterPackages == "")
+                    _backupPackage = Packages;
+
+                _filterPackages = value;
+
+                if (_filterPackages != null && _filterPackages != "")
+                {
+                    IEnumerable<PackageModel> filter = _enstancePackage.Where(package => package.Name.ToLower().Contains(_filterPackages.ToLower()));
+
+                    _packages = new ObservableCollection<PackageModel>(filter);
+
+                    OnPropertyChanged("Packages");
+                }
+                else
+                    Packages = _backupPackage;
+
+                if (Packages.Count > 0)
+                {
+                    // Selects the first element of the list for correct work of a data panel
+                    _currentPackage = Packages[0];
+                    // Updating of property of the current package
+                    OnPropertyChanged("CurrentPackage");
+                }
+            }
+        }
         public CategoryModel CurrentSubcategory
         {
             get { return _currentSubcategory; }
@@ -76,21 +109,20 @@ namespace ProgramManager.ViewModel
                 if (_currentSubcategory != value && value != null)
                 {
                     _currentSubcategory = value;
-                    // TODO: To optimize this line (This line repeatedly requests data that can affect program performance)
-                    Packages = new ObservableCollection<PackageModel>(PackageAccess.GetPackages());
 
                     // Filters data depending on the selected subcategory if the special element "All" is selected, all data of subcategories will be selected
                     if (_currentSubcategory.SubcategoryName != "Все")
                     {
-                        IEnumerable<PackageModel> query = Packages.Where(package => package.Subcategory == _currentSubcategory.SubcategoryName);
+                        IEnumerable<PackageModel> query = _enstancePackage.Where(package => package.Subcategory == _currentSubcategory.SubcategoryName);
                         Packages = new ObservableCollection<PackageModel>(query);
                     }
                     // Filters data depending on the selected category and displays the list of all these subcategories
                     else
                     {
-                        IEnumerable<PackageModel> query = Packages.Where(package => package.Category == _currentCategory.CategoryName);
+                        IEnumerable<PackageModel> query = _enstancePackage.Where(package => package.Category == _currentCategory.CategoryName);
                         Packages = new ObservableCollection<PackageModel>(query);
-                    }                    
+                    }
+
                     if (Packages.Count > 0)
                     {
                         // Selects the first element of the list for correct work of a data panel
@@ -106,6 +138,8 @@ namespace ProgramManager.ViewModel
         /// </summary>
         public MainViewModel()
         {
+            _enstancePackage = new ObservableCollection< PackageModel > (PackageAccess.GetPackages());
+            Packages = _enstancePackage;
             Category = new ObservableCollection<CategoryModel>(CategoryAccess.GetCategories());
         }
     }

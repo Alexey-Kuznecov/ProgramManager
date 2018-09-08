@@ -6,12 +6,10 @@ namespace ProgramManager.ViewModel
 {
     public class RelayCommand : ICommand
     {
-        private readonly MainViewModel _viewModel;
         private readonly Action _action;
 
-        public RelayCommand(MainViewModel viewModel, Action command)
+        public RelayCommand(Action command)
         {
-            _viewModel = viewModel;
             _action = command;
         }
         public bool CanExecute(object parameter)

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ProgramManager"
         xmlns:vm="clr-namespace:ProgramManager.ViewModel"
         mc:Ignorable="d"
-        Title="Witcher Mod Install" Height="606" Width="900" MinHeight="584" MinWidth="870" MaxHeight="700" MaxWidth="870" WindowStartupLocation="CenterScreen">
+        Title="Pragram Manager" Height="606" Width="900" MinHeight="584" MinWidth="870" MaxHeight="700" MaxWidth="870" WindowStartupLocation="CenterScreen">
     <Window.DataContext>
         <vm:MainViewModel />
     </Window.DataContext>
@@ -174,7 +174,7 @@
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        <ListBox Grid.Row="4" Grid.RowSpan="4" Margin="5,0,5,5" 
+        <ListBox Grid.Row="4" Grid.RowSpan="4" Margin="5,0" 
                  ItemsSource="{Binding Subcategory, Mode=TwoWay}"
                  SelectedItem="{Binding CurrentSubcategory, Mode=TwoWay}"
                  IsSynchronizedWithCurrentItem="True">
@@ -202,7 +202,7 @@
                     <ColumnDefinition Width="32"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Image Height="16" Source="Resources/Icons/Search_48px.png"></Image>
-                <TextBox Grid.Column="1" Tag="Искать..."/>
+                <TextBox Grid.Column="1" Text="{Binding FilterPackages, UpdateSourceTrigger=PropertyChanged}" Tag="Искать..."/>
                 <Button Grid.Column="2" Style="{StaticResource btIcon}" Margin="4">
                     <Button.Content>
                         <ContentControl>
@@ -212,10 +212,10 @@
                 </Button>
             </Grid>
         </StackPanel>
+        <!--Список программ-->
         <ListBox Grid.Column="1" Grid.Row="4" Grid.RowSpan="4" 
                  ItemsSource="{Binding Packages, Mode=TwoWay}" 
-                 SelectedItem="{Binding CurrentPackage, Mode=TwoWay}" 
-                 Height="449" VerticalAlignment="Top">
+                 SelectedItem="{Binding CurrentPackage, Mode=TwoWay}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
@@ -232,18 +232,20 @@
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
         </Grid>
-        <Image Grid.Column="2" Grid.Row="3" Grid.RowSpan="2" Source="Resources/19572.jpg" Width="250" Height="320" HorizontalAlignment="Right" Margin="10" OpacityMask="Black" RenderTransformOrigin="0.5,0.5">
-
-        </Image>
+        <Image Grid.Column="2" Grid.Row="3" Grid.RowSpan="2" 
+               Source="Resources/19572.jpg" Width="250" 
+               Height="320" HorizontalAlignment="Right" 
+               Margin="10" OpacityMask="Black" 
+               RenderTransformOrigin="0.5,0.5"/>
         <StackPanel Grid.Column="2" Grid.Row="5" Margin="5">
             <Rectangle Fill="#CDCDCD" Height="1" Width="240"></Rectangle>
             <WrapPanel>
                 <Label Content="Имя:" FontWeight="Bold"></Label>
-                <Label Name="Name" Content="{Binding CurrentPackage.Name, UpdateSourceTrigger=PropertyChanged}"></Label>
+                <Label Name="Name" Content="{Binding CurrentPackage.Name, Mode=TwoWay}"></Label>
             </WrapPanel>
             <WrapPanel>
                 <Label Content="Автор:" FontWeight="Bold"></Label>
-                <Label Name="Author" Content="{Binding CurrentPackage.Author, UpdateSourceTrigger=PropertyChanged}"></Label>
+                <Label Name="Author" Content="{Binding CurrentPackage.Author, Mode=TwoWay}"></Label>
             </WrapPanel>
             <WrapPanel>
                 <Label Content="Категория:" FontWeight="Bold"></Label>
@@ -259,7 +261,7 @@
             </WrapPanel>
             <WrapPanel>
                 <Label Content="Описание:" FontWeight="Bold"></Label>
-                <TextBlock Name="Description" TextWrapping="Wrap" Padding="5" Text="{Binding CurrentPackage.Description, UpdateSourceTrigger=Explicit}"/>
+                <TextBlock Name="Description" TextWrapping="Wrap" Padding="5" Text="{Binding CurrentPackage.Description, Mode=TwoWay}"/>
             </WrapPanel>
         </StackPanel>
         <!--Область кнопки установить-->

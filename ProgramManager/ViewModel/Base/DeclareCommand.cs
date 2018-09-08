@@ -11,8 +11,12 @@ namespace ProgramManager.ViewModel
 {
     public partial class MainViewModel
     {
+        private void FixPackState()
+        {
+            List<object> pack = new List<object>();
+            pack.Add(_packages);        
+        }
         private void Update() { }
-        private void Preview(int selected) { }
         private void Insert() { }
     }
 }

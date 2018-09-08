@@ -19,7 +19,7 @@ namespace ProgramManager.Model
                     Category = "Программы",
                     Subcategory = "Редактор графики",
                     Version = "Cloud CC6",
-                    Description = "Программа для оформления фотографий"
+                    Description = "Программа для оформления фотографий",
                 },
                 new PackageModel {
                     Name = "Illustrator",
