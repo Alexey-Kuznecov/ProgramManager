@@ -13,9 +13,10 @@ namespace ProgramManager.Model
     class PackageAccess
     {
         const string DOCUMENT_NAME = "packages.xml";
-
-        public IEnumerable<PackageModel> Packages { get; private set; }
-
+        private List<PackageModel> packages;
+        /// <summary>
+        /// Создает заголовок XML документа
+        /// </summary>
         public static void FormatHeadXmlDoc()
         {
             XDocument xDoc = new XDocument(
@@ -36,22 +37,22 @@ namespace ProgramManager.Model
             List<PackageModel> package = new List<PackageModel>();
             int id = 0;
 
-            IEnumerable<XElement> doc = from el in root.Elements("Package")
-                                        where (string)el.Attribute("Id") == id.ToString()
-                                        select el;
+            IEnumerable<XElement> document = from element in root.Elements("Package")
+                                        where (string)element.Attribute("Id") == id.ToString()
+                                        select element;
 
-            foreach (XElement el in doc)
+            foreach (XElement element in document)
             {
                 package.Add(
                     new PackageModel
                     {
-                        Name = el.Element("Name").Value,
-                        Author = el.Element("Author").Value,
-                        Category = el.Element("Category").Value,
-                        Subcategory = el.Element("Subcategory").Value,
-                        Version = el.Element("Version").Value,
-                        Image = el.Element("Image").Value,
-                        Description = el.Element("Description").Value
+                        Name = element.Element("Name").Value,
+                        Author = element.Element("Author").Value,
+                        Category = element.Element("Category").Value,
+                        Subcategory = element.Element("Subcategory").Value,
+                        Version = element.Element("Version").Value,
+                        Image = element.Element("Image").Value,
+                        Description = element.Element("Description").Value
                     });                
                 id++;
             }
@@ -76,6 +77,37 @@ namespace ProgramManager.Model
                             new XElement("Subcategory", data.Subcategory),
                             new XElement("Description", data.Description),
                             new XElement("Image", new XAttribute("Source", data.Image))));
+            xDoc.Save(DOCUMENT_NAME);
+        }
+        /// <summary>
+        /// Обновляет данные по индексу и сохраняет документ 
+        /// </summary>
+        /// <param name="id">Индекс пакета который требуется изменить.</param>
+        /// <param name="data">Коллекция объектов данных</param>
+        public static void UpdatePackage(int id, PackageModel data)
+        {
+            XElement root = XElement.Load(DOCUMENT_NAME);
+
+            XElement el = root.Elements("Package").ElementAt(id);
+
+            el.SetElementValue("Name", data.Name);
+            el.SetElementValue("Author", data.Author);
+            el.SetElementValue("Category", data.Category);
+            el.SetElementValue("Subcategory", data.Subcategory);
+            el.SetElementValue("Version", data.Version);
+            el.SetElementValue("Description", data.Description);
+            el.Element("Image").SetAttributeValue("Source", data.Image);
+
+            root.Save(DOCUMENT_NAME);
+        }
+        /// <summary>
+        /// Удаляет полностью весь пакет по индексу и сохраняет документ 
+        /// </summary>
+        /// <param name="id">Индекс пакета который требуется удалить.</param>
+        public static void RemovePackage(int id)
+        {
+            XDocument xDoc = XDocument.Load(DOCUMENT_NAME);
+            xDoc.Root.Nodes().ElementAt(id).Remove();
             xDoc.Save(DOCUMENT_NAME);
         }
         /// <summary>
@@ -106,7 +138,9 @@ namespace ProgramManager.Model
             if (!File.Exists("packages.xml"))
                 PackageAccess.FormatHeadXmlDoc();
 
-            foreach (PackageModel pack in Packages)
+            packages = GetPackages();
+
+            foreach (PackageModel pack in packages)
             {
                 PackageModel newData = new PackageModel()
                 {
