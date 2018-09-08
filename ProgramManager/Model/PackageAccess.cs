@@ -164,7 +164,63 @@ namespace ProgramManager.Model
                     Subcategory = "Меседжеры",
                     Version = "2.2",
                     Description = "Программа для создания сообществ"
-                 }
+                 },
+                 new PackageModel {
+                    Name = "The Witcher 3 Wild Hunt",
+                    Author = "CD Project Red",
+                    Category = "Игры",
+                    Subcategory = "RPG",
+                    Version = "3.31",
+                    Description = "Игра для романтиков на досуге мясников"
+                 },
+                 new PackageModel {
+                    Name = "Empire Earth 2",
+                    Author = "Mod Doc Software",
+                    Category = "Игры",
+                    Subcategory = "Стратегии",
+                    Version = "2.2",
+                    Description = "Игра для настоящих царей"
+                 },
+                 new PackageModel {
+                    Name = "High Definition Audio",
+                    Author = "Realtek",
+                    Category = "Драйверы",
+                    Subcategory = "Звуковая карта",
+                    Version = "3.31",
+                    Description = ""
+                 },
+                 new PackageModel {
+                    Name = "Logitech HD Webcam C270",
+                    Author = "Logitech",
+                    Category = "Драйверы",
+                    Subcategory = "Аксессуары",
+                    Version = "2.2",
+                    Description = ""
+                 },
+                 new PackageModel {
+                    Name = "High Definition Audio",
+                    Author = "Realtek",
+                    Category = "Драйверы",
+                    Subcategory = "Звуковая карта",
+                    Version = "3.31",
+                    Description = ""
+                 },
+                 new PackageModel {
+                    Name = "1.000 Times Better 2.3.1",
+                    Author = "Logitech",
+                    Category = "Моды",
+                    Subcategory = "Реворк",
+                    Version = "2.3.1",
+                    Description = "Качественный мод для 3 Ведьмака, который улучшит качество графики в игре."
+                 },
+                 new PackageModel {
+                    Name = "Counter Strike GO",
+                    Author = "Valve",
+                    Category = "Игры",
+                    Subcategory = "Shooter",
+                    Version = "2.2",
+                    Description = "Игра для настоящих ассов"
+                 },
             };
 
             return package;

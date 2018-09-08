@@ -161,27 +161,33 @@
         </WrapPanel>
         <!--Боковая панель-->
         <Rectangle Grid.Row="2" Grid.ColumnSpan="3" Height="1" Fill="#CDCDCD"></Rectangle>
-        <ComboBox Grid.Row="3" Margin="5,5,5,5" Padding="10,7" SelectedIndex="1" VerticalAlignment="Center">
-            <ComboBoxItem Padding="5" Content="Моды"></ComboBoxItem>
-            <ComboBoxItem Padding="5" Content="Программы"></ComboBoxItem>
-            <ComboBoxItem Padding="5" Content="Плагины"></ComboBoxItem>
-            <ComboBoxItem Padding="5" Content="Драйверы"></ComboBoxItem>
-            <ComboBoxItem Padding="5" Content="Игры"></ComboBoxItem>
+        <ComboBox Grid.Row="3" Margin="5,5,5,5" Padding="10,7" 
+                  ItemsSource="{Binding Category, Mode=TwoWay}"
+                  SelectedItem="{Binding CurrentCategory, Mode=TwoWay}" 
+                  SelectedIndex="0" 
+                  VerticalAlignment="Center">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock Height="30" Width="auto" Padding="5,3" Text="{Binding CategoryName}"></TextBlock>
+                    </StackPanel>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
         </ComboBox>
         <ListBox Grid.Row="4" Grid.RowSpan="4" Margin="5,0,5,5" 
-                 SelectedItem="{Binding CurrentCategory, Mode=OneWayToSource}"
-                 ItemsSource="{Binding Category, Mode=TwoWay}"
+                 ItemsSource="{Binding Subcategory, Mode=TwoWay}"
+                 SelectedItem="{Binding CurrentSubcategory, Mode=TwoWay}"
                  IsSynchronizedWithCurrentItem="True">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
                         <TextBlock Height="30" Width="auto" Padding="5,8" Text="{Binding SubcategoryName}">
-                            <TextBlock.InputBindings>
+                            <!--<TextBlock.InputBindings>
                                 <MouseBinding
                                     Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Path=DataContext.InsertCommand}"
                                     CommandParameter="{Binding Path}"
                                     Gesture="LeftClick"/>
-                            </TextBlock.InputBindings>
+                            </TextBlock.InputBindings>-->
                         </TextBlock>
                     </StackPanel>
                 </DataTemplate>
@@ -241,7 +247,7 @@
             </WrapPanel>
             <WrapPanel>
                 <Label Content="Категория:" FontWeight="Bold"></Label>
-                <Label Name="Category" Content="{Binding CurrentPackage.Category, Mode=OneWayToSource}"></Label>
+                <Label Name="Category" Content="{Binding CurrentPackage.Category, Mode=TwoWay}"></Label>
             </WrapPanel>
             <WrapPanel>
                 <Label Content="Версия:" FontWeight="Bold"></Label>
