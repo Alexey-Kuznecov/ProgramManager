@@ -75,11 +75,16 @@ namespace ProgramManager.ViewModel
                     
                     // TODO: Оптимизировать эту строку(Эта строка повтроно запрашивает данные что может повлиять на производительность программы)
                     Packages = new ObservableCollection<PackageModel>(PackageAccess.GetPackages());
-                    
+
                     // Фильтрует данные взависимости от выбранной подкотегории
-                    if (_currentSubcategory.SubcategoryName != "Все" && _currentCategory.CategoryName == _currentSubcategory.CategoryName)
+                    if (_currentSubcategory.SubcategoryName != "Все")
                     {
                         IEnumerable<PackageModel> query = Packages.Where(package => package.Subcategory == _currentSubcategory.SubcategoryName);
+                        Packages = new ObservableCollection<PackageModel>(query);
+                    }
+                    if(_currentSubcategory.SubcategoryName == "Все")
+                    {
+                        IEnumerable<PackageModel> query = Packages.Where(package => package.Category == _currentCategory.CategoryName);
                         Packages = new ObservableCollection<PackageModel>(query);
                     }
                     
