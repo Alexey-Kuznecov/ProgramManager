@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,8 @@ namespace ProgramManager.Model
     class PackageAccess
     {
         const string DOCUMENT_NAME = "packages.xml";
+
+        public IEnumerable<PackageModel> Packages { get; private set; }
 
         public static void FormatHeadXmlDoc()
         {
@@ -51,8 +54,73 @@ namespace ProgramManager.Model
                         Description = el.Element("Description").Value
                     });                
                 id++;
-            }     
+            }
+                 
             return package;
+        }
+        /// <summary>
+        /// Добавляет новый пакет в xml хранилище
+        /// </summary>
+        /// <param name="data">Коллекция объектов данных которые нужно дабавить в хранилище.</param>
+        public static void AddPackage(PackageModel data)
+        {
+            XDocument xDoc = XDocument.Load(DOCUMENT_NAME);
+            int id = GetIdLastElement();
+
+            xDoc.Element("Packages").Add(new XElement("Package",
+                            new XAttribute("Id", ++id),
+                            new XElement("Name", data.Name),
+                            new XElement("Author", data.Author),
+                            new XElement("Version", data.Version),
+                            new XElement("Category", data.Category),
+                            new XElement("Subcategory", data.Subcategory),
+                            new XElement("Description", data.Description),
+                            new XElement("Image", new XAttribute("Source", data.Image))));
+            xDoc.Save(DOCUMENT_NAME);
+        }
+        /// <summary>
+        /// Находит последний элемент корневого узла "Packages" — парсит строку, 
+        /// затем извлекает значение атрибута id элемента "Package".
+        /// </summary>
+        /// <returns>Возращает id последного элемента</returns>
+        public static int GetIdLastElement()
+        {
+            XDocument xDoc = XDocument.Load(DOCUMENT_NAME);
+            int id = 0;
+
+            try
+            {
+                string str = xDoc.Root.LastNode.ToString();
+                XDocument node = XDocument.Parse(str);
+                id = Convert.ToInt32(node.Root.Attribute("Id").Value);
+            }
+            catch (NullReferenceException ex)
+            {
+                return -1;
+            }
+            return id;
+        }
+
+        public PackageAccess()
+        {
+            if (!File.Exists("packages.xml"))
+                PackageAccess.FormatHeadXmlDoc();
+
+            foreach (PackageModel pack in Packages)
+            {
+                PackageModel newData = new PackageModel()
+                {
+                    Name = pack.Name,
+                    Image = "User/Images/19572.jpg",
+                    Author = pack.Author,
+                    Category = pack.Category,
+                    Subcategory = pack.Subcategory,
+                    Version = pack.Version,
+                    Description = pack.Description
+                };
+
+                //PackageAccess.AddPackage(newData);
+            }
         }
     }
 }
