@@ -10,17 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ProgramManager
+namespace ProgramManager.View
 {
     /// <summary>
-    /// Interaction logic for CreatePackWindow.xaml
+    /// Interaction logic for CreatePackageWindow.xaml
     /// </summary>
-    public partial class CreatePackWindow : Window
+    public partial class CreatePackageWindow : Window
     {
-        public CreatePackWindow()
+        public CreatePackageWindow()
         {
             InitializeComponent();
         }

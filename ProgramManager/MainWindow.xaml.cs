@@ -1,4 +1,4 @@
-﻿using ProgramManager.ViewModel;
+﻿using ProgramManager.View;
 using System.Windows;
 
 namespace ProgramManager
@@ -14,7 +14,7 @@ namespace ProgramManager
         }
         private void CallWinCreatePack_Click(object sender, RoutedEventArgs e)
         {
-            CreatePackWindow window = new CreatePackWindow();
+            CreatePackageWindow window = new CreatePackageWindow();
             window.ShowDialog();
         }
     }
