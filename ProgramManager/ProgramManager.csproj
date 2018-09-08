@@ -62,7 +62,7 @@
     <Compile Include="ViewModel\Base\DeclareCommand.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\Base\RelayCommand.cs" />
-    <Page Include="CreatePackWindow.xaml">
+    <Page Include="View\CreatePackageWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -74,8 +74,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="CreatePackWindow.xaml.cs">
-      <DependentUpon>CreatePackWindow.xaml</DependentUpon>
+    <Compile Include="View\CreatePackageWindow.xaml.cs">
+      <DependentUpon>CreatePackageWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\PackageModel.cs" />
     <Compile Include="MainWindow.xaml.cs">
@@ -128,7 +128,9 @@
   <ItemGroup>
     <Resource Include="Resources\19572.jpg" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Resources\User\Images\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
