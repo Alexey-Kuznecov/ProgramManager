@@ -3,3 +3,6 @@
 ################################################################################
 
 /ProgramManager/obj/Debug
+*.suo
+/.vs/ProgramManager/v14/*.suo
+/ProgramManager/obj/Debug

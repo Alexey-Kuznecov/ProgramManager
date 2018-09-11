@@ -20,7 +20,7 @@ namespace ProgramManager.ViewModel
         public ObservableCollection<CategoryModel> Subcategory { get; set; }
         public ObservableCollection<CategoryModel> Category { get; set; }
         /// <summary>
-        /// Receives and transfers information on the current packet to view
+        /// Receives and transfers information on the current package to view
         /// </summary>
         public ObservableCollection<PackageModel> Packages
         {
@@ -114,7 +114,7 @@ namespace ProgramManager.ViewModel
                     // Filters data depending on the selected subcategory if the special element "All" is selected, all data of subcategories will be selected
                     if (_currentSubcategory.SubcategoryName != "Все")
                     {
-                        IEnumerable<PackageModel> query = _enstancePackage.Where(package => package.Subcategory == _currentSubcategory.SubcategoryName);
+                        IEnumerable<PackageModel> query = _enstancePackage.Where(package => package.Subcategory.Contains(_currentSubcategory.SubcategoryName));
                         Packages = new ObservableCollection<PackageModel>(query);
                     }
                     // Filters data depending on the selected category and displays the list of all these subcategories
@@ -139,7 +139,7 @@ namespace ProgramManager.ViewModel
         /// </summary>
         public MainViewModel()
         {
-            _enstancePackage = new ObservableCollection< PackageModel > (PackageAccess.GetPackages());
+            _enstancePackage = new ObservableCollection<PackageModel>(PackageAccess.GetPackages());
             Packages = _enstancePackage;
             Category = new ObservableCollection<CategoryModel>(CategoryAccess.GetCategories());
         }

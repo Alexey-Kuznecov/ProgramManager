@@ -60,6 +60,7 @@
     <Compile Include="Model\PackageAccess.cs" />
     <Compile Include="ViewModel\Base\PropertiesChanged.cs" />
     <Compile Include="ViewModel\Base\DeclareCommand.cs" />
+    <Compile Include="ViewModel\CreatePackageViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\Base\RelayCommand.cs" />
     <Page Include="View\CreatePackageWindow.xaml">
@@ -117,7 +118,6 @@
     <Resource Include="Resources\Icons\Add_to_Favorites_48px.png" />
     <Resource Include="Resources\Icons\Categorize_48px.png" />
     <Resource Include="Resources\Icons\Delete_48px.png" />
-    <Resource Include="Resources\Icons\Delete_48px_1.png" />
     <Resource Include="Resources\Icons\Edit_48px.png" />
     <Resource Include="Resources\Icons\Open_48px.png" />
     <Resource Include="Resources\Icons\Optional_48px.png" />
@@ -129,7 +129,35 @@
     <Resource Include="Resources\19572.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Resources\User\Images\" />
+    <Resource Include="Resources\User\Images\Adobe Photoshop.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\User\packages.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\Save_48px.png" />
+    <Resource Include="Resources\Icons\Settings_48px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\Businessman_48px.png" />
+    <Resource Include="Resources\Icons\Customer_48px.png" />
+    <Resource Include="Resources\Icons\User_48px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\Add_48px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\Collapse_Arrow_48px.png" />
+    <Resource Include="Resources\Icons\Expand_Arrow_48px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\Add_Textfield_48px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\Category_40px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\Category_48px_1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

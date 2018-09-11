@@ -142,8 +142,8 @@
                 <Button.Content>
                     <ContentControl>
                         <WrapPanel>
-                            <Image Width="18" Source="Resources/Icons/Categorize_48px.png"></Image>
-                            <Label Content="Добавить в категорию" BorderBrush="{x:Null}" Height="24"></Label>
+                            <Image Width="18" Source="Resources/Icons/Category_48px.png"></Image>
+                            <Label Content="Добавить в категории" BorderBrush="{x:Null}" Height="24"></Label>
                         </WrapPanel>
                     </ContentControl>
                 </Button.Content>
