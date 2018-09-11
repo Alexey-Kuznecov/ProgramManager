@@ -3,8 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ProgramManager.View"
-        xmlns:vm="clr-namespace:ProgramManager.ViewModel" x:Class="ProgramManager.View.CreatePackageWindow"
+        xmlns:local="clr-namespace:ProgramManager.Views"
+        xmlns:vm="clr-namespace:ProgramManager.ViewModels" x:Class="ProgramManager.Views.CreatePackageWindow"
         mc:Ignorable="d"
         Title="Создать пакет" 
         Height="550" Width="417" 
@@ -75,7 +75,7 @@
                 <Button x:Name="cpSelectCategory" Height="28" Style="{StaticResource btIcon}">
                     <ContentControl>
                         <WrapPanel>
-                            <Image Width="18" Source="../Resources/Icons/Category_48px.png"/>
+                            <Image Width="18" Source="../Resources/Icons/Categorize_48px.png"/>
                             <Label Content="Доб. Категории" BorderBrush="{x:Null}" Height="26"/>
                         </WrapPanel>
                     </ContentControl>

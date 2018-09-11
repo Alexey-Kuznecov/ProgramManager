@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProgramManager"
-        xmlns:vm="clr-namespace:ProgramManager.ViewModel"
+        xmlns:vm="clr-namespace:ProgramManager.ViewModels"
         mc:Ignorable="d"
         Title="Pragram Manager" Height="606" Width="900" MinHeight="584" MinWidth="870" MaxHeight="700" MaxWidth="870" WindowStartupLocation="CenterScreen">
     <Window.DataContext>
@@ -142,7 +142,7 @@
                 <Button.Content>
                     <ContentControl>
                         <WrapPanel>
-                            <Image Width="18" Source="Resources/Icons/Category_48px.png"></Image>
+                            <Image Width="18" Source="Resources/Icons/Categorize_48px.png"></Image>
                             <Label Content="Добавить в категории" BorderBrush="{x:Null}" Height="24"></Label>
                         </WrapPanel>
                     </ContentControl>

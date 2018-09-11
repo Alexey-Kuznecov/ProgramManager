@@ -7,7 +7,7 @@ using ProgramManager.Model;
 using System.Collections.ObjectModel;
 using System.Windows;
 
-namespace ProgramManager.ViewModel
+namespace ProgramManager.ViewModels
 {
     public partial class MainViewModel
     {

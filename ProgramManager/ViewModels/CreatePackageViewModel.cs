@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
-using ProgramManager.View;
+using ProgramManager.Views;
 
-namespace ProgramManager.ViewModel
+namespace ProgramManager.ViewModels
 {
     public class CreatePackageViewModel : PropertiesChanged
     {

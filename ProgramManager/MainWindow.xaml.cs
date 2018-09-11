@@ -1,4 +1,4 @@
-﻿using ProgramManager.View;
+﻿using ProgramManager.Views;
 using System.Windows;
 
 namespace ProgramManager

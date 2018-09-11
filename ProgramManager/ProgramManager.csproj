@@ -55,15 +55,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Model\CategoryAccess.cs" />
-    <Compile Include="Model\CategoryModel.cs" />
-    <Compile Include="Model\PackageAccess.cs" />
-    <Compile Include="ViewModel\Base\PropertiesChanged.cs" />
-    <Compile Include="ViewModel\Base\DeclareCommand.cs" />
-    <Compile Include="ViewModel\CreatePackageViewModel.cs" />
-    <Compile Include="ViewModel\MainViewModel.cs" />
-    <Compile Include="ViewModel\Base\RelayCommand.cs" />
-    <Page Include="View\CreatePackageWindow.xaml">
+    <Compile Include="Models\CategoryAccess.cs" />
+    <Compile Include="Models\CategoryModel.cs" />
+    <Compile Include="Models\PackageAccess.cs" />
+    <Compile Include="ViewModels\Base\PropertiesChanged.cs" />
+    <Compile Include="ViewModels\Base\DeclareCommand.cs" />
+    <Compile Include="ViewModels\CreatePackageViewModel.cs" />
+    <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\Base\RelayCommand.cs" />
+    <Page Include="Views\CreatePackageWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -75,10 +75,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="View\CreatePackageWindow.xaml.cs">
+    <Compile Include="Views\CreatePackageWindow.xaml.cs">
       <DependentUpon>CreatePackageWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Model\PackageModel.cs" />
+    <Compile Include="Models\PackageModel.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -158,6 +158,11 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Icons\Category_48px_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Converters\" />
+    <Folder Include="Filters\" />
+    <Folder Include="Gender\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace ProgramManager.View
+namespace ProgramManager.Views
 {
     /// <summary>
     /// Interaction logic for CreatePackageWindow.xaml
