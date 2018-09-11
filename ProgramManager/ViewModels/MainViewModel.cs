@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Collections.ObjectModel;
 using ProgramManager.Model;
+using ProgramManager.Enums;
 using System.IO;
 
 namespace ProgramManager.ViewModels
@@ -65,7 +66,7 @@ namespace ProgramManager.ViewModels
                     Subcategory = new ObservableCollection<CategoryModel>(query);
                     
                     // Adding special elements.
-                    Subcategory.Insert(0, new CategoryModel() { SubcategoryName = "Все" });
+                    Subcategory.Insert(0, new CategoryModel() { SubcategoryName = "Все"});
 
                     // Updating properties Subcategory
                     OnPropertyChanged("Subcategory");
@@ -142,6 +143,7 @@ namespace ProgramManager.ViewModels
             _enstancePackage = new ObservableCollection<PackageModel>(PackageAccess.GetPackages());
             Packages = _enstancePackage;
             Category = new ObservableCollection<CategoryModel>(CategoryAccess.GetCategories());
+            Subcategory = new ObservableCollection<CategoryModel>(CategoryAccess.GetSubcategories());
         }
     }
 }

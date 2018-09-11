@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace ProgramManager.Views
 {
     /// <summary>
-    /// Interaction logic for CreatePackageWindow.xaml
+    /// Interaction logic for DialogPackages.xaml
     /// </summary>
-    public partial class CreatePackageWindow : Window
+    public partial class DialogPackages : Window
     {
-        public CreatePackageWindow()
+        public DialogPackages()
         {
             InitializeComponent();
         }

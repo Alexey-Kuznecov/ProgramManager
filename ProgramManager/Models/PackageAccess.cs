@@ -28,7 +28,7 @@ namespace ProgramManager.Model
             xDoc.Save(DOCUMENT_NAME);
         }
         /// <summary>
-        /// Вытягивает все узлы из файла xml по их id и формирует коллекцю из выбранных элементов
+        /// Вытягивает все узлы из файла xml по их id и формирует коллекцию из выбранных элементов
         /// </summary>
         /// <returns>Возращает коллекцию эелементов <list type="PackageModel"/></returns>
         internal static List<PackageModel> GetPackages()
@@ -126,7 +126,7 @@ namespace ProgramManager.Model
                 XDocument node = XDocument.Parse(str);
                 id = Convert.ToInt32(node.Root.Attribute("Id").Value);
             }
-            catch (NullReferenceException ex)
+            catch (NullReferenceException)
             {
                 return -1;
             }
@@ -135,7 +135,7 @@ namespace ProgramManager.Model
 
         public PackageAccess()
         {
-            if (!File.Exists("packages.xml"))
+            if (!File.Exists(DOCUMENT_NAME))
                 PackageAccess.FormatHeadXmlDoc();
 
             packages = GetPackages();

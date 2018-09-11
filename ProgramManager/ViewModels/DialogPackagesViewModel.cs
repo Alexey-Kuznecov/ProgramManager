@@ -8,9 +8,9 @@ using ProgramManager.Views;
 
 namespace ProgramManager.ViewModels
 {
-    public class CreatePackageViewModel : PropertiesChanged
+    public class DialogPackagesViewModel : PropertiesChanged
     {
-        public CreatePackageViewModel()
+        public DialogPackagesViewModel()
         {
 
         }

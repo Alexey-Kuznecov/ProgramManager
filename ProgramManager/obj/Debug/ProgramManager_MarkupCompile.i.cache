@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\Алексей\Documents\Visual Studio 2015\Projects\ProgramManager\ProgramManager\App.xaml
-2-1949101970
+2971643041
 
-19-1930311555
+22-1682568333
 13738642453
-Views\CreatePackageWindow.xaml;MainWindow.xaml;
+Views\DialogPackages.xaml;Views\MainView.xaml;
 
 False
 
