@@ -68,7 +68,7 @@
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="TextBox">
-                                <Border BorderBrush="#ADD8E6" BorderThickness="2" CornerRadius="2">
+                                <Border BorderBrush="#FF85C8E8" BorderThickness="2" CornerRadius="1">
                                     <Grid Margin="5">
                                         <ScrollViewer x:Name="PART_ContentHost" Margin="0" VerticalAlignment="Center" />
                                         <TextBlock 

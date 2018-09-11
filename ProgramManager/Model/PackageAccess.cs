@@ -12,7 +12,7 @@ namespace ProgramManager.Model
 {
     class PackageAccess
     {
-        const string DOCUMENT_NAME = "packages.xml";
+        const string DOCUMENT_NAME = "../../Resources/User/packages.xml";
         private List<PackageModel> packages;
         /// <summary>
         /// Создает заголовок XML документа
