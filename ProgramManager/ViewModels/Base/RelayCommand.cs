@@ -6,24 +6,33 @@ namespace ProgramManager.ViewModels
 {
     public class RelayCommand : ICommand
     {
-        private readonly Action _action;
+        private readonly Action _command;
+        private readonly Func<bool> _canExecute;
 
-        public RelayCommand(Action command)
+        public event EventHandler CanExecuteChanged;
+
+        public RelayCommand(Action command, Func<bool> canExecute = null)
         {
-            _action = command;
+            if (command == null)
+                throw new ArgumentNullException("command");
+            _canExecute = canExecute;
+            _command = command;
         }
-        public bool CanExecute(object parameter)
-        {
-            return true;
-        }
-        public event EventHandler CanExecuteChanged
-        {
-            add { CommandManager.RequerySuggested += value; }
-            remove { CommandManager.RequerySuggested -= value; }
-        }
+
         public void Execute(object parameter)
         {
-            _action();
+            _command();
+        }
+
+        public bool CanExecute(object parameter)
+        {
+            return _canExecute == null || _canExecute();
+        }
+
+        public void RaiseCanExecuteChanged()
+        {
+            if (CanExecuteChanged != null)
+                CanExecuteChanged(this, EventArgs.Empty);
         }
     }
 }

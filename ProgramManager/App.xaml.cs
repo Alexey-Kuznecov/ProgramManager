@@ -15,9 +15,8 @@ namespace ProgramManager
         {
             var window = new Window();
             var view = new MainView();
-            var viewModel = new MainViewModel();
 
-            view.DataContext = viewModel;
+
             window = view;
             window.Show();
         }

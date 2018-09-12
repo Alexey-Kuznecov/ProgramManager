@@ -16,7 +16,7 @@ namespace ProgramManager.Model
                 new CategoryModel() { CategoryName = "Программы", SubcategoryName = "Браузеры" },
                 new CategoryModel() { CategoryName = "Программы", SubcategoryName = "Меседжеры" },
                 new CategoryModel() { CategoryName = "Программы", SubcategoryName = "Редакторы кода" },
-                new CategoryModel() { CategoryName = "Программы", SubcategoryName = "Инструменты вебразработчика" },
+                new CategoryModel() { CategoryName = "Программы", SubcategoryName = "Инструменты разработчика" },
                 new CategoryModel() { CategoryName = "Программы", SubcategoryName = "Офисные" },
                 new CategoryModel() { CategoryName = "Программы", SubcategoryName = "Оптимизатры" },
                 new CategoryModel() { CategoryName = "Программы", SubcategoryName = "Органазеры" },

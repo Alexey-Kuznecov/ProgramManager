@@ -12,7 +12,7 @@ namespace ProgramManager.ViewModels
     public partial class MainViewModel
     {
         public void FixStatePackage()
-        {
+        {            
             if (_filterPackages == null || _filterPackages == "")
                 _storage = Packages;
             else

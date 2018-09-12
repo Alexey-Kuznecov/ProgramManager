@@ -11,7 +11,7 @@
         mc:Ignorable="d"
         Title="Pragram Manager" Height="606" Width="900" MinHeight="584" MinWidth="870" MaxHeight="700" MaxWidth="870" WindowStartupLocation="CenterScreen">
     <Window.DataContext>
-        <vm:MainViewModel />
+        <vm:MainViewModel/>
     </Window.DataContext>
 
     <Grid VerticalAlignment="Top" Height="566">

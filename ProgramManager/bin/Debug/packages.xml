@@ -25,7 +25,7 @@
     <Author>Axure Software Solution</Author>
     <Version>RP 8</Version>
     <Category>Программы</Category>
-    <Subcategory>Инструменты вебразработчика</Subcategory>
+    <Subcategory>Инструменты разработчика</Subcategory>
     <Description>Программа для создания прототипов сайтов</Description>
     <Image Source="User/Images/19572.jpg" />
   </Package>
@@ -115,7 +115,7 @@
     <Author>HQ Pty Ltd</Author>
     <Version>3.1.1 Build 3176</Version>
     <Category>Программы</Category>
-    <Subcategory>Редакторы кода</Subcategory>
+    <Subcategory>Редакторы кода, Инструменты разработчика</Subcategory>
     <Description>Многофункциональный редактор кода</Description>
     <Image Source="User/Images/19572.jpg" />
   </Package>
@@ -210,8 +210,8 @@
     <Image Source="User/Images/19572.jpg" />
   </Package>
   <Package Id="23">
-    <Name>High Definition Audio</Name>
-    <Author>Realtek</Author>
+    <Name>SUMSUNG-4 (NVIDEO High Definition Audio)</Name>
+    <Author>NVIDEO</Author>
     <Version>3.31</Version>
     <Category>Драйвера</Category>
     <Subcategory>Звуковая карта</Subcategory>

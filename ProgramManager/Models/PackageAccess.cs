@@ -1,19 +1,22 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Documents;
 using System.Xml.Linq;
 
 namespace ProgramManager.Model
 {
     class PackageAccess
     {
-        const string DOCUMENT_NAME = "../../Resources/User/packages.xml";
-        private List<PackageModel> packages;
+        const string DOCUMENT_NAME = "packages.xml";
+        /// <summary>
+        /// Конструктор по умолчанию
+        /// </summary>
+        public PackageAccess()
+        {
+            if (!File.Exists(DOCUMENT_NAME))
+                PackageAccess.FormatHeadXmlDoc();
+        }
         /// <summary>
         /// Создает заголовок XML документа
         /// </summary>
@@ -41,11 +44,9 @@ namespace ProgramManager.Model
                                         where (string)element.Attribute("Id") == id.ToString()
                                         select element;
 
-            foreach (XElement element in document)
-            {
+            foreach (XElement element in document) {
                 package.Add(
-                    new PackageModel
-                    {
+                    new PackageModel {
                         Name = element.Element("Name").Value,
                         Author = element.Element("Author").Value,
                         Category = element.Element("Category").Value,
@@ -55,8 +56,8 @@ namespace ProgramManager.Model
                         Description = element.Element("Description").Value
                     });                
                 id++;
-            }
-                 
+            }     
+                        
             return package;
         }
         /// <summary>
@@ -86,9 +87,8 @@ namespace ProgramManager.Model
         /// <param name="data">Коллекция объектов данных</param>
         public static void UpdatePackage(int id, PackageModel data)
         {
-            XElement root = XElement.Load(DOCUMENT_NAME);
-
-            XElement el = root.Elements("Package").ElementAt(id);
+            XElement root = XElement.Load(DOCUMENT_NAME),
+                     el = root.Elements("Package").ElementAt(id);
 
             el.SetElementValue("Name", data.Name);
             el.SetElementValue("Author", data.Author);
@@ -131,30 +131,6 @@ namespace ProgramManager.Model
                 return -1;
             }
             return id;
-        }
-
-        public PackageAccess()
-        {
-            if (!File.Exists(DOCUMENT_NAME))
-                PackageAccess.FormatHeadXmlDoc();
-
-            packages = GetPackages();
-
-            foreach (PackageModel pack in packages)
-            {
-                PackageModel newData = new PackageModel()
-                {
-                    Name = pack.Name,
-                    Image = "User/Images/19572.jpg",
-                    Author = pack.Author,
-                    Category = pack.Category,
-                    Subcategory = pack.Subcategory,
-                    Version = pack.Version,
-                    Description = pack.Description
-                };
-
-                //PackageAccess.AddPackage(newData);
-            }
         }
     }
 }
