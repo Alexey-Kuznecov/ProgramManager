@@ -15,3 +15,7 @@ C:\Users\Алексей\Documents\Visual Studio 2015\Projects\ProgramManager\Pro
 C:\Users\Алексей\Documents\Visual Studio 2015\Projects\ProgramManager\ProgramManager\obj\Debug\ProgramManager.csprojResolveAssemblyReference.cache
 C:\Users\Алексей\Documents\Visual Studio 2015\Projects\ProgramManager\ProgramManager\obj\Debug\Views\DialogPackages.g.cs
 C:\Users\Алексей\Documents\Visual Studio 2015\Projects\ProgramManager\ProgramManager\obj\Debug\Views\DialogPackages.baml
+C:\Users\Алексей\Documents\Visual Studio 2015\Projects\ProgramManager\ProgramManager\obj\Debug\Views\DialogPacks\TabFields.g.cs
+C:\Users\Алексей\Documents\Visual Studio 2015\Projects\ProgramManager\ProgramManager\obj\Debug\Views\DialogPacks\TabFiles.g.cs
+C:\Users\Алексей\Documents\Visual Studio 2015\Projects\ProgramManager\ProgramManager\obj\Debug\Views\DialogPacks\TabFields.baml
+C:\Users\Алексей\Documents\Visual Studio 2015\Projects\ProgramManager\ProgramManager\obj\Debug\Views\DialogPacks\TabFiles.baml

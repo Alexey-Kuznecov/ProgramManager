@@ -37,6 +37,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -70,6 +72,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\DialogPacks\TabFields.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DialogPacks\TabFiles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -81,6 +91,12 @@
     <Compile Include="Models\PackageModel.cs" />
     <Compile Include="Views\DialogPackages.xaml.cs">
       <DependentUpon>DialogPackages.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DialogPacks\TabFields.xaml.cs">
+      <DependentUpon>TabFields.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DialogPacks\TabFiles.xaml.cs">
+      <DependentUpon>TabFiles.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
