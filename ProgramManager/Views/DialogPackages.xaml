@@ -4,6 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProgramManager.Views"
+        xmlns:models="clr-namespace:ProgramManager.Models"
+        xmlns:vm="clr-namespace:ProgramManager.ViewModels"
         xmlns:dpack="clr-namespace:ProgramManager.Views.DialogPacks"
         mc:Ignorable="d"
         Title="Создать пакет" 
@@ -12,9 +14,7 @@
         VerticalAlignment="Center" 
         WindowStartupLocation="CenterScreen"
         MinHeight="600" MinWidth="500"
-        MaxHeight="600" MaxWidth="500" Background="#FFE6E6E6"
-        >
-
+        MaxHeight="600" MaxWidth="500" Background="#FFE6E6E6">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="25*"/>
@@ -89,11 +89,16 @@
             </WrapPanel>
         </Grid>
         <Grid Grid.Row="1">
+            <Grid.DataContext>
+                <vm:TextFieldViewModel/>
+            </Grid.DataContext>
             <TabControl Grid.Row="1">
                 <TabItem Header="Поля">
-                    <ItemsControl>
-                        <dpack:TabFields/>
-                    </ItemsControl>
+                    <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto">
+                        <ItemsControl>
+                            <dpack:TabFields/>
+                        </ItemsControl>
+                    </ScrollViewer>
                 </TabItem>
                 <TabItem Header="Описание">
                     <Grid>

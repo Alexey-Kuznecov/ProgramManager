@@ -11,7 +11,7 @@ namespace ProgramManager.ViewModels
 
         public MainViewModel()
         {
-            Packages = _enstancePackage;
+            Packages = _instancePackages;
             Category = new ObservableCollection<CategoryModel>(CategoryAccess.GetCategories());
         }
 
@@ -25,7 +25,7 @@ namespace ProgramManager.ViewModels
         private CategoryModel _currentCategory;
         private ObservableCollection<PackageModel> _packages;
         private ObservableCollection<PackageModel> _storage;
-        private ObservableCollection<PackageModel> _enstancePackage
+        private ObservableCollection<PackageModel> _instancePackages
                         = new ObservableCollection<PackageModel>(PackageAccess.GetPackages());
         private string _filterPackages;
 
@@ -49,7 +49,10 @@ namespace ProgramManager.ViewModels
         public PackageModel CurrentPackage
         {
             get { return _currentPackage; }
-            set { SetProperty(ref _currentPackage, value, () => CurrentPackage); }
+            set
+            {
+                SetProperty(ref _currentPackage, value, () => CurrentPackage);
+            }
         }
         public CategoryModel CurrentCategory
         {
@@ -57,6 +60,7 @@ namespace ProgramManager.ViewModels
             set
             {
                 SetProperty(ref _currentCategory, value, () => CurrentCategory);
+                // When the SelectedItem attribute value changes, all subcategories are filtered depending on the selected category.
                 // Request of these Subcategories
                 Subcategory = new ObservableCollection<CategoryModel>(CategoryAccess.GetSubcategories());
 
@@ -80,12 +84,12 @@ namespace ProgramManager.ViewModels
 
                 // Filters data depending on the selected subcategory if the special element "All" is selected, all data of subcategories will be selected
                 if (_currentSubcategory.SubcategoryName != "Все") {
-                    IEnumerable<PackageModel> query = _enstancePackage.Where(package => package.Subcategory.Contains(_currentSubcategory.SubcategoryName));
+                    IEnumerable<PackageModel> query = _instancePackages.Where(package => package.Subcategory.Contains(_currentSubcategory.SubcategoryName));
                     Packages = new ObservableCollection<PackageModel>(query);
                 }
                 // Filters data depending on the selected category and displays the list of all these subcategories
                 else {
-                    IEnumerable<PackageModel> query = _enstancePackage.Where(package => package.Category == _currentCategory.CategoryName);
+                    IEnumerable<PackageModel> query = _instancePackages.Where(package => package.Category == _currentCategory.CategoryName);
                     Packages = new ObservableCollection<PackageModel>(query);
                 }
                 if (Packages.Count > 0) {
@@ -101,16 +105,19 @@ namespace ProgramManager.ViewModels
             get { return _filterPackages; }
             set
             {
+                // This method to save a list current state before will begin search. 
+                // If search box is empty that method restores a former list state on 117 line.
                 FixStatePackage();
 
                 SetProperty(ref _filterPackages, value, () => FilterPackages);
-
+                // This instruction to filter data.
                 if (_filterPackages != "") {
-                    IEnumerable<PackageModel> filter = _enstancePackage.Where(package
+                    IEnumerable<PackageModel> filter = _instancePackages.Where(package
                         => package.Name.ToLower().Contains(_filterPackages.ToLower()));
                     _packages = new ObservableCollection<PackageModel>(filter);
                     OnPropertyChanged("Packages");
                 }
+                // Method to restore a former list state.
                 else FixStatePackage();
 
                 if (Packages.Count > 0) {
