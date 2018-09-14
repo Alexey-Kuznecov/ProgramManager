@@ -18,7 +18,18 @@ namespace ProgramManager.ViewModels
             else
                 Packages = _storage;
         }
-        private void Update() { }
-        private void Insert() { }
+        private void SetCurrentPackage(PackageModel obj)
+        {
+            List<PackageModel> current = new List<PackageModel>();
+
+            current.Add(new PackageModel() { Label = "Имя:", Field = obj.Name });
+            current.Add(new PackageModel() { Label = "Автор:", Field = obj.Author });
+            current.Add(new PackageModel() { Label = "Версия:", Field = obj.Version });
+            current.Add(new PackageModel() { Label = "Категория:", Field = obj.Category });
+            current.Add(new PackageModel() { Label = "Тип:", Field = obj.Subcategory });
+            current.Add(new PackageModel() { Label = "Описания:", Field = obj.Description });
+
+            _currentPackage = current;
+        }
     }
 }

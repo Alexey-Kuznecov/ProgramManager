@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Collections.ObjectModel;
 using ProgramManager.Model;
+using System;
 
 namespace ProgramManager.ViewModels
 {
@@ -20,13 +21,14 @@ namespace ProgramManager.ViewModels
         #region Fields
 
         // The fields for properties
-        private PackageModel _currentPackage;
+        private dynamic _currentPackage;
         private CategoryModel _currentSubcategory;
         private CategoryModel _currentCategory;
         private ObservableCollection<PackageModel> _packages;
         private ObservableCollection<PackageModel> _storage;
         private ObservableCollection<PackageModel> _instancePackages
                         = new ObservableCollection<PackageModel>(PackageAccess.GetPackages());
+        private int _indexPackage;
         private string _filterPackages;
 
         #endregion
@@ -42,16 +44,26 @@ namespace ProgramManager.ViewModels
             set { SetProperty(ref _packages, value, () => Packages); }
         }
         public ObservableCollection<CategoryModel> Subcategory { get; set; }
-        public ObservableCollection<CategoryModel> Category { get; set; }        
+        public ObservableCollection<CategoryModel> Category { get; set; }
+        public int IndexPackage
+        {
+            get { return _indexPackage; }
+            set { SetProperty(ref _indexPackage, value, () => IndexPackage); }
+        }
         /// <summary>
         /// Receives and transfers information on the current category to view 
-        /// </summary>       
-        public PackageModel CurrentPackage
+        /// </summary>
+        public dynamic CurrentPackage
         {
             get { return _currentPackage; }
             set
             {
-                SetProperty(ref _currentPackage, value, () => CurrentPackage);
+                _currentPackage = value;
+                      
+                if (value != null)
+                    SetCurrentPackage(value);
+
+                OnPropertyChanged("CurrentPackage");  
             }
         }
         public CategoryModel CurrentCategory
@@ -94,7 +106,8 @@ namespace ProgramManager.ViewModels
                 }
                 if (Packages.Count > 0) {
                     // Selects the first element of the list for correct work of a data panel
-                    _currentPackage = Packages[0];
+                    CurrentPackage = Packages[0];
+                    IndexPackage = 0;
                     // Updating of property of the current package
                     OnPropertyChanged("CurrentPackage");
                 }                                      
@@ -122,7 +135,8 @@ namespace ProgramManager.ViewModels
 
                 if (Packages.Count > 0) {
                     // Selects the first element of the list for correct work of a data panel
-                    _currentPackage = Packages[0];
+                    CurrentPackage = Packages[0];
+                    IndexPackage = 0;
                     // Updating of property of the current package
                     OnPropertyChanged("CurrentPackage");
                 }

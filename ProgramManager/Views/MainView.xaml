@@ -8,6 +8,7 @@
         xmlns:enums="clr-namespace:ProgramManager.Enums"
         xmlns:converters="clr-namespace:ProgramManager.Converters"
         xmlns:vm="clr-namespace:ProgramManager.ViewModels"
+        xmlns:converter="clr-namespace:ProgramManager.Converters"
         mc:Ignorable="d"
         Title="Pragram Manager" Height="606" Width="900" MinHeight="584" MinWidth="870" MaxHeight="700" MaxWidth="870" WindowStartupLocation="CenterScreen">
     <Window.DataContext>
@@ -218,7 +219,8 @@
         <!--Список программ-->
         <ListBox Grid.Column="1" Grid.Row="4" Grid.RowSpan="4" 
                  ItemsSource="{Binding Packages, Mode=TwoWay}" 
-                 SelectedItem="{Binding CurrentPackage, Mode=TwoWay}">
+                 SelectedItem="{Binding CurrentPackage, Mode=TwoWay}" 
+                 SelectedIndex="{Binding IndexPackage, Mode=TwoWay}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
@@ -242,30 +244,16 @@
                RenderTransformOrigin="0.5,0.5"/>
         <StackPanel Grid.Column="2" Grid.Row="5" Margin="5">
             <Rectangle Fill="#CDCDCD" Height="1" Width="240"></Rectangle>
-            <WrapPanel>
-                <Label Content="Имя:" FontWeight="Bold"></Label>
-                <Label Name="PackageName" Content="{Binding CurrentPackage.Name, Mode=TwoWay}"></Label>
-            </WrapPanel>
-            <WrapPanel>
-                <Label Content="Автор:" FontWeight="Bold"></Label>
-                <Label Name="Author" Content="{Binding CurrentPackage.Author, Mode=TwoWay}"></Label>
-            </WrapPanel>
-            <WrapPanel>
-                <Label Content="Категория:" FontWeight="Bold"></Label>
-                <Label Name="Category" Content="{Binding CurrentPackage.Category, Mode=TwoWay}"></Label>
-            </WrapPanel>
-            <WrapPanel>
-                <Label Content="Версия:" FontWeight="Bold"></Label>
-                <Label Name="Version" Content="{Binding CurrentPackage.Version, Mode=TwoWay}"></Label>
-            </WrapPanel>
-            <WrapPanel>
-                <Label Content="Тип:" FontWeight="Bold"></Label>
-                <Label Name="Type" Content="{Binding CurrentPackage.Subcategory, Mode=OneWay}"></Label>
-            </WrapPanel>
-            <WrapPanel>
-                <Label Content="Описание:" FontWeight="Bold"></Label>
-                <TextBlock Name="Description" TextWrapping="Wrap" Padding="5" Text="{Binding CurrentPackage.Description, Mode=TwoWay}"/>
-            </WrapPanel>
+            <ItemsControl ItemsSource="{Binding CurrentPackage, Mode=TwoWay}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <WrapPanel>
+                            <Label Content="{Binding Label}" FontWeight="Bold"></Label>
+                            <Label Name="PackageName" Content="{Binding Field}"></Label>
+                        </WrapPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
         </StackPanel>
         <!--Область кнопки установить-->
         <StackPanel Grid.Column="2" Grid.Row="6" Margin="5,0,0,10" HorizontalAlignment="Left">
