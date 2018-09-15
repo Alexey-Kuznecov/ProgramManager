@@ -10,6 +10,7 @@ namespace ProgramManager.Models
     {
         public int CategoryId { get; set; }
         public string CategoryName { get; set; }
-        public string SubcategoryName { get; set; }
+        public string TagName { get; set; }
+        public int Count { get; set; }
     }
 }

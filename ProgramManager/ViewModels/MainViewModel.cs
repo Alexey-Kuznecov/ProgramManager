@@ -12,7 +12,8 @@ namespace ProgramManager.ViewModels
         public MainViewModel()
         {
             Packages = _instancePackages;
-            Category = new ObservableCollection<CategoryModel>(CategoryAccess.GetCategories());
+            Category = _instanceCategories;
+            CalculateByCategory();
         }
 
         #endregion
@@ -21,12 +22,14 @@ namespace ProgramManager.ViewModels
 
         // The fields for properties
         private dynamic _currentPackage;
-        private CategoryModel _currentSubcategory;
+        private CategoryModel _currentTag;
         private CategoryModel _currentCategory;
         private ObservableCollection<PackageModel> _packages;
         private ObservableCollection<PackageModel> _storage;
         private ObservableCollection<PackageModel> _instancePackages
-                        = new ObservableCollection<PackageModel>(PackageAccess.GetPackages());
+            = new ObservableCollection<PackageModel>(PackageAccess.GetPackages());
+        private ObservableCollection<CategoryModel> _instanceCategories
+            = new ObservableCollection<CategoryModel>(CategoryAccess.GetCategories());
         private int _indexPackage;
         private string _filterPackages;
 
@@ -42,7 +45,7 @@ namespace ProgramManager.ViewModels
             get { return _packages; }
             set { SetProperty(ref _packages, value, () => Packages); }
         }
-        public ObservableCollection<CategoryModel> Subcategory { get; set; }
+        public ObservableCollection<CategoryModel> Tags { get; set; }
         public ObservableCollection<CategoryModel> Category { get; set; }
         public int IndexPackage
         {
@@ -71,44 +74,45 @@ namespace ProgramManager.ViewModels
             set
             {
                 SetProperty(ref _currentCategory, value, () => CurrentCategory);
-                // When the SelectedItem attribute value changes, all subcategories are filtered depending on the selected category.
-                // Request of these Subcategories
-                Subcategory = new ObservableCollection<CategoryModel>(CategoryAccess.GetSubcategories());
+                // When the SelectedItem attribute value changes, all Tags are filtered depending on the selected category.
+                // Request of these Tags
+                CalculateByTag();
 
-                // Filters subcategory depending on the selected category.
-                IEnumerable<CategoryModel> query = Subcategory.Where(category => category.CategoryName == _currentCategory.CategoryName);
+                // Filters Tags depending on the selected category.
+                IEnumerable<CategoryModel> query = Tags.Where(category =>
+                                                   category.CategoryName == _currentCategory.CategoryName);
                 // Creating new data
-                Subcategory = new ObservableCollection<CategoryModel>(query);
+                Tags = new ObservableCollection<CategoryModel>(query);
 
                 // Adding special elements.
-                Subcategory.Insert(0, new CategoryModel() { SubcategoryName = "Все" });
-                // Updating properties Subcategory
-                OnPropertyChanged("Subcategory"); 
+                Tags.Insert(0, new CategoryModel() { TagName = "Все", Count = CurrentCategory.Count });
+                // Updating properties Tags
+                OnPropertyChanged("Tags"); 
             }
         }
-        public CategoryModel CurrentSubcategory
+        public CategoryModel CurrentTag
         {
-            get { return _currentSubcategory; }
+            get { return _currentTag; }
             set
             {
-                SetProperty(ref _currentSubcategory, value, () => CurrentSubcategory);
+                SetProperty(ref _currentTag, value, () => CurrentTag);
 
-                // Filters data depending on the selected subcategory if the special element "All" is selected, all data of subcategories will be selected
-                if (_currentSubcategory.SubcategoryName != "Все") {
-                    IEnumerable<PackageModel> query = _instancePackages.Where(package => package.Subcategory.Contains(_currentSubcategory.SubcategoryName));
+                // Filters data depending on the selected Tag if the special element "All" is selected, all data of Tags will be selected
+                if (_currentTag.TagName != "Все") {
+                    IEnumerable<PackageModel> query = _instancePackages.Where(package => 
+                                                      package.TagName.Contains(_currentTag.TagName));
                     Packages = new ObservableCollection<PackageModel>(query);
                 }
-                // Filters data depending on the selected category and displays the list of all these subcategories
+                // Filters data depending on the selected category and displays the list of all these Tags
                 else {
-                    IEnumerable<PackageModel> query = _instancePackages.Where(package => package.Category == _currentCategory.CategoryName);
+                    IEnumerable<PackageModel> query = _instancePackages.Where(package => 
+                                                      package.Category == _currentCategory.CategoryName);
                     Packages = new ObservableCollection<PackageModel>(query);
                 }
                 if (Packages.Count > 0) {
                     // Selects the first element of the list for correct work of a data panel
                     CurrentPackage = Packages[0];
                     IndexPackage = 0;
-                    // Updating of property of the current package
-                    OnPropertyChanged("CurrentPackage");
                 }                                      
             }
         }
@@ -134,10 +138,8 @@ namespace ProgramManager.ViewModels
 
                 if (Packages.Count > 0) {
                     // Selects the first element of the list for correct work of a data panel
-                    CurrentPackage = Packages[0];
+                    _currentPackage = Packages[0];
                     IndexPackage = 0;
-                    // Updating of property of the current package
-                    OnPropertyChanged("CurrentPackage");
                 }
             }
         }

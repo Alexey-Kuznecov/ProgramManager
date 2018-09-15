@@ -7,7 +7,7 @@
     <Author>Adobe</Author>
     <Version>Cloud CC6</Version>
     <Category>Программы</Category>
-    <Subcategory>Редактор графики</Subcategory>
+    <Tag>Редактор графики</Tag>
     <Description>Программа для оформления фотографий</Description>
     <Image Source="User/Images/19572.jpg" />
   </Package>
@@ -16,7 +16,7 @@
     <Author>Adobe</Author>
     <Version>Cloud CC6</Version>
     <Category>Программы</Category>
-    <Subcategory>Редактор графики</Subcategory>
+    <Tag>Редактор графики</Tag>
     <Description>Программа для оформления фотографий</Description>
     <Image Source="User/Images/19572.jpg" />
   </Package>
@@ -25,7 +25,7 @@
     <Author>Axure Software Solution</Author>
     <Version>RP 8</Version>
     <Category>Программы</Category>
-    <Subcategory>Инструменты вебразработчика</Subcategory>
+    <Tag>Инструменты вебразработчика</Tag>
     <Description>Программа для создания прототипов сайтов</Description>
     <Image Source="User/Images/19572.jpg" />
   </Package>
@@ -34,7 +34,7 @@
     <Author>Andrei Kulabukhau</Author>
     <Version>0.10</Version>
     <Category>Программы</Category>
-    <Subcategory>Органазеры</Subcategory>
+    <Tag>Органазеры</Tag>
     <Description>Программа для измерения времени</Description>
     <Image Source="User/Images/19572.jpg" />
   </Package>
@@ -43,7 +43,7 @@
     <Author>Mozilla</Author>
     <Version>7.9.4</Version>
     <Category>Программы</Category>
-    <Subcategory>Браузеры</Subcategory>
+    <Tag>Браузеры</Tag>
     <Description>Программа для просмотра вебстраниц</Description>
     <Image Source="User/Images/19572.jpg" />
   </Package>
@@ -52,7 +52,7 @@
     <Author>Google</Author>
     <Version>8.5.0</Version>
     <Category>Программы</Category>
-    <Subcategory>Браузеры</Subcategory>
+    <Tag>Браузеры</Tag>
     <Description>Программа для просмотра вебстраниц</Description>
     <Image Source="User/Images/19572.jpg" />
   </Package>
@@ -61,7 +61,7 @@
     <Author>Microsoft</Author>
     <Version>2017</Version>
     <Category>Программы</Category>
-    <Subcategory>Офисные</Subcategory>
+    <Tag>Офисные</Tag>
     <Description>Программа для организации электронных писем</Description>
     <Image Source="User/Images/19572.jpg" />
   </Package>
@@ -70,7 +70,7 @@
     <Author>Microsoft</Author>
     <Version>2017</Version>
     <Category>Программы</Category>
-    <Subcategory>Офисные</Subcategory>
+    <Tag>Офисные</Tag>
     <Description>Программа для написания, редактирования, оформления текста и многое другое.</Description>
     <Image Source="User/Images/19572.jpg" />
   </Package>
@@ -79,7 +79,7 @@
     <Author>Piriform</Author>
     <Version>5.43.6520</Version>
     <Category>Программы</Category>
-    <Subcategory>Оптимизатры</Subcategory>
+    <Tag>Оптимизатры</Tag>
     <Description>Программа очиски компьютора</Description>
     <Image Source="User/Images/19572.jpg" />
   </Package>
@@ -88,7 +88,7 @@
     <Author>ChemTable Software</Author>
     <Version>8.16</Version>
     <Category>Программы</Category>
-    <Subcategory>Оптимизатры</Subcategory>
+    <Tag>Оптимизатры</Tag>
     <Description>Программа для оптимизации, отчиски, дефрагментации реестра и многое другое</Description>
     <Image Source="User/Images/19572.jpg" />
   </Package>
@@ -97,7 +97,7 @@
     <Author>Неизвестно</Author>
     <Version>6.0</Version>
     <Category>Программы</Category>
-    <Subcategory>Органазеры</Subcategory>
+    <Tag>Органазеры</Tag>
     <Description>Программа организации задач</Description>
     <Image Source="User/Images/19572.jpg" />
   </Package>
@@ -106,7 +106,7 @@
     <Author>Kasperski Lab</Author>
     <Version>6.0</Version>
     <Category>Программы</Category>
-    <Subcategory>Антивирусы</Subcategory>
+    <Tag>Антивирусы</Tag>
     <Description>Программа для защиты компютера от вирусов</Description>
     <Image Source="User/Images/19572.jpg" />
   </Package>
@@ -115,7 +115,7 @@
     <Author>HQ Pty Ltd</Author>
     <Version>3.1.1 Build 3176</Version>
     <Category>Программы</Category>
-    <Subcategory>Редакторы кода, Инструменты вебразработчика</Subcategory>
+    <Tag>Редакторы кода, Инструменты вебразработчика</Tag>
     <Description>Многофункциональный редактор кода</Description>
     <Image Source="User/Images/19572.jpg" />
   </Package>
@@ -124,7 +124,7 @@
     <Author>Notepad++Team</Author>
     <Version>7.4.2</Version>
     <Category>Программы</Category>
-    <Subcategory>Редакторы кода</Subcategory>
+    <Tag>Редакторы кода</Tag>
     <Description>Удобный и мультифункциональный редактор кода</Description>
     <Image Source="User/Images/19572.jpg" />
   </Package>
@@ -133,7 +133,7 @@
     <Author>Microsoft</Author>
     <Version>14.0</Version>
     <Category>Программы</Category>
-    <Subcategory>IDE</Subcategory>
+    <Tag>IDE</Tag>
     <Description>Интегрированая среда разработки</Description>
     <Image Source="User/Images/19572.jpg" />
   </Package>
@@ -142,7 +142,7 @@
     <Author>Poligonic</Author>
     <Version>10</Version>
     <Category>Программы</Category>
-    <Subcategory>3D Редакторы</Subcategory>
+    <Tag>3D Редакторы</Tag>
     <Description>Программа для создания 3D моделей</Description>
     <Image Source="User/Images/19572.jpg" />
   </Package>
@@ -151,7 +151,7 @@
     <Author>NetBeans Software</Author>
     <Version>9.1.0</Version>
     <Category>Программы</Category>
-    <Subcategory>IDE</Subcategory>
+    <Tag>IDE</Tag>
     <Description>Интегрированая среда разработки</Description>
     <Image Source="User/Images/19572.jpg" />
   </Package>
@@ -160,7 +160,7 @@
     <Author>Discord Team</Author>
     <Version>3.0</Version>
     <Category>Программы</Category>
-    <Subcategory>Меседжеры</Subcategory>
+    <Tag>Меседжеры</Tag>
     <Description>Программа для создания сообществ</Description>
     <Image Source="User/Images/19572.jpg" />
   </Package>
@@ -169,7 +169,7 @@
     <Author>Slack Team</Author>
     <Version>2.2</Version>
     <Category>Программы</Category>
-    <Subcategory>Меседжеры</Subcategory>
+    <Tag>Меседжеры</Tag>
     <Description>Программа для создания сообществ</Description>
     <Image Source="User/Images/19572.jpg" />
   </Package>
@@ -178,7 +178,7 @@
     <Author>CD Project Red</Author>
     <Version>3.31</Version>
     <Category>Игры</Category>
-    <Subcategory>RPG</Subcategory>
+    <Tag>RPG</Tag>
     <Description>Игра для романтиков на досуге мясников</Description>
     <Image Source="User/Images/19572.jpg" />
   </Package>
@@ -187,7 +187,7 @@
     <Author>Mod Doc Software</Author>
     <Version>2.2</Version>
     <Category>Игры</Category>
-    <Subcategory>Стратегии</Subcategory>
+    <Tag>Стратегии</Tag>
     <Description>Игра для настоящих царей</Description>
     <Image Source="User/Images/19572.jpg" />
   </Package>
@@ -196,7 +196,7 @@
     <Author>Realtek</Author>
     <Version>3.31</Version>
     <Category>Драйвера</Category>
-    <Subcategory>Звуковая карта</Subcategory>
+    <Tag>Звуковая карта</Tag>
     <Description></Description>
     <Image Source="User/Images/19572.jpg" />
   </Package>
@@ -205,7 +205,7 @@
     <Author>Logitech</Author>
     <Version>2.2</Version>
     <Category>Драйвера</Category>
-    <Subcategory>Аксессуары</Subcategory>
+    <Tag>Аксессуары</Tag>
     <Description></Description>
     <Image Source="User/Images/19572.jpg" />
   </Package>
@@ -214,7 +214,7 @@
     <Author>Realtek</Author>
     <Version>3.31</Version>
     <Category>Драйвера</Category>
-    <Subcategory>Звуковая карта</Subcategory>
+    <Tag>Звуковая карта</Tag>
     <Description></Description>
     <Image Source="User/Images/19572.jpg" />
   </Package>
@@ -223,7 +223,7 @@
     <Author>Logitech</Author>
     <Version>2.3.1</Version>
     <Category>Моды</Category>
-    <Subcategory>Реворк</Subcategory>
+    <Tag>Реворк</Tag>
     <Description>Качественный мод для 3 Ведьмака, который улучшит качество графики в игре.</Description>
     <Image Source="User/Images/19572.jpg" />
   </Package>
@@ -232,7 +232,7 @@
     <Author>Valve</Author>
     <Version>2.2</Version>
     <Category>Игры</Category>
-    <Subcategory>Shooter</Subcategory>
+    <Tag>Shooter</Tag>
     <Description>Игра для настоящих ассов</Description>
     <Image Source="User/Images/19572.jpg" />
   </Package>

@@ -50,14 +50,13 @@ namespace ProgramManager.Models
                         Name = element.Element("Name").Value,
                         Author = element.Element("Author").Value,
                         Category = element.Element("Category").Value,
-                        Subcategory = element.Element("Subcategory").Value,
+                        TagName = element.Element("Tag").Value,
                         Version = element.Element("Version").Value,
                         Image = element.Element("Image").Value,
                         Description = element.Element("Description").Value
                     });                
                 id++;
-            }     
-                        
+            }                             
             return package;
         }
         /// <summary>
@@ -75,7 +74,7 @@ namespace ProgramManager.Models
                             new XElement("Author", data.Author),
                             new XElement("Version", data.Version),
                             new XElement("Category", data.Category),
-                            new XElement("Subcategory", data.Subcategory),
+                            new XElement("Tag", data.TagName),
                             new XElement("Description", data.Description),
                             new XElement("Image", new XAttribute("Source", data.Image))));
             xDoc.Save(DOCUMENT_NAME);
@@ -93,7 +92,7 @@ namespace ProgramManager.Models
             el.SetElementValue("Name", data.Name);
             el.SetElementValue("Author", data.Author);
             el.SetElementValue("Category", data.Category);
-            el.SetElementValue("Subcategory", data.Subcategory);
+            el.SetElementValue("Tag", data.TagName);
             el.SetElementValue("Version", data.Version);
             el.SetElementValue("Description", data.Description);
             el.Element("Image").SetAttributeValue("Source", data.Image);
