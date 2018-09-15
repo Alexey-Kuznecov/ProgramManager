@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProgramManager.Model
+namespace ProgramManager.Models
 {
     public class CategoryModel
     {

@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Collections.ObjectModel;
-using ProgramManager.Model;
-using System;
+using ProgramManager.Models;
 
 namespace ProgramManager.ViewModels
 {

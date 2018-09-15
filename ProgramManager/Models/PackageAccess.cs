@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Xml.Linq;
 
-namespace ProgramManager.Model
+namespace ProgramManager.Models
 {
     class PackageAccess
     {
@@ -20,7 +20,7 @@ namespace ProgramManager.Model
         /// <summary>
         /// Создает заголовок XML документа
         /// </summary>
-        public static void FormatHeadXmlDoc()
+        private static void FormatHeadXmlDoc()
         {
             XDocument xDoc = new XDocument(
                 new XDeclaration("1.0", "UTF-8", "yes"),
@@ -115,7 +115,7 @@ namespace ProgramManager.Model
         /// затем извлекает значение атрибута id элемента "Package".
         /// </summary>
         /// <returns>Возращает id последного элемента</returns>
-        public static int GetIdLastElement()
+        private static int GetIdLastElement()
         {
             XDocument xDoc = XDocument.Load(DOCUMENT_NAME);
             int id = 0;

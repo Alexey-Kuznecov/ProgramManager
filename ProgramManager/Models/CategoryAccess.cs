@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ProgramManager.Model
+namespace ProgramManager.Models
 {
     public class CategoryAccess
     {

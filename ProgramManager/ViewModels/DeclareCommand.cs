@@ -1,24 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ProgramManager.Model;
-using System.Collections.ObjectModel;
-using System.Windows;
+﻿using System.Collections.Generic;
+using ProgramManager.Models;
 
 namespace ProgramManager.ViewModels
 {
     public partial class MainViewModel
     {
-        public void FixStatePackage()
-        {            
+        private void FixStatePackage()
+        {
             if (_filterPackages == null || _filterPackages == "")
                 _storage = Packages;
             else
                 Packages = _storage;
         }
-        private void Update() { }
-        private void Insert() { }
+        private void SetCurrentPackage(PackageModel obj)
+        {
+            List<DataPanelModel> current = new List<DataPanelModel>();
+
+            current.Add(new DataPanelModel() { Label = "Имя:", Field = obj.Name });
+            current.Add(new DataPanelModel() { Label = "Автор:", Field = obj.Author });
+            current.Add(new DataPanelModel() { Label = "Версия:", Field = obj.Version });
+            current.Add(new DataPanelModel() { Label = "Категория:", Field = obj.Category });
+            current.Add(new DataPanelModel() { Label = "Тип:", Field = obj.Subcategory });
+            current.Add(new DataPanelModel() { Label = "Описания:", Field = obj.Description });
+
+            _currentPackage = current;
+        }
     }
 }

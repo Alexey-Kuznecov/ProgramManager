@@ -60,14 +60,14 @@
                                 HorizontalAlignment="Right" Width="103" Height="25">
                     <Button.ContextMenu>
                         <ContextMenu>
-                            <MenuItem Header="Автор"></MenuItem>
-                            <MenuItem Header="Версия"></MenuItem>
-                            <MenuItem Header="Лицензия"></MenuItem>
-                            <MenuItem Header="Авторские прова"></MenuItem>
-                            <MenuItem Header="Официальный сайт"></MenuItem>
-                            <MenuItem Header="Лицензионный ключ"></MenuItem>
-                            <MenuItem Header="Источник"></MenuItem>
-                            <MenuItem Header="Хеш-суммы"></MenuItem>
+                            <MenuItem Header="Автор" Command="{Binding OpenCommand}"/>
+                            <MenuItem Header="Версия" Command="{Binding AddVersion}"/>
+                            <MenuItem Header="Лицензия" Command="{Binding AddLicense}"/>                         
+                            <MenuItem Header="Авторские прова" Command="{Binding AddCopyRight}"/>
+                            <MenuItem Header="Официальный сайт" Command="{Binding AddSite}"/>
+                            <MenuItem Header="Лицензионный ключ" Command="{Binding AddLicenseKey}"/>
+                            <MenuItem Header="Источник" Command="{Binding AddSource}"/>
+                            <MenuItem Header="Хеш-суммы" Command="{Binding AddHeshSum}"/>
                         </ContextMenu>
                     </Button.ContextMenu>
                 </Button>

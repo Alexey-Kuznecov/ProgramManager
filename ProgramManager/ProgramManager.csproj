@@ -62,10 +62,11 @@
     <Compile Include="MarkupExtensions\EnumValues.cs" />
     <Compile Include="Models\CategoryAccess.cs" />
     <Compile Include="Models\CategoryModel.cs" />
+    <Compile Include="Models\DataPanelModel.cs" />
     <Compile Include="Models\PackageAccess.cs" />
     <Compile Include="Models\TextFieldModel.cs" />
     <Compile Include="ViewModels\Base\PropertiesChanged.cs" />
-    <Compile Include="ViewModels\Base\DeclareCommand.cs" />
+    <Compile Include="ViewModels\DeclareCommand.cs" />
     <Compile Include="ViewModels\DialogPackagesViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\Base\RelayCommand.cs" />
