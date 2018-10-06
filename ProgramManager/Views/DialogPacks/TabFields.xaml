@@ -1,44 +1,61 @@
-﻿<UserControl x:Class="ProgramManager.Views.DialogPacks.TabFields"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:ProgramManager.Views.DialogPacks"
-             xmlns:vm="clr-namespace:ProgramManager.ViewModels"
-             xmlns:models="clr-namespace:ProgramManager.Models"
-             mc:Ignorable="d"
-             d:DataContext="{d:DesignInstance vm:TextFieldViewModel}"
-             d:DesignHeight="300" d:DesignWidth="500">
+﻿<UserControl
+    x:Class="ProgramManager.Views.DialogPacks.TabFields"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:ProgramManager.Views.DialogPacks"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="clr-namespace:ProgramManager.Models"
+    xmlns:vm="clr-namespace:ProgramManager.ViewModels"
+    d:DataContext="{d:DesignInstance vm:DialogPackagesViewModel}"
+    d:DesignHeight="300"
+    d:DesignWidth="500"
+    mc:Ignorable="d">
     <UserControl.Resources>
-        <!--Элементы из данного шаблона будет созданы для каждого элемента списка-->
+        <!--  Элементы из данного шаблона будет созданы для каждого элемента списка  -->
         <DataTemplate DataType="{x:Type models:TextFieldModel}">
             <StackPanel>
                 <Label Grid.Row="0">
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="300*"/>
-                            <ColumnDefinition Width="80*"/>
+                            <ColumnDefinition Width="300*" />
+                            <ColumnDefinition Width="80*" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
+                            <RowDefinition />
+                            <RowDefinition />
                         </Grid.RowDefinitions>
-                        <StackPanel Grid.Column="0" Grid.RowSpan="2" Width="380">
-                            <TextBlock Margin="10,5,168,0" Height="20" Text="{Binding Path=LabelField}"/>
-                            <TextBox Margin="10,5,30,5" Height="35" Tag="{Binding Path=HintField}"/>
+                        <StackPanel
+                            Grid.RowSpan="2"
+                            Grid.Column="0"
+                            Width="380">
+                            <TextBlock
+                                Height="20"
+                                Margin="10,5,168,0"
+                                Text="{Binding Path=LabelField}" />
+                            <TextBox
+                                Height="35"
+                                Margin="10,5,30,5"
+                                Tag="{Binding Path=HintField}"
+                                Text="{Binding Path=FieldValue}" />
                         </StackPanel>
-                        <WrapPanel Grid.Column="1" Grid.Row="1" Margin="0,22,0,0" Width="80">
+                        <WrapPanel
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Width="80"
+                            Margin="0,22,0,0">
                             <Button Grid.Column="1" Height="28">
                                 <ContentControl>
-                                    <Image Height="24" Source="{Binding Path=AutoCompleteIcon}"/>
+                                    <Image Height="24" Source="{Binding Path=AutoCompleteIcon}" />
                                 </ContentControl>
                             </Button>
-                            <Button Margin="5,0,0,0" Height="28" 
-                                    Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl},
-                                    Path=DataContext.RemoveTextField}"
-                                    CommandParameter="{Binding}">
+                            <Button
+                                Height="28"
+                                Margin="5,0,0,0"
+                                Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Path=DataContext.RemoveTextField}"
+                                CommandParameter="{Binding}">
                                 <ContentControl>
-                                    <Image Height="24" Source="{Binding Path=DeleteTextFieldIcon}"/>
+                                    <Image Height="24" Source="{Binding Path=DeleteTextFieldIcon}" />
                                 </ContentControl>
                             </Button>
                         </WrapPanel>
@@ -47,27 +64,36 @@
             </StackPanel>
         </DataTemplate>
     </UserControl.Resources>
-    <!--Привязка модели к представлению-->
+    <!--  Привязка модели к представлению  -->
     <DockPanel LastChildFill="True">
         <StackPanel Name="StackPanel" DockPanel.Dock="Top">
-            <ItemsControl x:Name="ItemsControl" ItemsSource="{Binding TextField}" HorizontalContentAlignment="Stretch"/>
+            <ItemsControl
+                x:Name="ItemsControl"
+                HorizontalContentAlignment="Stretch"
+                ItemsSource="{Binding TextField}" />
             <StackPanel Orientation="Vertical">
 
-                <Button x:Name="AddField"
-                                Margin="0,10,34,10"
-                                Content="Добавить поле"
-                                Command="{Binding AddTextField}"
-                                HorizontalAlignment="Right" Width="103" Height="25">
+                <Button
+                    x:Name="AddField"
+                    Width="103"
+                    Height="25"
+                    Margin="0,10,34,10"
+                    HorizontalAlignment="Right"
+                    Content="Добавить поле">
                     <Button.ContextMenu>
-                        <ContextMenu>
-                            <MenuItem Header="Автор" Command="{Binding OpenCommand}"/>
-                            <MenuItem Header="Версия" Command="{Binding AddVersion}"/>
-                            <MenuItem Header="Лицензия" Command="{Binding AddLicense}"/>                         
-                            <MenuItem Header="Авторские прова" Command="{Binding AddCopyRight}"/>
-                            <MenuItem Header="Официальный сайт" Command="{Binding AddSite}"/>
-                            <MenuItem Header="Лицензионный ключ" Command="{Binding AddLicenseKey}"/>
-                            <MenuItem Header="Источник" Command="{Binding AddSource}"/>
-                            <MenuItem Header="Хеш-суммы" Command="{Binding AddHeshSum}"/>
+                        <ContextMenu ItemsSource="{Binding MenuItem}">
+                            <ContextMenu.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Name}">
+                                        <TextBlock.InputBindings>
+                                            <MouseBinding
+                                                Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}, Path=DataContext.AddTextField}"
+                                                CommandParameter="{Binding Mode=OneWay}"
+                                                Gesture="LeftClick" />
+                                        </TextBlock.InputBindings>
+                                    </TextBlock>
+                                </DataTemplate>
+                            </ContextMenu.ItemTemplate>
                         </ContextMenu>
                     </Button.ContextMenu>
                 </Button>

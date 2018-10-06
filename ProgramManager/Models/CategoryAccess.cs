@@ -7,7 +7,7 @@ namespace ProgramManager.Models
     {
         internal static List<CategoryModel> GetSubcategories()
         {
-            List<CategoryModel> subcatergory = new List<CategoryModel> {
+            List<CategoryModel> subcategory = new List<CategoryModel> {
 
                 new CategoryModel() { CategoryName = "Программы", TagName = "3D Редакторы"  },
                 new CategoryModel() { CategoryName = "Программы", TagName = "IDE" },
@@ -33,7 +33,7 @@ namespace ProgramManager.Models
                 new CategoryModel() { CategoryName = "Плагины", TagName = "Для фотошопа" },
             };
 
-            return subcatergory;
+            return subcategory;
         }
         internal static List<CategoryModel> GetCategories()
         {

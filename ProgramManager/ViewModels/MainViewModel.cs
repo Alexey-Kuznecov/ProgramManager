@@ -15,7 +15,6 @@ namespace ProgramManager.ViewModels
             Category = _instanceCategories;
             CalculateByCategory();
         }
-
         #endregion
 
         #region Fields
@@ -26,10 +25,8 @@ namespace ProgramManager.ViewModels
         private CategoryModel _currentCategory;
         private ObservableCollection<PackageModel> _packages;
         private ObservableCollection<PackageModel> _storage;
-        private ObservableCollection<PackageModel> _instancePackages
-            = new ObservableCollection<PackageModel>(PackageAccess.GetPackages());
-        private ObservableCollection<CategoryModel> _instanceCategories
-            = new ObservableCollection<CategoryModel>(CategoryAccess.GetCategories());
+        private ObservableCollection<PackageModel> _instancePackages = new DataBase().GetPackages();
+        private ObservableCollection<CategoryModel> _instanceCategories = new DataBase().GetCategories();
         private int _indexPackage;
         private string _filterPackages;
 
@@ -77,17 +74,13 @@ namespace ProgramManager.ViewModels
                 // When the SelectedItem attribute value changes, all Tags are filtered depending on the selected category.
                 // Request of these Tags
                 CalculateByTag();
-
                 // Filters Tags depending on the selected category.
                 IEnumerable<CategoryModel> query = Tags.Where(category =>
                                                    category.CategoryName == _currentCategory.CategoryName);
-                // Creating new data
-                Tags = new ObservableCollection<CategoryModel>(query);
 
-                // Adding special elements.
-                Tags.Insert(0, new CategoryModel() { TagName = "Все", Count = CurrentCategory.Count });
-                // Updating properties Tags
-                OnPropertyChanged("Tags"); 
+                Tags = new ObservableCollection<CategoryModel>(query); // Creating new data
+                Tags.Insert(0, new CategoryModel() { TagName = "Все", Count = CurrentCategory.Count }); // Adding special elements.        
+                OnPropertyChanged("Tags"); // Updating properties Tags
             }
         }
         public CategoryModel CurrentTag

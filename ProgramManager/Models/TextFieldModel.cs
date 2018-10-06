@@ -12,5 +12,6 @@ namespace ProgramManager.Models
         public string HintField { get; set; }
         public string AutoCompleteIcon { get; set; }
         public string DeleteTextFieldIcon { get; set; }
+        public string FieldValue { get; set; }
     }
 }

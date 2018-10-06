@@ -6,7 +6,7 @@ using System.Xml.Linq;
 
 namespace ProgramManager.Models
 {
-    class PackageAccess
+    public class PackageAccess
     {
         const string DOCUMENT_NAME = "packages.xml";
         /// <summary>

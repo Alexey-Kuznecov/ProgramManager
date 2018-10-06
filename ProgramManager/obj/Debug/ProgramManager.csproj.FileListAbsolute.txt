@@ -19,3 +19,5 @@ C:\Users\Алексей\Documents\Visual Studio 2015\Projects\ProgramManager\Pro
 C:\Users\Алексей\Documents\Visual Studio 2015\Projects\ProgramManager\ProgramManager\obj\Debug\Views\DialogPacks\TabFiles.g.cs
 C:\Users\Алексей\Documents\Visual Studio 2015\Projects\ProgramManager\ProgramManager\obj\Debug\Views\DialogPacks\TabFields.baml
 C:\Users\Алексей\Documents\Visual Studio 2015\Projects\ProgramManager\ProgramManager\obj\Debug\Views\DialogPacks\TabFiles.baml
+C:\Users\Алексей\Documents\Visual Studio 2015\Projects\ProgramManager\ProgramManager\obj\Debug\Views\DialogPacks\InputName.g.cs
+C:\Users\Алексей\Documents\Visual Studio 2015\Projects\ProgramManager\ProgramManager\obj\Debug\Views\DialogPacks\InputName.baml

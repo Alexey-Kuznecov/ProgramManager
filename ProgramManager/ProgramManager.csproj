@@ -62,7 +62,9 @@
     <Compile Include="MarkupExtensions\EnumValues.cs" />
     <Compile Include="Models\CategoryAccess.cs" />
     <Compile Include="Models\CategoryModel.cs" />
+    <Compile Include="Models\DataBase.cs" />
     <Compile Include="Models\DataPanelModel.cs" />
+    <Compile Include="Models\MenuItemModel.cs" />
     <Compile Include="Models\PackageAccess.cs" />
     <Compile Include="Models\TextFieldModel.cs" />
     <Compile Include="ViewModels\Base\PropertiesChanged.cs" />
@@ -71,6 +73,10 @@
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\Base\RelayCommand.cs" />
     <Page Include="Views\DialogPackages.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DialogPacks\InputName.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -91,9 +97,11 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Models\PackageModel.cs" />
-    <Compile Include="ViewModels\TextFieldViewModel.cs" />
     <Compile Include="Views\DialogPackages.xaml.cs">
       <DependentUpon>DialogPackages.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DialogPacks\InputName.xaml.cs">
+      <DependentUpon>InputName.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\DialogPacks\TabFields.xaml.cs">
       <DependentUpon>TabFields.xaml</DependentUpon>

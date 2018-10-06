@@ -8,7 +8,7 @@ namespace ProgramManager.Converters
 {
     public class KeywordToTextConverter : IValueConverter
     {
-        private static IDictionary<Keywords, string> _descriptions = new Dictionary<Keywords, string>
+        private static readonly IDictionary<Keywords, string> Descriptions = new Dictionary<Keywords, string>
         {
             { Keywords.All, "Все" },
             { Keywords.Chosen, "Избранные" },
@@ -20,9 +20,9 @@ namespace ProgramManager.Converters
             if (!(value is Keywords))
                 return null;
             var keyword = (Keywords)value;
-            if (!_descriptions.ContainsKey(keyword))
+            if (!Descriptions.ContainsKey(keyword))
                 return null;
-            return _descriptions[keyword];
+            return Descriptions[keyword];
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
