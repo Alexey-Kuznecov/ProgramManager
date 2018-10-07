@@ -63,7 +63,7 @@ namespace ProgramManager.Models
         /// Добавляет новый пакет в xml хранилище
         /// </summary>
         /// <param name="data">Коллекция объектов данных которые нужно дабавить в хранилище.</param>
-        public static void AddPackage(PackageModel data)
+        public void AddPackage(PackageModel data)
         {
             XDocument xDoc = XDocument.Load(DOCUMENT_NAME);
             int id = GetIdLastElement();

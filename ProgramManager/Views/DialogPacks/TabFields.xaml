@@ -72,7 +72,6 @@
                 HorizontalContentAlignment="Stretch"
                 ItemsSource="{Binding TextField}" />
             <StackPanel Orientation="Vertical">
-
                 <Button
                     x:Name="AddField"
                     Width="103"
@@ -82,7 +81,7 @@
                     Content="Добавить поле">
                     <Button.ContextMenu>
                         <ContextMenu ItemsSource="{Binding MenuItem}">
-                            <ContextMenu.ItemTemplate>
+                            <!--<ContextMenu.ItemTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding Name}">
                                         <TextBlock.InputBindings>
@@ -93,7 +92,7 @@
                                         </TextBlock.InputBindings>
                                     </TextBlock>
                                 </DataTemplate>
-                            </ContextMenu.ItemTemplate>
+                            </ContextMenu.ItemTemplate>-->
                         </ContextMenu>
                     </Button.ContextMenu>
                 </Button>

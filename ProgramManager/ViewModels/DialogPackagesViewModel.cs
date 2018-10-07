@@ -4,9 +4,7 @@ using ProgramManager.Models;
 using System.Windows.Input;
 using ProgramManager.Views.DialogPacks;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Windows;
-using System.Windows.Controls;
+using ProgramManager.Contracts;
 
 namespace ProgramManager.ViewModels
 {
@@ -33,14 +31,14 @@ namespace ProgramManager.ViewModels
         };
         public List<MenuItemModel> MenuItem { get; set; } = new List<MenuItemModel>()
         {
-            new MenuItemModel { Name = "Автор", Id = 0},
-            new MenuItemModel { Name = "Версия", Id = 1},
-            new MenuItemModel { Name = "Лицензия", Id = 2},
-            new MenuItemModel { Name = "Авторские права", Id = 3},
-            new MenuItemModel { Name = "Официальный сайт", Id = 4},
-            new MenuItemModel { Name = "Лицензионный ключ", Id = 5},
-            new MenuItemModel { Name = "Источник", Id = 6},
-            new MenuItemModel { Name = "Хеш-суммы", Id = 7}
+            new MenuItemModel { Id = 0, Name = "Автор" },
+            new MenuItemModel { Id = 1, Name = "Версия" },
+            new MenuItemModel { Id = 2, Name = "Лицензия" },
+            new MenuItemModel { Id = 3, Name = "Авторские права" },
+            new MenuItemModel { Id = 4, Name = "Официальный сайт" },
+            new MenuItemModel { Id = 5, Name = "Лицензионный ключ" },
+            new MenuItemModel { Id = 6, Name = "Источник" },
+            new MenuItemModel { Id = 7, Name = "Хеш-суммы", }
         };
         public string Description { get; set; }
 
@@ -56,10 +54,8 @@ namespace ProgramManager.ViewModels
                 DeleteTextFieldIcon = DELETE_ICON
             });
         }
-        public PackageModel SavingPackage()
+        public void SavingPackage()
         {
-            Debug.Assert(condition: TextField != null, message: nameof(TextField) + " != null");
-
             PackageModel newPack = new PackageModel {Description = Description};
 
             for (var index = 0; index < TextField.Count; index++)
@@ -83,8 +79,7 @@ namespace ProgramManager.ViewModels
                 else if (MenuItem[index].Id == 7)
                     newPack.HashSumm = fieldModel.FieldValue;
             }
-
-            return newPack;
+            new BaseConnector().OnPackageChanged(newPack);
         }
         public ICommand InputNameField { get; }
         public ICommand AddTextField { get; }
