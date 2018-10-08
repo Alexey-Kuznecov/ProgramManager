@@ -236,4 +236,28 @@
     <Description>Игра для настоящих ассов</Description>
     <Image Source="User/Images/19572.jpg" />
   </Package>
+  <Package Id="26">
+    <Name></Name>
+    <Author>Автор</Author>
+    <Version>Версия</Version>
+    <Category></Category>
+    <Tag></Tag>
+    <License>Описание</License>
+    <Description>Описание</Description>
+    <Image Source="" />
+  </Package>
+  <Package Id="27">
+    <Name>Mortal Combat</Name>
+    <Author>NetherRealm Studios, High Voltage Software</Author>
+    <Version>Mortal Combat X</Version>
+    <Category></Category>
+    <Tag></Tag>
+    <License>NetherRealm Studios, High Voltage Software</License>
+    <CompanySite>http://www.mkxmobile.com/</CompanySite>
+    <SerialKey></SerialKey>
+    <Source>http://torrent-games.net/news/mortal_kombat_x_premium_edition_2015_pc_124_licenzija/2015-04-14-48319</Source>
+    <HashSumm></HashSumm>
+    <Description>Mortal Kombat X – файтинг нового поколения и следующая глава легендарной серии от знаменитой студии NetherRealm. Разработчикам удалось создать самый зрелищный и глубокий файтинг в истории Mortal Kombat, в котором жестокие поединки кинематографического качества объединились с новыми геймплейными элементами. Все персонажи Mortal Kombat X владеют несколькими стилями боя, в рамках которых используют совершенно разные спецприемы и комбо. Благодаря глубокой интеграции сетевых функций каждый игрок станет участником глобальной битвы за первенство, в которой любой поединок может склонить чашу весов в ту или иную сторону.</Description>
+    <Image Source="" />
+  </Package>
 </Packages>

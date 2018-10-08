@@ -1,191 +1,271 @@
-﻿<Window x:Class="ProgramManager.Views.MainView"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ProgramManager"
-        xmlns:markupExtensions="clr-namespace:ProgramManager.MarkupExtensions"
-        xmlns:enums="clr-namespace:ProgramManager.Enums"
-        xmlns:converters="clr-namespace:ProgramManager.Converters"
-        xmlns:vm="clr-namespace:ProgramManager.ViewModels"
-        xmlns:converter="clr-namespace:ProgramManager.Converters"
-        mc:Ignorable="d"
-        Title="Pragram Manager" Height="606" Width="900" MinHeight="584" MinWidth="870" MaxHeight="700" MaxWidth="870" WindowStartupLocation="CenterScreen">
+﻿<Window
+    x:Class="ProgramManager.Views.MainView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converter="clr-namespace:ProgramManager.Converters"
+    xmlns:converters="clr-namespace:ProgramManager.Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:enums="clr-namespace:ProgramManager.Enums"
+    xmlns:local="clr-namespace:ProgramManager"
+    xmlns:markupExtensions="clr-namespace:ProgramManager.MarkupExtensions"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:ProgramManager.ViewModels"
+    Title="Pragram Manager"
+    Width="900"
+    Height="606"
+    MinWidth="870"
+    MinHeight="584"
+    MaxWidth="870"
+    MaxHeight="700"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
     <Window.DataContext>
-        <vm:MainViewModel/>
+        <vm:MainViewModel />
     </Window.DataContext>
 
-    <Grid VerticalAlignment="Top" Height="566">
+    <Grid Height="566" VerticalAlignment="Top">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.2*"></ColumnDefinition>
-            <ColumnDefinition Width="0.3*"></ColumnDefinition>
-            <ColumnDefinition Width="0.2*"></ColumnDefinition>
+            <ColumnDefinition Width="0.2*" />
+            <ColumnDefinition Width="0.3*" />
+            <ColumnDefinition Width="0.2*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="25"></RowDefinition>
-            <RowDefinition Height="35"></RowDefinition>
-            <RowDefinition Height="2"></RowDefinition>
-            <RowDefinition Height="45"></RowDefinition>
-            <RowDefinition Height="40"></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition Height="65"></RowDefinition>
-            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition Height="25" />
+            <RowDefinition Height="35" />
+            <RowDefinition Height="2" />
+            <RowDefinition Height="45" />
+            <RowDefinition Height="40" />
+            <RowDefinition />
+            <RowDefinition Height="65" />
+            <RowDefinition Height="40" />
         </Grid.RowDefinitions>
         <Menu Grid.ColumnSpan="3">
-            <MenuItem Header="Действие" FontSize="12" Height="20">
-                <MenuItem Header="Восстановить"></MenuItem>
-                <MenuItem Header="Создать резевную копию"></MenuItem>
-                <MenuItem Header="Обновить список"></MenuItem>
-                <MenuItem Header="Удалить из списка"></MenuItem>
-                <Separator/>
+            <MenuItem
+                Height="20"
+                FontSize="12"
+                Header="Действие">
+                <MenuItem Header="Восстановить" />
+                <MenuItem Header="Создать резевную копию" />
+                <MenuItem Header="Обновить список" />
+                <MenuItem Header="Удалить из списка" />
+                <Separator />
                 <MenuItem Header="Добавить">
-                    <MenuItem Header="Добавить в избранное"></MenuItem>
-                    <MenuItem Header="Добавить тег"></MenuItem>
-                    <MenuItem Header="Добавить категорию"></MenuItem>
-                    <MenuItem Header="Добавить информацию"></MenuItem>
+                    <MenuItem Header="Добавить в избранное" />
+                    <MenuItem Header="Добавить тег" />
+                    <MenuItem Header="Добавить категорию" />
+                    <MenuItem Header="Добавить информацию" />
                 </MenuItem>
-                <Separator/>
-                <MenuItem Header="Инпортировать"></MenuItem>
-                <MenuItem Header="Экспортировать"></MenuItem>
-                <Separator/>
-                <MenuItem Header="Выход"></MenuItem>
+                <Separator />
+                <MenuItem Header="Инпортировать" />
+                <MenuItem Header="Экспортировать" />
+                <Separator />
+                <MenuItem Header="Выход" />
             </MenuItem>
-            <MenuItem Header="Команды" FontSize="12">
-                <MenuItem x:Name="menuCreatePack" Header="Собрать пакет" Click="CallWinCreatePack_Click"></MenuItem>
-                <MenuItem Header="Отредактировать пакет"></MenuItem>
-                <MenuItem Header="Переименовать пакет"></MenuItem>
-                <MenuItem Header="Устнановка пакета"></MenuItem>
-                <MenuItem Header="Удаление пакета"></MenuItem>
-                <Separator/>
-                <MenuItem Header="Редактировать теги"></MenuItem>
-                <MenuItem Header="Редактировать категории"></MenuItem>
-                <MenuItem Header="Редактировать избранные"></MenuItem>
+            <MenuItem FontSize="12" Header="Команды">
+                <MenuItem Command="{Binding OpenDialogPackage}" Header="Собрать пакет" />
+                <MenuItem Header="Отредактировать пакет" />
+                <MenuItem Header="Переименовать пакет" />
+                <MenuItem Header="Устнановка пакета" />
+                <MenuItem Header="Удаление пакета" />
+                <Separator />
+                <MenuItem Header="Редактировать теги" />
+                <MenuItem Header="Редактировать категории" />
+                <MenuItem Header="Редактировать избранные" />
             </MenuItem>
-            <MenuItem Header="Инструменты" FontSize="12">
-                <MenuItem Header="Мастер установки"></MenuItem>
-                <MenuItem Header="Редактор конфигурации"></MenuItem>
+            <MenuItem FontSize="12" Header="Инструменты">
+                <MenuItem Header="Мастер установки" />
+                <MenuItem Header="Редактор конфигурации" />
             </MenuItem>
-            <MenuItem Header="Настройки" FontSize="12">
-                <MenuItem Header="Параметры"></MenuItem>
+            <MenuItem FontSize="12" Header="Настройки">
+                <MenuItem Header="Параметры" />
                 <MenuItem Header="Скины">
-                    <MenuItem Header="По умолчанию"></MenuItem>
-                    <MenuItem Header="TotalCommander"></MenuItem>
-                    <MenuItem Header="Vista"></MenuItem>
-                    <MenuItem Header="Fenix Black"></MenuItem>
-                    <MenuItem Header="Fenix Light"></MenuItem>
-                    <MenuItem Header="Xoma"></MenuItem>
-                    <MenuItem Header="Monokai"></MenuItem>
-                    <MenuItem Header="Zirael Black"></MenuItem>
-                    <MenuItem Header="Zirael Light"></MenuItem>
+                    <MenuItem Header="По умолчанию" />
+                    <MenuItem Header="TotalCommander" />
+                    <MenuItem Header="Vista" />
+                    <MenuItem Header="Fenix Black" />
+                    <MenuItem Header="Fenix Light" />
+                    <MenuItem Header="Xoma" />
+                    <MenuItem Header="Monokai" />
+                    <MenuItem Header="Zirael Black" />
+                    <MenuItem Header="Zirael Light" />
                 </MenuItem>
-                <Separator/>
-                <MenuItem Header="Боковая панель"></MenuItem>
-                <MenuItem Header="Cтрока состояния"></MenuItem>
-                <MenuItem Header="Панель инструментов"></MenuItem>
+                <Separator />
+                <MenuItem Header="Боковая панель" />
+                <MenuItem Header="Cтрока состояния" />
+                <MenuItem Header="Панель инструментов" />
             </MenuItem>
-            <MenuItem Header="Справка" FontSize="12">
-                <MenuItem Header="Руководство"></MenuItem>
-                <MenuItem Header="Скачать моды"></MenuItem>
-                <Separator/>
-                <MenuItem Header="О программе"></MenuItem>
+            <MenuItem FontSize="12" Header="Справка">
+                <MenuItem Header="Руководство" />
+                <MenuItem Header="Скачать моды" />
+                <Separator />
+                <MenuItem Header="О программе" />
             </MenuItem>
         </Menu>
-        <WrapPanel Grid.Row="1" Grid.ColumnSpan="3" VerticalAlignment="Center">
-            <Button x:Name="pToolsOpen"  Margin="5,0,0,0" Height="30" Style="{StaticResource btIcon}">
+        <WrapPanel
+            Grid.Row="1"
+            Grid.ColumnSpan="3"
+            VerticalAlignment="Center">
+            <Button
+                x:Name="pToolsOpen"
+                Height="30"
+                Margin="5,0,0,0"
+                Style="{StaticResource btIcon}">
                 <Button.Content>
                     <ContentControl>
                         <WrapPanel>
-                            <Image Width="18" Source="../Resources/Icons/Open_48px.png" ></Image>
-                            <Label Content="Открыть" BorderBrush="{x:Null}" Height="24"></Label>
+                            <Image Width="18" Source="../Resources/Icons/Open_48px.png" />
+                            <Label
+                                Height="24"
+                                BorderBrush="{x:Null}"
+                                Content="Открыть" />
                         </WrapPanel>
                     </ContentControl>
                 </Button.Content>
             </Button>
-            <Button x:Name="pToolsCreate" Height="30" Style="{StaticResource btIcon}">
+            <Button
+                x:Name="pToolsCreate"
+                Height="30"
+                Style="{StaticResource btIcon}">
                 <Button.Content>
                     <ContentControl>
                         <WrapPanel>
-                            <Image Width="18" Source="../Resources/Icons/Add_Folder_48px.png"></Image>
-                            <Label Content="Создать" BorderBrush="{x:Null}" Height="24"></Label>
+                            <Image Width="18" Source="../Resources/Icons/Add_Folder_48px.png" />
+                            <Label
+                                Height="24"
+                                BorderBrush="{x:Null}"
+                                Content="Создать" />
                         </WrapPanel>
                     </ContentControl>
                 </Button.Content>
             </Button>
-            <Button x:Name="pToolsEdit" Height="30" Style="{StaticResource btIcon}">
+            <Button
+                x:Name="pToolsEdit"
+                Height="30"
+                Style="{StaticResource btIcon}">
                 <Button.Content>
                     <ContentControl>
                         <WrapPanel>
-                            <Image Width="18" Source="../Resources/Icons/Edit_48px.png"></Image>
-                            <Label Content="Редактировать" BorderBrush="{x:Null}" Height="24"></Label>
+                            <Image Width="18" Source="../Resources/Icons/Edit_48px.png" />
+                            <Label
+                                Height="24"
+                                BorderBrush="{x:Null}"
+                                Content="Редактировать" />
                         </WrapPanel>
                     </ContentControl>
                 </Button.Content>
             </Button>
-            <Button x:Name="pToolsRename" Height="30" Style="{StaticResource btIcon}">
+            <Button
+                x:Name="pToolsRename"
+                Height="30"
+                Style="{StaticResource btIcon}">
                 <Button.Content>
                     <ContentControl>
                         <WrapPanel>
-                            <Image Width="18" Source="../Resources/Icons/Rename_48px.png"></Image>
-                            <Label Content="Переименовать" BorderBrush="{x:Null}" Height="24"></Label>
+                            <Image Width="18" Source="../Resources/Icons/Rename_48px.png" />
+                            <Label
+                                Height="24"
+                                BorderBrush="{x:Null}"
+                                Content="Переименовать" />
                         </WrapPanel>
                     </ContentControl>
                 </Button.Content>
             </Button>
-            <Rectangle Margin="5" Width="1" Height="25" Fill="#CDCDCD"></Rectangle>
-            <Button x:Name="pToolsFavorites" Height="30" Style="{StaticResource btIcon}">
+            <Rectangle
+                Width="1"
+                Height="25"
+                Margin="5"
+                Fill="#CDCDCD" />
+            <Button
+                x:Name="pToolsFavorites"
+                Height="30"
+                Style="{StaticResource btIcon}">
                 <Button.Content>
                     <ContentControl>
                         <WrapPanel>
-                            <Image Width="18" Source="../Resources/Icons/Add_to_Favorites_48px.png"></Image>
-                            <Label Content="Добавить в избранное" BorderBrush="{x:Null}" Height="24"></Label>
+                            <Image Width="18" Source="../Resources/Icons/Add_to_Favorites_48px.png" />
+                            <Label
+                                Height="24"
+                                BorderBrush="{x:Null}"
+                                Content="Добавить в избранное" />
                         </WrapPanel>
                     </ContentControl>
                 </Button.Content>
             </Button>
-            <Button x:Name="pToolsCategorize" Height="30" Style="{StaticResource btIcon}">
+            <Button
+                x:Name="pToolsCategorize"
+                Height="30"
+                Style="{StaticResource btIcon}">
                 <Button.Content>
                     <ContentControl>
                         <WrapPanel>
-                            <Image Width="18" Source="../Resources/Icons/Categorize_48px.png"></Image>
-                            <Label Content="Добавить в категории" BorderBrush="{x:Null}" Height="24"></Label>
+                            <Image Width="18" Source="../Resources/Icons/Categorize_48px.png" />
+                            <Label
+                                Height="24"
+                                BorderBrush="{x:Null}"
+                                Content="Добавить в категории" />
                         </WrapPanel>
                     </ContentControl>
                 </Button.Content>
             </Button>
-            <Button x:Name="pToolsTag" Height="30" Style="{StaticResource btIcon}">
+            <Button
+                x:Name="pToolsTag"
+                Height="30"
+                Style="{StaticResource btIcon}">
                 <Button.Content>
                     <ContentControl>
                         <WrapPanel>
-                            <Image Width="18" Source="../Resources/Icons/Add_Tag_48px.png"></Image>
-                            <Label Content="Добавить тег" BorderBrush="{x:Null}" Height="24"></Label>
+                            <Image Width="18" Source="../Resources/Icons/Add_Tag_48px.png" />
+                            <Label
+                                Height="24"
+                                BorderBrush="{x:Null}"
+                                Content="Добавить тег" />
                         </WrapPanel>
                     </ContentControl>
                 </Button.Content>
             </Button>
         </WrapPanel>
-        <!--Боковая панель-->
-        <Rectangle Grid.Row="2" Grid.ColumnSpan="3" Height="1" Fill="#CDCDCD"></Rectangle>
-        <ComboBox Grid.Row="3" Margin="5,5,5,5" Padding="10,7" 
-                  ItemsSource="{Binding Category, Mode=TwoWay}"
-                  SelectedItem="{Binding CurrentCategory, Mode=TwoWay}" 
-                  SelectedIndex="0" 
-                  VerticalAlignment="Center">
+        <!--  Боковая панель  -->
+        <Rectangle
+            Grid.Row="2"
+            Grid.ColumnSpan="3"
+            Height="1"
+            Fill="#CDCDCD" />
+        <ComboBox
+            Grid.Row="3"
+            Margin="5,5,5,5"
+            Padding="10,7"
+            VerticalAlignment="Center"
+            ItemsSource="{Binding Category, Mode=TwoWay}"
+            SelectedIndex="0"
+            SelectedItem="{Binding CurrentCategory, Mode=TwoWay}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
-                        <TextBlock Height="30" Width="auto" Padding="5,3" Text="{Binding CategoryName}"></TextBlock>
+                        <TextBlock
+                            Width="auto"
+                            Height="30"
+                            Padding="5,3"
+                            Text="{Binding CategoryName}" />
                     </StackPanel>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        <ListBox Grid.Row="4" Grid.RowSpan="4" Margin="5,0" ItemStringFormat=""
-                 ItemsSource="{Binding Tags, Mode=TwoWay}"
-                 SelectedItem="{Binding CurrentTag, Mode=TwoWay}"
-                 IsSynchronizedWithCurrentItem="True">
+        <ListBox
+            Grid.Row="4"
+            Grid.RowSpan="4"
+            Margin="5,0"
+            IsSynchronizedWithCurrentItem="True"
+            ItemStringFormat=""
+            ItemsSource="{Binding Tags, Mode=TwoWay}"
+            SelectedItem="{Binding CurrentTag, Mode=TwoWay}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel>
-                        <TextBlock Height="30" Width="190" Padding="5,8" Text="{Binding TagName}">
+                        <TextBlock
+                            Width="190"
+                            Height="30"
+                            Padding="5,8"
+                            Text="{Binding TagName}">
                             <!--<TextBlock.InputBindings>
                                 <MouseBinding
                                     Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Path=DataContext.InsertCommand}"
@@ -193,76 +273,121 @@
                                     Gesture="LeftClick"/>
                             </TextBlock.InputBindings>-->
                         </TextBlock>
-                        <Label Content="{Binding Count}"></Label>
+                        <Label Content="{Binding Count}" />
                     </WrapPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <!--Центральная панель-->
-        <StackPanel Grid.Column="1" Grid.Row="3" Margin="0,5,0,0" >
+        <!--  Центральная панель  -->
+        <StackPanel
+            Grid.Row="3"
+            Grid.Column="1"
+            Margin="0,5,0,0">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="32"></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition Width="32"></ColumnDefinition>
+                    <ColumnDefinition Width="32" />
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="32" />
                 </Grid.ColumnDefinitions>
-                <Image Height="16" Source="../Resources/Icons/Search_48px.png"></Image>
-                <TextBox Grid.Column="1" Text="{Binding FilterPackages, UpdateSourceTrigger=PropertyChanged}" Tag="Искать..."/>
-                <Button Grid.Column="2" Style="{StaticResource btIcon}" Margin="4">
+                <Image Height="16" Source="../Resources/Icons/Search_48px.png" />
+                <TextBox
+                    Grid.Column="1"
+                    Tag="Искать..."
+                    Text="{Binding FilterPackages, UpdateSourceTrigger=PropertyChanged}" />
+                <Button
+                    Grid.Column="2"
+                    Margin="4"
+                    Style="{StaticResource btIcon}">
                     <Button.Content>
                         <ContentControl>
-                            <Image Grid.Column="2" Height="16" Source="../Resources/Icons/Delete_48px.png"></Image>
+                            <Image
+                                Grid.Column="2"
+                                Height="16"
+                                Source="../Resources/Icons/Delete_48px.png" />
                         </ContentControl>
                     </Button.Content>
                 </Button>
             </Grid>
         </StackPanel>
-        <!--Список программ-->
-        <ListBox Grid.Column="1" Grid.Row="4" Grid.RowSpan="4" 
-                 ItemsSource="{Binding Packages, Mode=TwoWay}" 
-                 SelectedItem="{Binding CurrentPackage, Mode=TwoWay}" 
-                 SelectedIndex="{Binding IndexPackage, Mode=TwoWay}">
+        <!--  Список программ  -->
+        <ListBox
+            Grid.Row="4"
+            Grid.RowSpan="4"
+            Grid.Column="1"
+            ItemsSource="{Binding Packages, Mode=TwoWay}"
+            SelectedIndex="{Binding IndexPackage, Mode=TwoWay}"
+            SelectedItem="{Binding CurrentPackage, Mode=TwoWay}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
-                        <TextBlock Height="45" Margin="5,0,0,0" 
-                                   Padding="0,15" Text="{Binding Name, Mode=TwoWay}"/>
+                        <TextBlock
+                            Height="45"
+                            Margin="5,0,0,0"
+                            Padding="0,15"
+                            Text="{Binding Name, Mode=TwoWay}" />
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <!--Панель с информацией об моде-->
-        <Grid Grid.Column="2" Grid.Row="2">
+        <!--  Панель с информацией об моде  -->
+        <Grid Grid.Row="2" Grid.Column="2">
             <Grid.RowDefinitions>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
+                <RowDefinition />
+                <RowDefinition />
             </Grid.RowDefinitions>
         </Grid>
-        <Image Grid.Column="2" Grid.Row="3" Grid.RowSpan="2" 
-               Source="../Resources/19572.jpg" Width="250" 
-               Height="320" HorizontalAlignment="Right" 
-               Margin="10" OpacityMask="Black" 
-               RenderTransformOrigin="0.5,0.5"/>
-        <StackPanel Grid.Column="2" Grid.Row="5" Margin="5">
-            <Rectangle Fill="#CDCDCD" Height="1" Width="240"></Rectangle>
+        <Image
+            Grid.Row="3"
+            Grid.RowSpan="2"
+            Grid.Column="2"
+            Width="250"
+            Height="320"
+            Margin="10"
+            HorizontalAlignment="Right"
+            OpacityMask="Black"
+            RenderTransformOrigin="0.5,0.5"
+            Source="../Resources/19572.jpg" />
+        <StackPanel
+            Grid.Row="5"
+            Grid.Column="2"
+            Margin="5">
+            <Rectangle
+                Width="240"
+                Height="1"
+                Fill="#CDCDCD" />
             <ItemsControl ItemsSource="{Binding CurrentPackage, Mode=TwoWay}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <WrapPanel>
-                            <Label Content="{Binding Label}" FontWeight="Bold"></Label>
-                            <Label Name="PackageName" Content="{Binding Field}"></Label>
+                            <Label Content="{Binding Label}" FontWeight="Bold" />
+                            <Label Name="PackageName" Content="{Binding Field}" />
                         </WrapPanel>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </StackPanel>
-        <!--Область кнопки установить-->
-        <StackPanel Grid.Column="2" Grid.Row="6" Margin="5,0,0,10" HorizontalAlignment="Left">
-            <Button x:Name="Intstall" Width="100" Height="30" Content="Установить" Margin="5,10,5,10" Command="{Binding InsertCommand}"/>
-            <Rectangle Height="1" Width="240"></Rectangle>
+        <!--  Область кнопки установить  -->
+        <StackPanel
+            Grid.Row="6"
+            Grid.Column="2"
+            Margin="5,0,0,10"
+            HorizontalAlignment="Left">
+            <Button
+                x:Name="Intstall"
+                Width="100"
+                Height="30"
+                Margin="5,10,5,10"
+                Command="{Binding InsertCommand}"
+                Content="Установить" />
+            <Rectangle Width="240" Height="1" />
         </StackPanel>
-        <!--Понель состояния-->
-        <WrapPanel  Grid.Column="2" Grid.Row="7" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,10">
+        <!--  Понель состояния  -->
+        <WrapPanel
+            Grid.Row="7"
+            Grid.Column="2"
+            Margin="0,0,0,10"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center">
             <Label Content="Установлено: 5" FontSize="11" />
             <Label Content="Пакеты: 13" FontSize="11" />
         </WrapPanel>

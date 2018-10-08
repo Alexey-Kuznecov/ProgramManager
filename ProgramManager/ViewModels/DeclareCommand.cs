@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using ProgramManager.Models;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace ProgramManager.ViewModels
 {
@@ -11,7 +12,7 @@ namespace ProgramManager.ViewModels
         /// </summary>
         private void FixStatePackage()
         {
-            if (_filterPackages == null || _filterPackages == "")
+            if (string.IsNullOrEmpty(_filterPackages))
                 _storage = Packages;
             else
                 Packages = _storage;
@@ -22,14 +23,16 @@ namespace ProgramManager.ViewModels
         /// <param name="obj">Data of the current pack.</param>
         private void SetCurrentPackage(PackageModel obj)
         {
-            List<DataPanelModel> current = new List<DataPanelModel>();
+            List<DataPanelModel> current = new List<DataPanelModel>
+            {
+                new DataPanelModel() {Label = "Имя:", Field = obj.Name},
+                new DataPanelModel() {Label = "Автор:", Field = obj.Author},
+                new DataPanelModel() {Label = "Версия:", Field = obj.Version},
+                new DataPanelModel() {Label = "Категория:", Field = obj.Category},
+                new DataPanelModel() {Label = "Тип:", Field = obj.TagName},
+                new DataPanelModel() {Label = "Описания:", Field = obj.Description}
+            };
 
-            current.Add(new DataPanelModel() { Label = "Имя:", Field = obj.Name });
-            current.Add(new DataPanelModel() { Label = "Автор:", Field = obj.Author });
-            current.Add(new DataPanelModel() { Label = "Версия:", Field = obj.Version });
-            current.Add(new DataPanelModel() { Label = "Категория:", Field = obj.Category });
-            current.Add(new DataPanelModel() { Label = "Тип:", Field = obj.TagName });
-            current.Add(new DataPanelModel() { Label = "Описания:", Field = obj.Description });
 
             _currentPackage = current;
         }
@@ -43,18 +46,11 @@ namespace ProgramManager.ViewModels
 
             foreach (var category in tags)
             {
-                for (var i = 0; i < _instancePackages.Count; i++)
-                {
-                    if (_instancePackages[i].TagName.Contains(category.TagName))
-                    {
-                        total++;
-                    }
-                }
+                total += _instancePackages.Count(t => t.TagName.Contains(category.TagName));
                 tags[count].Count = total;
                 total = 0;
                 count++;
             }
-
             Tags = new ObservableCollection<CategoryModel>(tags);
         }
         /// <summary>
@@ -67,13 +63,7 @@ namespace ProgramManager.ViewModels
 
             foreach (var category in categories)
             {
-                for (var i = 0; i < _instancePackages.Count; i++)
-                {
-                    if (_instancePackages[i].Category == category.CategoryName)
-                    {
-                        total++;
-                    }
-                }
+                total += _instancePackages.Count(t => t.Category == category.CategoryName);
                 Category[count].Count = total;
                 total = 0;
                 count++;

@@ -16,7 +16,7 @@ namespace ProgramManager.Models
         public string Description { get; set; }
         public string Category { get; set; }
         public string TagName { get; set; }
-        public string Lincense { get; set; }
+        public string License { get; set; }
         public string SerialKey { get; set; }
         public string HashSumm { get; set; }
         public string CompanySite { get; set; }

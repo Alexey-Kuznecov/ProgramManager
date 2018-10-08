@@ -1,0 +1,109 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AsyncMvvmMessenger</name>
+    </assembly>
+    <members>
+        <member name="T:AsyncMvvmMessenger.AsyncMessage`1">
+            <summary>
+            awaitable message
+            </summary>
+            <typeparam name="TMessage"></typeparam>
+        </member>
+        <member name="T:AsyncMvvmMessenger.AsyncMessageReceiver`1">
+            <summary>
+            AsyncMessage Receiver
+            </summary>
+            <typeparam name="TMessage"></typeparam>
+        </member>
+        <member name="T:AsyncMvvmMessenger.MessengerExtensions">
+            <summary>
+            IMessenger extension methods.
+            </summary>
+        </member>
+        <member name="M:AsyncMvvmMessenger.MessengerExtensions.SendAsync``1(GalaSoft.MvvmLight.Messaging.IMessenger,``0)">
+            <summary>
+            Send AsyncMessage.<br/>
+            Important!!: If not found receiver then freeze.
+            </summary>
+            <typeparam name="TMessage">wrapped message type</typeparam>
+            <param name="self"></param>
+            <param name="message">wrapped message</param>
+            <returns></returns>
+        </member>
+        <member name="M:AsyncMvvmMessenger.MessengerExtensions.SendAsync``2(GalaSoft.MvvmLight.Messaging.IMessenger,``0)">
+            <summary>
+            Send AsyncMessage.<br/>
+            Important!!: If not found receiver then freeze.
+            </summary>
+            <typeparam name="TMessage">wrapped message type</typeparam>
+            <typeparam name="TResult">return type</typeparam>
+            <param name="self"></param>
+            <param name="message">wrapped message</param>
+            <returns></returns>
+        </member>
+        <member name="M:AsyncMvvmMessenger.MessengerExtensions.RegisterAsyncMessage``1(GalaSoft.MvvmLight.Messaging.IMessenger,System.Object,System.Func{``0,System.Threading.Tasks.Task})">
+            <summary>
+            register message receive callback method. you must have return value reference. if don't have reference then unregist callback, mvvm light WeakReference.
+            </summary>
+            <typeparam name="TMessage"></typeparam>
+            <param name="self"></param>
+            <param name="token"></param>
+            <param name="callback"></param>
+            <returns>when call dispose method, unregist.</returns>
+        </member>
+        <member name="M:AsyncMvvmMessenger.MessengerExtensions.RegisterAsyncMessage``1(GalaSoft.MvvmLight.Messaging.IMessenger,System.Func{``0,System.Threading.Tasks.Task})">
+            <summary>
+            register message receive callback method. you must have return value reference. if don't have reference then unregist callback, mvvm light WeakReference.
+            </summary>
+            <typeparam name="TMessage"></typeparam>
+            <param name="self"></param>
+            <param name="callback"></param>
+            <returns>when call dispose method, unregist.</returns>
+        </member>
+        <member name="M:AsyncMvvmMessenger.MessengerExtensions.RegisterAsyncMessage``1(GalaSoft.MvvmLight.Messaging.IMessenger,System.Object,System.Boolean,System.Func{``0,System.Threading.Tasks.Task})">
+            <summary>
+            register message receive callback method. you must have return value reference. if don't have reference then unregist callback, mvvm light WeakReference.
+            </summary>
+            <typeparam name="TMessage"></typeparam>
+            <param name="self"></param>
+            <param name="token"></param>
+            <param name="receiveDerivedMessagesToo"></param>
+            <param name="callback"></param>
+            <returns>when call dispose method, unregist.</returns>
+        </member>
+        <member name="M:AsyncMvvmMessenger.MessengerExtensions.RegisterAsyncMessage``2(GalaSoft.MvvmLight.Messaging.IMessenger,System.Object,System.Func{``0,System.Threading.Tasks.Task{``1}})">
+            <summary>
+            register message receive callback method. you must have return value reference. if don't have reference then unregist callback, mvvm light WeakReference.
+            </summary>
+            <typeparam name="TMessage"></typeparam>
+            <typeparam name="TResult"></typeparam>
+            <param name="self"></param>
+            <param name="token"></param>
+            <param name="callback"></param>
+            <returns>when call dispose method, unregist.</returns>
+        </member>
+        <member name="M:AsyncMvvmMessenger.MessengerExtensions.RegisterAsyncMessage``2(GalaSoft.MvvmLight.Messaging.IMessenger,System.Func{``0,System.Threading.Tasks.Task{``1}})">
+            <summary>
+            register message receive callback method. you must have return value reference. if don't have reference then unregist callback, mvvm light WeakReference.
+            </summary>
+            <typeparam name="TMessage"></typeparam>
+            <typeparam name="TResult"></typeparam>
+            <param name="self"></param>
+            <param name="callback"></param>
+            <returns>when call dispose method, unregist.</returns>
+        </member>
+        <member name="M:AsyncMvvmMessenger.MessengerExtensions.RegisterAsyncMessage``2(GalaSoft.MvvmLight.Messaging.IMessenger,System.Object,System.Boolean,System.Func{``0,System.Threading.Tasks.Task{``1}})">
+            <summary>
+            register message receive callback method. you must have return value reference. if don't have reference then unregist callback, mvvm light WeakReference.
+            </summary>
+            <typeparam name="TMessage"></typeparam>
+            <typeparam name="TResult"></typeparam>
+            <param name="self"></param>
+            <param name="token"></param>
+            <param name="receiveDerivedMessagesToo"></param>
+            <param name="callback"></param>
+            <returns>when call dispose method, unregist.</returns>
+        </member>
+    </members>
+</doc>

@@ -2,11 +2,9 @@
     x:Class="ProgramManager.Views.DialogPackages"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:converters="clr-namespace:ProgramManager.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:ProgramManager.Views.DialogPacks"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:models="clr-namespace:ProgramManager.Models"
     xmlns:vm="clr-namespace:ProgramManager.ViewModels"
     Title="Создать пакет"
     Width="417"
@@ -67,7 +65,8 @@
                 Grid.Row="2"
                 Height="35"
                 Margin="10,10,10,10"
-                Tag="Имя пакета..." />
+                Tag="Имя пакета..."
+                Text="{Binding PackageName}" />
             <Image
                 Grid.Row="2"
                 Grid.Column="1"
@@ -92,7 +91,10 @@
                         </WrapPanel>
                     </ContentControl>
                 </Button>
-                <Button Height="28" Style="{StaticResource btIcon}">
+                <Button
+                    Height="28"
+                    Command="{Binding OpenInputName}"
+                    Style="{StaticResource btIcon}">
                     <ContentControl>
                         <WrapPanel>
                             <Image Width="18" Source="../Resources/Icons/Add_Textfield_48px.png" />
@@ -130,6 +132,9 @@
         <Grid Grid.Row="1">
             <TabControl Grid.Row="1">
                 <TabItem Header="Поля">
+                    <TabItem.ContextMenu>
+                        <ContextMenu ItemsSource="{Binding MenuItem}" />
+                    </TabItem.ContextMenu>
                     <ScrollViewer VerticalScrollBarVisibility="Auto">
                         <ItemsControl>
                             <local:TabFields />

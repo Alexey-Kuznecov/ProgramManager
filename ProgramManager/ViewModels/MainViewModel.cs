@@ -1,7 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Collections.ObjectModel;
+using System.Windows.Input;
+using GalaSoft.MvvmLight.Messaging;
 using ProgramManager.Models;
+using ProgramManager.Views;
 
 namespace ProgramManager.ViewModels
 {
@@ -23,10 +26,11 @@ namespace ProgramManager.ViewModels
         private dynamic _currentPackage;
         private CategoryModel _currentTag;
         private CategoryModel _currentCategory;
+        private DialogPackages _dialog = new DialogPackages();
         private ObservableCollection<PackageModel> _packages;
         private ObservableCollection<PackageModel> _storage;
-        private ObservableCollection<PackageModel> _instancePackages = new DataBase().GetPackages();
-        private ObservableCollection<CategoryModel> _instanceCategories = new DataBase().GetCategories();
+        private ObservableCollection<PackageModel> _instancePackages = new BaseModel().GetPackages();
+        private ObservableCollection<CategoryModel> _instanceCategories = new BaseModel().GetCategories();
         private int _indexPackage;
         private string _filterPackages;
 
@@ -120,7 +124,7 @@ namespace ProgramManager.ViewModels
 
                 SetProperty(ref _filterPackages, value, () => FilterPackages);
                 // This instruction to filter data.
-                if (_filterPackages != "") {
+                if (!string.IsNullOrEmpty(_filterPackages) ) {
                     IEnumerable<PackageModel> filter = _instancePackages.Where(package
                         => package.Name.ToLower().Contains(_filterPackages.ToLower()));
                     _packages = new ObservableCollection<PackageModel>(filter);
@@ -137,6 +141,10 @@ namespace ProgramManager.ViewModels
             }
         }
 
+        public ICommand OpenDialogPackage => new RelayCommand(obj =>
+        {
+            PackagesDialog.OpenPackageDialog();
+        });
         #endregion
     }
 }

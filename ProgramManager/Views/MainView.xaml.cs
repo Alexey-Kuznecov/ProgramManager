@@ -12,11 +12,5 @@ namespace ProgramManager.Views
         {
             InitializeComponent();
         }
-
-        private void CallWinCreatePack_Click(object sender, RoutedEventArgs e)
-        {
-            DialogPackages window = new DialogPackages();
-            window.ShowDialog();
-        }
     }
 }

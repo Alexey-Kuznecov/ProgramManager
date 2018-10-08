@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ProgramManager.Models;
 
 namespace ProgramManager.Contracts
@@ -12,7 +7,8 @@ namespace ProgramManager.Contracts
     {
         public BaseConnector()
         {
-            
+            BaseModel model = new BaseModel();
+            PackageChanged += model.AddNewPackage;
         }
         public void OnPackageChanged(PackageModel package)
         {

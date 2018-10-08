@@ -1,17 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ProgramManager.Enums;
 
 namespace ProgramManager.Models
 {
     public class TextFieldModel
     {
-        public string LabelField { get; set; }
-        public string HintField { get; set; }
+        public string Label { get; set; }
+        public string Hint { get; set; }
         public string AutoCompleteIcon { get; set; }
         public string DeleteTextFieldIcon { get; set; }
         public string FieldValue { get; set; }
+        public string Name { get; set; }
+        public TFieldType Type { get; set; }
     }
 }

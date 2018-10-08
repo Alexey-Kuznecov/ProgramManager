@@ -67,16 +67,22 @@ namespace ProgramManager.Models
         {
             XDocument xDoc = XDocument.Load(DOCUMENT_NAME);
             int id = GetIdLastElement();
-
-            xDoc.Element("Packages").Add(new XElement("Package",
-                            new XAttribute("Id", ++id),
-                            new XElement("Name", data.Name),
-                            new XElement("Author", data.Author),
-                            new XElement("Version", data.Version),
-                            new XElement("Category", data.Category),
-                            new XElement("Tag", data.TagName),
-                            new XElement("Description", data.Description),
-                            new XElement("Image", new XAttribute("Source", data.Image))));
+            if(data != null)
+                xDoc.Element("Packages")
+                    ?.Add(new XElement("Package",
+                    new XAttribute("Id", ++id),
+                    new XElement("Name", data.Name ?? ""),
+                    new XElement("Author", data.Author ?? ""),
+                    new XElement("Version", data.Version ?? ""),
+                    new XElement("Category", data.Category ?? ""),
+                    new XElement("Tag", data.TagName ?? ""),
+                    new XElement("License", data.License ?? ""),
+                    new XElement("CompanySite", data.CompanySite ?? ""),
+                    new XElement("SerialKey", data.SerialKey ?? ""),
+                    new XElement("Source", data.Source ?? ""),
+                    new XElement("HashSumm", data.HashSumm ?? ""),
+                        new XElement("Description", data.Description ?? ""),
+                    new XElement("Image", new XAttribute("Source", data.Image ?? ""))));
             xDoc.Save(DOCUMENT_NAME);
         }
         /// <summary>
@@ -95,7 +101,7 @@ namespace ProgramManager.Models
             el.SetElementValue("Tag", data.TagName);
             el.SetElementValue("Version", data.Version);
             el.SetElementValue("Description", data.Description);
-            el.Element("Image").SetAttributeValue("Source", data.Image);
+            el.Element("Image")?.SetAttributeValue("Source", data.Image);
 
             root.Save(DOCUMENT_NAME);
         }

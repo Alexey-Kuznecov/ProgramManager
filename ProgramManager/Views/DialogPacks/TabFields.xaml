@@ -32,11 +32,11 @@
                             <TextBlock
                                 Height="20"
                                 Margin="10,5,168,0"
-                                Text="{Binding Path=LabelField}" />
+                                Text="{Binding Path=Label}" />
                             <TextBox
                                 Height="35"
                                 Margin="10,5,30,5"
-                                Tag="{Binding Path=HintField}"
+                                Tag="{Binding Path=Hint}"
                                 Text="{Binding Path=FieldValue}" />
                         </StackPanel>
                         <WrapPanel
@@ -78,23 +78,11 @@
                     Height="25"
                     Margin="0,10,34,10"
                     HorizontalAlignment="Right"
+                    Command="{Binding OpenInputName}"
                     Content="Добавить поле">
-                    <Button.ContextMenu>
-                        <ContextMenu ItemsSource="{Binding MenuItem}">
-                            <!--<ContextMenu.ItemTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding Name}">
-                                        <TextBlock.InputBindings>
-                                            <MouseBinding
-                                                Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}, Path=DataContext.AddTextField}"
-                                                CommandParameter="{Binding Mode=OneWay}"
-                                                Gesture="LeftClick" />
-                                        </TextBlock.InputBindings>
-                                    </TextBlock>
-                                </DataTemplate>
-                            </ContextMenu.ItemTemplate>-->
-                        </ContextMenu>
-                    </Button.ContextMenu>
+                    <!--<Button.ContextMenu>
+                        <ContextMenu ItemsSource="{Binding MenuItem}" />
+                    </Button.ContextMenu>-->
                 </Button>
             </StackPanel>
         </StackPanel>

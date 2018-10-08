@@ -3,17 +3,15 @@ using ProgramManager.Contracts;
 
 namespace ProgramManager.Models
 {
-    public class DataBase : BaseConnector
+    public class BaseModel
     {
         private PackageAccess _packageAccess;
         private CategoryAccess _categoryAccess;
 
-        public DataBase()
+        public BaseModel()
         {
             _categoryAccess = new CategoryAccess();
             _packageAccess = new PackageAccess();
-
-            base.PackageChanged += AddNewPackage;
         }
         public void AddNewPackage(object sender, PackageEventArgs e)
         {

@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using ProgramManager.Views.DialogPacks;
 
 namespace ProgramManager.Views
 {
@@ -21,7 +22,7 @@ namespace ProgramManager.Views
     public partial class DialogPackages : Window
     {
         public DialogPackages()
-        {
+        { 
             InitializeComponent();
         }
     }

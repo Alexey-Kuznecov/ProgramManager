@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProgramManager.Models
+namespace ProgramManager.ViewModels
 {
-    public class MenuItemModel
+    public class InfoMessage
     {
-        public int Id { get; set; }
         public string Name { get; set; }
+        public object Obj { get; set; }
     }
 }
