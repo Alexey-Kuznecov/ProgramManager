@@ -5,11 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using ProgramManager.Models;
 
-namespace ProgramManager.Contracts
+namespace ProgramManager.ViewModels
 {
-    public class PackageEventArgs : EventArgs
+    public class ConnectorEventArgs : EventArgs
     {
-        public PackageEventArgs(PackageModel package)
+        public ConnectorEventArgs(PackageModel package)
         {
             Package = package;
         }

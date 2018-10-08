@@ -16,7 +16,6 @@ namespace ProgramManager
             var window = new Window();
             var view = new MainView();
 
-
             window = view;
             window.Show();
         }

@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using ProgramManager.Models;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Reflection;
 
 namespace ProgramManager.ViewModels
 {
@@ -23,17 +25,20 @@ namespace ProgramManager.ViewModels
         /// <param name="obj">Data of the current pack.</param>
         private void SetCurrentPackage(PackageModel obj)
         {
-            List<DataPanelModel> current = new List<DataPanelModel>
+            List<DataPanelModel> current = new List<DataPanelModel>();
+
+            Type classType = typeof(PackageModel);
+
+            PropertyInfo[] properties = classType.GetProperties();
+
+            foreach (var property in properties)
             {
-                new DataPanelModel() {Label = "Имя:", Field = obj.Name},
-                new DataPanelModel() {Label = "Автор:", Field = obj.Author},
-                new DataPanelModel() {Label = "Версия:", Field = obj.Version},
-                new DataPanelModel() {Label = "Категория:", Field = obj.Category},
-                new DataPanelModel() {Label = "Тип:", Field = obj.TagName},
-                new DataPanelModel() {Label = "Описания:", Field = obj.Description}
-            };
-
-
+                if (property.GetValue(obj) != null)
+                {
+                    current.Add(new DataPanelModel
+                        { Label = "Имя:", Field = obj.GetType().GetProperty(property.Name)?.GetValue(obj).ToString() });
+                }
+            }
             _currentPackage = current;
         }
         /// <summary>

@@ -1,11 +1,11 @@
 ﻿using System.Collections.ObjectModel;
-using ProgramManager.Contracts;
+using ProgramManager.ViewModels;
 
 namespace ProgramManager.Models
 {
     public class BaseModel
     {
-        private PackageAccess _packageAccess;
+        private readonly PackageAccess _packageAccess;
         private CategoryAccess _categoryAccess;
 
         public BaseModel()
@@ -13,7 +13,7 @@ namespace ProgramManager.Models
             _categoryAccess = new CategoryAccess();
             _packageAccess = new PackageAccess();
         }
-        public void AddNewPackage(object sender, PackageEventArgs e)
+        public void AddNewPackage(object sender, ConnectorEventArgs e)
         {
             _packageAccess.AddPackage(e.Package);
         }

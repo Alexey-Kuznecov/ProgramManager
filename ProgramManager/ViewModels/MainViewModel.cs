@@ -22,11 +22,10 @@ namespace ProgramManager.ViewModels
 
         #region Fields
 
-        // The fields for properties
+        // Поля для свойств
         private dynamic _currentPackage;
         private CategoryModel _currentTag;
         private CategoryModel _currentCategory;
-        private DialogPackages _dialog = new DialogPackages();
         private ObservableCollection<PackageModel> _packages;
         private ObservableCollection<PackageModel> _storage;
         private ObservableCollection<PackageModel> _instancePackages = new BaseModel().GetPackages();
@@ -39,7 +38,7 @@ namespace ProgramManager.ViewModels
         #region Properties
 
         /// <summary>
-        /// Receives and transfers information on the current package to view
+        /// Получает и передает информацию о текущем пакете для просмотра
         /// </summary>
         public ObservableCollection<PackageModel> Packages
         {
@@ -54,7 +53,7 @@ namespace ProgramManager.ViewModels
             set { SetProperty(ref _indexPackage, value, () => IndexPackage); }
         }
         /// <summary>
-        /// Receives and transfers information on the current category to view 
+        /// Получает и передает информацию о текущей категории для просмотра
         /// </summary>
         public dynamic CurrentPackage
         {
@@ -75,16 +74,16 @@ namespace ProgramManager.ViewModels
             set
             {
                 SetProperty(ref _currentCategory, value, () => CurrentCategory);
-                // When the SelectedItem attribute value changes, all Tags are filtered depending on the selected category.
-                // Request of these Tags
+                // При изменении значения атрибута SelectedItem все теги фильтруются в зависимости от выбранной категории.
+                // Запрос этих тегов.
                 CalculateByTag();
-                // Filters Tags depending on the selected category.
+                // Фильтрует теги в зависимости от выбранной категории.
                 IEnumerable<CategoryModel> query = Tags.Where(category =>
                                                    category.CategoryName == _currentCategory.CategoryName);
 
-                Tags = new ObservableCollection<CategoryModel>(query); // Creating new data
-                Tags.Insert(0, new CategoryModel() { TagName = "Все", Count = CurrentCategory.Count }); // Adding special elements.        
-                OnPropertyChanged("Tags"); // Updating properties Tags
+                Tags = new ObservableCollection<CategoryModel>(query); // Создание новых данных.
+                Tags.Insert(0, new CategoryModel() { TagName = "Все", Count = CurrentCategory.Count }); // Добавление специальных элементов.    
+                OnPropertyChanged("Tags"); // Обновление тегов свойств, добавление специальных элементов.
             }
         }
         public CategoryModel CurrentTag
@@ -94,20 +93,20 @@ namespace ProgramManager.ViewModels
             {
                 SetProperty(ref _currentTag, value, () => CurrentTag);
 
-                // Filters data depending on the selected Tag if the special element "All" is selected, all data of Tags will be selected
+                // Фильтрация данных в зависимости от выбранного тега если выбран специальный элемент "все", будут выбраны все данные тегов
                 if (_currentTag.TagName != "Все") {
                     IEnumerable<PackageModel> query = _instancePackages.Where(package => 
                                                       package.TagName.Contains(_currentTag.TagName));
                     Packages = new ObservableCollection<PackageModel>(query);
                 }
-                // Filters data depending on the selected category and displays the list of all these Tags
+                // Фильтрует данные в зависимости от выбранной категории и отображает список всех этих тегов
                 else {
                     IEnumerable<PackageModel> query = _instancePackages.Where(package => 
                                                       package.Category == _currentCategory.CategoryName);
                     Packages = new ObservableCollection<PackageModel>(query);
                 }
                 if (Packages.Count > 0) {
-                    // Selects the first element of the list for correct work of a data panel
+                    // Выбирает первый элемент списка для корректной работы панели данных
                     CurrentPackage = Packages[0];
                     IndexPackage = 0;
                 }                                      
@@ -118,23 +117,23 @@ namespace ProgramManager.ViewModels
             get { return _filterPackages; }
             set
             {
-                // This method to save a list current state before will begin search. 
-                // If search box is empty that method restores a former list state on 117 line.
+                // Этот метод для сохранения текущего состояния списка перед началом поиска. 
+                // Если поле поиска пустое, то метод восстанавливает прежнее состояние списка на 133 строке.
                 FixStatePackage();
 
                 SetProperty(ref _filterPackages, value, () => FilterPackages);
-                // This instruction to filter data.
+                // Эта инструкция для фильтрации данных.
                 if (!string.IsNullOrEmpty(_filterPackages) ) {
                     IEnumerable<PackageModel> filter = _instancePackages.Where(package
                         => package.Name.ToLower().Contains(_filterPackages.ToLower()));
                     _packages = new ObservableCollection<PackageModel>(filter);
                     OnPropertyChanged("Packages");
                 }
-                // Method to restore a former list state.
+                // Метод восстановления прежнего состояния списка.
                 else FixStatePackage();
 
                 if (Packages.Count > 0) {
-                    // Selects the first element of the list for correct work of a data panel
+                    // Выбирает первый элемент списка для корректной работы панели данных
                     _currentPackage = Packages[0];
                     IndexPackage = 0;
                 }
@@ -143,7 +142,7 @@ namespace ProgramManager.ViewModels
 
         public ICommand OpenDialogPackage => new RelayCommand(obj =>
         {
-            PackagesDialog.OpenPackageDialog();
+            PackagesDialogVisibility.OpenPackageDialog();
         });
         #endregion
     }

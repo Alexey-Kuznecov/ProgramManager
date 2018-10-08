@@ -8,17 +8,18 @@ using ProgramManager.Views;
 
 namespace ProgramManager.ViewModels
 {
-    public static class PackagesDialog
+    public static class PackagesDialogVisibility
     {
-        public static readonly DialogPackages _dialogPackages = new DialogPackages();
+        public static readonly PackagesDialog PackagesDialog = new PackagesDialog();
 
         public static void OpenPackageDialog()
         {
-            _dialogPackages.Visibility = Visibility.Visible;
+            PackagesDialog.Visibility = Visibility.Visible;
+            PackagesDialog.ShowDialog();
         }
         public static void ClosePackageDialog()
         {
-            _dialogPackages.Visibility = Visibility.Hidden;
+            PackagesDialog.Visibility = Visibility.Hidden;
         }
     }
 }

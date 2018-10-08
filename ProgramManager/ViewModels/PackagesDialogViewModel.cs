@@ -4,17 +4,15 @@ using ProgramManager.Models;
 using System.Windows.Input;
 using ProgramManager.Views.DialogPacks;
 using System.Collections.ObjectModel;
-using System.Windows;
 using System.Windows.Controls;
 using GalaSoft.MvvmLight.Messaging;
 using ProgramManager.Enums;
-using ProgramManager.Views;
 
 namespace ProgramManager.ViewModels
 {
-    public partial class DialogPackagesViewModel : PropertiesChanged
+    public partial class PackagesDialogViewModel : PropertiesChanged
     {
-        public DialogPackagesViewModel()
+        public PackagesDialogViewModel()
         {
             _windowInputName = new InputName();
             RemoveTextField = new RelayCommand(obj => TextField.Remove(obj as TextFieldModel));

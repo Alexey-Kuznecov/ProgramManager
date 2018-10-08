@@ -81,8 +81,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Contracts\BaseConnector.cs" />
-    <Compile Include="Contracts\PackageEventArgs.cs" />
+    <Compile Include="Models\PackageBase.cs" />
+    <Compile Include="Models\ProgramModel.cs" />
+    <Compile Include="ViewModels\Base\BaseConnector.cs" />
+    <Compile Include="ViewModels\Base\ConnectorEventArgs.cs" />
     <Compile Include="Converters\KeywordToTextConverter.cs" />
     <Compile Include="Enums\TFieldType.cs" />
     <Compile Include="Enums\Keywords.cs" />
@@ -94,14 +96,14 @@
     <Compile Include="Models\PackageAccess.cs" />
     <Compile Include="Models\TextFieldModel.cs" />
     <Compile Include="ViewModels\Base\PropertiesChanged.cs" />
-    <Compile Include="ViewModels\DeclareCommand.cs" />
-    <Compile Include="ViewModels\DialogPackagePartial.cs" />
-    <Compile Include="ViewModels\DialogPackagesViewModel.cs" />
+    <Compile Include="ViewModels\MainViewModelPartial.cs" />
+    <Compile Include="ViewModels\PackagesDialogPartial.cs" />
+    <Compile Include="ViewModels\PackagesDialogViewModel.cs" />
     <Compile Include="Models\InfoMessage.cs" />
     <Compile Include="ViewModels\InputNameViewModelcs.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\Base\RelayCommand.cs" />
-    <Page Include="Views\DialogPackages.xaml">
+    <Page Include="Views\PackagesDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -126,9 +128,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Models\PackageModel.cs" />
-    <Compile Include="ViewModels\PackagesDialog.cs" />
-    <Compile Include="Views\DialogPackages.xaml.cs">
-      <DependentUpon>DialogPackages.xaml</DependentUpon>
+    <Compile Include="ViewModels\PackagesDialogVisibility.cs" />
+    <Compile Include="Views\PackagesDialog.xaml.cs">
+      <DependentUpon>PackagesDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\DialogPacks\InputName.xaml.cs">
       <DependentUpon>InputName.xaml</DependentUpon>
@@ -217,6 +219,7 @@
     <Resource Include="Resources\Icons\Category_48px_1.png" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Contracts\" />
     <Folder Include="Filters\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

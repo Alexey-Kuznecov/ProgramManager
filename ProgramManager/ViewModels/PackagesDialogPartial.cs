@@ -1,15 +1,10 @@
-﻿using System;
-using System.Reflection;
-using GalaSoft.MvvmLight.Messaging;
-using ProgramManager.Contracts;
+﻿using System.Reflection;
 using ProgramManager.Enums;
 using ProgramManager.Models;
-using ProgramManager.Views;
-using ProgramManager.Views.DialogPacks;
 
 namespace ProgramManager.ViewModels
 {
-    partial class DialogPackagesViewModel
+    partial class PackagesDialogViewModel
     {
         private void SavingPackage()
         {
@@ -38,7 +33,7 @@ namespace ProgramManager.ViewModels
             }
             BaseConnector connector = new BaseConnector();
             connector.OnPackageChanged(newPack);
-            PackagesDialog.ClosePackageDialog();
+            PackagesDialogVisibility.ClosePackageDialog();
         }
         private static void AddTextField(string name, TFieldType type)
         {

@@ -1,7 +1,8 @@
 ﻿using System;
 using ProgramManager.Models;
+using ProgramManager.ViewModels;
 
-namespace ProgramManager.Contracts
+namespace ProgramManager.ViewModels
 {
     public class BaseConnector
     {
@@ -12,8 +13,8 @@ namespace ProgramManager.Contracts
         }
         public void OnPackageChanged(PackageModel package)
         {
-            PackageChanged?.Invoke(this, new PackageEventArgs(package));
+            PackageChanged?.Invoke(this, new ConnectorEventArgs(package));
         }
-        public EventHandler<PackageEventArgs> PackageChanged { get; set; }
+        public EventHandler<ConnectorEventArgs> PackageChanged { get; set; }
     }
 }
