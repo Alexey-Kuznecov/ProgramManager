@@ -68,7 +68,7 @@ namespace ProgramManager.Models
         /// работает в паре с PackageFilter который позволеят исключить элементы с пустыми значениями
         /// </summary>
         /// <param name="data">Объект данных</param>
-        public void AddPackage(PackageModel data)
+        public void AddPackageObsolete(PackageModel data)
         {
             // Получает индекс последнего элемента в xml документе
             int id = GetIdLastElement();
@@ -147,7 +147,7 @@ namespace ProgramManager.Models
         /// </summary>
         /// <remarks>Метод не используется программой, оставил на крайний случай если вдруг пригодится</remarks>
         /// <param name="data">Коллекция объектов данных которые нужно дабавить в хранилище.</param>
-        public static void AddPackageObsolete(PackageModel data)
+        public void AddPackage(PackageModel data)
         {
             XDocument xDoc = XDocument.Load(DOCUMENT_NAME);
             int id = GetIdLastElement();
