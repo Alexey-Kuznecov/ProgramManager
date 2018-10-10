@@ -1,6 +1,9 @@
-﻿using System.Collections.Generic;
+﻿#define TEST
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Messaging;
 using ProgramManager.Models;
@@ -24,12 +27,12 @@ namespace ProgramManager.ViewModels
 
         // Поля для свойств
         private dynamic _currentPackage;
-        private CategoryModel _currentTag;
-        private CategoryModel _currentCategory;
+        private CategoryModelOb _currentTag;
+        private CategoryModelOb _currentCategory;
         private ObservableCollection<PackageModel> _packages;
         private ObservableCollection<PackageModel> _storage;
-        private ObservableCollection<PackageModel> _instancePackages = new BaseModel().GetPackages();
-        private ObservableCollection<CategoryModel> _instanceCategories = new BaseModel().GetCategories();
+        private ObservableCollection<PackageModel> _instancePackages = null;
+        private ObservableCollection<CategoryModelOb> _instanceCategories = null;
         private int _indexPackage;
         private string _filterPackages;
 
@@ -45,8 +48,8 @@ namespace ProgramManager.ViewModels
             get { return _packages; }
             set { SetProperty(ref _packages, value, () => Packages); }
         }
-        public ObservableCollection<CategoryModel> Tags { get; set; }
-        public ObservableCollection<CategoryModel> Category { get; set; }
+        public ObservableCollection<CategoryModelOb> Tags { get; set; }
+        public ObservableCollection<CategoryModelOb> Category { get; set; }
         public int IndexPackage
         {
             get { return _indexPackage; }
@@ -63,12 +66,12 @@ namespace ProgramManager.ViewModels
                 _currentPackage = value;
                       
                 if (value != null)
-                    SetCurrentPackage(value);
+                    //SetCurrentPackage(value);
 
                 OnPropertyChanged("CurrentPackage");  
             }
         }
-        public CategoryModel CurrentCategory
+        public CategoryModelOb CurrentCategory
         {
             get { return _currentCategory; }
             set
@@ -78,15 +81,15 @@ namespace ProgramManager.ViewModels
                 // Запрос этих тегов.
                 CalculateByTag();
                 // Фильтрует теги в зависимости от выбранной категории.
-                IEnumerable<CategoryModel> query = Tags.Where(category =>
+                IEnumerable<CategoryModelOb> query = Tags.Where(category =>
                                                    category.CategoryName == _currentCategory.CategoryName);
 
-                Tags = new ObservableCollection<CategoryModel>(query); // Создание новых данных.
-                Tags.Insert(0, new CategoryModel() { TagName = "Все", Count = CurrentCategory.Count }); // Добавление специальных элементов.    
+                Tags = new ObservableCollection<CategoryModelOb>(query); // Создание новых данных.
+                Tags.Insert(0, new CategoryModelOb() { TagName = "Все", Count = CurrentCategory.Count }); // Добавление специальных элементов.    
                 OnPropertyChanged("Tags"); // Обновление тегов свойств, добавление специальных элементов.
             }
         }
-        public CategoryModel CurrentTag
+        public CategoryModelOb CurrentTag
         {
             get { return _currentTag; }
             set
@@ -139,11 +142,6 @@ namespace ProgramManager.ViewModels
                 }
             }
         }
-
-        public ICommand OpenDialogPackage => new RelayCommand(obj =>
-        {
-            PackagesDialogVisibility.OpenPackageDialog();
-        });
         #endregion
     }
 }
