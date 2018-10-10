@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using ProgramManager.Filters;
 using ProgramManager.Models.NewModel;
 using ProgramManager.ViewModels;
@@ -49,8 +50,16 @@ namespace ProgramManager.Models
 
         public static ObservableCollection<PackageBase> GetPackages()
         {
-            CategoryModel categoryModel = new CategoryModel { Name = "Программы" };
-            _packages = new ObservableCollection<PackageBase>(ProgramAccess.GetPackages(categoryModel));
+            CategoryModel.Categories = new List<CategoryModel>()
+            {
+                new CategoryModel() { Name = "Программы" },
+                new CategoryModel() { Name = "Драйвера" },
+                new CategoryModel() { Name = "Моды" },
+                new CategoryModel() { Name = "Плагины" },
+                new CategoryModel() { Name = "Игры" },
+            };
+         
+            _packages = new ObservableCollection<PackageBase>(ProgramAccess.GetPackages(CategoryModel.Categories[0]));
             return _packages;
         }
 

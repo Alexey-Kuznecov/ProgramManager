@@ -86,8 +86,6 @@ namespace ProgramManager.Models
                         IndexCategory = 0
             });
                 package[index].Datails = package[index].Properties = propNotIsEmpty.Filter(package[index++]);
-
-
             }
             return package;
         }
