@@ -19,7 +19,6 @@ namespace ProgramManager.Models
         public int IndexCategory { get; set; }
         public string TagContain { get; set; }
         public List<TagModel> Tag { get; set; }
-        public List<CategoryModel> Categories { get; set; }
         public List<FieldNotIsNull> Properties { get; set; }
         public List<FieldNotIsNull> Datails { get; set; }
 
@@ -29,14 +28,6 @@ namespace ProgramManager.Models
         public virtual void RemovePackage() { }
         public PackageBase()
         {
-            Categories = new List<CategoryModel>()
-            {
-                new CategoryModel() { Name = "Программы" },
-                new CategoryModel() { Name = "Драйвера" },
-                new CategoryModel() { Name = "Моды" },
-                new CategoryModel() { Name = "Плагины" },
-                new CategoryModel() { Name = "Игры" },
-            };
             //IndexCategory = Categories.FindIndex(x => x.Name == Category);
         }
     }

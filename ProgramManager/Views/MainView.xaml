@@ -209,8 +209,8 @@
             Margin="5,5,5,5"
             Padding="10,7"
             VerticalAlignment="Center"
-            ItemsSource="{Binding Packages/Categories}"
-            SelectedIndex="{Binding IndexCategory}"
+            ItemsSource="{Binding Categories}"
+            SelectedIndex="0"
             SelectedItem="{Binding CurrentCategory}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
@@ -281,7 +281,6 @@
             Grid.RowSpan="4"
             Grid.Column="1"
             ItemsSource="{Binding Packages}"
-            SelectedIndex="{Binding IndexPackage}"
             SelectedItem="{Binding CurrentPackage}">
             <ListBox.ItemTemplate>
                 <DataTemplate>

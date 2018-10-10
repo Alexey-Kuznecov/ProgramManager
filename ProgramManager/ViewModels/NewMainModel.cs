@@ -15,16 +15,19 @@ namespace ProgramManager.ViewModels
         public NewMainModel()
         {
             Packages = BaseModel.GetPackages();
+
+            Categories = CategoryModel.Categories;
+
             if (Packages.Count > 0)
             {
                 CurrentPackage = Packages[0];
             }
-            _currentCategory = Packages[0].Categories[0];
         }
         private ObservableCollection<PackageBase> _packages;
         private PackageBase _currentPackage;
         private CategoryModel _currentCategory;
         private TagModel _currentTag;
+        private List<CategoryModel> _categories;
 
         public ObservableCollection<PackageBase> Packages
         {
@@ -34,8 +37,14 @@ namespace ProgramManager.ViewModels
                 SetProperty(ref _packages, value, () => Packages);
             }
         }
-        public int IndexPackage { get; set; }
-        public int IndexCategory { get; set; }
+        public List<CategoryModel> Categories
+        {
+            get { return _categories; }
+            set
+            {
+                SetProperty(ref _categories, value, () => Categories);
+            }
+        }
         public PackageBase CurrentPackage
         {
             get { return _currentPackage; }
@@ -60,8 +69,6 @@ namespace ProgramManager.ViewModels
                 if (_currentCategory != null)
                     Packages = BaseModel.GetPackages(_currentCategory);
 
-                _currentCategory = Packages[0].Categories[_packages[0].IndexCategory];
-
                 if (Packages.Count > 0)
                     CurrentPackage = Packages[0];
             }
@@ -76,14 +83,14 @@ namespace ProgramManager.ViewModels
             get { return _currentTag; }
             set
             {
-                SetProperty(ref _currentTag, value, () => CurrentTag);
-
                 if (_currentTag != null)
                 {
-                    //Packages = BaseModel.GetPackages(_currentCategory);
-                    //IEnumerable<PackageBase> query = Packages.Where(pack => pack.TagContain == _currentTag.Name);
-                    //Packages = new ObservableCollection<PackageBase>(query);
+                    Packages = BaseModel.GetPackages(_currentCategory);
+                    IEnumerable<PackageBase> query = Packages.Where(pack => pack.TagContain == _currentTag.Name);
+                    Packages = new ObservableCollection<PackageBase>(query);
                 }
+
+                _currentTag = value;
             }
         }
     }

@@ -9,5 +9,7 @@ namespace ProgramManager.Models.NewModel
     public class CategoryModel
     {
         public string Name { get; set; }
+
+        public static List<CategoryModel> Categories { get; set; }
     }
 }
