@@ -81,8 +81,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Models\PackageBase.cs" />
-    <Compile Include="Models\ProgramModel.cs" />
+    <Compile Include="Filters\FilterField.cs" />
+    <Compile Include="Models\NewModel\CategoryModel.cs" />
+    <Compile Include="Models\NewModel\TagModel.cs" />
+    <Compile Include="Models\NewModel\DriverModel.cs" />
+    <Compile Include="Models\NewModel\GameModel.cs" />
+    <Compile Include="Models\NewModel\ModModel.cs" />
+    <Compile Include="Models\NewModel\PackageBase.cs" />
+    <Compile Include="Models\NewModel\PluginModel.cs" />
+    <Compile Include="Models\NewModel\ProgramModel.cs" />
     <Compile Include="ViewModels\Base\BaseConnector.cs" />
     <Compile Include="ViewModels\Base\ConnectorEventArgs.cs" />
     <Compile Include="Converters\KeywordToTextConverter.cs" />
@@ -90,13 +97,14 @@
     <Compile Include="Enums\Keywords.cs" />
     <Compile Include="MarkupExtensions\EnumValues.cs" />
     <Compile Include="Models\CategoryAccess.cs" />
-    <Compile Include="Models\CategoryModel.cs" />
+    <Compile Include="Models\CategoryModelOb.cs" />
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\DataPanelModel.cs" />
     <Compile Include="Models\PackageAccess.cs" />
     <Compile Include="Models\TextFieldModel.cs" />
     <Compile Include="ViewModels\Base\PropertiesChanged.cs" />
     <Compile Include="ViewModels\MainViewModelPartial.cs" />
+    <Compile Include="ViewModels\NewMainModel.cs" />
     <Compile Include="ViewModels\PackagesDialogPartial.cs" />
     <Compile Include="ViewModels\PackagesDialogViewModel.cs" />
     <Compile Include="Models\InfoMessage.cs" />
@@ -220,7 +228,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Contracts\" />
-    <Folder Include="Filters\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

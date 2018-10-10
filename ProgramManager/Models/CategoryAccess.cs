@@ -5,45 +5,45 @@ namespace ProgramManager.Models
 {
     public class CategoryAccess
     {
-        internal static List<CategoryModel> GetSubcategories()
+        internal static List<CategoryModelOb> GetSubcategories()
         {
-            List<CategoryModel> subcategory = new List<CategoryModel> {
+            List<CategoryModelOb> subcategory = new List<CategoryModelOb> {
 
-                new CategoryModel() { CategoryName = "Программы", TagName = "3D Редакторы"  },
-                new CategoryModel() { CategoryName = "Программы", TagName = "IDE" },
-                new CategoryModel() { CategoryName = "Программы", TagName = "Антивирусы" },
-                new CategoryModel() { CategoryName = "Программы", TagName = "Браузеры" },
-                new CategoryModel() { CategoryName = "Программы", TagName = "Меседжеры" },
-                new CategoryModel() { CategoryName = "Программы", TagName = "Редакторы кода" },
-                new CategoryModel() { CategoryName = "Программы", TagName = "Инструменты разработчика" },
-                new CategoryModel() { CategoryName = "Программы", TagName = "Офисные" },
-                new CategoryModel() { CategoryName = "Программы", TagName = "Оптимизатры" },
-                new CategoryModel() { CategoryName = "Программы", TagName = "Органазеры" },
-                new CategoryModel() { CategoryName = "Игры", TagName = "Стратегии" },
-                new CategoryModel() { CategoryName = "Игры", TagName = "RPG" },
-                new CategoryModel() { CategoryName = "Игры", TagName = "Shooter" },
-                new CategoryModel() { CategoryName = "Моды", TagName = "Прически" },
-                new CategoryModel() { CategoryName = "Моды", TagName = "Персонажи" },
-                new CategoryModel() { CategoryName = "Моды", TagName = "Реворк" },
-                new CategoryModel() { CategoryName = "Драйвера", TagName = "Видеокарты" },
-                new CategoryModel() { CategoryName = "Драйвера", TagName = "Сетевые адаптары" },
-                new CategoryModel() { CategoryName = "Драйвера", TagName = "Материнская плата" },
-                new CategoryModel() { CategoryName = "Драйвера", TagName = "Звуковая карта" },
-                new CategoryModel() { CategoryName = "Драйвера", TagName = "Аксессуары" },
-                new CategoryModel() { CategoryName = "Плагины", TagName = "Для фотошопа" },
+                new CategoryModelOb() { CategoryName = "Программы", TagName = "3D Редакторы"  },
+                new CategoryModelOb() { CategoryName = "Программы", TagName = "IDE" },
+                new CategoryModelOb() { CategoryName = "Программы", TagName = "Антивирусы" },
+                new CategoryModelOb() { CategoryName = "Программы", TagName = "Браузеры" },
+                new CategoryModelOb() { CategoryName = "Программы", TagName = "Меседжеры" },
+                new CategoryModelOb() { CategoryName = "Программы", TagName = "Редакторы кода" },
+                new CategoryModelOb() { CategoryName = "Программы", TagName = "Инструменты разработчика" },
+                new CategoryModelOb() { CategoryName = "Программы", TagName = "Офисные" },
+                new CategoryModelOb() { CategoryName = "Программы", TagName = "Оптимизатры" },
+                new CategoryModelOb() { CategoryName = "Программы", TagName = "Органазеры" },
+                new CategoryModelOb() { CategoryName = "Игры", TagName = "Стратегии" },
+                new CategoryModelOb() { CategoryName = "Игры", TagName = "RPG" },
+                new CategoryModelOb() { CategoryName = "Игры", TagName = "Shooter" },
+                new CategoryModelOb() { CategoryName = "Моды", TagName = "Прически" },
+                new CategoryModelOb() { CategoryName = "Моды", TagName = "Персонажи" },
+                new CategoryModelOb() { CategoryName = "Моды", TagName = "Реворк" },
+                new CategoryModelOb() { CategoryName = "Драйвера", TagName = "Видеокарты" },
+                new CategoryModelOb() { CategoryName = "Драйвера", TagName = "Сетевые адаптары" },
+                new CategoryModelOb() { CategoryName = "Драйвера", TagName = "Материнская плата" },
+                new CategoryModelOb() { CategoryName = "Драйвера", TagName = "Звуковая карта" },
+                new CategoryModelOb() { CategoryName = "Драйвера", TagName = "Аксессуары" },
+                new CategoryModelOb() { CategoryName = "Плагины", TagName = "Для фотошопа" },
             };
 
             return subcategory;
         }
-        internal static List<CategoryModel> GetCategories()
+        internal static List<CategoryModelOb> GetCategories()
         {
-            List<CategoryModel> catergory = new List<CategoryModel> {
+            List<CategoryModelOb> catergory = new List<CategoryModelOb> {
 
-                new CategoryModel() { CategoryName = "Программы" },
-                new CategoryModel() { CategoryName = "Драйвера" },
-                new CategoryModel() { CategoryName = "Моды" },
-                new CategoryModel() { CategoryName = "Плагины" },
-                new CategoryModel() { CategoryName = "Игры" }
+                new CategoryModelOb() { CategoryName = "Программы" },
+                new CategoryModelOb() { CategoryName = "Драйвера" },
+                new CategoryModelOb() { CategoryName = "Моды" },
+                new CategoryModelOb() { CategoryName = "Плагины" },
+                new CategoryModelOb() { CategoryName = "Игры" }
             };
 
             return catergory;
