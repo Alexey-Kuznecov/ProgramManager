@@ -34,21 +34,21 @@ namespace ProgramManager.Models
                         Image = element.Element("Image")?.Value,
                         Source = element.Element("Source")?.Value,
                         Description = element.Element("Description")?.Value,
-                        TagContain = element.Element("Tag")?.Value,
+                        TagOne = element.Element("Tag")?.Value,
                     });
             }
             return package;
         }
         public PluginModel()
         {
-            Tag = new List<TagModel>()
+            Tag = new List<WrapPackages>()
             {
-                new TagModel() { Name = "Встраиваемые" },
-                new TagModel() { Name = "Для фотошопа" },
-                new TagModel() { Name = "Просмоторщики" },
-                new TagModel() { Name = "Для сжатия" },
-                new TagModel() { Name = "Для Sublime Text" },
-                new TagModel() { Name = "Для Total Commander" },
+                new WrapPackages() { Name = "Встраиваемые" },
+                new WrapPackages() { Name = "Для фотошопа" },
+                new WrapPackages() { Name = "Просмоторщики" },
+                new WrapPackages() { Name = "Для сжатия" },
+                new WrapPackages() { Name = "Для Sublime Text" },
+                new WrapPackages() { Name = "Для Total Commander" },
             };
         }
     }

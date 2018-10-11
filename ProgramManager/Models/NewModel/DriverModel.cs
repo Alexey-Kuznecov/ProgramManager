@@ -20,21 +20,22 @@ namespace ProgramManager.Models.NewModel
 
         public DriverModel()
         {
-            Tag = new List<TagModel>()
+            Tag = new List<WrapPackages>()
             {
-                new TagModel() { Name = "Звуковая карта" },
-                new TagModel() { Name = "Аксессуары" },
-                new TagModel() { Name = "Звуковая карта" },
+                new WrapPackages() { Name = "Звуковая карта" },
+                new WrapPackages() { Name = "Аксессуары" },
+                new WrapPackages() { Name = "Сетевой адапер" },
+                new WrapPackages() { Name = "Видео карта" },
             };
         }
     }
     public class DriverAccess
     {
-        private const string DOCUMENT_NAME = "packages.xml";
+        private const string DocumentName = "DriverPackages.xml";
 
         public static List<DriverModel> GetPackages(CategoryModel category)
         {
-            XElement root = XElement.Load(DOCUMENT_NAME);
+            XElement root = XElement.Load(DocumentName);
             List<DriverModel> package = new List<DriverModel>();
             FilterField<DriverModel> propNotIsEmpty = new FilterField<DriverModel>();
             int index = 0;
@@ -54,9 +55,8 @@ namespace ProgramManager.Models.NewModel
                         Image = element.Element("Image")?.FirstAttribute.Value,
                         Description = element.Element("Description")?.Value,
                         Category = element?.LastAttribute.Value,
-                        IndexCategory = 1
                     });
-                package[index].Datails = package[index].Properties = propNotIsEmpty.Filter(package[index++]);
+                package[index].Datails = propNotIsEmpty.Filter(package[index++]);
             }
             return package;
         }

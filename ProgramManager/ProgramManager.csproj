@@ -83,7 +83,7 @@
     </ApplicationDefinition>
     <Compile Include="Filters\FilterField.cs" />
     <Compile Include="Models\NewModel\CategoryModel.cs" />
-    <Compile Include="Models\NewModel\TagModel.cs" />
+    <Compile Include="Models\NewModel\WrapPackages.cs" />
     <Compile Include="Models\NewModel\DriverModel.cs" />
     <Compile Include="Models\NewModel\GameModel.cs" />
     <Compile Include="Models\NewModel\ModModel.cs" />

@@ -34,7 +34,7 @@ namespace ProgramManager.Models
                         Image = element.Element("Image")?.Value,
                         Description = element.Element("Description")?.Value,
                         Source = element.Element("Source")?.Value,
-                        TagContain = element.Element("Tag")?.Value,
+                        TagOne = element.Element("Tag")?.Value,
                     });
             }
             return package;
@@ -42,16 +42,16 @@ namespace ProgramManager.Models
 
         public ModModel()
         {
-            Tag = new List<TagModel>()
+            Tag = new List<WrapPackages>()
             {
-                new TagModel() { Name = "Все" },
-                new TagModel() { Name = "Оружие" },
-                new TagModel() { Name = "Персонажи" },
-                new TagModel() { Name = "Прически" },
-                new TagModel() { Name = "Ретекстур" },
-                new TagModel() { Name = "DLC" },
-                new TagModel() { Name = "Ивентарь" },
-                new TagModel() { Name = "Разное" },
+                new WrapPackages() { Name = "Все" },
+                new WrapPackages() { Name = "Оружие" },
+                new WrapPackages() { Name = "Персонажи" },
+                new WrapPackages() { Name = "Прически" },
+                new WrapPackages() { Name = "Ретекстур" },
+                new WrapPackages() { Name = "DLC" },
+                new WrapPackages() { Name = "Ивентарь" },
+                new WrapPackages() { Name = "Разное" },
             };
         }
     }

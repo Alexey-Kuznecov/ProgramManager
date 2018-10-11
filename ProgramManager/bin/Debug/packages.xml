@@ -1,7 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<!DOCTYPE Packages SYSTEM "Packages.dtd"[]>
-<?PackageHandler out-of-print?>
-<Packages>
+﻿<Packages>
   <Package Id="0" Category="Программы">
     <Name>Photoshop</Name>
     <Author>Adobe</Author>

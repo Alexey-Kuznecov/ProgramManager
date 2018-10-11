@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Packages>
+    <Package Id="0" Category="Программы">
+        <Name>Photoshop</Name>
+        <Author>Adobe</Author>
+        <Version>Cloud CC6</Version>
+        <Tag>Редактор графики</Tag>
+        <Description>Программа для оформления фотографий</Description>
+        <Image Source="User/Images/19572.jpg" />
+    </Package>
+    <Package Id="1" Category="Программы">
+        <Name>Illustrator</Name>
+        <Author>Adobe</Author>
+        <Version>Cloud CC6</Version>
+        <Tag>Редактор графики</Tag>
+        <Description>Программа для оформления фотографий</Description>
+        <Image Source="User/Images/19572.jpg" />
+    </Package>
+    <Package Id="3" Category="Программы">
+        <Name>Sublime Text 3</Name>
+        <Author>HQ Pty Ltd</Author>
+        <Version>3.1.1 Build 3176</Version>
+        <Tags>
+            <Tag>Редакторы кода</Tag>
+            <Tag>Инструменты разработчика</Tag>
+        </Tags>
+        <Description>Многофункциональный редактор кода</Description>
+        <Image Source="User/Images/19572.jpg" />
+    </Package>       
+</Packages>
