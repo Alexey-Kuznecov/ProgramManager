@@ -1,8 +1,5 @@
 ﻿using System.Windows;
-using ProgramManager.ViewModels;
 using ProgramManager.Views;
-using ProgramManager.Models;
-using ProgramManager.Enums;
 
 namespace ProgramManager
 {

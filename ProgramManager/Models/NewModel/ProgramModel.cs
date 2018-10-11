@@ -31,63 +31,58 @@ namespace ProgramManager.Models
                     new XElement("Image", new XAttribute("Source", Image ?? ""))));
             xDoc.Save(DOCUMENT_NAME);
         }
-
         public override List<ProgramModel> GetPackages(CategoryModel category)
         {
             throw new NotImplementedException();
         }
-        public ProgramModel()
-        {
-            Tag = new List<TagModel>()
-            {
-                new TagModel() { Name = "3D Редакторы"  },
-                new TagModel() { Name = "IDE" },
-                new TagModel() { Name = "Антивирусы" },
-                new TagModel() { Name = "Браузеры" },
-                new TagModel() { Name = "Меседжеры" },
-                new TagModel() { Name = "Редакторы кода" },
-                new TagModel() { Name = "Инструменты разработчика" },
-                new TagModel() { Name = "Офисные" },
-                new TagModel() { Name = "Оптимизатры" },
-                new TagModel() { Name = "Органазеры" },
-            };
-        }
     }
-    public class ProgramAccess
+    public class ProgramAccess<T> where T : PackageBase, new()
     {
-        private const string DOCUMENT_NAME = "packages.xml";
+        private const string DocumentName = "ProgramPackages.xml";
 
-        public static List<ProgramModel> GetPackages(CategoryModel category)
+        public static List<T> GetPackages(CategoryModel category)
         {
-            XElement root = XElement.Load(DOCUMENT_NAME);
-            List<ProgramModel> package = new List<ProgramModel>();
-            FilterField<ProgramModel> propNotIsEmpty = new FilterField<ProgramModel>();
+            FilterField<T> propNotIsEmpty = new FilterField<T>();
+            List<T> packages = new List<T>();
+            XElement root = XElement.Load(DocumentName);
             int index = 0;
-
+            
+            // Запрос с фильтрацией данных. 
             IEnumerable<XElement> document = from element in root.Elements("Package")
                 where (string)element.Attribute("Category") == category.Name
                 select element;
-
+            // Формирования нового объекта на основе данных xml документа.
             foreach (XElement element in document)
             {
-                package.Add(
-                    new ProgramModel
-                    {
+                packages.Add( new T {
                         Name = element.Element("Name")?.Value,
                         Author = element.Element("Author")?.Value,
                         Version = element.Element("Version")?.Value,
                         Image = element.Element("Image")?.FirstAttribute.Value,
                         Description = element.Element("Description")?.Value,
-                        License = element.Element("License")?.Value,
-                        TagContain = element.Element("Tag")?.Value,
-                        SerialKey = element.Element("SerialKey")?.Value,
-                        CompanySite = element.Element("CompanySite")?.Value,
-                        Category = element?.LastAttribute.Value,
-                        IndexCategory = 0
-            });
-                package[index].Datails = package[index].Properties = propNotIsEmpty.Filter(package[index++]);
+                        TagOne = element.Element("Tag")?.Value,
+                        // Вызов метода для создания коллекции тегов, если пакет имеет более одного тега
+                        TagList = GetTags(element),
+                        Category = element?.LastAttribute.Value });
+                // Вызом тетода фильтрации полей с пустыми значениями данного объекта.
+                packages[index].Datails = propNotIsEmpty.Filter(packages[index++]);
             }
-            return package;
+            return packages;
+        }
+        /// <summary>
+        /// Вспомогательный метод для получения массива тегов(текст), так как пакеты могут иметь больше одного тега.
+        /// Метод находит елемент <TagList></TagList> и формирует массив на основе содержимого данного элемента.
+        /// </summary>
+        /// <param name="node">Контекст текущего родительсткго элемента.</param>
+        /// <returns>Коллекцию строковых элеменов(тегов), пренадлижащих текущему пакету</returns>
+        private static List<string> GetTags(XElement node)
+        {
+            IEnumerable<XElement> elements = node.Elements("TagList");
+            List<string> tags = new List<string>();
+
+            foreach (var element in elements.Elements("Tag")) tags.Add(element.Value);
+
+            return tags;
         }
     }
 }

@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Packages>
+    <Package Id="21" Category="Драйвера">
+    <Name>SUMSUNG-4 (High Definition Audio)</Name>
+    <Author>NVIDEO</Author>
+    <Version>3.31</Version>
+    <Tag>Звуковая карта</Tag>
+    <Description></Description>
+    <Image Source="User/Images/19572.jpg" />
+  </Package>
+  <Package Id="22" Category="Драйвера">
+    <Name>Logitech HD Webcam C270</Name>
+    <Author>Logitech</Author>
+    <Version>2.2</Version>
+    <Tag>Аксессуары</Tag>
+    <Description></Description>
+    <Image Source="User/Images/19572.jpg" />
+  </Package>
+  <Package Id="23" Category="Драйвера">
+    <Name>High Definition Audio</Name>
+    <Author>Realtek</Author>
+    <Version>3.31</Version>
+    <Tag>Звуковая карта</Tag>
+    <Description></Description>
+    <Image Source="User/Images/19572.jpg" />
+  </Package>
+</Packages>

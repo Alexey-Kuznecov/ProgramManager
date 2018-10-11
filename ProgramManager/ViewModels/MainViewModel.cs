@@ -86,7 +86,7 @@ namespace ProgramManager.ViewModels
 
                 Tags = new ObservableCollection<CategoryModelOb>(query); // Создание новых данных.
                 Tags.Insert(0, new CategoryModelOb() { TagName = "Все", Count = CurrentCategory.Count }); // Добавление специальных элементов.    
-                OnPropertyChanged("Tags"); // Обновление тегов свойств, добавление специальных элементов.
+                OnPropertyChanged("TagList"); // Обновление тегов свойств, добавление специальных элементов.
             }
         }
         public CategoryModelOb CurrentTag

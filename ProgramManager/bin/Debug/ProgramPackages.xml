@@ -1,0 +1,157 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Packages>
+    <Package Id="0" Category="Программы">
+        <Name>Photoshop</Name>
+        <Author>Adobe</Author>
+        <Version>Cloud CC6</Version>
+        <Tag>Редактор графики</Tag>
+        <Description>Программа для оформления фотографий</Description>
+        <Image Source="User/Images/19572.jpg" />
+    </Package>
+    <Package Id="1" Category="Программы">
+        <Name>Illustrator</Name>
+        <Author>Adobe</Author>
+        <Version>Cloud CC6</Version>
+        <Tag>Редактор графики</Tag>
+        <Description>Программа для оформления фотографий</Description>
+        <Image Source="User/Images/19572.jpg" />
+    </Package>
+    <Package Id="2" Category="Программы">
+        <Name>Axure</Name>
+        <Author>Axure Software Solution</Author>
+        <Version>RP 8</Version>
+        <Tag>Инструменты разработчика</Tag>
+        <Description>Программа для создания прототипов сайтов</Description>
+        <Image Source="User/Images/19572.jpg" />
+    </Package>
+    <Package Id="3" Category="Программы">
+        <Name>LazyCure</Name>
+        <Author>Andrei Kulabukhau</Author>
+        <Version>0.10</Version>
+        <Tag>Органазеры</Tag>
+        <Description>Программа для измерения времени</Description>
+        <Image Source="User/Images/19572.jpg" />
+    </Package>
+    <Package Id="4" Category="Программы">
+        <Name>Firefox</Name>
+        <Author>Mozilla</Author>
+        <Version>7.9.4</Version>
+        <Tag>Браузеры</Tag>
+        <Description>Программа для просмотра вебстраниц</Description>
+        <Image Source="User/Images/19572.jpg" />
+    </Package>
+    <Package Id="5" Category="Программы">
+        <Name>Chrome</Name>
+        <Author>Google</Author>
+        <Version>8.5.0</Version>
+        <Tag>Браузеры</Tag>
+        <Description>Программа для просмотра вебстраниц</Description>
+        <Image Source="User/Images/19572.jpg" />
+    </Package>
+    <Package Id="6" Category="Программы">
+        <Name>Microsoft Outlook</Name>
+        <Author>Microsoft</Author>
+        <Version>2017</Version>
+        <Tag>Офисные</Tag>
+        <Description>Программа для организации электронных писем</Description>
+        <Image Source="User/Images/19572.jpg" />
+    </Package>
+    <Package Id="7" Category="Программы">
+        <Name>Microsoft Word</Name>
+        <Author>Microsoft</Author>
+        <Version>2017</Version>
+        <Tag>Офисные</Tag>
+        <Description>Программа для написания, редактирования, оформления текста и многое другое.</Description>
+        <Image Source="User/Images/19572.jpg" />
+    </Package>
+    <Package Id="8" Category="Программы">
+        <Name>CCleaner</Name>
+        <Author>Piriform</Author>
+        <Version>5.43.6520</Version>
+        <Tag>Оптимизатры</Tag>
+        <Description>Программа очиски компьютора</Description>
+        <Image Source="User/Images/19572.jpg" />
+    </Package>
+    <Package Id="9" Category="Программы">
+        <Name>Reg Organizer</Name>
+        <Author>ChemTable Software</Author>
+        <Version>8.16</Version>
+        <Tag>Оптимизатры</Tag>
+        <Description>Программа для оптимизации, отчиски, дефрагментации реестра и многое другое</Description>
+        <Image Source="User/Images/19572.jpg" />
+    </Package>
+    <Package Id="10" Category="Программы">
+        <Name>LeaderTask</Name>
+        <Author>Неизвестно</Author>
+        <Version>6.0</Version>
+        <Tag>Органазеры</Tag>
+        <Description>Программа организации задач</Description>
+        <Image Source="User/Images/19572.jpg" />
+    </Package>
+    <Package Id="11" Category="Программы">
+        <Name>Kasperski</Name>
+        <Author>Kasperski Lab</Author>
+        <Version>6.0</Version>
+        <Tag>Антивирусы</Tag>
+        <Description>Программа для защиты компютера от вирусов</Description>
+        <Image Source="User/Images/19572.jpg" />
+    </Package>
+    <Package Id="12" Category="Программы">
+        <Name>Sublime Text 3</Name>
+        <Author>HQ Pty Ltd</Author>
+        <Version>3.1.1 Build 3176</Version>
+        <TagList>
+            <Tag>Редакторы кода</Tag>
+            <Tag>Инструменты разработчика</Tag>
+        </TagList>
+        <Description>Многофункциональный редактор кода</Description>
+        <Image Source="User/Images/19572.jpg" />
+    </Package>
+    <Package Id="13" Category="Программы">
+        <Name>Notepad++</Name>
+        <Author>Notepad++Team</Author>
+        <Version>7.4.2</Version>
+        <Tag>Редакторы кода</Tag>
+        <Description>Удобный и мультифункциональный редактор кода</Description>
+        <Image Source="User/Images/19572.jpg" />
+    </Package>
+    <Package Id="14" Category="Программы">
+        <Name>Microsoft Visual Studio</Name>
+        <Author>Microsoft</Author>
+        <Version>14.0</Version>
+        <Tag>IDE</Tag>
+        <Description>Интегрированая среда разработки</Description>
+        <Image Source="User/Images/19572.jpg" />
+    </Package>
+    <Package Id="15" Category="Программы">
+        <Name>Zbrush</Name>
+        <Author>Poligonic</Author>
+        <Version>10</Version>
+        <Tag>3D Редакторы</Tag>
+        <Description>Программа для создания 3D моделей</Description>
+        <Image Source="User/Images/19572.jpg" />
+    </Package>
+    <Package Id="16" Category="Программы">
+        <Name>NetBeans</Name>
+        <Author>NetBeans Software</Author>
+        <Version>9.1.0</Version>
+        <Tag>IDE</Tag>
+        <Description>Интегрированая среда разработки</Description>
+        <Image Source="User/Images/19572.jpg" />
+    </Package>
+    <Package Id="17" Category="Программы">
+        <Name>Discord</Name>
+        <Author>Discord Team</Author>
+        <Version>3.0</Version>
+        <Tag>Меседжеры</Tag>
+        <Description>Программа для создания сообществ</Description>
+        <Image Source="User/Images/19572.jpg" />
+    </Package>
+    <Package Id="18" Category="Программы">
+        <Name>Slack</Name>
+        <Author>Slack Team</Author>
+        <Version>2.2</Version>
+        <Tag>Меседжеры</Tag>
+        <Description>Программа для создания сообществ</Description>
+    </Package>        
+</Packages>

@@ -34,7 +34,7 @@ namespace ProgramManager.Models
                         Image = element.Element("Image")?.Value,
                         Description = element.Element("Description")?.Value,
                         Source = element.Element("Source")?.Value,
-                        TagContain = element.Element("Tag")?.Value,
+                        TagOne = element.Element("Tag")?.Value,
                     });
             }
             return package;
@@ -42,11 +42,11 @@ namespace ProgramManager.Models
 
         public GameModel()
         {
-            Tag = new List<TagModel>()
+            Tag = new List<WrapPackages>()
             {
-                new TagModel() { Name = "RPG" },
-                new TagModel() { Name = "Стратегии" },
-                new TagModel() { Name = "Shooter" },
+                new WrapPackages() { Name = "RPG" },
+                new WrapPackages() { Name = "Стратегии" },
+                new WrapPackages() { Name = "Shooter" },
             };
         }
     }

@@ -229,8 +229,8 @@
             Grid.RowSpan="4"
             Margin="5,0"
             IsSynchronizedWithCurrentItem="True"
-            ItemsSource="{Binding Packages/Tag}"
-            SelectedItem="{Binding CurrentTag}">
+            ItemsSource="{Binding WrapPackage}"
+            SelectedIndex="{Binding IndexTag}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel>
@@ -239,7 +239,7 @@
                             Height="30"
                             Padding="5,8"
                             Text="{Binding Name}" />
-                        <Label Content="{Binding Count}" />
+                        <Label Content="{Binding Packages.Count, Mode=OneWay}" />
                     </WrapPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
@@ -280,8 +280,9 @@
             Grid.Row="4"
             Grid.RowSpan="4"
             Grid.Column="1"
-            ItemsSource="{Binding Packages}"
-            SelectedItem="{Binding CurrentPackage}">
+            ItemsSource="{Binding WrapPackage/Packages}"
+            SelectedIndex="{Binding IndexPackage}"
+            SelectedItem="{Binding CurrentPackage, Mode=TwoWay}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
@@ -320,7 +321,7 @@
                 Width="240"
                 Height="1"
                 Fill="#CDCDCD" />
-            <ItemsControl ItemsSource="{Binding Packages/Datails}">
+            <ItemsControl ItemsSource="{Binding CurrentPackage.Datails}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <WrapPanel>
@@ -342,7 +343,7 @@
                 Width="100"
                 Height="30"
                 Margin="5,10,5,10"
-                Command="{Binding InsertCommand}"
+                Command="{Binding TestCommand}"
                 Content="Установить" />
             <Rectangle Width="240" Height="1" />
         </StackPanel>

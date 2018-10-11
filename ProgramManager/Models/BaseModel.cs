@@ -9,46 +9,43 @@ namespace ProgramManager.Models
     public class BaseModel
     {
         private static ObservableCollection<PackageBase> _packages;
+        private static ObservableCollection<WrapPackages> _tags;
 
         public void AddNewPackage(object sender, ConnectorEventArgs e)
         {
             //_packageAccess.AddPackage(e.Package);
         }
 
-        public static ObservableCollection<PackageBase> GetPackages(CategoryModel category)
+        public static ObservableCollection<WrapPackages> GetPackages(CategoryModel category)
         {
             if (category.Name == "Программы")
             {
-                _packages = new ObservableCollection<PackageBase>(ProgramAccess.GetPackages(category));
-                return _packages;
+                _tags = new ObservableCollection<WrapPackages>(WrapPackages.WrapTagModel(ProgramAccess<ProgramModel>.GetPackages(CategoryModel.Categories[0])));
+                return _tags;
             }
             else if (category.Name == "Драйвера")
             {
-                _packages = new ObservableCollection<PackageBase>(DriverAccess.GetPackages(category));
-                return _packages;
+                _tags = new ObservableCollection<WrapPackages>(WrapPackages.WrapTagModel(ProgramAccess<ProgramModel>.GetPackages(CategoryModel.Categories[1])));
+                return _tags;
             }
             else if (category.Name == "Моды")
             {
-                ModModel mods = new ModModel();
-                _packages = new ObservableCollection<PackageBase>(mods.GetPackages(category));
-                return _packages;
+                _tags = new ObservableCollection<WrapPackages>(WrapPackages.WrapTagModel(ProgramAccess<ProgramModel>.GetPackages(CategoryModel.Categories[2])));
+                return _tags;
             }
             else if (category.Name == "Плагины")
             {
-                PluginModel plugins = new PluginModel();
-                _packages = new ObservableCollection<PackageBase>(plugins.GetPackages(category));
-                return _packages;
+                _tags = new ObservableCollection<WrapPackages>(WrapPackages.WrapTagModel(ProgramAccess<ProgramModel>.GetPackages(CategoryModel.Categories[3])));
+                return _tags;
             }
             else if (category.Name == "Игры")
             {
-                GameModel games = new GameModel();
-                _packages = new ObservableCollection<PackageBase>(games.GetPackages(category));
-                return _packages;
+                _tags = new ObservableCollection<WrapPackages>(WrapPackages.WrapTagModel(ProgramAccess<ProgramModel>.GetPackages(CategoryModel.Categories[4])));
+                return _tags;
             }
             return null;
         }
-
-        public static ObservableCollection<PackageBase> GetPackages()
+        public static ObservableCollection<WrapPackages> GetPackages()
         {
             CategoryModel.Categories = new List<CategoryModel>()
             {
@@ -58,9 +55,9 @@ namespace ProgramManager.Models
                 new CategoryModel() { Name = "Плагины" },
                 new CategoryModel() { Name = "Игры" },
             };
-         
-            _packages = new ObservableCollection<PackageBase>(ProgramAccess.GetPackages(CategoryModel.Categories[0]));
-            return _packages;
+
+            _tags = new ObservableCollection<WrapPackages>(WrapPackages.WrapTagModel(ProgramAccess<ProgramModel>.GetPackages(CategoryModel.Categories[0])));
+            return _tags;
         }
 
     }
