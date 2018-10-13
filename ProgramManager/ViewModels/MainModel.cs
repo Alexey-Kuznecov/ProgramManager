@@ -8,11 +8,11 @@ using ProgramManager.Models.NewModel;
 
 namespace ProgramManager.ViewModels
 {
-    public class NewMainModel : PropertiesChanged
+    public class MainModel : PropertiesChanged
     {
         #region Constructors
 
-        public NewMainModel()
+        public MainModel()
         {
             WrapPackage = BaseModel.GetPackages();
             Categories = CategoryModel.Categories;

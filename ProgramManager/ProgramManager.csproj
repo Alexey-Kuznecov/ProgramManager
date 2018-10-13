@@ -102,7 +102,7 @@
     <Compile Include="Models\PackageAccess.cs" />
     <Compile Include="Models\TextFieldModel.cs" />
     <Compile Include="ViewModels\Base\PropertiesChanged.cs" />
-    <Compile Include="ViewModels\NewMainModel.cs" />
+    <Compile Include="ViewModels\MainModel.cs" />
     <Compile Include="ViewModels\PackagesDialogPartial.cs" />
     <Compile Include="ViewModels\PackagesDialogViewModel.cs" />
     <Compile Include="Models\InfoMessage.cs" />
