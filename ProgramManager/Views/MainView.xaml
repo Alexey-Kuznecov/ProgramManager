@@ -13,7 +13,7 @@
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
     <Window.DataContext>
-        <vm:NewMainModel />
+        <vm:MainModel />
     </Window.DataContext>
 
     <Grid Height="566" VerticalAlignment="Top">
