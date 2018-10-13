@@ -8,44 +8,19 @@ namespace ProgramManager.Models
 {
     public class BaseModel
     {
-        private static ObservableCollection<PackageBase> _packages;
-        private static ObservableCollection<WrapPackages> _tags;
+        private static ObservableCollection<WrapPackage> _wrapperPackages;
 
         public void AddNewPackage(object sender, ConnectorEventArgs e)
         {
             //_packageAccess.AddPackage(e.Package);
         }
-
-        public static ObservableCollection<WrapPackages> GetPackages(CategoryModel category)
+        public static ObservableCollection<WrapPackage> GetPackages(CategoryModel category)
         {
-            if (category.Name == "Программы")
-            {
-                _tags = new ObservableCollection<WrapPackages>(WrapPackages.WrapTagModel(ProgramAccess<ProgramModel>.GetPackages(CategoryModel.Categories[0])));
-                return _tags;
-            }
-            else if (category.Name == "Драйвера")
-            {
-                _tags = new ObservableCollection<WrapPackages>(WrapPackages.WrapTagModel(ProgramAccess<ProgramModel>.GetPackages(CategoryModel.Categories[1])));
-                return _tags;
-            }
-            else if (category.Name == "Моды")
-            {
-                _tags = new ObservableCollection<WrapPackages>(WrapPackages.WrapTagModel(ProgramAccess<ProgramModel>.GetPackages(CategoryModel.Categories[2])));
-                return _tags;
-            }
-            else if (category.Name == "Плагины")
-            {
-                _tags = new ObservableCollection<WrapPackages>(WrapPackages.WrapTagModel(ProgramAccess<ProgramModel>.GetPackages(CategoryModel.Categories[3])));
-                return _tags;
-            }
-            else if (category.Name == "Игры")
-            {
-                _tags = new ObservableCollection<WrapPackages>(WrapPackages.WrapTagModel(ProgramAccess<ProgramModel>.GetPackages(CategoryModel.Categories[4])));
-                return _tags;
-            }
-            return null;
+            _wrapperPackages = new ObservableCollection<WrapPackage>(
+                WrapPackage.WrapPackageTag(ProgramAccess<ProgramModel>.GetPackages(category)));
+            return _wrapperPackages;
         }
-        public static ObservableCollection<WrapPackages> GetPackages()
+        public static ObservableCollection<WrapPackage> GetPackages()
         {
             CategoryModel.Categories = new List<CategoryModel>()
             {
@@ -56,8 +31,9 @@ namespace ProgramManager.Models
                 new CategoryModel() { Name = "Игры" },
             };
 
-            _tags = new ObservableCollection<WrapPackages>(WrapPackages.WrapTagModel(ProgramAccess<ProgramModel>.GetPackages(CategoryModel.Categories[0])));
-            return _tags;
+            _wrapperPackages = new ObservableCollection<WrapPackage>(
+                list: WrapPackage.WrapPackageTag(ProgramAccess<ProgramModel>.GetPackages(CategoryModel.Categories[0])));
+            return _wrapperPackages;
         }
 
     }

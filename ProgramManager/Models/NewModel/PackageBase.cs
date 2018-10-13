@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Linq;
 using ProgramManager.Filters;
@@ -8,7 +9,7 @@ namespace ProgramManager.Models
 {
     public abstract class PackageBase
     {
-        protected const string DOCUMENT_NAME = "packages.xml";
+        protected const string DocumentName = "packages.xml";
 
         public string Name { get; set; }
         public string Author { get; set; }
@@ -20,11 +21,10 @@ namespace ProgramManager.Models
         public string Category { get; set; }
         public string TagOne { get; set; }
         public List<string> TagList { get; set; }
-        public List<WrapPackages> Tag { get; set; }
-        public List<FieldNotIsNull> Datails { get; set; }
+        public List<WrapPackage> Tag { get; set; }
+        public List<PropertyNotIsNull> Datails { get; set; }
 
         public abstract void AddPackage();
-        public abstract List<ProgramModel> GetPackages(CategoryModel category);
         public virtual void UpdatePackage() { }
         public virtual void RemovePackage() { }
     }

@@ -153,5 +153,29 @@
         <Version>2.2</Version>
         <Tag>Меседжеры</Tag>
         <Description>Программа для создания сообществ</Description>
-    </Package>        
+    </Package>
+      <Package Id="20" Category="Игры">
+    <Name>Empire Earth 2</Name>
+    <Author>Mod Doc Software</Author>
+    <Version>2.2</Version>
+    <Tag>Стратегии</Tag>
+    <Description>Игра для настоящих царей</Description>
+    <Image Source="User/Images/19572.jpg" />
+  </Package>
+  <Package Id="24" Category="Моды">
+    <Name>1.000 Times Better 2.3.1</Name>
+    <Author>Logitech</Author>
+    <Version>2.3.1</Version>
+    <Tag>Реворк</Tag>
+    <Description>Качественный мод для 3 Ведьмака, который улучшит качество графики в игре.</Description>
+    <Image Source="User/Images/19572.jpg" />
+  </Package>
+  <Package Id="25" Category="Игры">
+    <Name>Counter Strike GO</Name>
+    <Author>Valve</Author>
+    <Version>2.2</Version>
+    <Tag>Shooter</Tag>
+    <Description>Игра для настоящих ассов</Description>
+    <Image Source="User/Images/19572.jpg" />
+  </Package>
 </Packages>
