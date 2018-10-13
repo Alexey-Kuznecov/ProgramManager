@@ -81,9 +81,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Filters\FilterField.cs" />
+    <Compile Include="Contracts\ISearchable.cs" />
+    <Compile Include="Filters\FilterProperties.cs" />
     <Compile Include="Models\NewModel\CategoryModel.cs" />
-    <Compile Include="Models\NewModel\WrapPackages.cs" />
+    <Compile Include="Models\NewModel\WrapPackage.cs" />
     <Compile Include="Models\NewModel\DriverModel.cs" />
     <Compile Include="Models\NewModel\GameModel.cs" />
     <Compile Include="Models\NewModel\ModModel.cs" />
@@ -96,20 +97,16 @@
     <Compile Include="Enums\TFieldType.cs" />
     <Compile Include="Enums\Keywords.cs" />
     <Compile Include="MarkupExtensions\EnumValues.cs" />
-    <Compile Include="Models\CategoryAccess.cs" />
-    <Compile Include="Models\CategoryModelOb.cs" />
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\DataPanelModel.cs" />
     <Compile Include="Models\PackageAccess.cs" />
     <Compile Include="Models\TextFieldModel.cs" />
     <Compile Include="ViewModels\Base\PropertiesChanged.cs" />
-    <Compile Include="ViewModels\MainViewModelPartial.cs" />
     <Compile Include="ViewModels\NewMainModel.cs" />
     <Compile Include="ViewModels\PackagesDialogPartial.cs" />
     <Compile Include="ViewModels\PackagesDialogViewModel.cs" />
     <Compile Include="Models\InfoMessage.cs" />
     <Compile Include="ViewModels\InputNameViewModelcs.cs" />
-    <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\Base\RelayCommand.cs" />
     <Page Include="Views\PackagesDialog.xaml">
       <SubType>Designer</SubType>
@@ -226,9 +223,7 @@
   <ItemGroup>
     <Resource Include="Resources\Icons\Category_48px_1.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Contracts\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

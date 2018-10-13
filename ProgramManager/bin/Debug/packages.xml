@@ -1,4 +1,7 @@
-﻿<Packages>
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<!DOCTYPE Packages SYSTEM "Packages.dtd"[]>
+<?PackageHandler out-of-print?>
+<Packages>
   <Package Id="0" Category="Программы">
     <Name>Photoshop</Name>
     <Author>Adobe</Author>
@@ -19,7 +22,7 @@
     <Name>Axure</Name>
     <Author>Axure Software Solution</Author>
     <Version>RP 8</Version>
-    <Tag>Инструменты разработчика</Tag>
+    <Tag>Инструменты вебразработчика</Tag>
     <Description>Программа для создания прототипов сайтов</Description>
     <Image Source="User/Images/19572.jpg" />
   </Package>
@@ -99,7 +102,10 @@
     <Name>Sublime Text 3</Name>
     <Author>HQ Pty Ltd</Author>
     <Version>3.1.1 Build 3176</Version>
-    <Tag>Редакторы кода, Инструменты вебразработчика</Tag>
+    <TagList>
+    <Tag>Редакторы кода</Tag>
+    <Tag>Инструменты вебразработчика</Tag>
+    </TagList>
     <Description>Многофункциональный редактор кода</Description>
     <Image Source="User/Images/19572.jpg" />
   </Package>
@@ -168,8 +174,8 @@
     <Image Source="User/Images/19572.jpg" />
   </Package>
   <Package Id="21" Category="Драйвера">
-    <Name>SUMSUNG-4 (High Definition Audio)</Name>
-    <Author>NVIDEO</Author>
+    <Name>High Definition Audio</Name>
+    <Author>Realtek</Author>
     <Version>3.31</Version>
     <Tag>Звуковая карта</Tag>
     <Description></Description>
@@ -204,6 +210,14 @@
     <Author>Valve</Author>
     <Version>2.2</Version>
     <Tag>Shooter</Tag>
+    <Description>Игра для настоящих ассов</Description>
+    <Image Source="User/Images/19572.jpg" />
+  </Package>
+  <Package Id="26" Category="Плагины">
+    <Name>Emmet</Name>
+    <Author>sergeche</Author>
+    <Version>2.2</Version>
+    <Tag>Плагины для Sublime Text</Tag>
     <Description>Игра для настоящих ассов</Description>
     <Image Source="User/Images/19572.jpg" />
   </Package>

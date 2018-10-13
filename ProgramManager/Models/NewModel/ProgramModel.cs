@@ -15,7 +15,7 @@ namespace ProgramManager.Models
 
         public override void AddPackage()
         {
-            XDocument xDoc = XDocument.Load(DOCUMENT_NAME);
+            XDocument xDoc = XDocument.Load(DocumentName);
             xDoc.Element("Packages")
                 ?.Add(new XElement("Package", 
                     new XAttribute("Id", Category),
@@ -29,20 +29,16 @@ namespace ProgramManager.Models
                     new XElement("HashSumm", HashSumm ?? ""),
                     new XElement("Description", Description ?? ""),
                     new XElement("Image", new XAttribute("Source", Image ?? ""))));
-            xDoc.Save(DOCUMENT_NAME);
-        }
-        public override List<ProgramModel> GetPackages(CategoryModel category)
-        {
-            throw new NotImplementedException();
+            xDoc.Save(DocumentName);
         }
     }
     public class ProgramAccess<T> where T : PackageBase, new()
     {
-        private const string DocumentName = "ProgramPackages.xml";
+        private const string DocumentName = "packages.xml";
 
         public static List<T> GetPackages(CategoryModel category)
         {
-            FilterField<T> propNotIsEmpty = new FilterField<T>();
+            FilterProperties<T> propNotIsEmpty = new FilterProperties<T>();
             List<T> packages = new List<T>();
             XElement root = XElement.Load(DocumentName);
             int index = 0;

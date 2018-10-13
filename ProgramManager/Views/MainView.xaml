@@ -239,7 +239,7 @@
                             Height="30"
                             Padding="5,8"
                             Text="{Binding Name}" />
-                        <Label Content="{Binding Packages.Count, Mode=OneWay}" />
+                        <Label Content="{Binding Packages.Count}" />
                     </WrapPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
@@ -259,7 +259,7 @@
                 <TextBox
                     Grid.Column="1"
                     Tag="Искать..."
-                    Text="" />
+                    Text="{Binding FilterText, UpdateSourceTrigger=PropertyChanged}" />
                 <Button
                     Grid.Column="2"
                     Margin="4"
