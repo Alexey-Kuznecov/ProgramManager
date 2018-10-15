@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 
@@ -12,12 +12,12 @@ namespace ProgramManager.Filters
     public class FilterProperties<T>
     {
         /// <summary>
-        /// Метод призван отсеиваеть свойства которые равняеются null и не явлеются строковым типом,
-        /// основное предназначения метода это вывод информации в UI свойств содеражащих значенеие,
-        /// где Name это имя свойства и где Value значение этого свойтва.
+        /// Метод призван отсеивать свойства которые равняется null и не являются строковым типом,
+        /// основное предназначение метода это вывод информации в UI свойств содержащих значение,
+        /// где Name это имя свойства и где Value значение этого свойства.
         /// </summary>
-        /// <param name="obj">Принимет объект в котором необходимо осуществить фильтрацию.</param>
-        /// <returns>Объект с полями которые содержать значения</returns>
+        /// <param name="obj">Принимает объект в котором необходимо осуществить фильтрацию.</param>
+        /// <returns>Объект с полями которые содержат значения</returns>
         public List<PropertyNotIsNull> Filter(T obj)
         {
             List<PropertyNotIsNull> field = new List<PropertyNotIsNull>();
