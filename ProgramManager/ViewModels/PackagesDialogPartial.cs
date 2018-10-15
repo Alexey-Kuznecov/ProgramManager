@@ -1,61 +1,44 @@
-﻿using System.Reflection;
-using ProgramManager.Enums;
+﻿using System.Linq;
+using System.Windows;
 using ProgramManager.Models;
+using ProgramManager.Converters;
 
 namespace ProgramManager.ViewModels
 {
     partial class PackagesDialogViewModel
     {
-        private void SavingPackage()
+        private static void AddTextField(string type)
         {
-            /** Метод формирует новый объект на основе данных введенных пользователем в соответстующие поля ввода
-            /*  Метод денамический получает имена свойств объекта PackageModel для его сровнения со значением
-            /*  свойства TextFieldModel.Type (это перечисление содержит типы полей, наример: Author).*/
-            PackageModel newPack = new PackageModel
-            {
-                Description = Description,
-                Name = PackageName
-            };
-            PropertyInfo[] properties = newPack.GetType().GetProperties();
+            var query = TextField.SingleOrDefault(s => s.Types == type);
 
-            for (int i = 0; i < TextField.Count; i++)
+            if (query == null)
             {
-                foreach (PropertyInfo property in properties)
+                TextField.Add(new TextFieldModel()
                 {
-                    // Сравнивает значение с именем свойства
-                    // TextField.Type <— Author == PackageModel.Author
-                    if (TextField[i].Type.ToString() == property.Name)
-                    {
-                        property.SetValue(newPack, TextField[i].FieldValue);
-                        break;
-                    }
-                }
+                    Types = type,
+                    AutoCompleteIcon = AutocompleteIcon,
+                    DeleteTextFieldIcon = DeleteIcon,
+                });
             }
-            BaseConnector connector = new BaseConnector();
-            connector.OnPackageChanged(newPack);
-            PackagesDialogVisibility.ClosePackageDialog();
+            else _windowInputName.ShowDialog();
         }
-        private static void AddTextField(string name, TFieldType type)
+        private void InputCustomName(string fieldName)
         {
-            TextField.Add(new TextFieldModel()
+            if (fieldName != null)
             {
-                Label = name + ":",
-                Hint = name + "...",
-                Type = type,
-                AutoCompleteIcon = AUTOCOMPLETE_ICON,
-                DeleteTextFieldIcon = DELETE_ICON,
-            });
-        }
-        private void InputCustomName(string name)
-        {
-            TextField.Add(new TextFieldModel()
-            {
-                Label = name + ":",
-                Hint = name + "...",
-                AutoCompleteIcon = AUTOCOMPLETE_ICON,
-                DeleteTextFieldIcon = DELETE_ICON,
-            });
-            _windowInputName.Close();
+                var formatKey = "UserField" + (TextField.Count + 1);
+
+                FieldConverter.Descriptions.Add(formatKey, fieldName);
+
+                TextField.Add(new TextFieldModel()
+                {
+                    FieldValue = fieldName,
+                    Types = formatKey,
+                    AutoCompleteIcon = AutocompleteIcon,
+                    DeleteTextFieldIcon = DeleteIcon,
+                });
+                _windowInputName.Visibility = Visibility.Hidden;
+            }
         }
     }
 }

@@ -66,7 +66,7 @@
                 Height="35"
                 Margin="10,10,10,10"
                 Tag="Имя пакета..."
-                Text="{Binding PackageName}" />
+                Text="{Binding PackageTitle}" />
             <Image
                 Grid.Row="2"
                 Grid.Column="1"
@@ -79,7 +79,7 @@
                 <Button
                     Height="28"
                     Margin="5,0,0,0"
-                    Command="{Binding SavingPack}"
+                    Command="{Binding SavePackage}"
                     Style="{StaticResource btIcon}">
                     <ContentControl>
                         <WrapPanel>

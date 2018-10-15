@@ -13,7 +13,7 @@
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
     <Window.DataContext>
-        <vm:MainModel />
+        <vm:MainViewModel />
     </Window.DataContext>
 
     <Grid Height="566" VerticalAlignment="Top">
@@ -101,6 +101,7 @@
             <Button
                 Height="30"
                 Margin="5,0,0,0"
+                Command="{Binding Exit}"
                 Style="{StaticResource btIcon}">
                 <Button.Content>
                     <ContentControl>
@@ -114,7 +115,10 @@
                     </ContentControl>
                 </Button.Content>
             </Button>
-            <Button Height="30" Style="{StaticResource btIcon}">
+            <Button
+                Height="30"
+                Command="{Binding OpenDialogPackage}"
+                Style="{StaticResource btIcon}">
                 <Button.Content>
                     <ContentControl>
                         <WrapPanel>

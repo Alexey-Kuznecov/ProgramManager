@@ -3,10 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Windows.Data;
+using ProgramManager.MarkupExtensions;
 
 namespace ProgramManager.Converters
 {
-    public class KeywordToTextConverter : IValueConverter
+    public class KeywordToTextConverter : ConvertorBase<KeywordToTextConverter>
     {
         private static readonly IDictionary<Keywords, string> Descriptions = new Dictionary<Keywords, string>
         {
@@ -15,7 +16,7 @@ namespace ProgramManager.Converters
             { Keywords.Found, "Найденные" },
         };
 
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (!(value is Keywords))
                 return null;
@@ -25,7 +26,7 @@ namespace ProgramManager.Converters
             return Descriptions[keyword];
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public override object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             throw new NotSupportedException();
         }

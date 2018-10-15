@@ -9,6 +9,7 @@ namespace ProgramManager.ViewModels
         private readonly Action _command;
         private readonly Action<object> _execute;
         private readonly Predicate<object> _canExecute;
+        private Action<object> p;
 
         public event EventHandler CanExecuteChanged;
 

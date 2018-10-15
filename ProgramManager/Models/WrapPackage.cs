@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
-namespace ProgramManager.Models.NewModel
+using ProgramManager.Models.PackageDerives;
+
+namespace ProgramManager.Models
 {
     /// <summary>
     /// Класс оболочка, содержит методы для упаковки пакетов. Основная идея создания оболочки для представления,

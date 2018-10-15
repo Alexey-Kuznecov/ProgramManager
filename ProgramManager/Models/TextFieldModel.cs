@@ -9,7 +9,6 @@ namespace ProgramManager.Models
         public string AutoCompleteIcon { get; set; }
         public string DeleteTextFieldIcon { get; set; }
         public string FieldValue { get; set; }
-        public string Name { get; set; }
-        public TFieldType Type { get; set; }
+        public string Types { get; set; }
     }
 }

@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Xml.Linq;
-using ProgramManager.Filters;
 
-namespace ProgramManager.Models.NewModel
+namespace ProgramManager.Models.PackageDerives
 {
     public class DriverModel : PackageBase
     {

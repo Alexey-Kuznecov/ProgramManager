@@ -4,6 +4,8 @@ using ProgramManager.Models;
 using System.Windows.Input;
 using ProgramManager.Views.DialogPacks;
 using System.Collections.ObjectModel;
+using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 using GalaSoft.MvvmLight.Messaging;
 using ProgramManager.Enums;
@@ -12,50 +14,67 @@ namespace ProgramManager.ViewModels
 {
     public partial class PackagesDialogViewModel : PropertiesChanged
     {
+        private const string AutocompleteIcon = "../../Resources/Icons/Businessman_48px.png";
+        private const string DeleteIcon = "../../Resources/Icons/Delete_48px.png";
+        private static InputName _windowInputName;
+
         public PackagesDialogViewModel()
         {
             _windowInputName = new InputName();
             RemoveTextField = new RelayCommand(obj => TextField.Remove(obj as TextFieldModel));
-            SavingPack = new RelayCommand(obj => SavingPackage());
+            SavePackage = new RelayCommand(obj => SendPackage());
             Messenger.Default.Register<InfoMessage>(this, action => InputCustomName(action.Name));
         }
-        private const string AUTOCOMPLETE_ICON = "../../Resources/Icons/Businessman_48px.png";
-        private const string DELETE_ICON = "../../Resources/Icons/Delete_48px.png";
-        private InputName _windowInputName;
+        /// <summary>
+        /// Создание контекстного меню вкладки поля.
+        /// </summary>
         public List<MenuItem> MenuItem { get; set; } = new List<MenuItem>()
         {
-            new MenuItem { Command = MenuCommand, CommandParameter = new ArrayList { TFieldType.Author, "Автор", }, Header = "Автор", },
-            new MenuItem { Command = MenuCommand, CommandParameter = new ArrayList { TFieldType.Version, "Версия", }, Header = "Версия", },
-            new MenuItem { Command = MenuCommand, CommandParameter = new ArrayList { TFieldType.License, "Лицензия", }, Header = "Лицензия", },
-            new MenuItem { Command = MenuCommand, CommandParameter = new ArrayList { TFieldType.Copyright, "Авторские права", }, Header = "Авторские права", },
-            new MenuItem { Command = MenuCommand, CommandParameter = new ArrayList { TFieldType.CompanySite, "Официальный сайт", }, Header = "Официальный сайт", },
-            new MenuItem { Command = MenuCommand, CommandParameter = new ArrayList { TFieldType.SerialKey, "Лицензионный ключ", }, Header = "Лицензионный ключ", },
-            new MenuItem { Command = MenuCommand, CommandParameter = new ArrayList { TFieldType.Source, "Источник", }, Header = "Источник", },
-            new MenuItem { Command = MenuCommand, CommandParameter = new ArrayList { TFieldType.HashSumm, "Хеш-суммы", }, Header = "Хеш-суммы", },
-            new MenuItem { Command = MenuCommand, CommandParameter = new ArrayList { TFieldType.Other, "Другое", }, Header = "Другое", }
-    };
+            new MenuItem { Command = MenuCommand, CommandParameter = "Author", Header = "Автор", },
+            new MenuItem { Command = MenuCommand, CommandParameter = "Version", Header = "Версия", },
+            new MenuItem { Command = MenuCommand, CommandParameter = "License", Header = "Лицензия", },
+            new MenuItem { Command = MenuCommand, CommandParameter = "Copyright", Header = "Авторские права", },
+            new MenuItem { Command = MenuCommand, CommandParameter = "CompanySite", Header = "Официальный сайт", },
+            new MenuItem { Command = MenuCommand, CommandParameter = "SerialKey", Header = "Лицензионный ключ", },
+            new MenuItem { Command = MenuCommand, CommandParameter = "Source", Header = "Источник", },
+            new MenuItem { Command = MenuCommand, CommandParameter = "HashSumm", Header = "Хеш-суммы", },
+            new MenuItem { Command = MenuCommand, CommandParameter = "Other", Header = "Другое", }
+        };
         public static ObservableCollection<TextFieldModel> TextField { get; } = new ObservableCollection<TextFieldModel>()
         {
-            new TextFieldModel { Label = "Автор: ", Hint = "Имя...", Type = TFieldType.Author, AutoCompleteIcon = AUTOCOMPLETE_ICON, DeleteTextFieldIcon = DELETE_ICON},
-            new TextFieldModel { Label = "Версия", Hint = "Версия...", Type = TFieldType.Version, AutoCompleteIcon = AUTOCOMPLETE_ICON, DeleteTextFieldIcon = DELETE_ICON}
+            new TextFieldModel { Types = "Author", AutoCompleteIcon = AutocompleteIcon, DeleteTextFieldIcon = DeleteIcon},
+            new TextFieldModel { Types = "Version", AutoCompleteIcon = AutocompleteIcon, DeleteTextFieldIcon = DeleteIcon}
         };
         public string Description { get; set; }
-        public string PackageName { get; set; }
+        public string PackageTitle { get; set; }
         public ICommand RemoveTextField { get; }
-        public ICommand SavingPack { get; }
-        public ICommand OpenInputName => new RelayCommand(obj =>
+        public ICommand SavePackage { get; }
+        public ICommand OpenInputName => new RelayCommand(obj => { _windowInputName.ShowDialog(); });
+        /// <summary>
+        /// Контекстное меню, команды для юоваления полей.
+        /// </summary>
+        public static ICommand MenuCommand => new RelayCommand(type =>
         {
-            _windowInputName.ShowDialog();
+            if (type != null)
+                AddTextField((string)type);
         });
-        public static ICommand MenuCommand => new RelayCommand(array =>
+        /// <summary>
+        /// Отпровляет данные для их добавления в базу данных.
+        /// </summary>
+        public void SendPackage()
         {
-            ArrayList item = array as ArrayList;
-            if (item != null)
+            TextField.Add(new TextFieldModel { Types = "Title", FieldValue = PackageTitle });
+
+            var anonymous = TextField.Select(field => new
             {
-                TFieldType type = (TFieldType)item[0];
-                AddTextField(item[1].ToString(), type);
-            }
-        });
+                name = field.Types,
+                value = field.FieldValue,
+            }).ToList();
+
+            BaseConnector connector = new BaseConnector();
+            connector.OnPackageChanged(anonymous);
+            PackagesDialogVisibility.ClosePackageDialog();
+        }
     }
     
 }

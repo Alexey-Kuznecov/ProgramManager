@@ -2,17 +2,19 @@
 using ProgramManager.Models;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading;
 using System.Windows.Forms;
 using System.Windows.Input;
-using ProgramManager.Models.NewModel;
+using System.Windows.Threading;
+using ProgramManager.Models.PackageDerives;
 
 namespace ProgramManager.ViewModels
 {
-    public class MainModel : PropertiesChanged
+    public class MainViewModel : PropertiesChanged
     {
         #region Constructors
 
-        public MainModel()
+        public MainViewModel()
         {
             WrapPackage = BaseModel.GetPackages();
             Categories = CategoryModel.Categories;
@@ -22,6 +24,7 @@ namespace ProgramManager.ViewModels
 
         #region Fields
 
+        private Dispatcher dispatcher = Dispatcher.CurrentDispatcher;
         private PackageBase _currentPackage;
         private CategoryModel _currentCategory;
         private List<CategoryModel> _categories;
@@ -50,6 +53,29 @@ namespace ProgramManager.ViewModels
                 SetProperty(ref _categories, value, () => Categories);
             }
         }
+        public CategoryModel CurrentCategory
+        {
+            get { return _currentCategory; }
+            set
+            {
+                SetProperty(ref _currentCategory, value, () => _currentCategory);
+                // Запрос на изсенения категории пакетов
+                if (_currentCategory != null && WrapPackage != null)
+                    WrapPackage = BaseModel.GetPackages(_currentCategory);
+                // Выбор первого пакета в списке после изменения категории
+                if (_indexPackage < 0)
+                    CurrentPackage = _wrapPackage[0].Packages[0];
+                _filterText = null;
+            }
+        }
+        public PackageBase CurrentPackage
+        {
+            get { return _currentPackage; }
+            set
+            {
+                SetProperty(ref _currentPackage, value, () => CurrentPackage);
+            }
+        }
         public int IndexPackage
         {
             set
@@ -70,29 +96,6 @@ namespace ProgramManager.ViewModels
                     CurrentPackage = _wrapPackage[_indexTag].Packages[0];
             }
         }
-        public PackageBase CurrentPackage
-        {
-            get { return _currentPackage; }
-            set
-            {
-                SetProperty(ref _currentPackage, value, () => CurrentPackage);
-            }
-        }
-        public CategoryModel CurrentCategory
-        {
-            get { return _currentCategory; }
-            set
-            {
-                SetProperty(ref _currentCategory, value, () => _currentCategory);
-                // Запрос на изсенения категории пакетов
-                if (_currentCategory != null && WrapPackage != null)
-                    WrapPackage = BaseModel.GetPackages(_currentCategory);
-                // Выбор первого пакета в списке после изменения категории
-                if (_indexPackage < 0)
-                    CurrentPackage = _wrapPackage[0].Packages[0];
-                _filterText = null;
-            }
-        }
         public string FilterText
         {
             get { return _filterText; }
@@ -105,7 +108,7 @@ namespace ProgramManager.ViewModels
                 {
                     List<PackageBase> result = new List<PackageBase>();
 
-                    WrapPackage[_indexTag].Packages = Models.NewModel.WrapPackage.AllPackages;
+                    WrapPackage[_indexTag].Packages = Models.WrapPackage.AllPackages;
 
                     var filters = from pack in _wrapPackage[_indexTag]
                                   where pack.Name.ToLower().Contains(_filterText.ToLower())
@@ -115,20 +118,27 @@ namespace ProgramManager.ViewModels
                     // Добавления результатов фильтрации и обновления списка
                     WrapPackage[_indexTag].Packages = result;
                 }
-                else {
+                else
+                {
                     List<PackageBase> reset = new List<PackageBase>();
                     string tag =  WrapPackage.ElementAt(_indexTag).Name;
+
                     var query = from pack in WrapPackage[0].Packages
                         where pack?.TagOne == tag || pack.TagList.Contains(tag)
                         select pack;
 
                     // Возврат к предыдущему состоянию списка и выбор первого элемента списка
                     foreach (var packageBase in query) reset.Add(packageBase);
+                    
                     // Сброс фильтрации:
-                    WrapPackage[_indexTag].Packages = tag == "Все теги" ? Models.NewModel.WrapPackage.AllPackages : reset;
+                    WrapPackage[_indexTag].Packages = tag == "Все теги" ? Models.WrapPackage.AllPackages : reset;
                 }
+
                 if (_wrapPackage[_indexTag].Packages.Count > 0)
+                {
                     CurrentPackage = _wrapPackage[_indexTag]?.Packages[0];
+                }
+                   
                 OnPropertyChanged("WrapPackage");
             }
         }
@@ -142,10 +152,14 @@ namespace ProgramManager.ViewModels
         });
         public ICommand TestCommand => new RelayCommand(obj =>
         {
-            MessageBox.Show(CurrentPackage.GetHashCode().ToString());
+            MessageBox.Show(CurrentPackage.GetType().ToString());
+        });
+        public ICommand Exit => new RelayCommand(obj =>
+        {
+            dispatcher.InvokeShutdown();
         });
 
         #endregion
-        
+
     }
 }
