@@ -9,10 +9,10 @@ namespace ProgramManager.ViewModels
 {
     public class ConnectorEventArgs : EventArgs
     {
-        public ConnectorEventArgs(PackageModel package)
+        public ConnectorEventArgs(object package)
         {
             Package = package;
         }
-        public PackageModel Package { get; private set; }
+        public object Package { get; private set; }
     }
 }

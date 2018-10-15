@@ -1,25 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.IO;
+using System.Threading;
 using System.Windows;
+using System.Windows.Threading;
 using ProgramManager.Views;
 
 namespace ProgramManager.ViewModels
 {
-    public static class PackagesDialogVisibility
+    public class PackagesDialogVisibility
     {
-        public static readonly PackagesDialog PackagesDialog = new PackagesDialog();
+        private static PackagesDialog _packagesDialog = new PackagesDialog();
 
         public static void OpenPackageDialog()
         {
-            PackagesDialog.Visibility = Visibility.Visible;
-            PackagesDialog.ShowDialog();
+            lock (_packagesDialog)
+            {
+                _packagesDialog = new PackagesDialog();
+                _packagesDialog.ShowDialog();
+            }        
         }
         public static void ClosePackageDialog()
         {
-            PackagesDialog.Visibility = Visibility.Hidden;
+            lock (_packagesDialog)
+            {
+                _packagesDialog.Close();
+            }           
         }
     }
 }

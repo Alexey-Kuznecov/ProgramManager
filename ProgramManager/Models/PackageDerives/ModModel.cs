@@ -1,12 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
-using ProgramManager.Models.NewModel;
 
-namespace ProgramManager.Models
+namespace ProgramManager.Models.PackageDerives
 {
     public class ModModel : PackageBase
     {

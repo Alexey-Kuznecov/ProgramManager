@@ -1,6 +1,5 @@
 ﻿using System;
 using ProgramManager.Models;
-using ProgramManager.ViewModels;
 
 namespace ProgramManager.ViewModels
 {
@@ -11,7 +10,7 @@ namespace ProgramManager.ViewModels
             BaseModel model = new BaseModel();
             PackageChanged += model.AddNewPackage;
         }
-        public void OnPackageChanged(PackageModel package)
+        public void OnPackageChanged(object package)
         {
             PackageChanged?.Invoke(this, new ConnectorEventArgs(package));
         }

@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Xml.Linq;
+﻿using System.Collections.Generic;
 using ProgramManager.Filters;
-using ProgramManager.Models.NewModel;
 
-namespace ProgramManager.Models
+namespace ProgramManager.Models.PackageDerives
 {
     public abstract class PackageBase
     {
         protected const string DocumentName = "packages.xml";
-
         public string Name { get; set; }
         public string Author { get; set; }
         public string Version { get; set; }

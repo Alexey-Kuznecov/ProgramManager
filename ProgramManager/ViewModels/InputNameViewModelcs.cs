@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Messaging;
+using ProgramManager.Enums;
 
 namespace ProgramManager.ViewModels
 {

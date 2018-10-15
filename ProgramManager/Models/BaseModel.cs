@@ -1,7 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using ProgramManager.Filters;
-using ProgramManager.Models.NewModel;
+﻿using System.Collections.ObjectModel;
+using ProgramManager.Models.PackageDerives;
 using ProgramManager.ViewModels;
 
 namespace ProgramManager.Models
@@ -12,27 +10,41 @@ namespace ProgramManager.Models
 
         public void AddNewPackage(object sender, ConnectorEventArgs e)
         {
-            //_packageAccess.AddPackage(e.Package);
+            PackageMutator.AddPackage(e.Package);
         }
         public static ObservableCollection<WrapPackage> GetPackages(CategoryModel category)
         {
-            _wrapperPackages = new ObservableCollection<WrapPackage>(
-                WrapPackage.WrapPackageTag(ProgramAccess<ProgramModel>.GetPackages(category)));
+            if (category.PackageType is ProgramModel)
+            {
+                _wrapperPackages = new ObservableCollection<WrapPackage>(
+                    WrapPackage.WrapPackageTag(PackageAccess<ProgramModel>.GetPackages(category)));              
+            }
+            if (category.PackageType is DriverModel)
+            {
+                _wrapperPackages = new ObservableCollection<WrapPackage>(
+                    WrapPackage.WrapPackageTag(PackageAccess<DriverModel>.GetPackages(category)));
+            }
+            if (category.PackageType is ModModel)
+            {
+                _wrapperPackages = new ObservableCollection<WrapPackage>(
+                    WrapPackage.WrapPackageTag(PackageAccess<ModModel>.GetPackages(category)));
+            }
+            if (category.PackageType is GameModel)
+            {
+                _wrapperPackages = new ObservableCollection<WrapPackage>(
+                    WrapPackage.WrapPackageTag(PackageAccess<GameModel>.GetPackages(category)));
+            }
+            if (category.PackageType is PluginModel)
+            {
+                _wrapperPackages = new ObservableCollection<WrapPackage>(
+                    WrapPackage.WrapPackageTag(PackageAccess<PluginModel>.GetPackages(category)));
+            }
             return _wrapperPackages;
         }
         public static ObservableCollection<WrapPackage> GetPackages()
         {
-            CategoryModel.Categories = new List<CategoryModel>()
-            {
-                new CategoryModel() { Name = "Программы" },
-                new CategoryModel() { Name = "Драйвера" },
-                new CategoryModel() { Name = "Моды" },
-                new CategoryModel() { Name = "Плагины" },
-                new CategoryModel() { Name = "Игры" },
-            };
-
             _wrapperPackages = new ObservableCollection<WrapPackage>(
-                list: WrapPackage.WrapPackageTag(ProgramAccess<ProgramModel>.GetPackages(CategoryModel.Categories[0])));
+                list: WrapPackage.WrapPackageTag(PackageAccess<ProgramModel>.GetPackages(CategoryModel.Categories[0])));
             return _wrapperPackages;
         }
 
