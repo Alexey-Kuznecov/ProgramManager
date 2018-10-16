@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using ProgramManager.Models.PackageDerives;
+using ProgramManager.Models.PackageModels;
 
 namespace ProgramManager.Models
 {

@@ -5,7 +5,9 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Xml.Linq;
+using ProgramManager.Converters;
 using ProgramManager.Enums;
+using ProgramManager.Models.PackageModels;
 
 namespace ProgramManager.Models
 {
@@ -38,70 +40,64 @@ namespace ProgramManager.Models
         /// работает в паре с ConvertToDictionary который позволеят исключить элементы с пустыми значениями
         /// </summary>
         /// <param name="data">Объект данных</param>
-        public static void AddPackage(object data)
+        /// <param name="category">Категория в контексте которой будет создан пакет.</param>
+        public static void AddPackage(object data, string category)
         {      
             // Получает индекс последнего элемента в xml документе
-            int id = GetIdLastElement();
-            // Метод (ConvertToDictionary) исключает поля с пустыми значениями
+            int id = BaseXml.GetIdLastElement();
+            // Метод (ConvertToDictionary) формирует данные в соответствии словаря
             Dictionary<string, string> dictionary = ConvertToDictionary(data);
-
             XDocument xDoc = XDocument.Load(DocumentName);
-
-            XElement package = new XElement(new XElement("Package", new XAttribute("Id", ++id)));
+            // Имя поля пользователя
+            string fieldName = FieldTypes.Userfield.ToString();
+        
+            XElement package = new XElement(new XElement("Package", new XAttribute("Id", ++id), new XAttribute("Category", category)));
+            XElement userfield = new XElement(fieldName);
 
             foreach (var item in dictionary)
             {
+                if (item.Key.Contains(fieldName))
+                {
+                    userfield.Add(new XElement(item.Key, new XAttribute("Name", FieldConverter.Dictionary.Single(p => p.Key == item.Key).Value), item.Value)); continue;
+                }
                 package.Add(new XElement(item.Key, item.Value));
             }
-            xDoc.Element("Packages")?.Add(package);
+            package.Add(userfield);
+            xDoc.Element("Packages")?.Add(package);           
             xDoc.Save(DocumentName);
         }
         /// <summary>
-        /// Метод выполненяет фильтрацию объекта, выберает только те поля котрорые содержат данные, иные не ввойдут в выборку.
-        /// Затем создает словарь для удобного добавления элемента и его значения в xml документ.
+        /// Метод создает словарь для удобного добавления элемента и его значения в xml документ.
         /// </summary>
-        /// <param name="data">Объект данных для выборки</param>
-        /// <returns>Коллекцию словарей <TKey>PropertyName</TKey><TValue>PropertyValue</TValue></returns>
+        /// <param name="data">Объект данных, должен содержать коллекцию объектов, где первое свойство
+        /// будет играть роль ключа — а второе значения.</param>
+        /// <returns>Коллекцию словарей <TKey>FirstProperty</TKey><TValue>SecondProperty</TValue></returns>
         public static Dictionary<string, string> ConvertToDictionary(object data)
         {
             Dictionary<string, string> dictionary = new Dictionary<string, string>();
 
             var anomymous = (IEnumerable)data;
 
-            if (anomymous != null)
+            foreach (var items in anomymous)
             {
-                foreach (var items in anomymous)
+                PropertyInfo[] properties = items.GetType().GetProperties();
+
+                string key = null;
+
+                foreach (var property in properties)
                 {
-                    PropertyInfo[] properties = items.GetType().GetProperties();
+                    var value = property.GetValue(items);
 
-                    var key = TFieldTypes.Other;
-
-                    foreach (var property in properties)
+                    if (properties[0].Name == property.Name)
                     {
-                        var value = property.GetValue(items);
-
-                        if (key == TFieldTypes.Other)
-                        {
-                            
-                        }
-                        if (value is TFieldTypes)
-                        {
-                            key = (TFieldTypes)value; continue;
-                        }
-                        if (value == null) continue;
-
-                        dictionary.Add(key.ToString(), value.ToString()); break;
+                        key = value.ToString(); continue;
                     }
+                    if (value == null || key == null) continue;
+
+                    dictionary.Add(key, value.ToString()); break;
                 }
             }
             return dictionary;
-        }
-        public static Dictionary<string, string> PackageFilter2(object data)
-        {
-            var anomymous = (IEnumerable)data;
-
-            
-            return null;
         }
         /// <summary>
         /// Обновляет данные по индексу и сохраняет документ 
@@ -109,7 +105,7 @@ namespace ProgramManager.Models
         /// <remarks>Возможна переработка метода так как является не автоматизированным и требует ручнго расширения</remarks>
         /// <param name="id">Индекс пакета который требуется изменить.</param>
         /// <param name="data">Коллекция объектов данных</param>
-        public static void UpdatePackage(int id, PackageModel data)
+        public static void UpdatePackage(int id, PackageBase data)
         {
             XElement root = XElement.Load(DocumentName),
                      el = root.Elements("Package").ElementAt(id);
@@ -117,47 +113,12 @@ namespace ProgramManager.Models
             el.SetElementValue("Name", data.Name);
             el.SetElementValue("Author", data.Author);
             el.SetElementValue("Category", data.Category);
-            el.SetElementValue("Tag", data.TagName);
+            el.SetElementValue("Tag", data.TagOne);
             el.SetElementValue("Version", data.Version);
             el.SetElementValue("Description", data.Description);
             el.Element("Image")?.SetAttributeValue("Source", data.Image);
 
             root.Save(DocumentName);
-        }
-        /// <summary>
-        /// Удаляет полностью весь узел(package) по индексу и сохраняет документ 
-        /// </summary>
-        /// <param name="id">Индекс пакета который требуется удалить.</param>
-        public static void RemovePackage(int id)
-        {
-            XDocument xDoc = XDocument.Load(DocumentName);
-            xDoc.Root?.Nodes().ElementAt(id).Remove();
-            xDoc.Save(DocumentName);
-        }
-        /// <summary>
-        /// Находит последний элемент корневого узла "Packages" — парсит строку, 
-        /// затем извлекает значение атрибута id элемента "Package".
-        /// </summary>
-        /// <returns>Возращает индекс последного элемента(пакета)</returns>
-        private static int GetIdLastElement()
-        {
-            XDocument xDoc = XDocument.Load(DocumentName);
-            int id = 0;
-
-            try
-            {
-                if (xDoc.Root != null)
-                {
-                    string str = xDoc.Root.LastNode.ToString();
-                    XDocument node = XDocument.Parse(str);
-                    if (node.Root != null) id = Convert.ToInt32(node.Root.Attribute("Id")?.Value);
-                }
-            }
-            catch (NullReferenceException)
-            {
-                return -1;
-            }
-            return id;
         }
     }
 }

@@ -10,6 +10,5 @@ namespace ProgramManager.ViewModels
     {
         public string Name { get; set; }
         public object Obj { get; set; }
-        public object Type { get; set; }
     }
 }

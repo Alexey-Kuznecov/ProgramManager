@@ -1,14 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using ProgramManager.Models;
 using System.Windows.Input;
 using ProgramManager.Views.DialogPacks;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Windows;
 using System.Windows.Controls;
 using GalaSoft.MvvmLight.Messaging;
-using ProgramManager.Enums;
 
 namespace ProgramManager.ViewModels
 {
@@ -17,14 +13,25 @@ namespace ProgramManager.ViewModels
         private const string AutocompleteIcon = "../../Resources/Icons/Businessman_48px.png";
         private const string DeleteIcon = "../../Resources/Icons/Delete_48px.png";
         private static InputName _windowInputName;
+        private static TagDialog _windowTagModify;
+
+        #region Constructor
 
         public PackagesDialogViewModel()
         {
             _windowInputName = new InputName();
+            _windowTagModify = new TagDialog();
+
             RemoveTextField = new RelayCommand(obj => TextField.Remove(obj as TextFieldModel));
             SavePackage = new RelayCommand(obj => SendPackage());
             Messenger.Default.Register<InfoMessage>(this, action => InputCustomName(action.Name));
         }
+
+        #endregion
+
+
+        #region Properties
+
         /// <summary>
         /// Создание контекстного меню вкладки поля.
         /// </summary>
@@ -47,34 +54,26 @@ namespace ProgramManager.ViewModels
         };
         public string Description { get; set; }
         public string PackageTitle { get; set; }
+
+        #endregion
+
+        #region Commands
+
         public ICommand RemoveTextField { get; }
         public ICommand SavePackage { get; }
         public ICommand OpenInputName => new RelayCommand(obj => { _windowInputName.ShowDialog(); });
+        public ICommand OpenTagDialog => new RelayCommand(obj => { _windowTagModify.ShowDialog(); });
         /// <summary>
-        /// Контекстное меню, команды для юоваления полей.
+        /// Контекстное меню, команды для добавления полей.
         /// </summary>
         public static ICommand MenuCommand => new RelayCommand(type =>
         {
             if (type != null)
                 AddTextField((string)type);
         });
-        /// <summary>
-        /// Отпровляет данные для их добавления в базу данных.
-        /// </summary>
-        public void SendPackage()
-        {
-            TextField.Add(new TextFieldModel { Types = "Title", FieldValue = PackageTitle });
 
-            var anonymous = TextField.Select(field => new
-            {
-                name = field.Types,
-                value = field.FieldValue,
-            }).ToList();
+        #endregion
 
-            BaseConnector connector = new BaseConnector();
-            connector.OnPackageChanged(anonymous);
-            PackagesDialogVisibility.ClosePackageDialog();
-        }
     }
     
 }

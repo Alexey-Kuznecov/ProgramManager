@@ -1,23 +1,30 @@
 ﻿using System.Collections.ObjectModel;
-using ProgramManager.Models.PackageDerives;
-using ProgramManager.ViewModels;
+using ProgramManager.Models;
+using ProgramManager.Models.PackageModels;
 
-namespace ProgramManager.Models
+namespace ProgramManager.ViewModels.Base
 {
-    public class BaseModel
+    public class BaseManager
     {
         private static ObservableCollection<WrapPackage> _wrapperPackages;
-
+        private static string _categoryStatus;
+        public BaseManager()
+        {
+            BaseConnector.PackageChanged += AddNewPackage;
+            BaseConnector.TagListUpdate += TagDialogViewModel.DisplayTagList;
+        }
         public void AddNewPackage(object sender, ConnectorEventArgs e)
         {
-            PackageMutator.AddPackage(e.Package);
+            PackageMutator.AddPackage(e.Package, _categoryStatus);
         }
         public static ObservableCollection<WrapPackage> GetPackages(CategoryModel category)
         {
+            _categoryStatus = category.Name;
+
             if (category.PackageType is ProgramModel)
             {
                 _wrapperPackages = new ObservableCollection<WrapPackage>(
-                    WrapPackage.WrapPackageTag(PackageAccess<ProgramModel>.GetPackages(category)));              
+                    WrapPackage.WrapPackageTag(PackageAccess<ProgramModel>.GetPackages(category)));
             }
             if (category.PackageType is DriverModel)
             {

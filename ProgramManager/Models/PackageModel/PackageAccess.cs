@@ -3,9 +3,10 @@ using System.Linq;
 using System.Reflection;
 using System.Windows;
 using System.Xml.Linq;
+using ProgramManager.Enums;
 using ProgramManager.Filters;
 
-namespace ProgramManager.Models.PackageDerives
+namespace ProgramManager.Models.PackageModels
 {
     /// Этот класс является обобщенным поэтому каждый потомок класса PackageBase будет совместим с данным классом, свойства производных классов
     /// будут гарантированно проинициализированы значениями из элементов xml документа, если имена свойств совпадают с именами xml элементов.
@@ -37,13 +38,13 @@ namespace ProgramManager.Models.PackageDerives
                 // Инициализация свойств из базового класса
                packages.Add(new T
                {
-                   Name = element.Element("Name")?.Value,
-                   Author = element.Element("Author")?.Value,
-                   Version = element.Element("Version")?.Value,
-                   Image = element.Element("Image")?.FirstAttribute.Value,
-                   Description = element.Element("Description")?.Value,
-                   TagOne = element.Element("Tag")?.Value,
-                   HashSumm = element.Element("HashSumm")?.Value,
+                   Name = element.Element(FieldTypes.Name.ToString())?.Value,
+                   Author = element.Element(FieldTypes.Author.ToString())?.Value,
+                   Version = element.Element(FieldTypes.Version.ToString())?.Value,
+                   Image = element.Element(FieldTypes.Images.ToString())?.FirstAttribute.Value,
+                   Description = element.Element(FieldTypes.Description.ToString())?.Value,
+                   TagOne = element.Element(FieldTypes.Tag.ToString())?.Value,
+                   HashSumm = element.Element(FieldTypes.HashSumm.ToString())?.Value,
                    // Вызов метода для создания коллекции тегов, если пакет имеет более одного тега
                    TagList = GetTagsList(element),
                    Category = element.LastAttribute.Value,
@@ -66,7 +67,7 @@ namespace ProgramManager.Models.PackageDerives
             IEnumerable<XElement> elements = node.Elements("TagList");
             List<string> tags = new List<string>();
 
-            foreach (var element in elements.Elements("Tag")) tags.Add(element.Value);
+            foreach (var element in elements.Elements(FieldTypes.Tag.ToString())) tags.Add(element.Value);
 
             return tags;
         }

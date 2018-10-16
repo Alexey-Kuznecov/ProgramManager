@@ -223,47 +223,4 @@
     <Description>Игра для настоящих ассов</Description>
     <Image Source="User/Images/19572.jpg" />
   </Package>
-  <Package Id="27">
-    <Author>dsfsd</Author>
-    <Version>dsfsd</Version>
-  </Package>
-  <Package Id="28">
-    <Author>sads</Author>
-    <Version>sadasd</Version>
-  </Package>
-  <Package Id="29">
-    <Author>1</Author>
-    <Version>2</Version>
-    <Description>6</Description>
-  </Package>
-  <Package Id="30">
-    <Name>333</Name>
-    <Author>111</Author>
-    <Version>222</Version>
-    <Description>444</Description>
-  </Package>
-  <Package Id="31">
-    <Name>555</Name>
-    <Author>111</Author>
-    <Version>222</Version>
-    <Description>444</Description>
-  </Package>
-  <Package Id="32">
-    <Author>1</Author>
-    <Version>2</Version>
-  </Package>
-  <Package Id="33">
-    <Author>1</Author>
-    <Version>2</Version>
-  </Package>
-  <Package Id="34">
-    <Author>sadas</Author>
-    <Version>dasda</Version>
-  </Package>
-  <Package Id="35">
-    <Author>aaaaaaa</Author>
-    <Version>bbbbbbb</Version>
-    <Description>cccccccc</Description>
-    <Title>ooooooooo</Title>
-  </Package>
 </Packages>

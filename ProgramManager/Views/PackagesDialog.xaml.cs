@@ -11,5 +11,11 @@ namespace ProgramManager.Views
         { 
             InitializeComponent();
         }
+        // Это нарушение паттерна MVVM, используется только для удобства разработки.
+        private void Exit_Click(object sender, RoutedEventArgs e)
+        {
+            Application app = Application.Current;
+            app.Shutdown();
+        }
     }
 }
