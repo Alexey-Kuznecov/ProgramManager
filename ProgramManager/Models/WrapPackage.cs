@@ -26,11 +26,9 @@ namespace ProgramManager.Models
             set
             {
                 _tagList = value;
-
-                if (_connector == null)
-                    _connector = new BaseConnector();
+                _connector = new BaseConnector();
                 // Вызов события добавления, возникает при полной загруки списка тегов.           
-                _connector.OnTagListUpdate(_tagList);
+                _connector.OnLoadTagsList(_tagList);
             }
         }
         /// <summary>

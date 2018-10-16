@@ -12,7 +12,7 @@ namespace ProgramManager.ViewModels
         {
             PackageChanged?.Invoke(this, new ConnectorEventArgs(package));
         }
-        public void OnTagListUpdate(object package)
+        public void OnLoadTagsList(object package)
         {
             TagListUpdate?.Invoke(this, new ConnectorEventArgs(package));
         }

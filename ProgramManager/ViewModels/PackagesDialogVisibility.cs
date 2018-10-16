@@ -1,6 +1,5 @@
 ﻿using System.Windows;
 using ProgramManager.Views;
-using ProgramManager.Views.DialogPacks;
 
 namespace ProgramManager.ViewModels
 {

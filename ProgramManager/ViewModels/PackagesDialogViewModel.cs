@@ -1,9 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using ProgramManager.Models;
 using System.Windows.Input;
 using ProgramManager.Views.DialogPacks;
 using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Markup;
 using GalaSoft.MvvmLight.Messaging;
 
 namespace ProgramManager.ViewModels
@@ -13,15 +16,11 @@ namespace ProgramManager.ViewModels
         private const string AutocompleteIcon = "../../Resources/Icons/Businessman_48px.png";
         private const string DeleteIcon = "../../Resources/Icons/Delete_48px.png";
         private static InputName _windowInputName;
-        private static TagDialog _windowTagModify;
-
         #region Constructor
 
         public PackagesDialogViewModel()
         {
             _windowInputName = new InputName();
-            _windowTagModify = new TagDialog();
-
             RemoveTextField = new RelayCommand(obj => TextField.Remove(obj as TextFieldModel));
             SavePackage = new RelayCommand(obj => SendPackage());
             Messenger.Default.Register<InfoMessage>(this, action => InputCustomName(action.Name));
@@ -61,8 +60,12 @@ namespace ProgramManager.ViewModels
 
         public ICommand RemoveTextField { get; }
         public ICommand SavePackage { get; }
-        public ICommand OpenInputName => new RelayCommand(obj => { _windowInputName.ShowDialog(); });
-        public ICommand OpenTagDialog => new RelayCommand(obj => { _windowTagModify.ShowDialog(); });
+        public ICommand OpenInputName => new RelayCommand(obj => _windowInputName.ShowDialog());
+        public ICommand OpenTagDialog => new RelayCommand(obj =>
+        {
+            TagDialog windowTagModify = new TagDialog();
+            windowTagModify.Show();
+        });
         /// <summary>
         /// Контекстное меню, команды для добавления полей.
         /// </summary>
