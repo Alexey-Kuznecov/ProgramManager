@@ -19,10 +19,7 @@
             <RowDefinition Height="1.8*" />
         </Grid.RowDefinitions>
         <Grid Margin="10">
-            <Border
-                Background="{x:Null}"
-                BorderBrush="#FFC1C1C1"
-                BorderThickness="1">
+            <Border BorderBrush="#FFC1C1C1" BorderThickness="1">
                 <ScrollViewer>
                     <ItemsControl ItemsSource="{Binding TagList, Mode=TwoWay}">
                         <ItemsControl.ItemTemplate>
@@ -33,9 +30,6 @@
                                         Margin="0,10,0,0"
                                         HorizontalAlignment="Left"
                                         VerticalAlignment="Top"
-                                        Checked="{Binding TagChecked}"
-                                        Command="{Binding}"
-                                        CommandParameter="{Binding IsChecked, ElementName=CheckBox}"
                                         Content="{Binding Name}" />
                                 </WrapPanel>
                             </DataTemplate>
