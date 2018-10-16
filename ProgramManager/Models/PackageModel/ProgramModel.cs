@@ -1,6 +1,6 @@
 ﻿using System.Xml.Linq;
 
-namespace ProgramManager.Models.PackageDerives
+namespace ProgramManager.Models.PackageModels
 {
     public class ProgramModel : PackageBase
     {

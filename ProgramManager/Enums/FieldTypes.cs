@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProgramManager.Enums
 {
-    public enum TFieldTypes
+    public enum FieldTypes
     {
         Title,
         Author,
@@ -18,6 +18,10 @@ namespace ProgramManager.Enums
         Source,
         HashSumm,
         Description,
-        Other
+        Other,
+        Userfield,
+        Images,
+        Name,
+        Tag
     } 
 }

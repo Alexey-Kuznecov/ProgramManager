@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
-using ProgramManager.Models.PackageDerives;
+using ProgramManager.Models.PackageModels;
+using ProgramManager.ViewModels;
 
 namespace ProgramManager.Models
 {
@@ -14,9 +15,24 @@ namespace ProgramManager.Models
     /// </summary>
     public class WrapPackage : IEnumerable<PackageBase>
     {
+        private static List<WrapPackage> _tagList;
+        private static BaseConnector _connector;
         public string Name { get; set; }
         public List<PackageBase> Packages { get; set; }
         public static List<PackageBase> AllPackages { get; set; }
+        public static List<WrapPackage> TagList
+        {
+            get { return _tagList; }
+            set
+            {
+                _tagList = value;
+
+                if (_connector == null)
+                    _connector = new BaseConnector();
+                // Вызов события добавления, возникает при полной загруки списка тегов.           
+                _connector.OnTagListUpdate(_tagList);
+            }
+        }
         /// <summary>
         /// Главный метод в основном делегирует работу других методов и возвращает результат.
         /// Метод также выполняет роль упаковщка, для спецальных тегов (Избранные, Все и т.д)
@@ -52,7 +68,7 @@ namespace ProgramManager.Models
         /// </summary>
         /// <param name="collection">Коллекция пакетов для инициализции свойства Packages</param>
         /// <param name="wrapperPackages">Коллекция класса оболочки</param>
-        public static void InitialPackages(dynamic @collection, List<WrapPackage> wrapperPackages)
+        private static void InitialPackages(dynamic @collection, List<WrapPackage> wrapperPackages)
         {
             int index = 0;
 
@@ -82,7 +98,7 @@ namespace ProgramManager.Models
         /// <param name="wrapperPackages">Коллекция класса оболочки</param>
         /// <param name="wrapper">Контекст текущей оболочки</param>
         /// <param name="index">Индекс текущей оболочки</param>
-        public static void InsertTags(dynamic @collection, List<WrapPackage> wrapperPackages, WrapPackage wrapper,  int index)
+        private static void InsertTags(dynamic @collection, List<WrapPackage> wrapperPackages, WrapPackage wrapper,  int index)
         {         
             // Вставляет пакеты которые могут иметь больше одного тега 
             foreach (var package in @collection)
@@ -105,7 +121,7 @@ namespace ProgramManager.Models
         /// Метод является вспомогательным для метода WrapPackageTag который осуществляет поиск
         /// по xml документу и выбрирает только те значения которые являются уникальными.
         /// </summary>
-        /// <param name="category">Категория пакетов, необходимая для учтонения выборки</param>
+        /// <param name="category">Категория пакетов, необходимая для учтонения выборки.</param>
         /// <returns>Возвращает коллекцию уникальных значений.</returns>
         private static List<WrapPackage> TagFinder(string category)
         {
@@ -122,8 +138,10 @@ namespace ProgramManager.Models
 
             queryTag.AddRange(queryTags);
             // Сортирует, фильтрует, выберает и преобразует в список:
-            return queryTag.Distinct().OrderBy(x => x.Substring(0, 3))
+            TagList = queryTag.Distinct().OrderBy(x => x.Substring(0, 3))
                 .Select(element => new WrapPackage() { Name = element }).ToList();
+
+            return TagList;
         }
         /// <summary>
         /// Реализалация интерфеса IEnumerator

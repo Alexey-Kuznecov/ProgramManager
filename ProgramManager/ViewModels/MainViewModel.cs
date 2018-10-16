@@ -2,11 +2,11 @@
 using ProgramManager.Models;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Threading;
 using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Threading;
-using ProgramManager.Models.PackageDerives;
+using ProgramManager.Models.PackageModels;
+using ProgramManager.ViewModels.Base;
 
 namespace ProgramManager.ViewModels
 {
@@ -16,7 +16,9 @@ namespace ProgramManager.ViewModels
 
         public MainViewModel()
         {
-            WrapPackage = BaseModel.GetPackages();
+            _baseManager = new BaseManager();
+            _dispatcher =  Dispatcher.CurrentDispatcher;
+            WrapPackage = BaseManager.GetPackages();
             Categories = CategoryModel.Categories;
         }
 
@@ -24,8 +26,9 @@ namespace ProgramManager.ViewModels
 
         #region Fields
 
-        private Dispatcher dispatcher = Dispatcher.CurrentDispatcher;
+        private readonly Dispatcher _dispatcher;
         private PackageBase _currentPackage;
+        private BaseManager _baseManager;
         private CategoryModel _currentCategory;
         private List<CategoryModel> _categories;
         private ObservableCollection<WrapPackage> _wrapPackage;
@@ -58,10 +61,11 @@ namespace ProgramManager.ViewModels
             get { return _currentCategory; }
             set
             {
-                SetProperty(ref _currentCategory, value, () => _currentCategory);
                 // Запрос на изсенения категории пакетов
-                if (_currentCategory != null && WrapPackage != null)
-                    WrapPackage = BaseModel.GetPackages(_currentCategory);
+                if (_currentCategory != null)
+                    WrapPackage = BaseManager.GetPackages(value);
+
+                _currentCategory = value;
                 // Выбор первого пакета в списке после изменения категории
                 if (_indexPackage < 0)
                     CurrentPackage = _wrapPackage[0].Packages[0];
@@ -156,7 +160,7 @@ namespace ProgramManager.ViewModels
         });
         public ICommand Exit => new RelayCommand(obj =>
         {
-            dispatcher.InvokeShutdown();
+            _dispatcher.InvokeShutdown();
         });
 
         #endregion

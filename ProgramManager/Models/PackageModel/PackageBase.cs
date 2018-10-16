@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using ProgramManager.Filters;
 
-namespace ProgramManager.Models.PackageDerives
+namespace ProgramManager.Models.PackageModels
 {
     public abstract class PackageBase
     {

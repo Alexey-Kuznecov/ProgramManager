@@ -1,19 +1,20 @@
 ﻿using System;
-using ProgramManager.Models;
+using ProgramManager.ViewModels.Base;
 
 namespace ProgramManager.ViewModels
 {
     public class BaseConnector
     {
-        public BaseConnector()
-        {
-            BaseModel model = new BaseModel();
-            PackageChanged += model.AddNewPackage;
-        }
+        public static event EventHandler<ConnectorEventArgs> PackageChanged;
+        public static event EventHandler<ConnectorEventArgs> TagListUpdate;
+
         public void OnPackageChanged(object package)
         {
             PackageChanged?.Invoke(this, new ConnectorEventArgs(package));
         }
-        public EventHandler<ConnectorEventArgs> PackageChanged { get; set; }
+        public void OnTagListUpdate(object package)
+        {
+            TagListUpdate?.Invoke(this, new ConnectorEventArgs(package));
+        }
     }
 }

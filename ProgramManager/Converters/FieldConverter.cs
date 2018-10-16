@@ -10,7 +10,7 @@ namespace ProgramManager.Converters
 {
     public class FieldConverter : ConvertorBase<FieldConverter>
     {
-        private static readonly IDictionary<string, string> _descriptions = new Dictionary<string, string>
+        private static readonly IDictionary<string, string> _dictionary = new Dictionary<string, string>
         {
             { "Author", "Автор" },
             { "Version", "Версия" },
@@ -24,14 +24,14 @@ namespace ProgramManager.Converters
             { "HashSumm", "Хеш-сумма" },
         };
 
-        public static IDictionary<string, string> Descriptions
+        public static IDictionary<string, string> Dictionary
         {
-            get { return _descriptions; }
+            get { return _dictionary; }
             set
             {
                 if (value != null)
                 {
-                    _descriptions.Add(value.Keys.ToString(), value.Values.ToString());
+                    _dictionary.Add(value.Keys.ToString(), value.Values.ToString());
                 }               
             }
         }
@@ -40,9 +40,9 @@ namespace ProgramManager.Converters
             if (!(value is TextFieldModel))
                 return null;
             var field = (TextFieldModel)value;
-            if (!Descriptions.ContainsKey(field.Types))
+            if (!Dictionary.ContainsKey(field.Types))
                 return null;
-            return Descriptions[field.Types];
+            return Dictionary[field.Types];
         }
     }
 }

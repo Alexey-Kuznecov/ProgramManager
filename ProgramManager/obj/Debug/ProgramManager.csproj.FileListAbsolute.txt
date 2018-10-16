@@ -36,3 +36,5 @@ C:\Users\Алексей\Documents\Visual Studio 2015\Projects\ProgramManager\Pro
 C:\Users\Алексей\Documents\Visual Studio 2015\Projects\ProgramManager\ProgramManager\bin\Debug\Microsoft.Practices.ServiceLocation.xml
 C:\Users\Алексей\Documents\Visual Studio 2015\Projects\ProgramManager\ProgramManager\obj\Debug\Views\PackagesDialog.g.cs
 C:\Users\Алексей\Documents\Visual Studio 2015\Projects\ProgramManager\ProgramManager\obj\Debug\Views\PackagesDialog.baml
+C:\Users\Алексей\Documents\Visual Studio 2015\Projects\ProgramManager\ProgramManager\obj\Debug\Views\DialogPacks\TagDialog.g.cs
+C:\Users\Алексей\Documents\Visual Studio 2015\Projects\ProgramManager\ProgramManager\obj\Debug\Views\DialogPacks\TagDialog.baml
