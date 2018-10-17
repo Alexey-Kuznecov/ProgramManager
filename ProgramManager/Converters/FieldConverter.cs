@@ -22,6 +22,10 @@ namespace ProgramManager.Converters
             { "CompanySite", "Официальный сайт" },
             { "Copyright", "Авторские права" },
             { "HashSumm", "Хеш-сумма" },
+            { "Userfield1", "Userfield1" },
+            { "Userfield2", "Userfield2" },
+            { "Userfield3", "Userfield3" },
+            { "Userfield4", "Userfield4" },
         };
 
         public static IDictionary<string, string> Dictionary

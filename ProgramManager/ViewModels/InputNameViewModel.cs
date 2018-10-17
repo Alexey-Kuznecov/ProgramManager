@@ -10,12 +10,12 @@ using ProgramManager.Enums;
 
 namespace ProgramManager.ViewModels
 {
-    public class InputNameViewModelcs
+    public class InputNameViewModel
     {
         public string Name { get; set; }
         public ICommand InputName => new RelayCommand(obj =>
         {
-            Messenger.Default.Send(new InfoMessage { Name = Name });
+            Messenger.Default.Send(new InputNameViewModel { Name = Name });
         });      
     }
 }

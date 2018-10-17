@@ -41,7 +41,7 @@ namespace ProgramManager.Models.PackageModels
                    Name = element.Element(FieldTypes.Name.ToString())?.Value,
                    Author = element.Element(FieldTypes.Author.ToString())?.Value,
                    Version = element.Element(FieldTypes.Version.ToString())?.Value,
-                   Image = element.Element(FieldTypes.Images.ToString())?.FirstAttribute.Value,
+                   Image = element.Element(FieldTypes.Image.ToString())?.FirstAttribute.Value,
                    Description = element.Element(FieldTypes.Description.ToString())?.Value,
                    TagOne = element.Element(FieldTypes.Tag.ToString())?.Value,
                    HashSumm = element.Element(FieldTypes.HashSumm.ToString())?.Value,

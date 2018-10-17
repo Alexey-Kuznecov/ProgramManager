@@ -80,6 +80,7 @@
                     Height="28"
                     Margin="5,0,0,0"
                     Command="{Binding SavePackage}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
                     Style="{StaticResource btIcon}">
                     <ContentControl>
                         <WrapPanel>
@@ -116,7 +117,10 @@
                         </WrapPanel>
                     </ContentControl>
                 </Button>
-                <Button Command="{Binding OpenTagDialog}" Height="28" Style="{StaticResource btIcon}">
+                <Button
+                    Height="28"
+                    Command="{Binding OpenTagDialog}"
+                    Style="{StaticResource btIcon}">
                     <ContentControl>
                         <WrapPanel>
                             <Image Width="18" Source="../Resources/Icons/Add_Tag_48px.png" />

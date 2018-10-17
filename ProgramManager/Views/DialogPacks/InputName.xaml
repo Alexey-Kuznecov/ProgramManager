@@ -13,7 +13,7 @@
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
     <Window.DataContext>
-        <viewModels:InputNameViewModelcs />
+        <viewModels:InputNameViewModel />
     </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>

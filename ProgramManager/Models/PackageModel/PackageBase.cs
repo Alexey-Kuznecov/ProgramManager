@@ -14,11 +14,37 @@ namespace ProgramManager.Models.PackageModels
         public string Description { get; set; }
         public string Image { get; set; }
         public string Category { get; set; }
+        private readonly IDictionary<string, string> _fieldList = new Dictionary<string, string>();
+        private readonly IDictionary<string, string> _taList = new Dictionary<string, string>();
+        public IDictionary<string, string> TaList
+        {
+            get { return _taList; }
+            set
+            {
+                if (value != null)
+                {
+                    _taList.Add(value.Keys.ToString(), value.Values.ToString());
+                }
+            }
+        }
+        public IDictionary<string, string> FieldList
+        {
+            get { return _fieldList; }
+            set
+            {
+                if (value != null)
+                {
+                    _fieldList.Add(value.Keys.ToString(), value.Values.ToString());
+                }
+            }
+        }
         public string TagOne { get; set; }
         public List<string> TagList { get; set; }
-        public List<WrapPackage> Tag { get; set; }
+        /// <summary>
+        /// Это коллекция вбирает в себя все другие свойства для вывода их в панель деталей.
+        /// При этом свойства не содержат пустые значения.
+        /// </summary>
         public List<PropertyNotIsNull> Datails { get; set; }
-
         public abstract void AddPackage();
         public virtual void UpdatePackage() { }
         public virtual void RemovePackage() { }

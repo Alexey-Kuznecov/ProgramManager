@@ -1,35 +1,112 @@
-﻿using System.Linq;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using System.Windows;
 using ProgramManager.Models;
 using ProgramManager.Converters;
 using ProgramManager.Enums;
+using ProgramManager.Models.PackageModels;
+using ProgramManager.Views;
 
 namespace ProgramManager.ViewModels
 {
+
     partial class PackagesDialogViewModel
     {
-        /// <summary>
-        /// Отпровляет данные для их добавления в базу данных.
-        /// Вызывает события изменения данных.
-        /// </summary>
-        public void SendPackage()
+        private static List<string> _tagList;
+        private static Dictionary<string, string> _dataList = new Dictionary<string, string>();
+        public void InitialDataSource(object data)
         {
-            // Инициальзация данных
-            var title = new { Name = "Title", Value = PackageTitle };
-            var descripion = new { Name = "Description", Value = Description };
-            var fields = TextField.Select(s => new { Name = s.Types, Value = s.FieldValue, }).ToList();
-
-            fields.Add(title);
-            fields.Add(descripion);
-
-            BaseConnector connector = new BaseConnector();
-            connector.OnPackageChanged(fields);
-            PackagesDialogVisibility.ClosePackageDialog();
+            if (data is List<string>)
+                _tagList = data as List<string>;
         }
         /// <summary>
-        /// Метод добавления нового поля.
+        /// Отправляет данные для их добавления в базу данных.
+        /// Вызывает события изменения данных.
         /// </summary>
-        /// <param name="type">Принимает тип поля</param>
+        /// <param name="data">Данные входящие в папкет.</param>
+        public void SendPackage<T>(object data) where T: PackageBase, new ()
+        {
+            PackagesDialog window = data as PackagesDialog;
+
+            T package = new T()
+            {
+                Name = PackageTitle,
+                Author = TextField.SingleOrDefault(a => a.Types == FieldTypes.Author.ToString())?.FieldValue,
+                HashSumm = TextField.SingleOrDefault(a => a.Types == FieldTypes.HashSumm.ToString())?.FieldValue,
+                Source = TextField.SingleOrDefault(a => a.Types == FieldTypes.Source.ToString())?.FieldValue,
+                Version = TextField.SingleOrDefault(a => a.Types == FieldTypes.Version.ToString())?.FieldValue,
+                Image = TextField.SingleOrDefault(a => a.Types == FieldTypes.Image.ToString())?.FieldValue,
+                TagList = _tagList,
+                Description = Description,         
+            };
+            foreach (var property in package.GetType().GetProperties())
+            {
+                if (TextField.SingleOrDefault(p => p.Types == property.Name) != null && property.GetValue(package) == null)
+                {
+                    property.SetValue(package, TextField.Single(p => p.Types == property.Name).FieldValue);
+                }
+            }
+            foreach (var field in TextField.Select(p => p))
+            {
+                if (field.Types.Contains(FieldTypes.Userfield.ToString()))
+                {
+                    package.FieldList.Add(field.Types, field.FieldValue);
+                }
+            }
+            BaseConnector connector = new BaseConnector();
+            connector.OnPackageChanged(package);
+            window?.Close();
+        }
+        /// <summary>
+        /// Получает с
+        /// </summary>
+        /// <param name="data"></param>
+        public void ConvertToDictionary(object data)
+        {
+            string key = null;
+
+            foreach (var value in (IEnumerable)data)
+            {
+                if (key == null)
+                {
+                    key = value.ToString(); continue;
+                }                
+                _dataList.Add(key, value.ToString()); break;
+            }         
+        }
+        /// <summary>
+        /// Получает с
+        /// </summary>
+        /// <param name="data"></param>
+        public void ConvertAnonymousToDictionary(object data)
+        {
+            string key = null;
+
+            if (data != null)
+            {
+                foreach (var obj in (IEnumerable)data)
+                {
+                    PropertyInfo[] properties = obj.GetType().GetProperties();
+
+                    foreach (var property in properties)
+                    {
+                        if (key == null)
+                        {
+                            key = property.GetValue(obj).ToString(); continue;
+                        }
+                        _dataList.Add(key, property.GetValue(obj).ToString());
+
+                        key = null; break;
+                    }
+                }
+            }
+        }
+        /// <summary>
+        /// Метод для добавления нового поля.
+        /// </summary>
+        /// <param name="type">Принимает тип поля.</param>
         private static void AddTextField(string type)
         {
             var query = TextField.SingleOrDefault(s => s.Types == type);
@@ -47,12 +124,19 @@ namespace ProgramManager.ViewModels
                 _windowInputName.ShowDialog();
         }
         /// <summary>
+        /// Так как месседжер вызывает этот метод дважды пришлось ввести это поля.
+        /// В принципе вполне удачное рашение, так как не позволяет добавить поля с
+        /// одинаковыми именами. Но месседжер, все равно хорошо было бы починить.
+        /// </summary>
+        private static string _name;
+        /// <summary>
         /// Метод для добавления пользовательского поля.
         /// </summary>
         /// <param name="fieldName">Принимает имя поля</param>
         private void InputCustomName(string fieldName)
         {
-            if (fieldName != null)
+
+            if (fieldName != null && fieldName != _name)
             {
                 var formatKey = FieldTypes.Userfield.ToString() + (TextField.Count + 1);
 
@@ -67,6 +151,7 @@ namespace ProgramManager.ViewModels
                 });
                 _windowInputName.Visibility = Visibility.Hidden;
             }
+            _name = fieldName;
         }
     }
 }

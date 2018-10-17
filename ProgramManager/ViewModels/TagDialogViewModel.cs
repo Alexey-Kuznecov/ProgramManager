@@ -1,36 +1,57 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
+using GalaSoft.MvvmLight.Messaging;
 using ProgramManager.Models;
 using ProgramManager.ViewModels.Base;
+using ProgramManager.Views.DialogPacks;
 
 namespace ProgramManager.ViewModels
 {
     public class TagDialogModel
     {
         public string Name { get; set; }
-        public bool TagChecked { get; }
+
+        protected static List<string> _list = new List<string>();
 
         public ICommand Checked => new RelayCommand(obj =>
         {
-            //List<string> tags = new List<string> { obj.ToString() };
+            if ((bool)obj)  _list.Add(Name);
+
+            else _list.Remove(Name);              
         });
     }
-
-    public class TagDialogViewModel : PropertiesChanged
+    public class TagDialogViewModel : TagDialogModel
     {
+        private static TagDialog _tagDialog;
         public static ObservableCollection<TagDialogModel> TagList { get; set; }
-
-        public static void DisplayTagList(object sender, ConnectorEventArgs obj)
+        /// <summary>
+        /// Получает данные(список тегов) от издателя события и преобразует в удобный формат данных для их вывода.
+        /// </summary>
+        /// <param name="sender">Источник</param>
+        /// <param name="obj">Ожидается объект типа WrapPackage и его свойство Name</param>
+        public static void DisplayTagList(object sender, ConnectorEventArgs tags)
         {
-            List<WrapPackage> packs = obj.Package as List<WrapPackage>;
-            TagList = new ObservableCollection<TagDialogModel>();
-
+            List<WrapPackage> packs = tags.Package as List<WrapPackage>;
+            
             if (packs != null)
             {
+                TagList = new ObservableCollection<TagDialogModel>();
+
                 foreach (var item in packs)
                     TagList.Add(new TagDialogModel() { Name = item.Name });
             }
         }
+        public ICommand SendSelected => new RelayCommand(obj =>
+        {
+            Messenger.Default.Send(_list);
+            _tagDialog = obj as TagDialog;
+            _tagDialog?.Close();
+        });
+        public ICommand Cancel => new RelayCommand(obj =>
+        {
+            _tagDialog = obj as TagDialog;
+            _tagDialog?.Close();
+        });
     }
 }
