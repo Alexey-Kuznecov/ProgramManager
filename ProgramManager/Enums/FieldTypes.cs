@@ -20,7 +20,7 @@ namespace ProgramManager.Enums
         Description,
         Other,
         Userfield,
-        Images,
+        Image,
         Name,
         Tag
     } 

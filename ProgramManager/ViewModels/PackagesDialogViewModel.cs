@@ -4,10 +4,9 @@ using ProgramManager.Models;
 using System.Windows.Input;
 using ProgramManager.Views.DialogPacks;
 using System.Collections.ObjectModel;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Markup;
 using GalaSoft.MvvmLight.Messaging;
+using ProgramManager.Models.PackageModels;
 
 namespace ProgramManager.ViewModels
 {
@@ -16,14 +15,19 @@ namespace ProgramManager.ViewModels
         private const string AutocompleteIcon = "../../Resources/Icons/Businessman_48px.png";
         private const string DeleteIcon = "../../Resources/Icons/Delete_48px.png";
         private static InputName _windowInputName;
+        private static TagDialog _windowTagModify;
         #region Constructor
 
         public PackagesDialogViewModel()
         {
             _windowInputName = new InputName();
+            _windowTagModify = new TagDialog();
             RemoveTextField = new RelayCommand(obj => TextField.Remove(obj as TextFieldModel));
-            SavePackage = new RelayCommand(obj => SendPackage());
-            Messenger.Default.Register<InfoMessage>(this, action => InputCustomName(action.Name));
+            SavePackage = new RelayCommand(obj => SendPackage<ProgramModel>(obj));
+            Messenger.Default.Register<InputNameViewModel>(this, action => InputCustomName(action.Name));
+            Messenger.Default.Register<List<string>>(this, InitialDataSource);
+            Description = "This is Description";
+            PackageTitle = "This is PackageTitle";
         }
 
         #endregion
@@ -48,8 +52,16 @@ namespace ProgramManager.ViewModels
         };
         public static ObservableCollection<TextFieldModel> TextField { get; } = new ObservableCollection<TextFieldModel>()
         {
-            new TextFieldModel { Types = "Author", AutoCompleteIcon = AutocompleteIcon, DeleteTextFieldIcon = DeleteIcon},
-            new TextFieldModel { Types = "Version", AutoCompleteIcon = AutocompleteIcon, DeleteTextFieldIcon = DeleteIcon}
+            new TextFieldModel { FieldValue = "This is Author", Types = "Author", AutoCompleteIcon = AutocompleteIcon, DeleteTextFieldIcon = DeleteIcon},
+            new TextFieldModel { FieldValue = "This is Version", Types = "Version", AutoCompleteIcon = AutocompleteIcon, DeleteTextFieldIcon = DeleteIcon},
+            new TextFieldModel { FieldValue = "This is Source", Types = "Source", AutoCompleteIcon = AutocompleteIcon, DeleteTextFieldIcon = DeleteIcon},
+            new TextFieldModel { FieldValue = "This is HashSumm", Types = "HashSumm", AutoCompleteIcon = AutocompleteIcon, DeleteTextFieldIcon = DeleteIcon},
+            new TextFieldModel { FieldValue = "This is CompanySite", Types = "CompanySite", AutoCompleteIcon = AutocompleteIcon, DeleteTextFieldIcon = DeleteIcon},
+            new TextFieldModel { FieldValue = "This is License", Types = "License", AutoCompleteIcon = AutocompleteIcon, DeleteTextFieldIcon = DeleteIcon},
+            new TextFieldModel { FieldValue = "Userfield1", Types = "Userfield1", AutoCompleteIcon = AutocompleteIcon, DeleteTextFieldIcon = DeleteIcon},
+            new TextFieldModel { FieldValue = "Userfield2", Types = "Userfield2", AutoCompleteIcon = AutocompleteIcon, DeleteTextFieldIcon = DeleteIcon},
+            new TextFieldModel { FieldValue = "Userfield3", Types = "Userfield3", AutoCompleteIcon = AutocompleteIcon, DeleteTextFieldIcon = DeleteIcon},
+            new TextFieldModel { FieldValue = "Userfield4", Types = "Userfield4", AutoCompleteIcon = AutocompleteIcon, DeleteTextFieldIcon = DeleteIcon},
         };
         public string Description { get; set; }
         public string PackageTitle { get; set; }
@@ -61,11 +73,7 @@ namespace ProgramManager.ViewModels
         public ICommand RemoveTextField { get; }
         public ICommand SavePackage { get; }
         public ICommand OpenInputName => new RelayCommand(obj => _windowInputName.ShowDialog());
-        public ICommand OpenTagDialog => new RelayCommand(obj =>
-        {
-            TagDialog windowTagModify = new TagDialog();
-            windowTagModify.Show();
-        });
+        public ICommand OpenTagDialog => new RelayCommand(obj => { _windowTagModify.Show(); });
         /// <summary>
         /// Контекстное меню, команды для добавления полей.
         /// </summary>

@@ -172,6 +172,7 @@
     <Author>Mod Doc Software</Author>
     <Version>2.2</Version>
     <Tag>Стратегии</Tag>
+    <Puma>Adidas</Puma>
     <Description>Игра для настоящих царей</Description>
     <Image Source="User/Images/19572.jpg" />
   </Package>
@@ -180,7 +181,6 @@
     <Author>Realtek</Author>
     <Version>3.31</Version>
     <Tag>Звуковая карта</Tag>
-    <Description></Description>
     <Image Source="User/Images/19572.jpg" />
   </Package>
   <Package Id="22" Category="Драйвера">
@@ -188,7 +188,6 @@
     <Author>Logitech</Author>
     <Version>2.2</Version>
     <Tag>Аксессуары</Tag>
-    <Description></Description>
     <Image Source="User/Images/19572.jpg" />
   </Package>
   <Package Id="23" Category="Драйвера">
@@ -196,7 +195,7 @@
     <Author>Realtek</Author>
     <Version>3.31</Version>
     <Tag>Звуковая карта</Tag>
-    <Description></Description>
+    <HashSumm>12ld01kdn304fkm0s302k04kd2839jd</HashSumm>
     <Image Source="User/Images/19572.jpg" />
   </Package>
   <Package Id="24" Category="Моды">

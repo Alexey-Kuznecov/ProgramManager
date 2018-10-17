@@ -108,8 +108,7 @@
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\PackagesDialogPartial.cs" />
     <Compile Include="ViewModels\PackagesDialogViewModel.cs" />
-    <Compile Include="ViewModels\Base\InfoMessage.cs" />
-    <Compile Include="ViewModels\InputNameViewModelcs.cs" />
+    <Compile Include="ViewModels\InputNameViewModel.cs" />
     <Compile Include="ViewModels\Base\RelayCommand.cs" />
     <Page Include="Views\DialogPacks\TagDialog.xaml">
       <SubType>Designer</SubType>
