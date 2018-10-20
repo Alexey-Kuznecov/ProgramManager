@@ -5,8 +5,8 @@
     xmlns:converters="clr-namespace:ProgramManager.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:models="clr-namespace:ProgramManager.Models"
     xmlns:vm="clr-namespace:ProgramManager.ViewModels"
+    xmlns:packageModel="clr-namespace:ProgramManager.Models.PackageModel"
     d:DataContext="{d:DesignInstance vm:PackagesDialogViewModel}"
     d:DesignHeight="300"
     d:DesignWidth="500"
@@ -14,7 +14,7 @@
     <UserControl.Resources>
         <converters:FieldConverter x:Key="FieldConverter" />
         <!--  Элементы из данного шаблона будет созданы для каждого элемента списка  -->
-        <DataTemplate DataType="{x:Type models:TextFieldModel}">
+        <DataTemplate DataType="{x:Type packageModel:TextFieldModel}">
             <StackPanel>
                 <Label Grid.Row="0">
                     <Grid>

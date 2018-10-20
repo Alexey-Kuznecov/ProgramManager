@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Windows;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Messaging;
 using ProgramManager.Models;
@@ -46,12 +48,17 @@ namespace ProgramManager.ViewModels
         {
             Messenger.Default.Send(_list);
             _tagDialog = obj as TagDialog;
-            _tagDialog?.Close();
+            if (_tagDialog != null) _tagDialog.Visibility = Visibility.Hidden;
         });
         public ICommand Cancel => new RelayCommand(obj =>
         {
             _tagDialog = obj as TagDialog;
-            _tagDialog?.Close();
+            if (_tagDialog != null) _tagDialog.Visibility = Visibility.Hidden;
+        });
+        public ICommand AddTag => new RelayCommand(obj =>
+        {
+            if (Name != null)
+                TagList.Add(new TagDialogModel() { Name = Name });
         });
     }
 }

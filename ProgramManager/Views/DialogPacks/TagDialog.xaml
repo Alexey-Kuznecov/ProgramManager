@@ -5,9 +5,13 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:ProgramManager.ViewModels"
-    Title="TagDialog"
-    Width="310"
-    Height="390"
+    Title="Редактор тегов"
+    Width="320"
+    Height="450"
+    MinWidth="320"
+    MinHeight="390"
+    MaxWidth="320"
+    MaxHeight="450"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
     <Window.DataContext>
@@ -16,9 +20,9 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="10*" />
-            <RowDefinition Height="1.8*" />
+            <RowDefinition Height="4*" />
         </Grid.RowDefinitions>
-        <Grid Margin="10">
+        <Grid Margin="10,10,10,5">
             <Border BorderBrush="#FFC1C1C1" BorderThickness="1">
                 <ScrollViewer>
                     <ItemsControl ItemsSource="{Binding TagList, Mode=TwoWay}">
@@ -27,7 +31,7 @@
                                 <WrapPanel Margin="10">
                                     <CheckBox
                                         x:Name="CheckBox"
-                                        Margin="0,10,0,0"
+                                        Margin="0,10,0,10"
                                         HorizontalAlignment="Left"
                                         VerticalAlignment="Top"
                                         Command="{Binding Checked}"
@@ -40,26 +44,38 @@
                 </ScrollViewer>
             </Border>
         </Grid>
-        <WrapPanel Grid.Row="1" Background="#FFE4E4E4">
-            <Button
-                Width="80"
-                Height="25"
-                Margin="10,10,5,0"
-                Content="Добавить" />
-            <Button
-                Width="80"
-                Height="25"
-                Margin="10,10,5,0"
-                Command="{Binding SendSelected}"
-                CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-                Content="Ок" />
-            <Button
-                Width="80"
-                Height="25"
-                Margin="10,10,5,0"
-                Command="{Binding Cancel}"
-                CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-                Content="Отмена" />
-        </WrapPanel>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="55" />
+                <RowDefinition Height="50" />
+            </Grid.RowDefinitions>
+            <TextBox
+                Margin="10,10,10,8"
+                Tag="Поиск или добавить.."
+                Text="{Binding Name}" />
+            <WrapPanel Grid.Row="1" Margin="0,8,0,0">
+                <Button
+                    Width="70"
+                    Height="25"
+                    Margin="10,0,5,0"
+                    Command="{Binding AddTag}"
+                    Content="Добавить" />
+                <Button
+                    Width="70"
+                    Height="25"
+                    Margin="52,0,5,0"
+                    Command="{Binding SendSelected}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                    Content="Ок" />
+                <Button
+                    Width="70"
+                    Height="25"
+                    Margin="10,0,5,0"
+                    Command="{Binding Cancel}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                    Content="Отмена" />
+            </WrapPanel>
+        </Grid>
+
     </Grid>
 </Window>

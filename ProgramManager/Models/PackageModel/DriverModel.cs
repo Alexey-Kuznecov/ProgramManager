@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using ProgramManager.Models.PackageModels;
 
-namespace ProgramManager.Models.PackageModels
+namespace ProgramManager.Models.PackageModel
 {
     public class DriverModel : PackageBase
     {

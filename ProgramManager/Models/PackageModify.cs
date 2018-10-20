@@ -1,26 +1,22 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Xml.Linq;
-using ProgramManager.Converters;
-using ProgramManager.Enums;
-using ProgramManager.Models.PackageModels;
+using ProgramManager.Models.Func;
+using ProgramManager.Models.PackageModel;
 
 namespace ProgramManager.Models
 {
-    public class PackageMutator
+    public class PackageModify
     {
         const string DocumentName = "packages.xml";
         /// <summary>
         /// Конструктор по умолчанию
         /// </summary>
-        public PackageMutator()
+        public PackageModify()
         {
             if (!File.Exists(DocumentName))
-                PackageMutator.FormatHeadXmlDoc();
+                PackageModify.FormatHeadXmlDoc();
         }
         /// <summary>
         /// Создает заголовок XML документа
@@ -39,65 +35,47 @@ namespace ProgramManager.Models
         /// Новый метод для добавления пакета в xml документ, полсностью автоматизированный,
         /// работает в паре с ConvertToDictionary который позволеят исключить элементы с пустыми значениями
         /// </summary>
-        /// <param name="data">Объект данных</param>
+        /// <param name="data">Объект данных, ожидается объект типа PackageBase.</param>
         /// <param name="category">Категория в контексте которой будет создан пакет.</param>
         public static void AddPackage(object data, string category)
-        {      
+        {
             // Получает индекс последнего элемента в xml документе
             int id = BaseXml.GetIdLastElement();
-            // Метод (ConvertToDictionary) формирует данные в соответствии словаря
-            Dictionary<string, string> dictionary = ConvertToDictionary(data);
             XDocument xDoc = XDocument.Load(DocumentName);
-            // Имя поля пользователя
-            string fieldName = FieldTypes.Userfield.ToString();
-        
-            XElement package = new XElement(new XElement("Package", new XAttribute("Id", ++id), new XAttribute("Category", category)));
-            XElement userfield = new XElement(fieldName);
+            XElement package = new XElement("Package");
+            // Метод (ConvertToDictionary) формирует данные в соответствии словаря
+            Dictionary<object, string> dictionary = data.ConvertToDictionary();
 
             foreach (var item in dictionary)
             {
-                if (item.Key.Contains(fieldName))
-                {
-                    userfield.Add(new XElement(item.Key, new XAttribute("Name", FieldConverter.Dictionary.Single(p => p.Key == item.Key).Value), item.Value)); continue;
-                }
-                package.Add(new XElement(item.Key, item.Value));
-            }
-            package.Add(userfield);
-            xDoc.Element("Packages")?.Add(package);           
-            xDoc.Save(DocumentName);
-        }
-        /// <summary>
-        /// Метод создает словарь для удобного добавления элемента и его значения в xml документ.
-        /// </summary>
-        /// <param name="data">Объект данных, должен содержать коллекцию объектов, где первое свойство
-        /// будет играть роль ключа — а второе значения.</param>
-        /// <returns>Коллекцию словарей <TKey>FirstProperty</TKey><TValue>SecondProperty</TValue></returns>
-        public static Dictionary<string, string> ConvertToDictionary(object data)
-        {
-            Dictionary<string, string> dictionary = new Dictionary<string, string>();
-
-            var anomymous = (IEnumerable)data;
-
-            foreach (var items in anomymous)
-            {
-                PropertyInfo[] properties = items.GetType().GetProperties();
-
-                string key = null;
+                var properties = item.Key.GetType().GetProperties();
+                string name = null;
 
                 foreach (var property in properties)
                 {
-                    var value = property.GetValue(items);
+                    var key = property.GetValue(item.Key).ToString();
 
-                    if (properties[0].Name == property.Name)
-                    {
-                        key = value.ToString(); continue;
-                    }
-                    if (value == null || key == null) continue;
+                    if (property.Name == "Name")
+                        name = key;
 
-                    dictionary.Add(key, value.ToString()); break;
+                    if (properties.Length == 1)
+                        package.Add(new XElement(key, item.Value));           
+
+                    // Объявление атрибутов тегов, так же незабудь указать свойство анонимного типа в методе FuncHelper.ConvertToDictionary
+                    if (property.Name == "Id")
+                        if (name != null) package.Add(new XElement(name, new XAttribute("Id", key), item.Value));
+                    if (property.Name == "FieldName")
+                        if (name != null) package.Element(name)?.SetAttributeValue("FieldName", key);
                 }
             }
-            return dictionary;
+            // 1. Удалиние цифр кототрые содержат имена элементов (необходые для уникальности элемента).
+            // 2. Группировака элементов с одинаковыми именами в один элемент.
+            var newPack = package.TrimElementName().CreatingNestedElements().PostfixElementName();
+            newPack.SetAttributeValue("Id", ++id);
+            newPack.SetAttributeValue("Category", category);
+
+            xDoc.Element("Packages")?.Add(newPack);         
+            xDoc.Save(DocumentName);
         }
         /// <summary>
         /// Обновляет данные по индексу и сохраняет документ 

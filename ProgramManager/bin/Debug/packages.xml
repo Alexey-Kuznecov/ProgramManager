@@ -214,12 +214,20 @@
     <Description>Игра для настоящих ассов</Description>
     <Image Source="User/Images/19572.jpg" />
   </Package>
-  <Package Id="26" Category="Плагины">
-    <Name>Emmet</Name>
-    <Author>sergeche</Author>
-    <Version>2.2</Version>
-    <Tag>Плагины для Sublime Text</Tag>
-    <Description>Игра для настоящих ассов</Description>
-    <Image Source="User/Images/19572.jpg" />
+  <Package Id="26" Category="Программы">
+    <Name>MindManager</Name>
+    <Author>Mindjet</Author>
+    <Version>7.7.0</Version>
+    <Description>MindManager — самая мощная в мире программа.</Description>
+    <Tag Id="0">Органазеры</Tag>
+    <CompanySite>https://www.mindjet.com/ru/</CompanySite>
+    <Userfield Id="0" FieldName="Лозунг">Распознавайте.  Объединяйте.  Стимулируйте.</Userfield>
+  </Package>
+  <Package Id="27" Category="Программы">
+    <Name>This is PackageTitle</Name>
+    <Author>This is Author</Author>
+    <Version>This is Version</Version>
+    <Description>This is Description</Description>
+    <Tag Id="0">Не подшитые</Tag>
   </Package>
 </Packages>

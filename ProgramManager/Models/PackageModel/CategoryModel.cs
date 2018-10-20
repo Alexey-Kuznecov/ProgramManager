@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using ProgramManager.Models.PackageModels;
 
-namespace ProgramManager.Models
+namespace ProgramManager.Models.PackageModel
 {
     public class CategoryModel
     {

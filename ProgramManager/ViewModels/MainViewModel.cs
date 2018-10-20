@@ -5,7 +5,7 @@ using System.Linq;
 using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Threading;
-using ProgramManager.Models.PackageModels;
+using ProgramManager.Models.PackageModel;
 using ProgramManager.ViewModels.Base;
 
 namespace ProgramManager.ViewModels
@@ -18,8 +18,8 @@ namespace ProgramManager.ViewModels
         {
             _baseManager = new BaseManager();
             _dispatcher =  Dispatcher.CurrentDispatcher;
-            WrapPackage = BaseManager.GetPackages();
             Categories = CategoryModel.Categories;
+            WrapPackage = BaseManager.GetPackages();
         }
 
         #endregion

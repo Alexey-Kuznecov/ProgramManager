@@ -6,7 +6,7 @@ using ProgramManager.Views.DialogPacks;
 using System.Collections.ObjectModel;
 using System.Windows.Controls;
 using GalaSoft.MvvmLight.Messaging;
-using ProgramManager.Models.PackageModels;
+using ProgramManager.Models.PackageModel;
 
 namespace ProgramManager.ViewModels
 {
@@ -54,14 +54,6 @@ namespace ProgramManager.ViewModels
         {
             new TextFieldModel { FieldValue = "This is Author", Types = "Author", AutoCompleteIcon = AutocompleteIcon, DeleteTextFieldIcon = DeleteIcon},
             new TextFieldModel { FieldValue = "This is Version", Types = "Version", AutoCompleteIcon = AutocompleteIcon, DeleteTextFieldIcon = DeleteIcon},
-            new TextFieldModel { FieldValue = "This is Source", Types = "Source", AutoCompleteIcon = AutocompleteIcon, DeleteTextFieldIcon = DeleteIcon},
-            new TextFieldModel { FieldValue = "This is HashSumm", Types = "HashSumm", AutoCompleteIcon = AutocompleteIcon, DeleteTextFieldIcon = DeleteIcon},
-            new TextFieldModel { FieldValue = "This is CompanySite", Types = "CompanySite", AutoCompleteIcon = AutocompleteIcon, DeleteTextFieldIcon = DeleteIcon},
-            new TextFieldModel { FieldValue = "This is License", Types = "License", AutoCompleteIcon = AutocompleteIcon, DeleteTextFieldIcon = DeleteIcon},
-            new TextFieldModel { FieldValue = "Userfield1", Types = "Userfield1", AutoCompleteIcon = AutocompleteIcon, DeleteTextFieldIcon = DeleteIcon},
-            new TextFieldModel { FieldValue = "Userfield2", Types = "Userfield2", AutoCompleteIcon = AutocompleteIcon, DeleteTextFieldIcon = DeleteIcon},
-            new TextFieldModel { FieldValue = "Userfield3", Types = "Userfield3", AutoCompleteIcon = AutocompleteIcon, DeleteTextFieldIcon = DeleteIcon},
-            new TextFieldModel { FieldValue = "Userfield4", Types = "Userfield4", AutoCompleteIcon = AutocompleteIcon, DeleteTextFieldIcon = DeleteIcon},
         };
         public string Description { get; set; }
         public string PackageTitle { get; set; }
@@ -73,7 +65,7 @@ namespace ProgramManager.ViewModels
         public ICommand RemoveTextField { get; }
         public ICommand SavePackage { get; }
         public ICommand OpenInputName => new RelayCommand(obj => _windowInputName.ShowDialog());
-        public ICommand OpenTagDialog => new RelayCommand(obj => { _windowTagModify.Show(); });
+        public ICommand OpenTagDialog => new RelayCommand(obj => { _windowTagModify.ShowDialog(); });
         /// <summary>
         /// Контекстное меню, команды для добавления полей.
         /// </summary>

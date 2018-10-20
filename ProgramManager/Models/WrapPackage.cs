@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
-using ProgramManager.Models.PackageModels;
+using ProgramManager.Models.PackageModel;
 using ProgramManager.ViewModels;
+using ProgramManager.ViewModels.Base;
 
 namespace ProgramManager.Models
 {
@@ -35,7 +36,7 @@ namespace ProgramManager.Models
         /// Главный метод в основном делегирует работу других методов и возвращает результат.
         /// Метод также выполняет роль упаковщка, для спецальных тегов (Избранные, Все и т.д)
         /// </summary>
-        /// <param name="collection">Применяет коллекцию объектов типа PackageBase</param>
+        /// <param name="collection">Принимает коллекцию объектов типа PackageBase</param>
         /// <returns>Возвращает объект оболочку для представления</returns>
         public static List<WrapPackage> WrapPackageTag<T>(List<T> @collection) where T : PackageBase, new ()
         {
@@ -131,7 +132,7 @@ namespace ProgramManager.Models
                 select e.Value).ToList();
 
             var queryTags = root.Descendants("Package").Elements().Elements()
-                .Where(e => e.Name == "Tag" && e.Parent?.Parent?.LastAttribute.Value == category)
+                .Where(e => e.Name == "TagList" && e.Parent?.Parent?.LastAttribute.Value == category)
                 .Select(e => e.Value).ToList();
 
             queryTag.AddRange(queryTags);
