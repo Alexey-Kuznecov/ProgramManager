@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Windows.Data;
-using ProgramManager.Enums;
 using ProgramManager.MarkupExtensions;
 using ProgramManager.Models;
+using ProgramManager.Models.PackageModel;
 
 namespace ProgramManager.Converters
 {
@@ -22,10 +21,6 @@ namespace ProgramManager.Converters
             { "CompanySite", "Официальный сайт" },
             { "Copyright", "Авторские права" },
             { "HashSumm", "Хеш-сумма" },
-            { "Userfield1", "Userfield1" },
-            { "Userfield2", "Userfield2" },
-            { "Userfield3", "Userfield3" },
-            { "Userfield4", "Userfield4" },
         };
 
         public static IDictionary<string, string> Dictionary

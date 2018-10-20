@@ -1,7 +1,6 @@
 ﻿using System;
-using ProgramManager.ViewModels.Base;
 
-namespace ProgramManager.ViewModels
+namespace ProgramManager.ViewModels.Base
 {
     public class BaseConnector
     {

@@ -1,16 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Windows;
 using System.Xml.Linq;
 using ProgramManager.Enums;
 using ProgramManager.Filters;
 
-namespace ProgramManager.Models.PackageModels
+namespace ProgramManager.Models.PackageModel
 {
     /// Этот класс является обобщенным поэтому каждый потомок класса PackageBase будет совместим с данным классом, свойства производных классов
     /// будут гарантированно проинициализированы значениями из элементов xml документа, если имена свойств совпадают с именами xml элементов.
-    /// По результатам работы класса создается коллекция объектов типа List Т, свойства объектов которых будут инициализированы значениями элементов xml документа
+    /// По результатам работы класса создается коллекция объектов типа List Т, свойства объектов которых будут инициализированы значениями элементов xml документа.
     public class PackageAccess<T> where T : PackageBase, new()
     {
         private const string DocumentName = "packages.xml";

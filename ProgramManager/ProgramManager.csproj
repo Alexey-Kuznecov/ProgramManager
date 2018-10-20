@@ -86,7 +86,8 @@
     <Compile Include="Enums\FieldTypes.cs" />
     <Compile Include="Filters\FilterProperties.cs" />
     <Compile Include="Converters\ConverterBase.cs" />
-    <Compile Include="Models\CategoryModel.cs" />
+    <Compile Include="Models\PackageModel\CategoryModel.cs" />
+    <Compile Include="Models\Func\FuncHelper.cs" />
     <Compile Include="Models\PackageModel\PackageAccess.cs" />
     <Compile Include="Models\BaseXML.cs" />
     <Compile Include="Models\WrapPackage.cs" />
@@ -102,8 +103,8 @@
     <Compile Include="Enums\Keywords.cs" />
     <Compile Include="Converters\NumberToStringConverterExtension.cs" />
     <Compile Include="ViewModels\Base\BaseManager.cs" />
-    <Compile Include="Models\PackageMutator.cs" />
-    <Compile Include="Models\TextFieldModel.cs" />
+    <Compile Include="Models\PackageModify.cs" />
+    <Compile Include="Models\PackageModel\TextFieldModel.cs" />
     <Compile Include="ViewModels\Base\PropertiesChanged.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\PackagesDialogPartial.cs" />

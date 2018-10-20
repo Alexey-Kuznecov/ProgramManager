@@ -6,7 +6,8 @@ using System.Windows;
 using ProgramManager.Models;
 using ProgramManager.Converters;
 using ProgramManager.Enums;
-using ProgramManager.Models.PackageModels;
+using ProgramManager.Models.PackageModel;
+using ProgramManager.ViewModels.Base;
 using ProgramManager.Views;
 
 namespace ProgramManager.ViewModels
@@ -28,8 +29,13 @@ namespace ProgramManager.ViewModels
         /// <param name="data">Данные входящие в папкет.</param>
         public void SendPackage<T>(object data) where T: PackageBase, new ()
         {
+            // Получаем управление диалоговым окном пакетов.
             PackagesDialog window = data as PackagesDialog;
+            if (_tagList == null)
+                _tagList = new List<string>() { "Не подшитые" };
+                
 
+            // Добавления полей базовго класса.
             T package = new T()
             {
                 Name = PackageTitle,
@@ -41,6 +47,7 @@ namespace ProgramManager.ViewModels
                 TagList = _tagList,
                 Description = Description,         
             };
+            // Добавления полей производных классов.
             foreach (var property in package.GetType().GetProperties())
             {
                 if (TextField.SingleOrDefault(p => p.Types == property.Name) != null && property.GetValue(package) == null)
@@ -48,6 +55,7 @@ namespace ProgramManager.ViewModels
                     property.SetValue(package, TextField.Single(p => p.Types == property.Name).FieldValue);
                 }
             }
+            // Добавления пользовательских полей.
             foreach (var field in TextField.Select(p => p))
             {
                 if (field.Types.Contains(FieldTypes.Userfield.ToString()))
@@ -58,50 +66,6 @@ namespace ProgramManager.ViewModels
             BaseConnector connector = new BaseConnector();
             connector.OnPackageChanged(package);
             window?.Close();
-        }
-        /// <summary>
-        /// Получает с
-        /// </summary>
-        /// <param name="data"></param>
-        public void ConvertToDictionary(object data)
-        {
-            string key = null;
-
-            foreach (var value in (IEnumerable)data)
-            {
-                if (key == null)
-                {
-                    key = value.ToString(); continue;
-                }                
-                _dataList.Add(key, value.ToString()); break;
-            }         
-        }
-        /// <summary>
-        /// Получает с
-        /// </summary>
-        /// <param name="data"></param>
-        public void ConvertAnonymousToDictionary(object data)
-        {
-            string key = null;
-
-            if (data != null)
-            {
-                foreach (var obj in (IEnumerable)data)
-                {
-                    PropertyInfo[] properties = obj.GetType().GetProperties();
-
-                    foreach (var property in properties)
-                    {
-                        if (key == null)
-                        {
-                            key = property.GetValue(obj).ToString(); continue;
-                        }
-                        _dataList.Add(key, property.GetValue(obj).ToString());
-
-                        key = null; break;
-                    }
-                }
-            }
         }
         /// <summary>
         /// Метод для добавления нового поля.

@@ -1,6 +1,4 @@
-﻿using ProgramManager.Enums;
-
-namespace ProgramManager.Models
+﻿namespace ProgramManager.Models.PackageModel
 {
     public class TextFieldModel
     {

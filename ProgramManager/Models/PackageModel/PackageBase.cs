@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using ProgramManager.Filters;
 
-namespace ProgramManager.Models.PackageModels
+namespace ProgramManager.Models.PackageModel
 {
     public abstract class PackageBase
     {
@@ -14,19 +14,9 @@ namespace ProgramManager.Models.PackageModels
         public string Description { get; set; }
         public string Image { get; set; }
         public string Category { get; set; }
+        public string TagOne { get; set; }       
         private readonly IDictionary<string, string> _fieldList = new Dictionary<string, string>();
-        private readonly IDictionary<string, string> _taList = new Dictionary<string, string>();
-        public IDictionary<string, string> TaList
-        {
-            get { return _taList; }
-            set
-            {
-                if (value != null)
-                {
-                    _taList.Add(value.Keys.ToString(), value.Values.ToString());
-                }
-            }
-        }
+        public List<string> TagList { get; set; }
         public IDictionary<string, string> FieldList
         {
             get { return _fieldList; }
@@ -38,11 +28,9 @@ namespace ProgramManager.Models.PackageModels
                 }
             }
         }
-        public string TagOne { get; set; }
-        public List<string> TagList { get; set; }
         /// <summary>
         /// Это коллекция вбирает в себя все другие свойства для вывода их в панель деталей.
-        /// При этом свойства не содержат пустые значения.
+        /// При этом свойства не будут содержать пустые значения.
         /// </summary>
         public List<PropertyNotIsNull> Datails { get; set; }
         public abstract void AddPackage();

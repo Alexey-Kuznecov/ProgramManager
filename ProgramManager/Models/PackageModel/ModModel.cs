@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 
-namespace ProgramManager.Models.PackageModels
+namespace ProgramManager.Models.PackageModel
 {
     public class ModModel : PackageBase
     {

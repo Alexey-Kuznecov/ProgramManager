@@ -1,6 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using ProgramManager.Models;
-using ProgramManager.Models.PackageModels;
+using ProgramManager.Models.PackageModel;
 
 namespace ProgramManager.ViewModels.Base
 {
@@ -15,7 +15,7 @@ namespace ProgramManager.ViewModels.Base
         }
         public void AddNewPackage(object sender, ConnectorEventArgs e)
         {
-            PackageMutator.AddPackage(e.Package, _categoryStatus);
+            PackageModify.AddPackage(e.Package, _categoryStatus);
         }
         public static ObservableCollection<WrapPackage> GetPackages(CategoryModel category)
         {
@@ -50,6 +50,7 @@ namespace ProgramManager.ViewModels.Base
         }
         public static ObservableCollection<WrapPackage> GetPackages()
         {
+            _categoryStatus = CategoryModel.Categories[0].Name;
             _wrapperPackages = new ObservableCollection<WrapPackage>(
                 list: WrapPackage.WrapPackageTag(PackageAccess<ProgramModel>.GetPackages(CategoryModel.Categories[0])));
             return _wrapperPackages;

@@ -7,7 +7,7 @@
     xmlns:viewModels="clr-namespace:ProgramManager.ViewModels"
     Title=""
     Width="300"
-    Height="150"
+    Height="180"
     HorizontalAlignment="Center"
     VerticalAlignment="Center"
     WindowStartupLocation="CenterScreen"
@@ -28,12 +28,23 @@
             Margin="10,5,10,5"
             Tag="Имя:"
             Text="{Binding Name}" />
-        <Button
+        <WrapPanel
             Grid.Row="2"
-            Width="100"
-            Height="25"
-            Command="{Binding InputName}"
-            CommandParameter="{Binding Text, ElementName=FieldName}"
-            Content="Добавить" />
+            Margin="10"
+            HorizontalAlignment="Right">
+            <Button
+                Width="100"
+                Height="25"
+                Margin="0,0,10,0"
+                Command="{Binding InputName}"
+                CommandParameter="{Binding Text, ElementName=FieldName}"
+                Content="Добавить" />
+            <Button
+                Width="100"
+                Height="25"
+                Command="{Binding Cancel}"
+                CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                Content="Отмена" />
+        </WrapPanel>
     </Grid>
 </Window>
