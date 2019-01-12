@@ -6,7 +6,8 @@ using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Threading;
 using ProgramManager.Models.PackageModel;
-using ProgramManager.ViewModels.Base;
+using ProgramManager.Services;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace ProgramManager.ViewModels
 {
@@ -16,10 +17,11 @@ namespace ProgramManager.ViewModels
 
         public MainViewModel()
         {
-            _baseManager = new BaseManager();
+            _packagesManager = new PackagesManager();
             _dispatcher =  Dispatcher.CurrentDispatcher;
             Categories = CategoryModel.Categories;
-            WrapPackage = BaseManager.GetPackages();
+            WrapPackage = PackagesManager.GetPackages();
+            EventAggregate.LoadPackage += LoadPackage;
         }
 
         #endregion
@@ -28,7 +30,7 @@ namespace ProgramManager.ViewModels
 
         private readonly Dispatcher _dispatcher;
         private PackageBase _currentPackage;
-        private BaseManager _baseManager;
+        private PackagesManager _packagesManager;
         private CategoryModel _currentCategory;
         private List<CategoryModel> _categories;
         private ObservableCollection<WrapPackage> _wrapPackage;
@@ -63,7 +65,7 @@ namespace ProgramManager.ViewModels
             {
                 // Запрос на изсенения категории пакетов
                 if (_currentCategory != null)
-                    WrapPackage = BaseManager.GetPackages(value);
+                    WrapPackage = PackagesManager.GetPackages(value);
 
                 _currentCategory = value;
                 // Выбор первого пакета в списке после изменения категории
@@ -162,8 +164,24 @@ namespace ProgramManager.ViewModels
         {
             _dispatcher.InvokeShutdown();
         });
-
+        public ICommand PackageUpdate => new RelayCommand(obj => { PackageUpdated(); });
         #endregion
 
+        #region Method
+
+        private void LoadPackage(object message)
+        {
+            WrapPackage = PackagesManager.GetPackages(_currentCategory);
+
+            if (_indexPackage < 0)
+                CurrentPackage = _wrapPackage[0].Packages[0];
+            _filterText = null;
+        }
+        private void PackageUpdated()
+        {
+            PackagesDialogVisibility.EditPackageDialog(_currentPackage);
+        }
+
+        #endregion
     }
 }

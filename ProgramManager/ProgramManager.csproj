@@ -88,7 +88,7 @@
     <Compile Include="Converters\ConverterBase.cs" />
     <Compile Include="Models\PackageModel\CategoryModel.cs" />
     <Compile Include="Models\Func\FuncHelper.cs" />
-    <Compile Include="Models\PackageModel\PackageAccess.cs" />
+    <Compile Include="Models\PackagesReader.cs" />
     <Compile Include="Models\BaseXML.cs" />
     <Compile Include="Models\WrapPackage.cs" />
     <Compile Include="Models\PackageModel\DriverModel.cs" />
@@ -97,13 +97,13 @@
     <Compile Include="Models\PackageModel\PackageBase.cs" />
     <Compile Include="Models\PackageModel\PluginModel.cs" />
     <Compile Include="Models\PackageModel\ProgramModel.cs" />
-    <Compile Include="ViewModels\Base\BaseConnector.cs" />
-    <Compile Include="ViewModels\Base\ConnectorEventArgs.cs" />
+    <Compile Include="Services\EventAggregate.cs" />
+    <Compile Include="Services\BaseEventArgs.cs" />
     <Compile Include="Converters\KeywordToTextConverter.cs" />
     <Compile Include="Enums\Keywords.cs" />
     <Compile Include="Converters\NumberToStringConverterExtension.cs" />
-    <Compile Include="ViewModels\Base\BaseManager.cs" />
-    <Compile Include="Models\PackageModify.cs" />
+    <Compile Include="Services\PackagesManager.cs" />
+    <Compile Include="Models\PackageAccess.cs" />
     <Compile Include="Models\PackageModel\TextFieldModel.cs" />
     <Compile Include="ViewModels\Base\PropertiesChanged.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />

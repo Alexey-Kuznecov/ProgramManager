@@ -5,7 +5,7 @@ using System.Windows;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Messaging;
 using ProgramManager.Models;
-using ProgramManager.ViewModels.Base;
+using ProgramManager.Services;
 using ProgramManager.Views.DialogPacks;
 
 namespace ProgramManager.ViewModels
@@ -32,7 +32,7 @@ namespace ProgramManager.ViewModels
         /// </summary>
         /// <param name="sender">Источник</param>
         /// <param name="obj">Ожидается объект типа WrapPackage и его свойство Name</param>
-        public static void DisplayTagList(object sender, ConnectorEventArgs tags)
+        public static void DisplayTagList(object sender, BaseEventArgs tags)
         {
             List<WrapPackage> packs = tags.Package as List<WrapPackage>;
             

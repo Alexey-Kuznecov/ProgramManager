@@ -1,16 +1,19 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Xml.Linq;
 using ProgramManager.Enums;
 using ProgramManager.Filters;
+using ProgramManager.Models.PackageModel;
 
-namespace ProgramManager.Models.PackageModel
+namespace ProgramManager.Models
 {
     /// Этот класс является обобщенным поэтому каждый потомок класса PackageBase будет совместим с данным классом, свойства производных классов
     /// будут гарантированно проинициализированы значениями из элементов xml документа, если имена свойств совпадают с именами xml элементов.
     /// По результатам работы класса создается коллекция объектов типа List Т, свойства объектов которых будут инициализированы значениями элементов xml документа.
-    public class PackageAccess<T> where T : PackageBase, new()
+    public class PackagesReader<T> where T : PackageBase, new()
     {
         private const string DocumentName = "packages.xml";
         /// <summary>
@@ -31,12 +34,13 @@ namespace ProgramManager.Models.PackageModel
                                              where (string)element.Attribute("Category") == category.Name
                                              select element;
 
-            // Формирования нового объекта на основе данных xml документа.
+           // Формирования нового объекта на основе данных xml документа.
            foreach (XElement element in document)
            {
                 // Инициализация свойств из базового класса
                packages.Add(new T
                {
+                   Id = int.Parse(element.FirstAttribute.Value),
                    Name = element.Element(FieldTypes.Name.ToString())?.Value,
                    Author = element.Element(FieldTypes.Author.ToString())?.Value,
                    Version = element.Element(FieldTypes.Version.ToString())?.Value,
@@ -47,11 +51,12 @@ namespace ProgramManager.Models.PackageModel
                    // Вызов метода для создания коллекции тегов, если пакет имеет более одного тега
                    TagList = GetTagsList(element),
                    Category = element.LastAttribute.Value,
+                   TextField = SetFieldValue(element)
                });
                // Вызов метода для инициализации свойств производного класса.
                SetValueDeclaredProperties(packages, element, index);
                // Вызов метода фильтрации полей с пустыми значениями данного объекта.
-               packages[index].Datails = propNotIsEmpty.Filter(packages[index++]);              
+               packages[index].Datails = propNotIsEmpty.Filter(packages[index++]);             
             }
             return packages;
         }
@@ -84,6 +89,54 @@ namespace ProgramManager.Models.PackageModel
             {
                 property.SetValue(packages[index], element.Element(property.Name)?.Value);
             }
+        }
+        /// <summary>
+        /// Adding user field to property of collection. 
+        /// </summary>
+        /// <param name="node">Accents a current item.</param>
+        /// <returns>Return the collection of object is TextFieldModel type.</returns>
+        private static List<TextFieldModel> SetFieldValue(XElement node)
+        {
+            List<TextFieldModel> textField = new List<TextFieldModel>();
+
+            IEnumerable<XElement> elements = node.Elements();
+
+            foreach (var element in elements)
+            {
+                if (element.HasElements && element.Name == FieldTypes.Userfield.ToString() + "List")
+                {
+                    foreach (var child in element.Elements())
+                    {
+                        textField.Add(new TextFieldModel()
+                        {
+                            FieldValue = child.Value,
+                            Types = child.Name + child.FirstAttribute.Value,
+                            Label = child.LastAttribute.Value,
+                            Hint = child.LastAttribute.Value
+                        });
+                    }
+                }
+                if (!element.HasElements && element.Name == FieldTypes.Userfield.ToString())
+                {
+                    textField.Add(new TextFieldModel()
+                    {
+                        FieldValue = element.Value,
+                        Types = element.Name + element.FirstAttribute.Value,
+                        Label = element.LastAttribute.Value,
+                        Hint = element.LastAttribute.Value
+                    });
+                }
+                // Добавление всех полей кроме основных и пользовательских.
+                if (!element.HasElements && element.Name != "Name" && element.Name != "Description" && element.Name != "Tag" && element.Name != "Image" && element.Name != "Userfield")
+                {
+                    textField.Add(new TextFieldModel()
+                    {
+                        FieldValue = element.Value,
+                        Types = element.Name.ToString()
+                    });
+                }
+            }
+            return textField;
         }
     }
 }

@@ -1,13 +1,12 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
-using System.Reflection;
 using System.Windows;
-using ProgramManager.Models;
 using ProgramManager.Converters;
 using ProgramManager.Enums;
 using ProgramManager.Models.PackageModel;
-using ProgramManager.ViewModels.Base;
+using ProgramManager.Services;
 using ProgramManager.Views;
 
 namespace ProgramManager.ViewModels
@@ -16,11 +15,31 @@ namespace ProgramManager.ViewModels
     partial class PackagesDialogViewModel
     {
         private static List<string> _tagList;
+        private int _id;
         private static Dictionary<string, string> _dataList = new Dictionary<string, string>();
         public void InitialDataSource(object data)
         {
             if (data is List<string>)
                 _tagList = data as List<string>;
+        }
+        /// <summary>
+        /// Инициализация окна пакетов значениями по умолчанию.
+        /// </summary>
+        public static void InitializePackageDialog()
+        {
+            TextField = new ObservableCollection<TextFieldModel>()
+            {
+                new TextFieldModel
+                {
+                    FieldValue = "This is Author", Types = "Author", AutoCompleteIcon = AutocompleteIcon,
+                    DeleteTextFieldIcon = DeleteIcon
+                },
+                new TextFieldModel
+                {
+                    FieldValue = "This is Version", Types = "Version", AutoCompleteIcon = AutocompleteIcon,
+                    DeleteTextFieldIcon = DeleteIcon
+                }
+            };
         }
         /// <summary>
         /// Отправляет данные для их добавления в базу данных.
@@ -29,15 +48,17 @@ namespace ProgramManager.ViewModels
         /// <param name="data">Данные входящие в папкет.</param>
         public void SendPackage<T>(object data) where T: PackageBase, new ()
         {
-            // Получаем управление диалоговым окном пакетов.
-            PackagesDialog window = data as PackagesDialog;
             if (_tagList == null)
                 _tagList = new List<string>() { "Не подшитые" };
-                
+            
+            // Получаем управление диалоговым окном пакетов.
+            PackagesDialog window = data as PackagesDialog;
+            EventAggregate connector = new EventAggregate();
 
             // Добавления полей базовго класса.
             T package = new T()
             {
+                Id = _id,
                 Name = PackageTitle,
                 Author = TextField.SingleOrDefault(a => a.Types == FieldTypes.Author.ToString())?.FieldValue,
                 HashSumm = TextField.SingleOrDefault(a => a.Types == FieldTypes.HashSumm.ToString())?.FieldValue,
@@ -62,9 +83,12 @@ namespace ProgramManager.ViewModels
                 {
                     package.FieldList.Add(field.Types, field.FieldValue);
                 }
-            }
-            BaseConnector connector = new BaseConnector();
-            connector.OnPackageChanged(package);
+            }          
+            if (window.Title == "Редактирование пакета")
+                connector.OnPackageChanged(package);
+            else
+                connector.OnNewPackage(package);
+
             window?.Close();
         }
         /// <summary>
@@ -99,7 +123,6 @@ namespace ProgramManager.ViewModels
         /// <param name="fieldName">Принимает имя поля</param>
         private void InputCustomName(string fieldName)
         {
-
             if (fieldName != null && fieldName != _name)
             {
                 var formatKey = FieldTypes.Userfield.ToString() + (TextField.Count + 1);
@@ -116,6 +139,32 @@ namespace ProgramManager.ViewModels
                 _windowInputName.Visibility = Visibility.Hidden;
             }
             _name = fieldName;
+        }
+        /// <summary>
+        /// Данный метод загружает данные выбранного пакета для редактирования
+        /// </summary>
+        /// <param name="package">Данные пакета выбранного в списке пакетов в основном окне.</param>
+        public void LoadPackage(PackageBase package)
+        {
+            // Заполнение полей диалогового окна пакетов
+            _id = package.Id;
+            Description = package.Description;
+            PackageTitle = package.Name;
+            TextField.Clear();
+
+            for (int index = 0; index < package.TextField.Count; index++)
+            {
+                // Добавления полей данного пакета
+                TextField.Add(new TextFieldModel()
+                {
+                    FieldValue = package.TextField[index].FieldValue,
+                    AutoCompleteIcon = "../../Resources/Icons/Businessman_48px.png",
+                    DeleteTextFieldIcon = "../../Resources/Icons/Delete_48px.png",
+                    Types = package.TextField[index].Types
+                });
+                if (!FieldConverter.Dictionary.ContainsKey(package.TextField[index].Types))
+                    FieldConverter.Dictionary.Add(package.TextField[index].Types, package.TextField[index].Label);                        
+            }
         }
     }
 }

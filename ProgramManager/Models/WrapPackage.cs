@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 using ProgramManager.Models.PackageModel;
+using ProgramManager.Services;
 using ProgramManager.ViewModels;
-using ProgramManager.ViewModels.Base;
 
 namespace ProgramManager.Models
 {
@@ -17,7 +17,7 @@ namespace ProgramManager.Models
     public class WrapPackage : IEnumerable<PackageBase>
     {
         private static List<WrapPackage> _tagList;
-        private static BaseConnector _connector;
+        private static EventAggregate _connector;
         public string Name { get; set; }
         public List<PackageBase> Packages { get; set; }
         public static List<PackageBase> AllPackages { get; set; }
@@ -27,7 +27,7 @@ namespace ProgramManager.Models
             set
             {
                 _tagList = value;
-                _connector = new BaseConnector();
+                _connector = new EventAggregate();
                 // Вызов события добавления, возникает при полной загруки списка тегов.           
                 _connector.OnLoadTagsList(_tagList);
             }
@@ -43,7 +43,7 @@ namespace ProgramManager.Models
             List<WrapPackage> wrapperPackage = new List<WrapPackage>();
             
             // TODO: Обратотать исключение, например ввыести сообщение об отсутвии данных...
-            // WARNING: Выдает исключение если в базе отсутствует данные с какой-либо категорией.
+            // WARNING: Выдает исключение если в базе отсутствует данные какой-либо категорией.
             // Вызов метода для поиска тегов а xml документе и инициализация свойств класса оболочки
             wrapperPackage = wrapperPackage.Count == 0 ? TagFinder(@collection[0].Category) : wrapperPackage;
             InitialPackages(@collection, wrapperPackage);

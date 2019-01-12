@@ -6,6 +6,7 @@ namespace ProgramManager.Models.PackageModel
     public abstract class PackageBase
     {
         protected const string DocumentName = "packages.xml";
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Author { get; set; }
         public string Version { get; set; }
@@ -33,6 +34,7 @@ namespace ProgramManager.Models.PackageModel
         /// При этом свойства не будут содержать пустые значения.
         /// </summary>
         public List<PropertyNotIsNull> Datails { get; set; }
+        public List<TextFieldModel> TextField { get; set; }
         public abstract void AddPackage();
         public virtual void UpdatePackage() { }
         public virtual void RemovePackage() { }

@@ -16,27 +16,36 @@ namespace ProgramManager.ViewModels
         private const string DeleteIcon = "../../Resources/Icons/Delete_48px.png";
         private static InputName _windowInputName;
         private static TagDialog _windowTagModify;
+        private string _description;
+        private string _packageTitle;
+
         #region Constructor
 
         public PackagesDialogViewModel()
         {
+            // Initial fields.
             _windowInputName = new InputName();
             _windowTagModify = new TagDialog();
+
+            // Initial data.
+            InitializePackageDialog();
+
+            // Activate commands.
             RemoveTextField = new RelayCommand(obj => TextField.Remove(obj as TextFieldModel));
             SavePackage = new RelayCommand(obj => SendPackage<ProgramModel>(obj));
+
+            // Registration to receive data.
             Messenger.Default.Register<InputNameViewModel>(this, action => InputCustomName(action.Name));
+            Messenger.Default.Register<PackageBase>(this, action => LoadPackage(action));
             Messenger.Default.Register<List<string>>(this, InitialDataSource);
-            Description = "This is Description";
-            PackageTitle = "This is PackageTitle";
         }
 
         #endregion
 
-
         #region Properties
 
         /// <summary>
-        /// Создание контекстного меню вкладки поля.
+        /// Контекстное меню для вкладки поля.
         /// </summary>
         public List<MenuItem> MenuItem { get; set; } = new List<MenuItem>()
         {
@@ -50,13 +59,20 @@ namespace ProgramManager.ViewModels
             new MenuItem { Command = MenuCommand, CommandParameter = "HashSumm", Header = "Хеш-суммы", },
             new MenuItem { Command = MenuCommand, CommandParameter = "Other", Header = "Другое", }
         };
-        public static ObservableCollection<TextFieldModel> TextField { get; } = new ObservableCollection<TextFieldModel>()
+        public static ObservableCollection<TextFieldModel> TextField { get; set; }
+        public string Description
         {
-            new TextFieldModel { FieldValue = "This is Author", Types = "Author", AutoCompleteIcon = AutocompleteIcon, DeleteTextFieldIcon = DeleteIcon},
-            new TextFieldModel { FieldValue = "This is Version", Types = "Version", AutoCompleteIcon = AutocompleteIcon, DeleteTextFieldIcon = DeleteIcon},
-        };
-        public string Description { get; set; }
-        public string PackageTitle { get; set; }
+            get { return _description;  }
+            set { SetProperty(ref _description, value, () => Description); }
+        }
+        public string PackageTitle
+        {
+            get { return _packageTitle; }
+            set
+            {
+                SetProperty(ref _packageTitle, value, () => PackageTitle);
+            }
+        }
 
         #endregion
 
