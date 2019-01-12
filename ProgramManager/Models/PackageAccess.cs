@@ -4,19 +4,20 @@ using System.Linq;
 using System.Xml.Linq;
 using ProgramManager.Models.Func;
 using ProgramManager.Models.PackageModel;
+using ProgramManager.Services;
 
 namespace ProgramManager.Models
 {
-    public class PackageModify
+    public class PackageAccess
     {
         const string DocumentName = "packages.xml";
         /// <summary>
         /// Конструктор по умолчанию
         /// </summary>
-        public PackageModify()
+        public PackageAccess()
         {
             if (!File.Exists(DocumentName))
-                PackageModify.FormatHeadXmlDoc();
+                PackageAccess.FormatHeadXmlDoc();
         }
         /// <summary>
         /// Создает заголовок XML документа
@@ -76,6 +77,8 @@ namespace ProgramManager.Models
 
             xDoc.Element("Packages")?.Add(newPack);         
             xDoc.Save(DocumentName);
+            EventAggregate connector = new EventAggregate();
+            connector.OnLoadPackage("Xml updated");
         }
         /// <summary>
         /// Обновляет данные по индексу и сохраняет документ 

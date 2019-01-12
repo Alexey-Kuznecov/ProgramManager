@@ -56,7 +56,7 @@
             </MenuItem>
             <MenuItem FontSize="12" Header="Команды">
                 <MenuItem Command="{Binding OpenDialogPackage}" Header="Собрать пакет" />
-                <MenuItem Header="Отредактировать пакет" />
+                <MenuItem Command="{Binding PackageUpdate}" Header="Отредактировать пакет" />
                 <MenuItem Header="Переименовать пакет" />
                 <MenuItem Header="Устнановка пакета" />
                 <MenuItem Header="Удаление пакета" />
@@ -131,7 +131,10 @@
                     </ContentControl>
                 </Button.Content>
             </Button>
-            <Button Height="30" Style="{StaticResource btIcon}">
+            <Button
+                Height="30"
+                Command="{Binding PackageUpdate}"
+                Style="{StaticResource btIcon}">
                 <Button.Content>
                     <ContentControl>
                         <WrapPanel>

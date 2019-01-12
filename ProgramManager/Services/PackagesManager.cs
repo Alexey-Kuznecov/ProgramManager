@@ -1,21 +1,29 @@
 ﻿using System.Collections.ObjectModel;
 using ProgramManager.Models;
 using ProgramManager.Models.PackageModel;
+using ProgramManager.ViewModels;
 
-namespace ProgramManager.ViewModels.Base
+namespace ProgramManager.Services
 {
-    public class BaseManager
+    public class PackagesManager
     {
         private static ObservableCollection<WrapPackage> _wrapperPackages;
         private static string _categoryStatus;
-        public BaseManager()
+        public PackagesManager()
         {
-            BaseConnector.PackageChanged += AddNewPackage;
-            BaseConnector.TagListUpdate += TagDialogViewModel.DisplayTagList;
+            EventAggregate.NewPackage += EventAggregate_AddNewPackage;
+            EventAggregate.TagListUpdate += TagDialogViewModel.DisplayTagList;
+            EventAggregate.PackageChanged += EventAggregate_ChangePackage;
         }
-        public void AddNewPackage(object sender, ConnectorEventArgs e)
+
+        private void EventAggregate_ChangePackage(object sender, BaseEventArgs e)
         {
-            PackageModify.AddPackage(e.Package, _categoryStatus);
+            PackageBase package = e.Package as PackageBase;
+            PackageAccess.UpdatePackage(package.Id, package);
+        }
+        public void EventAggregate_AddNewPackage(object sender, BaseEventArgs e)
+        {
+            PackageAccess.AddPackage(e.Package, _categoryStatus);
         }
         public static ObservableCollection<WrapPackage> GetPackages(CategoryModel category)
         {
@@ -24,27 +32,27 @@ namespace ProgramManager.ViewModels.Base
             if (category.PackageType is ProgramModel)
             {
                 _wrapperPackages = new ObservableCollection<WrapPackage>(
-                    WrapPackage.WrapPackageTag(PackageAccess<ProgramModel>.GetPackages(category)));
+                    WrapPackage.WrapPackageTag(PackagesReader<ProgramModel>.GetPackages(category)));
             }
             if (category.PackageType is DriverModel)
             {
                 _wrapperPackages = new ObservableCollection<WrapPackage>(
-                    WrapPackage.WrapPackageTag(PackageAccess<DriverModel>.GetPackages(category)));
+                    WrapPackage.WrapPackageTag(PackagesReader<DriverModel>.GetPackages(category)));
             }
             if (category.PackageType is ModModel)
             {
                 _wrapperPackages = new ObservableCollection<WrapPackage>(
-                    WrapPackage.WrapPackageTag(PackageAccess<ModModel>.GetPackages(category)));
+                    WrapPackage.WrapPackageTag(PackagesReader<ModModel>.GetPackages(category)));
             }
             if (category.PackageType is GameModel)
             {
                 _wrapperPackages = new ObservableCollection<WrapPackage>(
-                    WrapPackage.WrapPackageTag(PackageAccess<GameModel>.GetPackages(category)));
+                    WrapPackage.WrapPackageTag(PackagesReader<GameModel>.GetPackages(category)));
             }
             if (category.PackageType is PluginModel)
             {
                 _wrapperPackages = new ObservableCollection<WrapPackage>(
-                    WrapPackage.WrapPackageTag(PackageAccess<PluginModel>.GetPackages(category)));
+                    WrapPackage.WrapPackageTag(PackagesReader<PluginModel>.GetPackages(category)));
             }
             return _wrapperPackages;
         }
@@ -52,7 +60,7 @@ namespace ProgramManager.ViewModels.Base
         {
             _categoryStatus = CategoryModel.Categories[0].Name;
             _wrapperPackages = new ObservableCollection<WrapPackage>(
-                list: WrapPackage.WrapPackageTag(PackageAccess<ProgramModel>.GetPackages(CategoryModel.Categories[0])));
+                list: WrapPackage.WrapPackageTag(PackagesReader<ProgramModel>.GetPackages(CategoryModel.Categories[0])));
             return _wrapperPackages;
         }
 

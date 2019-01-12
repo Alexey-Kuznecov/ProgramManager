@@ -1,4 +1,6 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<!DOCTYPE Packages SYSTEM "Packages.dtd"[]>
+<?PackageHandler out-of-print?>
 <Packages>
   <Package Id="0" Category="Программы">
     <Name>Photoshop</Name>
@@ -8,10 +10,6 @@
     <Description>Программа для оформления фотографий</Description>
     <CompanySite>https://Adobe.com</CompanySite>
     <License>5Q86W-TFPN7-K8VCJ-PH3CT</License>
-    <UserfieldList Processor="">
-      <Userfield Id="0" FieldName="Материалы">https://photomaster.com</Userfield>
-      <Userfield Id="1" FieldName="Ресурсы">https://Adobe.com/Resources/</Userfield>
-    </UserfieldList>
     <Image Source="User/Images/19572.jpg" />
   </Package>
   <Package Id="1" Category="Программы">
@@ -31,11 +29,12 @@
     <Image Source="User/Images/19572.jpg" />
   </Package>
   <Package Id="3" Category="Программы">
-    <Name>LazyCure2</Name>
+    <Name>LazyCure</Name>
     <Author>Andrei Kulabukhau</Author>
     <Version>0.10</Version>
+    <Tag>Органазеры</Tag>
     <Description>Программа для измерения времени</Description>
-    <Image />
+    <Image Source="User/Images/19572.jpg" />
   </Package>
   <Package Id="4" Category="Программы">
     <Name>Firefox</Name>
@@ -225,33 +224,41 @@
     <Userfield Id="0" FieldName="Лозунг">Распознавайте.  Объединяйте.  Стимулируйте.</Userfield>
   </Package>
   <Package Id="27" Category="Программы">
-    <Name>апрпарпар</Name>
-    <Author>32432</Author>
-    <Version>ыфвфывф</Version>
-    <Source>вфывыфв</Source>
-    <Description>23432423</Description>
-    <Userfield Id="0" FieldName="ееее">ыфвфывфы</Userfield>
-    <TagList>
-      <Tag Id="0">Офисные</Tag>
-      <Tag Id="1">Редактор графики</Tag>
-      <Tag Id="2">Органазеры</Tag>
-    </TagList>
-  </Package>
-  <Package Id="28" Category="Программы">
-    <Name>выфвыфвфыв</Name>
+    <Name>This is PackageTitle</Name>
     <Author>This is Author</Author>
     <Version>This is Version</Version>
-    <Description>фывфывфы</Description>
-    <TagList>
-      <Tag Id="0">Офисные</Tag>
-      <Tag Id="1">Редактор графики</Tag>
-      <Tag Id="2">Органазеры</Tag>
-      <Tag Id="3">3D Редакторы</Tag>
-      <Tag Id="4">Браузеры</Tag>
-    </TagList>
-    <UserfieldList Processor="">
-      <Userfield Id="0" FieldName="ввввв">вввввыыв</Userfield>
-      <Userfield Id="1" FieldName="ффффф">фффффыввыв</Userfield>
-    </UserfieldList>
+    <Description>This is Description</Description>
+    <Tag Id="0">Не подшитые</Tag>
   </Package>
+  <Package Id="28" Category="Программы">
+    <Name>This is PackageTitle</Name>
+    <Author>This is Author</Author>
+    <Version>This is Version</Version>
+    <Description>This is Description</Description>
+    <Userfield Id="0" FieldName="sadasd">sadasd</Userfield>
+    <TagList>
+      <Tag Id="0">IDE</Tag>
+      <Tag Id="1">Антивирусы</Tag>
+    </TagList>
+  </Package>
+  <Package Id="29" Category="Программы">
+    <Name>This is PackageTitle</Name>
+    <Author>This is Author</Author>
+    <Version>This is Version</Version>
+    <Description>This is Description</Description>
+    <Tag Id="0">Не подшитые</Tag>
+    <Userfield Id="0" FieldName="sadasd">sadasd</Userfield>
+  </Package>
+  <Package Id="30" Category="Программы">
+    <Name>This is PackageTitle</Name>
+    <Author>This is Author</Author>
+    <Version>This is Version</Version>
+    <Description>This is Description</Description>
+    <Tag Id="0">Не подшитые</Tag>
+    <Userfield>
+        <Userfield Id="0" FieldName="sadasd">sadasd</Userfield>
+        <Userfield Id="1" FieldName="sadasd2">sadasd</Userfield>
+        <Userfield Id="2" FieldName="sadasd">sadasd</Userfield>
+    </Userfield>
+</Package>
 </Packages>

@@ -1,5 +1,8 @@
 ﻿using System.Windows;
+using ProgramManager.Models.PackageModel;
 using ProgramManager.Views;
+using GalaSoft.MvvmLight.Messaging;
+using ProgramManager.Converters;
 
 namespace ProgramManager.ViewModels
 {
@@ -10,15 +13,32 @@ namespace ProgramManager.ViewModels
     {
         private static PackagesDialog _packagesDialog = new PackagesDialog();
 
+        public static void EditPackageDialog(PackageBase currPackage)
+        {
+            PackagesDialog packagesDialog = new PackagesDialog();
+
+            Messenger.Default.Send(currPackage);
+            packagesDialog.SaveAndEdit.Content = "Изменить";
+            packagesDialog.Title = "Редактирование пакета";
+            packagesDialog.ShowDialog();
+            
+            //Выполнение дополнительных действий после закрытия окна редактирования
+            if (!packagesDialog.IsActive)
+            {
+                // Чистка словоря от пользовательских полей 
+                for (int i = 0; i < FieldConverter.Dictionary.Count; i++)
+                    FieldConverter.Dictionary.Remove("Userfield" + i);     
+            }          
+        }
         public static void OpenPackageDialog()
         {
             lock (_packagesDialog)
             {
-                // TODO Строка не удалена а просто закрыта комментарием, так как решает проблему с достпупом к дочерниму окну после закрытия.
-                // Но, повторно инициальзирует конструктор что приводит к непресказуеммой работе програмы, оставил на будующие когда вернусь к этой проблме.
+                // TODO Строка не удалена а просто закрыта комментарием, так как решает проблему с доступом к дочерниму окну после закрытия.
+                // Но, повторно инициальзирует конструктор что приводит к непресказуеммой работе программы, оставил на будующие когда вернусь к этой проблеме.
                 //_packagesDialog = new PackagesDialog();
-                _packagesDialog.Visibility = Visibility.Visible;
-            }        
+                _packagesDialog.ShowDialog();
+            }
         }
         public static void ClosePackageDialog()
         {
