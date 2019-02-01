@@ -8,6 +8,7 @@ using ProgramManager.Enums;
 using ProgramManager.Models.PackageModel;
 using ProgramManager.Services;
 using ProgramManager.Views;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace ProgramManager.ViewModels
 {
@@ -69,6 +70,24 @@ namespace ProgramManager.ViewModels
                 Description = Description,         
             };
             // Добавления полей производных классов.
+            AddUniqueField(package);
+            // Добавления пользовательских полей.
+            AddCustomField(package);
+
+            if (window.Title == "Редактирование пакета")
+                connector.OnPackageChanged(package);
+            else
+                connector.OnNewPackage(package);
+
+            window?.Close();
+        }
+        /// <summary>
+        /// Метод заполняет уникальные свойства, которые объявлены в производных классах.
+        /// </summary>
+        /// <typeparam name="T">Тип производнного класса например ProgramModel.</typeparam>
+        /// <param name="package">Объект с уникальными свойствами.</param>
+        private void AddUniqueField<T>(T package)
+        {
             foreach (var property in package.GetType().GetProperties())
             {
                 if (TextField.SingleOrDefault(p => p.Types == property.Name) != null && property.GetValue(package) == null)
@@ -76,20 +95,21 @@ namespace ProgramManager.ViewModels
                     property.SetValue(package, TextField.Single(p => p.Types == property.Name).FieldValue);
                 }
             }
-            // Добавления пользовательских полей.
+        }
+        /// <summary>
+        /// Метод заполняет свойство FieldList из абстрактного класса PackageBase — полями созданными пользователем.
+        /// </summary>
+        /// <typeparam name="T">Тип производнного класса например "ProgramModel".</typeparam>
+        /// <param name="package">Объект с свойством FieldList</param>
+        private void AddCustomField<T>(T package) where T : PackageBase
+        {
             foreach (var field in TextField.Select(p => p))
             {
                 if (field.Types.Contains(FieldTypes.Userfield.ToString()))
                 {
                     package.FieldList.Add(field.Types, field.FieldValue);
                 }
-            }          
-            if (window.Title == "Редактирование пакета")
-                connector.OnPackageChanged(package);
-            else
-                connector.OnNewPackage(package);
-
-            window?.Close();
+            }
         }
         /// <summary>
         /// Метод для добавления нового поля.
@@ -136,6 +156,7 @@ namespace ProgramManager.ViewModels
                     AutoCompleteIcon = AutocompleteIcon,
                     DeleteTextFieldIcon = DeleteIcon,
                 });
+
                 _windowInputName.Visibility = Visibility.Hidden;
             }
             _name = fieldName;
@@ -162,8 +183,10 @@ namespace ProgramManager.ViewModels
                     DeleteTextFieldIcon = "../../Resources/Icons/Delete_48px.png",
                     Types = package.TextField[index].Types
                 });
+                
+                // Добавления данных полей в словарь ассоциаций 
                 if (!FieldConverter.Dictionary.ContainsKey(package.TextField[index].Types))
-                    FieldConverter.Dictionary.Add(package.TextField[index].Types, package.TextField[index].Label);                        
+                    FieldConverter.Dictionary.Add(package.TextField[index].Types, package.TextField[index].Label);
             }
         }
     }

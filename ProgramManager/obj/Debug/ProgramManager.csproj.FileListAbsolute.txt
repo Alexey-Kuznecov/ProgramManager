@@ -38,3 +38,43 @@ C:\Users\Алексей\Documents\Visual Studio 2015\Projects\ProgramManager\Pro
 C:\Users\Алексей\Documents\Visual Studio 2015\Projects\ProgramManager\ProgramManager\obj\Debug\Views\DialogPacks\TagDialog.g.cs
 C:\Users\Алексей\Documents\Visual Studio 2015\Projects\ProgramManager\ProgramManager\obj\Debug\Views\DialogPacks\TagDialog.baml
 C:\Users\Алексей\Documents\Visual Studio 2015\Projects\ProgramManager\ProgramManager\obj\Debug\ProgramManager.csprojResolveAssemblyReference.cache
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\ProgramManager.exe
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\ProgramManager.pdb
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\ProgramManager.exe
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\ProgramManager.pdb
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\AsyncMvvmMessenger.dll
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\GalaSoft.MvvmLight.dll
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\GalaSoft.MvvmLight.Extras.dll
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\GalaSoft.MvvmLight.Platform.dll
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\Microsoft.Practices.ServiceLocation.dll
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\System.Windows.Interactivity.dll
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\AsyncMvvmMessenger.xml
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\GalaSoft.MvvmLight.pdb
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\GalaSoft.MvvmLight.xml
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\GalaSoft.MvvmLight.Extras.pdb
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\GalaSoft.MvvmLight.Extras.xml
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\GalaSoft.MvvmLight.Platform.pdb
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\GalaSoft.MvvmLight.Platform.xml
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\Microsoft.Practices.ServiceLocation.pdb
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\Microsoft.Practices.ServiceLocation.xml
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\ProgramManager.csprojResolveAssemblyReference.cache
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Views\DialogPacks\TabFiles.baml
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Views\DialogPacks\TagDialog.g.cs
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Views\PackagesDialog.g.cs
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Views\DialogPacks\InputName.g.cs
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Views\DialogPacks\TabFields.g.cs
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Views\DialogPacks\TabFiles.g.cs
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Views\MainView.g.cs
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\App.g.cs
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\GeneratedInternalTypeHelper.g.cs
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\ProgramManager_MarkupCompile.cache
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\ProgramManager_MarkupCompile.lref
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\App.baml
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Views\DialogPacks\TagDialog.baml
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Views\PackagesDialog.baml
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Views\DialogPacks\InputName.baml
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Views\DialogPacks\TabFields.baml
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Views\MainView.baml
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\ProgramManager.g.resources
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\ProgramManager.Properties.Resources.resources
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\ProgramManager.csproj.GenerateResource.Cache

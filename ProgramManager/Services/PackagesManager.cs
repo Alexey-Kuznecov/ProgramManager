@@ -11,23 +11,30 @@ namespace ProgramManager.Services
         private static string _categoryStatus;
         public PackagesManager()
         {
-            EventAggregate.NewPackage += EventAggregate_AddNewPackage;
+            EventAggregate.NewPackage += AddNewPackage;
             EventAggregate.TagListUpdate += TagDialogViewModel.DisplayTagList;
-            EventAggregate.PackageChanged += EventAggregate_ChangePackage;
+            EventAggregate.PackageChanged += ChangePackage;
+            EventAggregate.RemovePackage += RemovePackage;
         }
 
-        private void EventAggregate_ChangePackage(object sender, BaseEventArgs e)
+        private void RemovePackage(object sender, BaseEventArgs e)
+        {
+            PackageAccess.RemovePackage((int)e.Package);
+        }
+        private void ChangePackage(object sender, BaseEventArgs e)
         {
             PackageBase package = e.Package as PackageBase;
-            PackageAccess.UpdatePackage(package.Id, package);
+            PackageAccess.UpdatePackage(package);
         }
-        public void EventAggregate_AddNewPackage(object sender, BaseEventArgs e)
+        private void AddNewPackage(object sender, BaseEventArgs e)
         {
-            PackageAccess.AddPackage(e.Package, _categoryStatus);
+            PackageBase package = e.Package as PackageBase;
+            PackageAccess.AddPackage(package, _categoryStatus);
         }
         public static ObservableCollection<WrapPackage> GetPackages(CategoryModel category)
         {
             _categoryStatus = category.Name;
+            PackagesDialogViewModel._category = category;
 
             if (category.PackageType is ProgramModel)
             {

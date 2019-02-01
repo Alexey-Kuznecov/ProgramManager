@@ -4,10 +4,12 @@ namespace ProgramManager.Models.PackageModel
 {
     public class DriverModel : PackageBase
     {
-        public string Puma { get; set; }
+        public string Vender { get; set; }
+        public string TypeDevice { get; set; }
         public override void AddPackage()
         {
             throw new NotImplementedException();
         }
+
     }
 }

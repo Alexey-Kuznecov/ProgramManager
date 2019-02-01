@@ -1,16 +1,18 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
+using ProgramManager.Enums;
 using ProgramManager.Models.Func;
 using ProgramManager.Models.PackageModel;
 using ProgramManager.Services;
+using ProgramManager.Converters;
 
 namespace ProgramManager.Models
 {
     public class PackageAccess
     {
-        const string DocumentName = "packages.xml";
+        const string DocumentName = "../../Resources/User/packages.xml";
         /// <summary>
         /// Конструктор по умолчанию
         /// </summary>
@@ -33,73 +35,113 @@ namespace ProgramManager.Models
             xDoc.Save(DocumentName);
         }
         /// <summary>
-        /// Новый метод для добавления пакета в xml документ, полсностью автоматизированный,
-        /// работает в паре с ConvertToDictionary который позволеят исключить элементы с пустыми значениями
+        /// Простой метод добавляет два атрибута Id, Catergory и делегирует работу для создания нового пакета.
         /// </summary>
         /// <param name="data">Объект данных, ожидается объект типа PackageBase.</param>
         /// <param name="category">Категория в контексте которой будет создан пакет.</param>
-        public static void AddPackage(object data, string category)
+        public static void AddPackage(PackageBase data, string category)
         {
-            // Получает индекс последнего элемента в xml документе
-            int id = BaseXml.GetIdLastElement();
             XDocument xDoc = XDocument.Load(DocumentName);
-            XElement package = new XElement("Package");
-            // Метод (ConvertToDictionary) формирует данные в соответствии словаря
-            Dictionary<object, string> dictionary = data.ConvertToDictionary();
+            XElement package = FormatPackage(data);
+            // Получает индекс последнего элемента в xml документе
+            short id = BaseXml.GetIdLastElement(); 
 
-            foreach (var item in dictionary)
-            {
-                var properties = item.Key.GetType().GetProperties();
-                string name = null;
-
-                foreach (var property in properties)
-                {
-                    var key = property.GetValue(item.Key).ToString();
-
-                    if (property.Name == "Name")
-                        name = key;
-
-                    if (properties.Length == 1)
-                        package.Add(new XElement(key, item.Value));           
-
-                    // Объявление атрибутов тегов, так же незабудь указать свойство анонимного типа в методе FuncHelper.ConvertToDictionary
-                    if (property.Name == "Id")
-                        if (name != null) package.Add(new XElement(name, new XAttribute("Id", key), item.Value));
-                    if (property.Name == "FieldName")
-                        if (name != null) package.Element(name)?.SetAttributeValue("FieldName", key);
-                }
-            }
-            // 1. Удалиние цифр кототрые содержат имена элементов (необходые для уникальности элемента).
-            // 2. Группировака элементов с одинаковыми именами в один элемент.
-            var newPack = package.TrimElementName().CreatingNestedElements().PostfixElementName();
-            newPack.SetAttributeValue("Id", ++id);
-            newPack.SetAttributeValue("Category", category);
-
-            xDoc.Element("Packages")?.Add(newPack);         
+            package.SetAttributeValue("Id", ++id);
+            package.SetAttributeValue("Category", category);
+            xDoc.Element("Packages")?.Add(package);         
             xDoc.Save(DocumentName);
-            EventAggregate connector = new EventAggregate();
-            connector.OnLoadPackage("Xml updated");
+            
+            // Обновление списка пакетов
+            EventAggregate ins = new EventAggregate();
+            ins.OnLoadPackage("");
         }
         /// <summary>
-        /// Обновляет данные по индексу и сохраняет документ 
+        /// Метод делегирует работу для обновления пакета.
         /// </summary>
-        /// <remarks>Возможна переработка метода так как является не автоматизированным и требует ручнго расширения</remarks>
-        /// <param name="id">Индекс пакета который требуется изменить.</param>
-        /// <param name="data">Коллекция объектов данных</param>
-        public static void UpdatePackage(int id, PackageBase data)
+        /// <param name="id">Уникальный номер пакета, который необходимо обновить</param>
+        /// <param name="data">Объект данных, ожидается объект типа PackageBase.</param>
+        public static void UpdatePackage(PackageBase data)
         {
             XElement root = XElement.Load(DocumentName),
-                     el = root.Elements("Package").ElementAt(id);
-
-            el.SetElementValue("Name", data.Name);
-            el.SetElementValue("Author", data.Author);
-            el.SetElementValue("Category", data.Category);
-            el.SetElementValue("Tag", data.TagOne);
-            el.SetElementValue("Version", data.Version);
-            el.SetElementValue("Description", data.Description);
-            el.Element("Image")?.SetAttributeValue("Source", data.Image);
-
+                     package = root.Elements("Package").ElementAt(data.Id),
+                     newPackage = FormatPackage(data);
+            
+            package.Elements().Remove();
+            package.Add(newPackage.Elements());
             root.Save(DocumentName);
+            
+            // Обновление списка пакетов
+            EventAggregate ins = new EventAggregate();
+            ins.OnLoadPackage("");
+
+        }
+        /// <summary>
+        /// Данный метод формирует пакет на основе данных, которые содержат свойства объекта. 
+        /// </summary>
+        /// <param name="data">Объект данных, ожидается объект типа PackageBase.</param>
+        /// <returns>Возвращает готовый пакет в виде xml элементов.</returns>
+        private static XElement FormatPackage(PackageBase data)
+        {
+            XElement package = new XElement("Package");
+            var properties = data.GetType().GetProperties();
+
+            foreach (var property in properties)
+            {
+                if (property.GetValue(data) == null) continue;
+
+                if (property.PropertyType.Name == "String")
+                    package.Add(new XElement(property.Name, property.GetValue(data)));
+
+                if (property.Name == "FieldList")
+                    AddUserfield(package, data);
+
+                if (property.Name == "TagList")
+                    AddTag(package, data);
+            }
+            // Группирует элементы с одинаковыми именами в один узел и добавляет "List" к имени нового узла.
+            return package.CreatingNestedElements().PostfixElementName();
+        }
+        /// <summary>
+        /// Метод формирует xml элементы на основе данных пользовательских полей (Имя, значение). 
+        /// </summary>
+        /// <param name="currentPack">Текущий пакет.</param>
+        /// <param name="data">Объект данных, ожидается объект типа PackageBase.</param>
+        private static void AddUserfield(XElement currentPack, PackageBase data)
+        {
+            foreach (var item in data.FieldList)
+            {
+                currentPack?.Add(new XElement(FieldTypes.Userfield.ToString(),
+                    new XAttribute("Label", FieldConverter.Dictionary.Single(p => p.Key == item.Key).Value), item.Value));
+            }           
+        }
+        /// <summary>
+        /// Метод создает xml элемент на основе элементов списка тегов. 
+        /// </summary>
+        /// <param name="currentPack">Текущий пакет.</param>
+        /// <param name="data">Объект данных, ожидается объект типа PackageBase.</param>
+        private static void AddTag(XElement currentPack, PackageBase data)
+        {
+            foreach (var value in data.TagList)
+                currentPack.Add(new XElement("Tag", value));
+        }
+        /// <summary>
+        /// Удаляет полностью весь узел(package) по индексу и сохраняет документ 
+        /// </summary>
+        /// <param name="id">Индекс пакета который требуется удалить.</param>
+        public static void RemovePackage(int id)
+        {
+            XDocument xDoc = XDocument.Load(DocumentName);
+            var root = xDoc.Root.Elements("Package");
+
+            foreach (var item in root)
+                if (item.FirstAttribute.Value == id.ToString())
+                    item.Remove();
+
+            xDoc.Save(DocumentName);
+
+            // Обновление списка пакетов`
+            EventAggregate ins = new EventAggregate();
+            ins.OnLoadPackage("");
         }
     }
 }

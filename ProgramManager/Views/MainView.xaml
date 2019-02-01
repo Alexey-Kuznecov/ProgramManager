@@ -52,14 +52,14 @@
                 <MenuItem Header="Инпортировать" />
                 <MenuItem Header="Экспортировать" />
                 <Separator />
-                <MenuItem Header="Выход" />
+                <MenuItem Command="{Binding CmdExit}" Header="Выход" />
             </MenuItem>
             <MenuItem FontSize="12" Header="Команды">
-                <MenuItem Command="{Binding OpenDialogPackage}" Header="Собрать пакет" />
-                <MenuItem Command="{Binding PackageUpdate}" Header="Отредактировать пакет" />
+                <MenuItem Command="{Binding CmdCreatePackage}" Header="Собрать пакет" />
+                <MenuItem Command="{Binding CmdUpdatePackage}" Header="Отредактировать пакет" />
                 <MenuItem Header="Переименовать пакет" />
                 <MenuItem Header="Устнановка пакета" />
-                <MenuItem Header="Удаление пакета" />
+                <MenuItem Command="{Binding CmdRemovePackage}" Header="Удаление пакета" />
                 <Separator />
                 <MenuItem Header="Редактировать теги" />
                 <MenuItem Header="Редактировать категории" />
@@ -101,7 +101,7 @@
             <Button
                 Height="30"
                 Margin="5,0,0,0"
-                Command="{Binding Exit}"
+                Command="{Binding CmdExit}"
                 Style="{StaticResource btIcon}">
                 <Button.Content>
                     <ContentControl>
@@ -117,7 +117,7 @@
             </Button>
             <Button
                 Height="30"
-                Command="{Binding OpenDialogPackage}"
+                Command="{Binding CmdCreatePackage}"
                 Style="{StaticResource btIcon}">
                 <Button.Content>
                     <ContentControl>
@@ -133,7 +133,7 @@
             </Button>
             <Button
                 Height="30"
-                Command="{Binding PackageUpdate}"
+                Command="{Binding CmdUpdatePackage}"
                 Style="{StaticResource btIcon}">
                 <Button.Content>
                     <ContentControl>
@@ -160,24 +160,27 @@
                     </ContentControl>
                 </Button.Content>
             </Button>
+            <Button
+                Height="30"
+                Command="{Binding CmdRemovePackage}"
+                Style="{StaticResource btIcon}">
+                <Button.Content>
+                    <ContentControl>
+                        <WrapPanel>
+                            <Image Width="18" Source="../Resources/Icons/Delete_48px.png" />
+                            <Label
+                                Height="24"
+                                BorderBrush="{x:Null}"
+                                Content="Удалить" />
+                        </WrapPanel>
+                    </ContentControl>
+                </Button.Content>
+            </Button>
             <Rectangle
                 Width="1"
                 Height="25"
                 Margin="5"
                 Fill="#CDCDCD" />
-            <Button Height="30" Style="{StaticResource btIcon}">
-                <Button.Content>
-                    <ContentControl>
-                        <WrapPanel>
-                            <Image Width="18" Source="../Resources/Icons/Add_to_Favorites_48px.png" />
-                            <Label
-                                Height="24"
-                                BorderBrush="{x:Null}"
-                                Content="Добавить в избранное" />
-                        </WrapPanel>
-                    </ContentControl>
-                </Button.Content>
-            </Button>
             <Button Height="30" Style="{StaticResource btIcon}">
                 <Button.Content>
                     <ContentControl>
@@ -350,7 +353,7 @@
                 Width="100"
                 Height="30"
                 Margin="5,10,5,10"
-                Command="{Binding TestCommand}"
+                Command="{Binding CmdTestCommand}"
                 Content="Установить" />
             <Rectangle Width="240" Height="1" />
         </StackPanel>

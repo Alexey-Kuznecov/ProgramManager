@@ -124,7 +124,7 @@ namespace ProgramManager.Models
         /// <returns>Возвращает коллекцию уникальных значений.</returns>
         private static List<WrapPackage> TagFinder(string category)
         {
-            string xmlDoc = "packages.xml";
+            string xmlDoc = "../../Resources/User/packages.xml";
             XElement root = XElement.Load(xmlDoc);
 
             var queryTag = (from e in root.Descendants("Package").Elements()
