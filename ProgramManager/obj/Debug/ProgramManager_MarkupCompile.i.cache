@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\Алексей\Documents\Visual Studio 2015\Projects\ProgramManager\ProgramManager\obj\Debug\
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\
 ProgramManager
 none
 false
 DEBUG;TRACE
-C:\Users\Алексей\Documents\Visual Studio 2015\Projects\ProgramManager\ProgramManager\App.xaml
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\App.xaml
 6-388954963
 
-46-1120437513
-72287135822
+461324686465
+72-1560003774
 Views\DialogPacks\TagDialog.xaml;Views\PackagesDialog.xaml;Views\DialogPacks\InputName.xaml;Views\DialogPacks\TabFields.xaml;Views\DialogPacks\TabFiles.xaml;Views\MainView.xaml;
 
-False
+True
 

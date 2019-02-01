@@ -5,7 +5,7 @@ namespace ProgramManager.Models.PackageModel
 {
     public abstract class PackageBase
     {
-        protected const string DocumentName = "packages.xml";
+        private readonly IDictionary<string, string> _fieldList = new Dictionary<string, string>();
         public int Id { get; set; }
         public string Name { get; set; }
         public string Author { get; set; }
@@ -16,7 +16,6 @@ namespace ProgramManager.Models.PackageModel
         public string Image { get; set; }
         public string Category { get; set; }
         public string TagOne { get; set; }       
-        private readonly IDictionary<string, string> _fieldList = new Dictionary<string, string>();
         public List<string> TagList { get; set; }
         public IDictionary<string, string> FieldList
         {

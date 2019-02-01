@@ -9,14 +9,11 @@ namespace ProgramManager.ViewModels
     {
         private static InputName _inputName;
         public string Name { get; set; }
-        public ICommand InputName => new RelayCommand(obj =>
-        {
-            Messenger.Default.Send(new InputNameViewModel { Name = Name });
-        });
+        public ICommand InputName => new RelayCommand(obj => Messenger.Default.Send(new InputNameViewModel { Name = Name }));
         public ICommand Cancel => new RelayCommand(obj =>
         {
             _inputName = obj as InputName;
-            if (_inputName != null) _inputName.Visibility = Visibility.Hidden;
+            if (_inputName != null) _inputName.Close();
         });
     }
 }

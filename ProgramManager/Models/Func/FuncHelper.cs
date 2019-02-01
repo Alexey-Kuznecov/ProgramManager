@@ -107,7 +107,6 @@ namespace ProgramManager.Models.Func
                             Id = count++,
                             FieldName = FieldConverter.Dictionary.Single(p => p.Key.ToString() == entry.Key.ToString()).Value
                         };
-
                         dictionary.Add(key, entry.Value.ToString());
                     }
                 }

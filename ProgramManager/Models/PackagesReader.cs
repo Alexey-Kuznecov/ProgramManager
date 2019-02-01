@@ -15,7 +15,7 @@ namespace ProgramManager.Models
     /// По результатам работы класса создается коллекция объектов типа List Т, свойства объектов которых будут инициализированы значениями элементов xml документа.
     public class PackagesReader<T> where T : PackageBase, new()
     {
-        private const string DocumentName = "packages.xml";
+        private const string DocumentName = "../../Resources/User/packages.xml";
         /// <summary>
         /// Базовый метод фильтрует и извлекает данные из xml документа, на основе данных формирует новый объект.
         /// Вызывает некоторые вспомогательные методы для боллее тонкой обработки данных и объекта. 
@@ -103,16 +103,20 @@ namespace ProgramManager.Models
 
             foreach (var element in elements)
             {
+                sbyte count = 0;
+
                 if (element.HasElements && element.Name == FieldTypes.Userfield.ToString() + "List")
                 {
                     foreach (var child in element.Elements())
                     {
+                        count++;
+
                         textField.Add(new TextFieldModel()
                         {
                             FieldValue = child.Value,
-                            Types = child.Name + child.FirstAttribute.Value,
-                            Label = child.LastAttribute.Value,
-                            Hint = child.LastAttribute.Value
+                            Types = child.Name.ToString() + count.ToString(),
+                            Label = child.FirstAttribute.Value,
+                            Hint = child.FirstAttribute.Value
                         });
                     }
                 }
@@ -121,7 +125,7 @@ namespace ProgramManager.Models
                     textField.Add(new TextFieldModel()
                     {
                         FieldValue = element.Value,
-                        Types = element.Name + element.FirstAttribute.Value,
+                        Types = element.Name.ToString(),
                         Label = element.LastAttribute.Value,
                         Hint = element.LastAttribute.Value
                     });

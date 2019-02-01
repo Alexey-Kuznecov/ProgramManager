@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.Windows.Controls;
 using GalaSoft.MvvmLight.Messaging;
 using ProgramManager.Models.PackageModel;
+using ProgramManager.Converters;
 
 namespace ProgramManager.ViewModels
 {
@@ -18,6 +19,7 @@ namespace ProgramManager.ViewModels
         private static TagDialog _windowTagModify;
         private string _description;
         private string _packageTitle;
+        public static CategoryModel _category;
 
         #region Constructor
 
@@ -31,11 +33,27 @@ namespace ProgramManager.ViewModels
             InitializePackageDialog();
 
             // Activate commands.
-            RemoveTextField = new RelayCommand(obj => TextField.Remove(obj as TextFieldModel));
-            SavePackage = new RelayCommand(obj => SendPackage<ProgramModel>(obj));
+            RemoveTextField = new RelayCommand(obj => 
+            {
+                TextFieldModel field = obj as TextFieldModel;
+                FieldConverter.Dictionary.Remove(field.Types);
+                TextField.Remove(field);
+            });
+
+            if (_category?.PackageType is PluginModel)
+                SavePackage = new RelayCommand(obj => SendPackage<PluginModel>(obj));
+            else if (_category?.PackageType is DriverModel)
+                SavePackage = new RelayCommand(obj => SendPackage<DriverModel>(obj));
+            else if (_category?.PackageType is GameModel)
+                SavePackage = new RelayCommand(obj => SendPackage<GameModel>(obj));
+            else if (_category?.PackageType is ModModel)
+                SavePackage = new RelayCommand(obj => SendPackage<ModModel>(obj));
+            else
+                SavePackage = new RelayCommand(obj => SendPackage<ProgramModel>(obj));
 
             // Registration to receive data.
             Messenger.Default.Register<InputNameViewModel>(this, action => InputCustomName(action.Name));
+            Messenger.Default.Register<InputName>(this, action => _windowInputName = action as InputName);
             Messenger.Default.Register<PackageBase>(this, action => LoadPackage(action));
             Messenger.Default.Register<List<string>>(this, InitialDataSource);
         }
@@ -79,9 +97,17 @@ namespace ProgramManager.ViewModels
         #region Commands
 
         public ICommand RemoveTextField { get; }
-        public ICommand SavePackage { get; }
-        public ICommand OpenInputName => new RelayCommand(obj => _windowInputName.ShowDialog());
-        public ICommand OpenTagDialog => new RelayCommand(obj => { _windowTagModify.ShowDialog(); });
+        public ICommand SavePackage { get; set; }
+        public ICommand OpenInputName => new RelayCommand(obj => 
+        {
+            InputName windowInputName = new InputName();
+            windowInputName.ShowDialog();
+        });
+        public ICommand OpenTagDialog => new RelayCommand(obj => 
+        {
+            TagDialog windowTagModify = new TagDialog();
+            windowTagModify.ShowDialog();
+        });
         /// <summary>
         /// Контекстное меню, команды для добавления полей.
         /// </summary>

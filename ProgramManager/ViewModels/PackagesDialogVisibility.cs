@@ -27,26 +27,19 @@ namespace ProgramManager.ViewModels
             {
                 // Чистка словоря от пользовательских полей 
                 for (int i = 0; i < FieldConverter.Dictionary.Count; i++)
-                    FieldConverter.Dictionary.Remove("Userfield" + i);     
+                    FieldConverter.Dictionary.Remove("Userfield" + i);
             }          
         }
-        public static void OpenPackageDialog()
+        public static void CreatePackageDialog(CategoryModel current)
         {
-            lock (_packagesDialog)
-            {
-                // TODO Строка не удалена а просто закрыта комментарием, так как решает проблему с доступом к дочерниму окну после закрытия.
-                // Но, повторно инициальзирует конструктор что приводит к непресказуеммой работе программы, оставил на будующие когда вернусь к этой проблеме.
-                //_packagesDialog = new PackagesDialog();
-                _packagesDialog.ShowDialog();
-            }
+            // TODO Строка не удалена а просто закрыта комментарием, так как решает проблему с доступом к дочерниму окну после закрытия.
+            // Но, повторно инициальзирует конструктор что приводит к непресказуеммой работе программы, оставил на будующие когда вернусь к этой проблеме.
+            _packagesDialog = new PackagesDialog();
+            _packagesDialog.ShowDialog();
         }
         public static void ClosePackageDialog()
         {
-            lock (_packagesDialog)
-            {
-                //_packagesDialog.Close();
-                _packagesDialog.Visibility = Visibility.Hidden;
-            }           
+            _packagesDialog.Close();         
         }
     }
 }

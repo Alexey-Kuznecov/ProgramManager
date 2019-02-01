@@ -36,7 +36,8 @@
                                         VerticalAlignment="Top"
                                         Command="{Binding Checked}"
                                         CommandParameter="{Binding IsChecked, ElementName=CheckBox}"
-                                        Content="{Binding Name}" />
+                                        Content="{Binding Name}"
+                                        IsChecked="{Binding IsChecked, Mode=TwoWay}" />
                                 </WrapPanel>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>

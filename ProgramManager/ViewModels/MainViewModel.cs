@@ -8,6 +8,7 @@ using System.Windows.Threading;
 using ProgramManager.Models.PackageModel;
 using ProgramManager.Services;
 using GalaSoft.MvvmLight.Messaging;
+using System;
 
 namespace ProgramManager.ViewModels
 {
@@ -63,7 +64,7 @@ namespace ProgramManager.ViewModels
             get { return _currentCategory; }
             set
             {
-                // Запрос на изсенения категории пакетов
+                // Запрос на изменения категории пакетов
                 if (_currentCategory != null)
                     WrapPackage = PackagesManager.GetPackages(value);
 
@@ -152,19 +153,22 @@ namespace ProgramManager.ViewModels
 
         #region Commands
         
-        public ICommand OpenDialogPackage => new RelayCommand(obj =>
+        public ICommand CmdCreatePackage => new RelayCommand(obj =>
         {
-            PackagesDialogVisibility.OpenPackageDialog();
+            PackagesDialogVisibility.CreatePackageDialog(_currentCategory);
         });
-        public ICommand TestCommand => new RelayCommand(obj =>
+        public ICommand CmdTestCommand => new RelayCommand(obj =>
         {
-            MessageBox.Show(CurrentPackage.GetType().ToString());
+            //MessageBox.Show(CurrentPackage.GetType().ToString());
+            MessageBox.Show(_currentPackage.Id.ToString());
         });
-        public ICommand Exit => new RelayCommand(obj =>
+        public ICommand CmdExit => new RelayCommand(obj =>
         {
             _dispatcher.InvokeShutdown();
         });
-        public ICommand PackageUpdate => new RelayCommand(obj => { PackageUpdated(); });
+        public ICommand CmdUpdatePackage => new RelayCommand(obj => { UpdatePackage(); });
+        public ICommand CmdRemovePackage => new RelayCommand(obj => { RemovePackage(); });
+
         #endregion
 
         #region Method
@@ -177,9 +181,14 @@ namespace ProgramManager.ViewModels
                 CurrentPackage = _wrapPackage[0].Packages[0];
             _filterText = null;
         }
-        private void PackageUpdated()
+        private void UpdatePackage()
         {
             PackagesDialogVisibility.EditPackageDialog(_currentPackage);
+        }
+        private void RemovePackage()
+        {
+            EventAggregate e = new EventAggregate();
+            e.OnRemovePackage(_currentPackage.Id);
         }
 
         #endregion
