@@ -5,8 +5,8 @@
     xmlns:converters="clr-namespace:ProgramManager.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:vm="clr-namespace:ProgramManager.ViewModels"
     xmlns:packageModel="clr-namespace:ProgramManager.Models.PackageModel"
+    xmlns:vm="clr-namespace:ProgramManager.ViewModels"
     d:DataContext="{d:DesignInstance vm:PackagesDialogViewModel}"
     d:DesignHeight="300"
     d:DesignWidth="500"
@@ -53,7 +53,7 @@
                             <Button
                                 Height="28"
                                 Margin="5,0,0,0"
-                                Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Path=DataContext.RemoveTextField}"
+                                Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Path=DataContext.CmdRemoveTextField}"
                                 CommandParameter="{Binding}">
                                 <ContentControl>
                                     <Image Height="24" Source="{Binding Path=DeleteTextFieldIcon}" />

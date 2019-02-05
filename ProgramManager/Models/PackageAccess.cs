@@ -43,12 +43,14 @@ namespace ProgramManager.Models
         {
             XDocument xDoc = XDocument.Load(DocumentName);
             XElement package = FormatPackage(data);
+            XElement packageS = new XElement("Package");
             // Получает индекс последнего элемента в xml документе
-            short id = BaseXml.GetIdLastElement(); 
+            short id = BaseXml.GetIdLastElement();
 
-            package.SetAttributeValue("Id", ++id);
-            package.SetAttributeValue("Category", category);
-            xDoc.Element("Packages")?.Add(package);         
+            packageS.SetAttributeValue("Id", ++id);
+            packageS.SetAttributeValue("Category", category);
+            packageS.Add(package.Elements().OrderBy(p => p.Name.ToString().Substring(0, 2)));
+            xDoc.Root.Add(packageS);         
             xDoc.Save(DocumentName);
             
             // Обновление списка пакетов
@@ -63,11 +65,15 @@ namespace ProgramManager.Models
         public static void UpdatePackage(PackageBase data)
         {
             XElement root = XElement.Load(DocumentName),
-                     package = root.Elements("Package").ElementAt(data.Id),
-                     newPackage = FormatPackage(data);
+                     newPackage = FormatPackage(data);                   
             
-            package.Elements().Remove();
-            package.Add(newPackage.Elements());
+            foreach (var item in root.Elements("Package"))
+                if (item.FirstAttribute.Value == data.Id.ToString())
+                {
+                    item.Elements().Remove();
+                    item.Add(newPackage.Elements().OrderBy(p => p.Name.ToString().Substring(0, 2)));
+                }
+
             root.Save(DocumentName);
             
             // Обновление списка пакетов

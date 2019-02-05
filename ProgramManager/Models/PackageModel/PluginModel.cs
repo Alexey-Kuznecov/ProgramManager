@@ -4,9 +4,12 @@ namespace ProgramManager.Models.PackageModel
 {
     public class PluginModel : PackageBase
     {
-        public override void AddPackage()
+        protected override string Status { get; } = "Плагины";
+        public string Appointment { get; set; }
+
+        public PluginModel()
         {
-            throw new NotImplementedException();
+            LoadItem += LoadMenuItem;
         }
     }
 }

@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ContextMenu xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocation="ContextMenu.xsd">
+  <Menu Category="Общие">
+    <MenuItem>
+      <Key>Author</Key>
+      <Value>Автор</Value>
+    </MenuItem>
+    <MenuItem>
+      <Key>Version</Key>
+      <Value>Версия</Value>
+    </MenuItem>
+    <MenuItem>
+      <Key>Source</Key>
+      <Value>Источник</Value>
+    </MenuItem>
+    <MenuItem>
+      <Key>HashSumm</Key>
+      <Value>Хеш-сумма</Value>
+    </MenuItem>
+    <MenuItem>
+      <Key>Copyright</Key>
+      <Value>Авторские права</Value>
+    </MenuItem>
+  </Menu>
+  <Menu Category="Программы">
+    <MenuItem>
+      <Key>License</Key>
+      <Value>Лицензия</Value>
+    </MenuItem>
+    <MenuItem>
+      <Key>SerialKey</Key>
+      <Value>Лицензионный ключ</Value>
+    </MenuItem>
+    <MenuItem>
+      <Key>CompanySite</Key>
+      <Value>Официальный сайт</Value>
+    </MenuItem>
+  </Menu>
+  <Menu Category="Драйвера">
+    <MenuItem>
+      <Key>Vendor</Key>
+      <Value>Производитель</Value>
+    </MenuItem>
+    <MenuItem>
+      <Key>TypeDevice</Key>
+      <Value>Тип устройсва</Value>
+    </MenuItem>
+  </Menu>
+  <Menu Category="Игры">
+    <MenuItem>
+      <Key>CheatCode</Key>
+      <Value>Читы</Value>
+    </MenuItem>
+  </Menu>
+  <Menu Category="Плагины">
+    <MenuItem>
+      <Key>Appointment</Key>
+      <Value>Назначение</Value>
+    </MenuItem>
+  </Menu>
+  <Menu Category="Моды">
+    <MenuItem>
+      <Key>Association</Key>
+      <Value>Ассоциация</Value>
+    </MenuItem>
+  </Menu>
+</ContextMenu>

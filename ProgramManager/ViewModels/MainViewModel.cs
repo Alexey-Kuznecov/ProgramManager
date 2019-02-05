@@ -22,6 +22,7 @@ namespace ProgramManager.ViewModels
             _dispatcher =  Dispatcher.CurrentDispatcher;
             Categories = CategoryModel.Categories;
             WrapPackage = PackagesManager.GetPackages();
+            _eventAggregate = new EventAggregate();
             EventAggregate.LoadPackage += LoadPackage;
         }
 
@@ -29,6 +30,7 @@ namespace ProgramManager.ViewModels
 
         #region Fields
 
+        private EventAggregate _eventAggregate;
         private readonly Dispatcher _dispatcher;
         private PackageBase _currentPackage;
         private PackagesManager _packagesManager;
@@ -73,6 +75,9 @@ namespace ProgramManager.ViewModels
                 if (_indexPackage < 0)
                     CurrentPackage = _wrapPackage[0].Packages[0];
                 _filterText = null;
+
+                //Если категория была изменена эта строка уведомлит всех подписчиков
+                 //_eventAggregate.OnCategoryChanged(_currentCategory);
             }
         }
         public PackageBase CurrentPackage
