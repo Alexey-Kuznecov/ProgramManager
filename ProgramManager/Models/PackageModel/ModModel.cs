@@ -4,9 +4,12 @@ namespace ProgramManager.Models.PackageModel
 {
     public class ModModel : PackageBase
     {
-        public override void AddPackage()
+        protected override string Status { get; } = "Моды";
+        public string Association { get; set; }
+
+        public ModModel()
         {
-            throw new NotImplementedException();
+            LoadItem += LoadMenuItem;
         }
     }
 }

@@ -4,14 +4,16 @@ using System.Globalization;
 using ProgramManager.MarkupExtensions;
 using ProgramManager.Models;
 using ProgramManager.Models.PackageModel;
+using System.Collections;
 
 namespace ProgramManager.Converters
 {
-    public class FieldConverter : ConvertorBase<FieldConverter>
+    public class FieldConverter : ConvertorBase<FieldConverter>, IEnumerable
     {
         private static readonly IDictionary<string, string> _dictionary = new Dictionary<string, string>
         {
             { "Author", "Автор" },
+            { "Name", "Имя" },
             { "Version", "Версия" },
             { "Title", "Имя" },
             { "Description", "Описание" },
@@ -42,6 +44,21 @@ namespace ProgramManager.Converters
             if (!Dictionary.ContainsKey(field.Types))
                 return null;
             return Dictionary[field.Types];
+        }
+        /// <summary>
+        /// Реализалация интерфеса IEnumerator
+        /// </summary>
+        /// <returns>Возвращает пакет</returns>
+        public IEnumerator<string> GetEnumerator()
+        {
+            foreach (var package in Dictionary)
+            {
+                yield return package.Key;
+            }
+        }
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
     }
 }

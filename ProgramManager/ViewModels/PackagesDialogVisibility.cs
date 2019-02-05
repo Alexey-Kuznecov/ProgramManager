@@ -3,6 +3,8 @@ using ProgramManager.Models.PackageModel;
 using ProgramManager.Views;
 using GalaSoft.MvvmLight.Messaging;
 using ProgramManager.Converters;
+using ProgramManager.Enums;
+using System.Linq;
 
 namespace ProgramManager.ViewModels
 {
@@ -25,9 +27,14 @@ namespace ProgramManager.ViewModels
             //Выполнение дополнительных действий после закрытия окна редактирования
             if (!packagesDialog.IsActive)
             {
+                var dictionary = FieldConverter.Dictionary;
+
                 // Чистка словоря от пользовательских полей 
-                for (int i = 0; i < FieldConverter.Dictionary.Count; i++)
-                    FieldConverter.Dictionary.Remove("Userfield" + i);
+                for (int i = 0; i <= dictionary.Count; i++)
+                {
+                    var item = FieldConverter.Dictionary.Select(p => p.Key.Substring(0, 4) == FieldTypes.Userfield.ToString().Substring(0, 4));
+                    //dictionary.Remove(item);
+                }
             }          
         }
         public static void CreatePackageDialog(CategoryModel current)

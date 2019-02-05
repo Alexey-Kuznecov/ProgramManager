@@ -9,6 +9,7 @@ using ProgramManager.Models.PackageModel;
 using ProgramManager.Services;
 using ProgramManager.Views;
 using GalaSoft.MvvmLight.Messaging;
+using System.Windows.Controls;
 
 namespace ProgramManager.ViewModels
 {
@@ -18,6 +19,8 @@ namespace ProgramManager.ViewModels
         private static List<string> _tagList;
         private int _id;
         private static Dictionary<string, string> _dataList = new Dictionary<string, string>();
+        public static CategoryModel _category;
+
         public void InitialDataSource(object data)
         {
             if (data is List<string>)
@@ -26,7 +29,7 @@ namespace ProgramManager.ViewModels
         /// <summary>
         /// Инициализация окна пакетов значениями по умолчанию.
         /// </summary>
-        public static void InitializePackageDialog()
+        public void InitializePackageDialog()
         {
             TextField = new ObservableCollection<TextFieldModel>()
             {
@@ -41,6 +44,42 @@ namespace ProgramManager.ViewModels
                     DeleteTextFieldIcon = DeleteIcon
                 }
             };
+
+            SetCategory();
+        }
+        /// <summary>
+        /// Устанавливает категорию для целевого пакета.
+        /// </summary>
+        public void SetCategory()
+        {
+            // Determining the type of package to send
+            if (_category?.PackageType is PluginModel)
+                SavePackage = new RelayCommand(obj => SendPackage<PluginModel>(obj));
+            else if (_category?.PackageType is DriverModel)
+                SavePackage = new RelayCommand(obj => SendPackage<DriverModel>(obj));
+            else if (_category?.PackageType is GameModel)
+                SavePackage = new RelayCommand(obj => SendPackage<GameModel>(obj));
+            else if (_category?.PackageType is ModModel)
+                SavePackage = new RelayCommand(obj => SendPackage<ModModel>(obj));
+            else
+            {
+                _category = new CategoryModel();
+                SavePackage = new RelayCommand(obj => SendPackage<ProgramModel>(obj));
+            }
+
+            SetContextMenuItem();
+        }
+        /// <summary>
+        /// Метод добавляет элементы в контекстное меню диалогового
+        /// окна пакетов в зависимости от текущей категории
+        /// </summary>
+        public void SetContextMenuItem()
+        {
+            MenuItem = new List<MenuItem>();
+            _category.SetMenuItem();
+
+            foreach (var item in _category.MenuItem)
+                MenuItem.Add(new MenuItem { Command = MenuCommand, CommandParameter = item.Key, Header = item.Value });
         }
         /// <summary>
         /// Отправляет данные для их добавления в базу данных.
@@ -67,7 +106,7 @@ namespace ProgramManager.ViewModels
                 Version = TextField.SingleOrDefault(a => a.Types == FieldTypes.Version.ToString())?.FieldValue,
                 Image = TextField.SingleOrDefault(a => a.Types == FieldTypes.Image.ToString())?.FieldValue,
                 TagList = _tagList,
-                Description = Description,         
+                Description = Description,
             };
             // Добавления полей производных классов.
             AddUniqueField(package);
@@ -148,7 +187,6 @@ namespace ProgramManager.ViewModels
                 var formatKey = FieldTypes.Userfield.ToString() + (TextField.Count + 1);
 
                 FieldConverter.Dictionary.Add(formatKey, fieldName);
-
                 TextField.Add(new TextFieldModel()
                 {
                     FieldValue = fieldName,
@@ -156,7 +194,6 @@ namespace ProgramManager.ViewModels
                     AutoCompleteIcon = AutocompleteIcon,
                     DeleteTextFieldIcon = DeleteIcon,
                 });
-
                 _windowInputName.Visibility = Visibility.Hidden;
             }
             _name = fieldName;
@@ -182,12 +219,25 @@ namespace ProgramManager.ViewModels
                     AutoCompleteIcon = "../../Resources/Icons/Businessman_48px.png",
                     DeleteTextFieldIcon = "../../Resources/Icons/Delete_48px.png",
                     Types = package.TextField[index].Types
-                });
-                
+                });      
                 // Добавления данных полей в словарь ассоциаций 
                 if (!FieldConverter.Dictionary.ContainsKey(package.TextField[index].Types))
                     FieldConverter.Dictionary.Add(package.TextField[index].Types, package.TextField[index].Label);
             }
+        }
+        /// <summary>
+        /// Метод удаляет из коллекции TextField поля а также очищает словарь.
+        /// </summary>
+        /// <param name="obj">Ожидается элемент коллекции который нужно удалить.</param>
+        public void RemoveTextField(object obj)
+        {
+            TextFieldModel field = obj as TextFieldModel;
+
+            // Removing the user field association from the dictionary
+            if (field.Types.Contains(FieldTypes.Userfield.ToString()))
+                FieldConverter.Dictionary.Remove(field.Types);
+
+            TextField.Remove(field);
         }
     }
 }

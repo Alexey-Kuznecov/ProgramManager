@@ -1,21 +1,20 @@
 ﻿using System.Collections.Generic;
 using ProgramManager.Filters;
+using System.Xml.Linq;
+using ProgramManager.Converters;
 
 namespace ProgramManager.Models.PackageModel
 {
-    public abstract class PackageBase
+    public abstract class PackageBase : PackageDrtails
     {
+        protected virtual string Status { get; }
         private readonly IDictionary<string, string> _fieldList = new Dictionary<string, string>();
+        public delegate Dictionary<string, string> DelegateMenuItem();
+        public DelegateMenuItem LoadItem { get; set; }
         public int Id { get; set; }
-        public string Name { get; set; }
-        public string Author { get; set; }
-        public string Version { get; set; }
-        public string Source { get; set; }
-        public string HashSumm { get; set; }
-        public string Description { get; set; }
         public string Image { get; set; }
         public string Category { get; set; }
-        public string TagOne { get; set; }       
+        public string TagOne { get; set; }
         public List<string> TagList { get; set; }
         public IDictionary<string, string> FieldList
         {
@@ -34,8 +33,36 @@ namespace ProgramManager.Models.PackageModel
         /// </summary>
         public List<PropertyNotIsNull> Datails { get; set; }
         public List<TextFieldModel> TextField { get; set; }
-        public abstract void AddPackage();
-        public virtual void UpdatePackage() { }
-        public virtual void RemovePackage() { }
+        public static Dictionary<string, string> MenuItem { get; set; } = new Dictionary<string, string>();
+        public virtual Dictionary<string, string> LoadMenuItem()
+        {
+            XDocument root = XDocument.Load("../../Resources/User/ContextMenu.xml");
+            XElement menuItem = new XElement("MenuItem");
+            MenuItem.Clear();
+
+            foreach (var menu in root.Elements().Elements())
+            {
+                if (menu.FirstAttribute.Value == Status || menu.FirstAttribute.Value == "Общие")
+                {
+                    menuItem = menu;
+
+                    foreach (var item in menuItem.Elements())
+                    {
+                        if (!MenuItem.ContainsKey(item.Element("Key").Value))
+                        {
+                            MenuItem.Add(item.Element("Key").Value, item.Element("Value").Value);
+
+                            if (!FieldConverter.Dictionary.ContainsKey(item.Element("Key").Value))
+                            {
+                                FieldConverter.Dictionary.Add(item.Element("Key").Value, item.Element("Value").Value);
+                            }
+                        }
+                    }
+
+                }
+
+            }
+            return MenuItem;
+        }
     }
 }

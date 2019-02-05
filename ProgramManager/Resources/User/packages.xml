@@ -1,255 +1,240 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Packages>
+<Packages xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocation="packages.xsd">
   <Package Id="0" Category="Программы">
-    <Name>Photoshop</Name>
     <Author>Adobe</Author>
-    <Version>Cloud CC6</Version>
-    <Tag>Редактор графики</Tag>
+    <CompanySite>https://www.Adobe.com/</CompanySite>
     <Description>Программа для оформления фотографий</Description>
-    <CompanySite>https://Adobe.com</CompanySite>
     <License>5Q86W-TFPN7-K8VCJ-PH3CT</License>
     <Image Source="User/Images/19572.jpg" />
+    <Name>Photoshop</Name>
+    <Tag>Редактор графики</Tag>
+    <Version>Cloud CC6</Version>
   </Package>
   <Package Id="1" Category="Программы">
-    <Name>Illustrator</Name>
     <Author>Adobe</Author>
-    <Version>Cloud CC6</Version>
-    <Tag>Редактор графики</Tag>
     <Description>Программа для оформления фотографий</Description>
     <Image Source="User/Images/19572.jpg" />
+    <Name>Illustrator</Name>
+    <Tag>Редактор графики</Tag>
+    <Version>Cloud CC6</Version>
   </Package>
   <Package Id="2" Category="Программы">
-    <Name>Axure</Name>
     <Author>Axure Software Solution</Author>
-    <Version>RP 8</Version>
-    <Tag>Инструменты вебразработчика</Tag>
     <Description>Программа для создания прототипов сайтов</Description>
     <Image Source="User/Images/19572.jpg" />
+    <Name>Axure</Name>
+    <Tag>Инструменты вебразработчика</Tag>
+    <Version>RP 8</Version>
   </Package>
   <Package Id="3" Category="Программы">
-    <Name>LazyCure</Name>
     <Author>Andrei Kulabukhau</Author>
-    <Version>0.10</Version>
-    <Tag>Органазеры</Tag>
     <Description>Программа для измерения времени</Description>
     <Image Source="User/Images/19572.jpg" />
+    <Name>LazyCure</Name>
+    <Tag>Органазеры</Tag>
+    <Version>0.10</Version>
   </Package>
   <Package Id="4" Category="Программы">
-    <Name>Firefox</Name>
     <Author>Mozilla</Author>
-    <Version>7.9.4</Version>
-    <Tag>Браузеры</Tag>
     <Description>Программа для просмотра вебстраниц</Description>
     <Image Source="User/Images/19572.jpg" />
+    <Name>Firefox</Name>
+    <Tag>Браузеры</Tag>
+    <Version>7.9.4</Version>
   </Package>
   <Package Id="5" Category="Программы">
-    <Name>Chrome</Name>
     <Author>Google</Author>
-    <Version>8.5.0</Version>
-    <Tag>Браузеры</Tag>
     <Description>Программа для просмотра вебстраниц</Description>
     <Image Source="User/Images/19572.jpg" />
+    <Name>Chrome</Name>
+    <Tag>Браузеры</Tag>
+    <Version>8.5.0</Version>
   </Package>
   <Package Id="6" Category="Программы">
-    <Name>Microsoft Outlook</Name>
     <Author>Microsoft</Author>
-    <Version>2017</Version>
-    <Tag>Офисные</Tag>
     <Description>Программа для организации электронных писем</Description>
     <Image Source="User/Images/19572.jpg" />
+    <Name>Microsoft Outlook</Name>
+    <Tag>Офисные</Tag>
+    <Version>2017</Version>
   </Package>
   <Package Id="7" Category="Программы">
-    <Name>Microsoft Word</Name>
     <Author>Microsoft</Author>
-    <Version>2017</Version>
-    <Tag>Офисные</Tag>
     <Description>Программа для написания, редактирования, оформления текста и многое другое.</Description>
     <Image Source="User/Images/19572.jpg" />
+    <Name>Microsoft Word</Name>
+    <Tag>Офисные</Tag>
+    <Version>2017</Version>
   </Package>
   <Package Id="8" Category="Программы">
-    <Name>CCleaner</Name>
     <Author>Piriform</Author>
-    <Version>5.43.6520</Version>
-    <Tag>Оптимизатры</Tag>
     <Description>Программа очиски компьютора</Description>
     <Image Source="User/Images/19572.jpg" />
+    <Name>CCleaner</Name>
+    <Tag>Оптимизатры</Tag>
+    <Version>5.43.6520</Version>
   </Package>
   <Package Id="9" Category="Программы">
-    <Name>Reg Organizer</Name>
     <Author>ChemTable Software</Author>
-    <Version>8.16</Version>
-    <Tag>Оптимизатры</Tag>
     <Description>Программа для оптимизации, отчиски, дефрагментации реестра и многое другое</Description>
     <Image Source="User/Images/19572.jpg" />
+    <Name>Reg Organizer</Name>
+    <Tag>Оптимизатры</Tag>
+    <Version>8.16</Version>
   </Package>
   <Package Id="10" Category="Программы">
-    <Name>LeaderTask</Name>
     <Author>Неизвестно</Author>
-    <Version>6.0</Version>
-    <Tag>Органазеры</Tag>
     <Description>Программа организации задач</Description>
     <Image Source="User/Images/19572.jpg" />
+    <Name>LeaderTask</Name>
+    <Tag>Органазеры</Tag>
+    <Version>6.0</Version>
   </Package>
   <Package Id="11" Category="Программы">
-    <Name>Kasperski</Name>
     <Author>Kasperski Lab</Author>
-    <Version>6.0</Version>
-    <Tag>Антивирусы</Tag>
     <Description>Программа для защиты компютера от вирусов</Description>
     <Image Source="User/Images/19572.jpg" />
+    <Name>Kasperski</Name>
+    <Tag>Антивирусы</Tag>
+    <Version>6.0</Version>
   </Package>
   <Package Id="12" Category="Программы">
-    <Name>Sublime Text 3</Name>
     <Author>HQ Pty Ltd</Author>
-    <Version>3.1.1 Build 3176</Version>
+    <Description>Многофункциональный редактор кода</Description>
+    <Image Source="User/Images/19572.jpg" />
+    <Name>Sublime Text 3</Name>
     <TagList>
       <Tag>Редакторы кода</Tag>
       <Tag>Инструменты вебразработчика</Tag>
     </TagList>
-    <Description>Многофункциональный редактор кода</Description>
-    <Image Source="User/Images/19572.jpg" />
+    <Version>3.1.1 Build 3176</Version>
   </Package>
   <Package Id="13" Category="Программы">
-    <Name>Notepad++</Name>
     <Author>Notepad++Team</Author>
-    <Version>7.4.2</Version>
-    <Tag>Редакторы кода</Tag>
     <Description>Удобный и мультифункциональный редактор кода</Description>
     <Image Source="User/Images/19572.jpg" />
+    <Name>Notepad++</Name>
+    <Tag>Редакторы кода</Tag>
+    <Version>7.4.2</Version>
   </Package>
   <Package Id="14" Category="Программы">
-    <Name>Microsoft Visual Studio</Name>
     <Author>Microsoft</Author>
-    <Version>14.0</Version>
-    <Tag>IDE</Tag>
     <Description>Интегрированая среда разработки</Description>
     <Image Source="User/Images/19572.jpg" />
+    <Name>Microsoft Visual Studio</Name>
+    <Tag>IDE</Tag>
+    <Version>14.0</Version>
   </Package>
   <Package Id="15" Category="Программы">
-    <Name>Zbrush</Name>
     <Author>Poligonic</Author>
-    <Version>10</Version>
-    <Tag>3D Редакторы</Tag>
     <Description>Программа для создания 3D моделей</Description>
     <Image Source="User/Images/19572.jpg" />
+    <Name>Zbrush</Name>
+    <Tag>3D Редакторы</Tag>
+    <Version>10</Version>
   </Package>
   <Package Id="16" Category="Программы">
-    <Name>NetBeans</Name>
     <Author>NetBeans Software</Author>
-    <Version>9.1.0</Version>
-    <Tag>IDE</Tag>
     <Description>Интегрированая среда разработки</Description>
     <Image Source="User/Images/19572.jpg" />
+    <Name>NetBeans</Name>
+    <Tag>IDE</Tag>
+    <Version>9.1.0</Version>
   </Package>
   <Package Id="17" Category="Программы">
-    <Name>Discord</Name>
     <Author>Discord Team</Author>
-    <Version>3.0</Version>
-    <Tag>Меседжеры</Tag>
     <Description>Программа для создания сообществ</Description>
     <Image Source="User/Images/19572.jpg" />
+    <Name>Discord</Name>
+    <Tag>Меседжеры</Tag>
+    <Version>3.0</Version>
   </Package>
   <Package Id="18" Category="Программы">
-    <Name>Slack</Name>
     <Author>Slack Team</Author>
-    <Version>2.2</Version>
-    <Tag>Меседжеры</Tag>
     <Description>Программа для создания сообществ</Description>
     <Image Source="User/Images/19572.jpg" />
+    <Name>Slack</Name>
+    <Tag>Меседжеры</Tag>
+    <Version>2.2</Version>
   </Package>
   <Package Id="19" Category="Игры">
-    <Name>The Witcher 3 Wild Hunt</Name>
     <Author>CD Project Red</Author>
-    <Version>3.31</Version>
-    <Tag>RPG</Tag>
     <Description>Игра для романтиков на досуге мясников</Description>
     <Image Source="User/Images/19572.jpg" />
+    <Name>The Witcher 3 Wild Hunt</Name>
+    <Tag>RPG</Tag>
+    <Version>3.31</Version>
   </Package>
   <Package Id="20" Category="Игры">
-    <Name>Empire Earth 2</Name>
     <Author>Mod Doc Software</Author>
-    <Version>2.2</Version>
-    <Tag>Стратегии</Tag>
-    <Puma>Adidas</Puma>
     <Description>Игра для настоящих царей</Description>
     <Image Source="User/Images/19572.jpg" />
+    <Name>Empire Earth 2</Name>
+    <Tag>Стратегии</Tag>
+    <Version>2.2</Version>
   </Package>
   <Package Id="21" Category="Драйвера">
-    <Name>High Definition Audio</Name>
     <Author>Realtek</Author>
-    <Version>3.31</Version>
-    <Tag>Звуковая карта</Tag>
     <Image Source="User/Images/19572.jpg" />
+    <Name>High Definition Audio</Name>
+    <Tag>Звуковая карта</Tag>
+    <Version>3.31</Version>
   </Package>
   <Package Id="22" Category="Драйвера">
-    <Name>Logitech HD Webcam C270</Name>
     <Author>Logitech</Author>
-    <Version>2.2</Version>
+    <Image Source="User/Images/19572.jpg" />
+    <Name>Logitech HD Webcam C270</Name>
     <Tag>Аксессуары</Tag>
-    <Image Source="User/Images/19572.jpg" />
-  </Package>
-  <Package Id="23" Category="Драйвера">
-    <Name>High Definition Audio</Name>
-    <Author>Realtek</Author>
-    <Version>3.31</Version>
-    <Tag>Звуковая карта</Tag>
-    <HashSumm>12ld01kdn304fkm0s302k04kd2839jd</HashSumm>
-    <Image Source="User/Images/19572.jpg" />
+    <Version>2.2</Version>
   </Package>
   <Package Id="24" Category="Моды">
-    <Name>1.000 Times Better 2.3.1</Name>
     <Author>Logitech</Author>
-    <Version>2.3.1</Version>
-    <Tag>Реворк</Tag>
     <Description>Качественный мод для 3 Ведьмака, который улучшит качество графики в игре.</Description>
     <Image Source="User/Images/19572.jpg" />
+    <Name>1.000 Times Better 2.3.1</Name>
+    <Tag>Реворк</Tag>
+    <Version>2.3.1</Version>
   </Package>
   <Package Id="25" Category="Игры">
-    <Name>Counter Strike GO</Name>
     <Author>Valve</Author>
-    <Version>2.2</Version>
-    <Tag>Shooter</Tag>
     <Description>Игра для настоящих ассов</Description>
     <Image Source="User/Images/19572.jpg" />
+    <Name>Counter Strike GO</Name>
+    <Tag>Shooter</Tag>
+    <Version>2.2</Version>
   </Package>
   <Package Id="26" Category="Программы">
-    <Name>MindManager</Name>
     <Author>Mindjet</Author>
-    <Version>7.7.0</Version>
-    <Description>MindManager — самая мощная в мире программа.</Description>
-    <Tag>Органазеры</Tag>
     <CompanySite>https://www.mindjet.com/ru/</CompanySite>
-    <Userfield FieldName="Лозунг">Распознавайте.  Объединяйте.  Стимулируйте.</Userfield>
+    <Description>MindManager — самая мощная в мире программа.</Description>
+    <Name>MindManager</Name>
+    <Tag>Органазеры</Tag>
+    <Userfield Label="Лозунг">Распознавайте.  Объединяйте.  Стимулируйте.</Userfield>
+    <Version>7.7.0</Version>
   </Package>
   <Package Id="27" Category="Программы">
+    <Author>Liquid Technogies Limited</Author>
+    <Description>Среда разработки XML проектов.</Description>
     <License>EMBRACED XXXXXXX</License>
     <Name>XML Studio Developer</Name>
-    <Author>Liquid Technogies Limited</Author>
+    <Tag>Не подшитые</Tag>
+    <UserfieldList>
+      <Userfield Label="Лозунг">Build on 28.02.2011 (Build No : 3078)</Userfield>
+      <Userfield Label="dwadwad">dwadwad</Userfield>
+      <Userfield Label="ewerew">ewerewqweqwe</Userfield>
+    </UserfieldList>
     <Version>9.0.11.3078</Version>
-    <Description>Среда разработки XML проектов.</Description>
-    <Userfield Label="Лозунг">Build on 28.02.2011 (Build No : 3078)</Userfield>
-    <TagList>
-      <Tag>3D Редакторы</Tag>
-      <Tag>IDE</Tag>
-      <Tag>Оптимизатры</Tag>
-      <Tag>Меседжеры</Tag>
-    </TagList>
   </Package>
   <Package Id="28" Category="Программы">
-    <CompanySite>wadawdaw</CompanySite>
-    <Name>awdwadaw</Name>
     <Author>This is Author</Author>
-    <Version>This is Version</Version>
-    <Description>awdawdawda</Description>
-    <TagList>
-      <Tag>3D Редакторы</Tag>
-      <Tag>IDE</Tag>
-      <Tag>Оптимизатры</Tag>
-    </TagList>
+    <Description>sadsadas</Description>
+    <Name>sdsadasd</Name>
+    <Tag>Не подшитые</Tag>
     <UserfieldList>
-      <Userfield Label="wadwad">wadwad</Userfield>
-      <Userfield Label="awdad">awdad</Userfield>
-      <Userfield Label="awdwadawd33">awdwadawd33</Userfield>
+      <Userfield Label="dwadadwad">dwadadwad</Userfield>
+      <Userfield Label="w31321awd">w31321awd</Userfield>
+      <Userfield Label="sadsadas">sadsadas</Userfield>
     </UserfieldList>
+    <Version>sdsdasd</Version>
   </Package>
 </Packages>

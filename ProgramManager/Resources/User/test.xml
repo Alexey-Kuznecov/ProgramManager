@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Packages>
+  <Package Id="0" Category="Программы">
+    <Name>Photoshop</Name>
+    <Author>Adobe</Author>
+    <Version>Cloud CC6</Version>
+    <Tag>Редактор графики</Tag>
+    <Description>Программа для оформления фотографий</Description>
+    <CompanySite>https://Adobe.com</CompanySite>
+    <License>5Q86W-TFPN7-K8VCJ-PH3CT</License>
+    <Image Source="User/Images/19572.jpg" />
+  </Package>
+</Packages>

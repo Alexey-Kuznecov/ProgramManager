@@ -4,9 +4,12 @@ namespace ProgramManager.Models.PackageModel
 {
     public class GameModel : PackageBase
     {
-        public override void AddPackage()
+        protected override string Status { get; } = "Игры";
+        public string CheatCode { get; set; }
+
+        public GameModel()
         {
-            throw new NotImplementedException();
+            LoadItem += LoadMenuItem;
         }
     }
 }

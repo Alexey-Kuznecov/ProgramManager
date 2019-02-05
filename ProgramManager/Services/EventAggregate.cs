@@ -8,6 +8,7 @@ namespace ProgramManager.Services
         public static event EventHandler<BaseEventArgs> NewPackage;
         public static event EventHandler<BaseEventArgs> TagListUpdate;
         public static event EventHandler<BaseEventArgs> RemovePackage;
+        public static event EventHandler<BaseEventArgs> CategoryChanged;
         public static event Action<string> LoadPackage;
 
         public void OnPackageChanged(object package)
@@ -30,6 +31,9 @@ namespace ProgramManager.Services
         {
             LoadPackage?.Invoke(message);
         }
-
+        public void OnCategoryChanged(object category)
+        {
+            CategoryChanged?.Invoke(this, new BaseEventArgs(category));
+        }
     }
 }
