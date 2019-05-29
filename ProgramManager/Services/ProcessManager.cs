@@ -1,4 +1,5 @@
 ﻿using ProgramManager.Converters;
+using ProgramManager.Models.PackageModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,8 @@ namespace ProgramManager.Services
     {
         public void InitialModule()
         {
-            FieldConverter.Dictionary
+            CategoryModel catr = new CategoryModel();
+            catr.SetMenuItem();
         }
     }
 }

@@ -5,17 +5,15 @@
     <CompanySite>https://www.Adobe.com/</CompanySite>
     <Description>Программа для оформления фотографий</Description>
     <License>5Q86W-TFPN7-K8VCJ-PH3CT</License>
-    <Image Source="User/Images/19572.jpg" />
     <Name>Photoshop</Name>
-    <Tag>Редактор графики</Tag>
+    <Tag>Не подшитые</Tag>
     <Version>Cloud CC6</Version>
   </Package>
   <Package Id="1" Category="Программы">
     <Author>Adobe</Author>
     <Description>Программа для оформления фотографий</Description>
-    <Image Source="User/Images/19572.jpg" />
     <Name>Illustrator</Name>
-    <Tag>Редактор графики</Tag>
+    <Tag>Офисные</Tag>
     <Version>Cloud CC6</Version>
   </Package>
   <Package Id="2" Category="Программы">
@@ -93,7 +91,6 @@
   <Package Id="11" Category="Программы">
     <Author>Kasperski Lab</Author>
     <Description>Программа для защиты компютера от вирусов</Description>
-    <Image Source="User/Images/19572.jpg" />
     <Name>Kasperski</Name>
     <Tag>Антивирусы</Tag>
     <Version>6.0</Version>
@@ -120,9 +117,8 @@
   <Package Id="14" Category="Программы">
     <Author>Microsoft</Author>
     <Description>Интегрированая среда разработки</Description>
-    <Image Source="User/Images/19572.jpg" />
     <Name>Microsoft Visual Studio</Name>
-    <Tag>IDE</Tag>
+    <Tag>Не подшитые</Tag>
     <Version>14.0</Version>
   </Package>
   <Package Id="15" Category="Программы">
@@ -167,10 +163,10 @@
   </Package>
   <Package Id="20" Category="Игры">
     <Author>Mod Doc Software</Author>
+    <CheatCode>dasdsa</CheatCode>
     <Description>Игра для настоящих царей</Description>
-    <Image Source="User/Images/19572.jpg" />
     <Name>Empire Earth 2</Name>
-    <Tag>Стратегии</Tag>
+    <Tag>Не подшитые</Tag>
     <Version>2.2</Version>
   </Package>
   <Package Id="21" Category="Драйвера">
@@ -217,24 +213,15 @@
     <Description>Среда разработки XML проектов.</Description>
     <License>EMBRACED XXXXXXX</License>
     <Name>XML Studio Developer</Name>
-    <Tag>Не подшитые</Tag>
-    <UserfieldList>
-      <Userfield Label="Лозунг">Build on 28.02.2011 (Build No : 3078)</Userfield>
-      <Userfield Label="dwadwad">dwadwad</Userfield>
-      <Userfield Label="ewerew">ewerewqweqwe</Userfield>
-    </UserfieldList>
+    <Tag>IDE</Tag>
+    <Userfield Label="Лозунг">Build on 28.02.2011 (Build No : 3078)</Userfield>
     <Version>9.0.11.3078</Version>
   </Package>
-  <Package Id="28" Category="Программы">
-    <Author>This is Author</Author>
-    <Description>sadsadas</Description>
-    <Name>sdsadasd</Name>
+  <Package Id="28" Category="Драйвера">
+    <Author>фывфыв</Author>
+    <Description>фывфыв</Description>
+    <Name>фвфыф</Name>
     <Tag>Не подшитые</Tag>
-    <UserfieldList>
-      <Userfield Label="dwadadwad">dwadadwad</Userfield>
-      <Userfield Label="w31321awd">w31321awd</Userfield>
-      <Userfield Label="sadsadas">sadsadas</Userfield>
-    </UserfieldList>
-    <Version>sdsdasd</Version>
+    <Version>фывфывф</Version>
   </Package>
 </Packages>

@@ -7,6 +7,7 @@ using System.Xml.Linq;
 using ProgramManager.Enums;
 using ProgramManager.Filters;
 using ProgramManager.Models.PackageModel;
+using ProgramManager.Converters;
 
 namespace ProgramManager.Models
 {
@@ -25,7 +26,7 @@ namespace ProgramManager.Models
         public static List<T> GetPackages(CategoryModel category)
         {
             List<T> packages = new List<T>();
-            FilterProperties<T> propNotIsEmpty = new FilterProperties<T>();
+            // FilterProperties<T> propNotIsEmpty = new FilterProperties<T>();
             XElement root = XElement.Load(DocumentName);
             int index = 0;
 
@@ -56,7 +57,7 @@ namespace ProgramManager.Models
                // Вызов метода для инициализации свойств производного класса.
                SetValueDeclaredProperties(packages, element, index);
                // Вызов метода фильтрации полей с пустыми значениями данного объекта.
-               packages[index].Datails = propNotIsEmpty.Filter(packages[index++]);             
+               // packages[index].Datails = propNotIsEmpty.Filter(packages[index++]);             
             }
             return packages;
         }
@@ -140,7 +141,18 @@ namespace ProgramManager.Models
                     });
                 }
             }
-            return textField;
+            return SetFieldLabel(textField);
+        }
+        private static List<TextFieldModel> SetFieldLabel(List<TextFieldModel> textFields)
+        {
+            for (var i = 0; i < textFields.Count; i++)
+            {
+                foreach (var item in FieldConverter.Dictionary.Where(d => d.Key == textFields[i].Types))
+                {
+                    textFields[i].Label = item.Value;
+                }
+            }
+            return textFields;
         }
     }
 }
