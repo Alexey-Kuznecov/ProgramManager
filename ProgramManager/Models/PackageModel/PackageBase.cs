@@ -31,7 +31,7 @@ namespace ProgramManager.Models.PackageModel
         /// Это коллекция вбирает в себя все другие свойства для вывода их в панель деталей.
         /// При этом свойства не будут содержать пустые значения.
         /// </summary>
-        public List<PropertyNotIsNull> Datails { get; set; }
+        // public List<PropertyNotIsNull> Datails { get; set; }
         public List<TextFieldModel> TextField { get; set; }
         public static Dictionary<string, string> MenuItem { get; set; } = new Dictionary<string, string>();
         public virtual Dictionary<string, string> LoadMenuItem()
@@ -60,7 +60,6 @@ namespace ProgramManager.Models.PackageModel
                     }
 
                 }
-
             }
             return MenuItem;
         }

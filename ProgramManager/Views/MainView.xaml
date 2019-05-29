@@ -331,12 +331,12 @@
                 Width="240"
                 Height="1"
                 Fill="#CDCDCD" />
-            <ItemsControl ItemsSource="{Binding CurrentPackage.Datails}">
+            <ItemsControl ItemsSource="{Binding CurrentPackage.TextField}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <WrapPanel>
-                            <Label Content="{Binding Name, StringFormat={}{0}{:}}" FontWeight="Bold" />
-                            <Label Name="PackageName" Content="{Binding Value}" />
+                            <Label Content="{Binding Label, StringFormat={}{0}{:}}" FontWeight="Bold" />
+                            <Label Name="PackageName" Content="{Binding FieldValue}" />
                         </WrapPanel>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
