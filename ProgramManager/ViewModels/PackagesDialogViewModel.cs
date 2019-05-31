@@ -8,6 +8,7 @@ using ProgramManager.Models.PackageModel;
 using ProgramManager.Converters;
 using ProgramManager.Enums;
 using ProgramManager.Services;
+using ProgramManager.Views;
 
 namespace ProgramManager.ViewModels
 {
@@ -17,6 +18,7 @@ namespace ProgramManager.ViewModels
         private const string DeleteIcon = "../../Resources/Icons/Delete_48px.png";
         private static InputName _windowInputName;
         private static TagDialog _windowTagModify;
+        private static DialogIcons _windowAddIcons;
         private string _description;
         private string _packageTitle;
 
@@ -27,6 +29,7 @@ namespace ProgramManager.ViewModels
             // Initial fields.
             _windowInputName = new InputName();
             _windowTagModify = new TagDialog();
+            _windowAddIcons = new DialogIcons();
 
             // Initial data.
             InitializePackageDialog();
@@ -70,6 +73,10 @@ namespace ProgramManager.ViewModels
 
         public ICommand CmdRemoveTextField { get; }
         public static ICommand SavePackage { get; set; }
+        public ICommand OpenDialogIcons => new RelayCommand(obj => {
+            DialogIcons windowDialogIcon = new DialogIcons();
+            windowDialogIcon.ShowDialog();
+        });
         public ICommand OpenInputName => new RelayCommand(obj => 
         {
             InputName windowInputName = new InputName();

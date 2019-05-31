@@ -5,6 +5,7 @@
     <CompanySite>https://www.Adobe.com/</CompanySite>
     <Description>Программа для оформления фотографий</Description>
     <License>5Q86W-TFPN7-K8VCJ-PH3CT</License>
+    <Image Source="../Resources/User/Images/Adobe Photoshop.png"/>
     <Name>Photoshop</Name>
     <Tag>Не подшитые</Tag>
     <Version>Cloud CC6</Version>
@@ -12,6 +13,7 @@
   <Package Id="1" Category="Программы">
     <Author>Adobe</Author>
     <Description>Программа для оформления фотографий</Description>
+    <Image Source="../Resources/User/Images/Programs.png"/>
     <Name>Illustrator</Name>
     <Tag>Офисные</Tag>
     <Version>Cloud CC6</Version>
@@ -19,7 +21,7 @@
   <Package Id="2" Category="Программы">
     <Author>Axure Software Solution</Author>
     <Description>Программа для создания прототипов сайтов</Description>
-    <Image Source="User/Images/19572.jpg" />
+    <Image Source="../Resources/User/Images/Programs.png"/>
     <Name>Axure</Name>
     <Tag>Инструменты вебразработчика</Tag>
     <Version>RP 8</Version>
@@ -27,7 +29,7 @@
   <Package Id="3" Category="Программы">
     <Author>Andrei Kulabukhau</Author>
     <Description>Программа для измерения времени</Description>
-    <Image Source="User/Images/19572.jpg" />
+    <Image Source="../Resources/User/Images/Programs.png"/>
     <Name>LazyCure</Name>
     <Tag>Органазеры</Tag>
     <Version>0.10</Version>
@@ -35,7 +37,7 @@
   <Package Id="4" Category="Программы">
     <Author>Mozilla</Author>
     <Description>Программа для просмотра вебстраниц</Description>
-    <Image Source="User/Images/19572.jpg" />
+    <Image Source="../Resources/User/Images/Programs.png"/>
     <Name>Firefox</Name>
     <Tag>Браузеры</Tag>
     <Version>7.9.4</Version>
@@ -43,7 +45,7 @@
   <Package Id="5" Category="Программы">
     <Author>Google</Author>
     <Description>Программа для просмотра вебстраниц</Description>
-    <Image Source="User/Images/19572.jpg" />
+    <Image Source="../Resources/User/Images/Programs.png"/>
     <Name>Chrome</Name>
     <Tag>Браузеры</Tag>
     <Version>8.5.0</Version>
@@ -51,7 +53,7 @@
   <Package Id="6" Category="Программы">
     <Author>Microsoft</Author>
     <Description>Программа для организации электронных писем</Description>
-    <Image Source="User/Images/19572.jpg" />
+    <Image Source="../Resources/User/Images/Programs.png"/>
     <Name>Microsoft Outlook</Name>
     <Tag>Офисные</Tag>
     <Version>2017</Version>
@@ -59,7 +61,7 @@
   <Package Id="7" Category="Программы">
     <Author>Microsoft</Author>
     <Description>Программа для написания, редактирования, оформления текста и многое другое.</Description>
-    <Image Source="User/Images/19572.jpg" />
+    <Image Source="../Resources/User/Images/Programs.png"/>
     <Name>Microsoft Word</Name>
     <Tag>Офисные</Tag>
     <Version>2017</Version>
@@ -67,7 +69,7 @@
   <Package Id="8" Category="Программы">
     <Author>Piriform</Author>
     <Description>Программа очиски компьютора</Description>
-    <Image Source="User/Images/19572.jpg" />
+    <Image Source="../Resources/User/Images/Programs.png"/>
     <Name>CCleaner</Name>
     <Tag>Оптимизатры</Tag>
     <Version>5.43.6520</Version>
@@ -75,7 +77,7 @@
   <Package Id="9" Category="Программы">
     <Author>ChemTable Software</Author>
     <Description>Программа для оптимизации, отчиски, дефрагментации реестра и многое другое</Description>
-    <Image Source="User/Images/19572.jpg" />
+    <Image Source="../Resources/User/Images/Programs.png"/>
     <Name>Reg Organizer</Name>
     <Tag>Оптимизатры</Tag>
     <Version>8.16</Version>
@@ -83,7 +85,7 @@
   <Package Id="10" Category="Программы">
     <Author>Неизвестно</Author>
     <Description>Программа организации задач</Description>
-    <Image Source="User/Images/19572.jpg" />
+    <Image Source="../Resources/User/Images/Programs.png"/>
     <Name>LeaderTask</Name>
     <Tag>Органазеры</Tag>
     <Version>6.0</Version>
@@ -91,6 +93,7 @@
   <Package Id="11" Category="Программы">
     <Author>Kasperski Lab</Author>
     <Description>Программа для защиты компютера от вирусов</Description>
+    <Image Source="../Resources/User/Images/Programs.png"/>
     <Name>Kasperski</Name>
     <Tag>Антивирусы</Tag>
     <Version>6.0</Version>
@@ -98,7 +101,7 @@
   <Package Id="12" Category="Программы">
     <Author>HQ Pty Ltd</Author>
     <Description>Многофункциональный редактор кода</Description>
-    <Image Source="User/Images/19572.jpg" />
+    <Image Source="../Resources/User/Images/Programs.png"/>
     <Name>Sublime Text 3</Name>
     <TagList>
       <Tag>Редакторы кода</Tag>
@@ -109,7 +112,7 @@
   <Package Id="13" Category="Программы">
     <Author>Notepad++Team</Author>
     <Description>Удобный и мультифункциональный редактор кода</Description>
-    <Image Source="User/Images/19572.jpg" />
+    <Image Source="../Resources/User/Images/Programs.png"/>
     <Name>Notepad++</Name>
     <Tag>Редакторы кода</Tag>
     <Version>7.4.2</Version>
@@ -117,6 +120,7 @@
   <Package Id="14" Category="Программы">
     <Author>Microsoft</Author>
     <Description>Интегрированая среда разработки</Description>
+    <Image Source="../Resources/User/Images/Programs.png"/>
     <Name>Microsoft Visual Studio</Name>
     <Tag>Не подшитые</Tag>
     <Version>14.0</Version>
@@ -124,7 +128,7 @@
   <Package Id="15" Category="Программы">
     <Author>Poligonic</Author>
     <Description>Программа для создания 3D моделей</Description>
-    <Image Source="User/Images/19572.jpg" />
+    <Image Source="../Resources/User/Images/Programs.png"/>
     <Name>Zbrush</Name>
     <Tag>3D Редакторы</Tag>
     <Version>10</Version>
@@ -132,7 +136,7 @@
   <Package Id="16" Category="Программы">
     <Author>NetBeans Software</Author>
     <Description>Интегрированая среда разработки</Description>
-    <Image Source="User/Images/19572.jpg" />
+    <Image Source="../Resources/User/Images/Programs.png"/>
     <Name>NetBeans</Name>
     <Tag>IDE</Tag>
     <Version>9.1.0</Version>
@@ -140,7 +144,7 @@
   <Package Id="17" Category="Программы">
     <Author>Discord Team</Author>
     <Description>Программа для создания сообществ</Description>
-    <Image Source="User/Images/19572.jpg" />
+    <Image Source="../Resources/User/Images/Programs.png"/>
     <Name>Discord</Name>
     <Tag>Меседжеры</Tag>
     <Version>3.0</Version>
@@ -148,7 +152,7 @@
   <Package Id="18" Category="Программы">
     <Author>Slack Team</Author>
     <Description>Программа для создания сообществ</Description>
-    <Image Source="User/Images/19572.jpg" />
+    <Image Source="../Resources/User/Images/Programs.png"/>
     <Name>Slack</Name>
     <Tag>Меседжеры</Tag>
     <Version>2.2</Version>
@@ -156,29 +160,29 @@
   <Package Id="19" Category="Игры">
     <Author>CD Project Red</Author>
     <Description>Игра для романтиков на досуге мясников</Description>
-    <Image Source="User/Images/19572.jpg" />
+    <Image Source="../Resources/User/Images/Games.png"/>
     <Name>The Witcher 3 Wild Hunt</Name>
     <Tag>RPG</Tag>
     <Version>3.31</Version>
   </Package>
   <Package Id="20" Category="Игры">
     <Author>Mod Doc Software</Author>
-    <CheatCode>dasdsa</CheatCode>
     <Description>Игра для настоящих царей</Description>
+    <Image Source="../Resources/User/Images/Games.png"/>
     <Name>Empire Earth 2</Name>
     <Tag>Не подшитые</Tag>
     <Version>2.2</Version>
   </Package>
   <Package Id="21" Category="Драйвера">
     <Author>Realtek</Author>
-    <Image Source="User/Images/19572.jpg" />
+    <Image Source="../Resources/User/Images/Drivers.png"/>
     <Name>High Definition Audio</Name>
     <Tag>Звуковая карта</Tag>
     <Version>3.31</Version>
   </Package>
   <Package Id="22" Category="Драйвера">
     <Author>Logitech</Author>
-    <Image Source="User/Images/19572.jpg" />
+    <Image Source="../Resources/User/Images/Drivers.png"/>
     <Name>Logitech HD Webcam C270</Name>
     <Tag>Аксессуары</Tag>
     <Version>2.2</Version>
@@ -186,7 +190,7 @@
   <Package Id="24" Category="Моды">
     <Author>Logitech</Author>
     <Description>Качественный мод для 3 Ведьмака, который улучшит качество графики в игре.</Description>
-    <Image Source="User/Images/19572.jpg" />
+    <Image Source="../Resources/User/Images/Mods.png"/>
     <Name>1.000 Times Better 2.3.1</Name>
     <Tag>Реворк</Tag>
     <Version>2.3.1</Version>
@@ -194,7 +198,7 @@
   <Package Id="25" Category="Игры">
     <Author>Valve</Author>
     <Description>Игра для настоящих ассов</Description>
-    <Image Source="User/Images/19572.jpg" />
+    <Image Source="../Resources/User/Images/Games.png"/>
     <Name>Counter Strike GO</Name>
     <Tag>Shooter</Tag>
     <Version>2.2</Version>
@@ -203,23 +207,37 @@
     <Author>Mindjet</Author>
     <CompanySite>https://www.mindjet.com/ru/</CompanySite>
     <Description>MindManager — самая мощная в мире программа.</Description>
+    <Image Source="../Resources/User/Images/Programs.png"/>
     <Name>MindManager</Name>
-    <Tag>Органазеры</Tag>
-    <Userfield Label="Лозунг">Распознавайте.  Объединяйте.  Стимулируйте.</Userfield>
+    <Tag>Не подшитые</Tag>
+    <UserfieldList>
+      <Userfield Label="Лозунг">Распознавайте.  Объединяйте.  Стимулируйте.</Userfield>
+      <Userfield Label="Лозунг2">Лозунг2</Userfield>
+    </UserfieldList>
     <Version>7.7.0</Version>
   </Package>
   <Package Id="27" Category="Программы">
     <Author>Liquid Technogies Limited</Author>
     <Description>Среда разработки XML проектов.</Description>
+    <Image Source="../Resources/User/Images/Programs.png"/>
     <License>EMBRACED XXXXXXX</License>
     <Name>XML Studio Developer</Name>
     <Tag>IDE</Tag>
     <Userfield Label="Лозунг">Build on 28.02.2011 (Build No : 3078)</Userfield>
     <Version>9.0.11.3078</Version>
   </Package>
-  <Package Id="28" Category="Драйвера">
+  <Package Id="28" Category="Плагины">
     <Author>фывфыв</Author>
     <Description>фывфыв</Description>
+    <Image Source="../Resources/User/Images/Plugins.png"/>
+    <Name>фвфыф</Name>
+    <Tag>Не подшитые</Tag>
+    <Version>фывфывф</Version>
+  </Package>
+  <Package Id="29" Category="Плагины">
+    <Author>фывфыв</Author>
+    <Description>фывфыв</Description>
+    <Image Source="../Resources/User/Images/Plugins.png"/>
     <Name>фвфыф</Name>
     <Tag>Не подшитые</Tag>
     <Version>фывфывф</Version>

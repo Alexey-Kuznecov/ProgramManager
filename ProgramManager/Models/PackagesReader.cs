@@ -1,13 +1,12 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Xml.Linq;
 using ProgramManager.Enums;
-using ProgramManager.Filters;
 using ProgramManager.Models.PackageModel;
 using ProgramManager.Converters;
+using ProgramManager.Dict;
 
 namespace ProgramManager.Models
 {
@@ -35,31 +34,49 @@ namespace ProgramManager.Models
                                              where (string)element.Attribute("Category") == category.Name
                                              select element;
 
-           // Формирования нового объекта на основе данных xml документа.
-           foreach (XElement element in document)
-           {
+            // Формирования нового объекта на основе данных xml документа.
+            foreach (XElement element in document)
+            {
+                string image = element.Element(FieldTypes.Image.ToString())?.FirstAttribute.Value;
+
                 // Инициализация свойств из базового класса
-               packages.Add(new T
-               {
-                   Id = int.Parse(element.FirstAttribute.Value),
-                   Name = element.Element(FieldTypes.Name.ToString())?.Value,
-                   Author = element.Element(FieldTypes.Author.ToString())?.Value,
-                   Version = element.Element(FieldTypes.Version.ToString())?.Value,
-                   Image = element.Element(FieldTypes.Image.ToString())?.FirstAttribute.Value,
-                   Description = element.Element(FieldTypes.Description.ToString())?.Value,
-                   TagOne = element.Element(FieldTypes.Tag.ToString())?.Value,
-                   HashSumm = element.Element(FieldTypes.HashSumm.ToString())?.Value,
-                   // Вызов метода для создания коллекции тегов, если пакет имеет более одного тега
-                   TagList = GetTagsList(element),
-                   Category = element.LastAttribute.Value,
-                   TextField = SetFieldValue(element)
-               });
-               // Вызов метода для инициализации свойств производного класса.
-               SetValueDeclaredProperties(packages, element, index);
-               // Вызов метода фильтрации полей с пустыми значениями данного объекта.
-               // packages[index].Datails = propNotIsEmpty.Filter(packages[index++]);             
+                packages.Add(new T
+                {
+                    Id = int.Parse(element.FirstAttribute.Value),
+                    Name = element.Element(FieldTypes.Name.ToString())?.Value,
+                    Author = element.Element(FieldTypes.Author.ToString())?.Value,
+                    Version = element.Element(FieldTypes.Version.ToString())?.Value,
+                    Description = element.Element(FieldTypes.Description.ToString())?.Value,
+                    TagOne = element.Element(FieldTypes.Tag.ToString())?.Value,
+                    HashSumm = element.Element(FieldTypes.HashSumm.ToString())?.Value,
+                    Image = image == null ? SetIcons(image, element.LastAttribute.Value) : image,
+                    // Вызов метода для создания коллекции тегов, если пакет имеет более одного тега
+                    TagList = GetTagsList(element),
+                    Category = element.LastAttribute.Value,
+                    TextField = SetFieldValue(element)
+                });
+                // Вызов метода для инициализации свойств производного класса.
+                SetValueDeclaredProperties(packages, element, index);
+                // Вызов метода фильтрации полей с пустыми значениями данного объекта.
+                // packages[index].Datails = propNotIsEmpty.Filter(packages[index++]);             
             }
             return packages;
+        }
+        private static string SetIcons(string iconPath, string category)
+        {
+            CategoryDict cateDict = new CategoryDict();
+            string uri = @"..\Resources\User\Images\";
+
+            if (category == cateDict.GetValue(Categories.Programs))
+                return uri + Categories.Programs.ToString() + ".png";
+            else if (category == cateDict.GetValue(Categories.Drivers))
+                return uri + Categories.Drivers.ToString() + ".png";
+            else if (category == cateDict.GetValue(Categories.Mods))
+                return uri + Categories.Mods.ToString() + ".png";
+            else if (category == cateDict.GetValue(Categories.Plugins))
+                return uri + Categories.Plugins.ToString() + ".png";
+            else
+                return uri + Categories.Games.ToString() + ".png";
         }
         /// <summary>
         /// Вспомогательный метод для получения массива тегов(текст), так как пакеты могут иметь больше одного тега.
@@ -143,15 +160,18 @@ namespace ProgramManager.Models
             }
             return SetFieldLabel(textField);
         }
+        /// <summary>
+        /// Метод инициализирует поля Label объекта TextFieldModel значениями словаря FieldConverter.Dictionary 
+        /// для вывода их в панель информации о пакете.
+        /// </summary>
+        /// <param name="textFields">Список полей выбранного пакета.</param>
+        /// <returns>Список объектов типа TextFieldModel с проинициализованными полями Label.</returns>
         private static List<TextFieldModel> SetFieldLabel(List<TextFieldModel> textFields)
         {
             for (var i = 0; i < textFields.Count; i++)
-            {
                 foreach (var item in FieldConverter.Dictionary.Where(d => d.Key == textFields[i].Types))
-                {
                     textFields[i].Label = item.Value;
-                }
-            }
+
             return textFields;
         }
     }

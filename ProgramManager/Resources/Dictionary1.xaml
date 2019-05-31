@@ -1,0 +1,14 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:ProgramManager.Resources">
+
+    <Style x:Key="BubleButton" TargetType="Button">
+        <Setter Property="Template" Value="{StaticResource BubleButtonTempl}" />
+        <Setter Property="Height" Value="48" />
+        <Setter Property="Margin" Value="5" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Background" Value="{Binding ElementName=grid, Path=Background}" />
+        <Setter Property="Foreground" Value="{Binding ElementName=c, Path=SelectedItem.Content}" />
+    </Style>
+</ResourceDictionary>

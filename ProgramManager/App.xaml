@@ -1,101 +1,16 @@
-﻿<Application x:Class="ProgramManager.App"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:ProgramManager"
-             xmlns:views="clr-namespace:ProgramManager.Views">
-<Application.Resources>
-        <Style x:Key="btIcon">
-            <Setter Property="Control.Background" Value="{x:Null}"></Setter>
-            <Setter Property="Control.BorderBrush" Value="{x:Null}"></Setter>
-        </Style>
-
-        <Style TargetType="Button">
-            <Style.Setters>
-                <Setter Property="Control.FontFamily" Value="Roboto"/>
-                <Setter Property="Control.Cursor" Value="Hand"/>
-            </Style.Setters>
-        </Style>
-        <Style x:Key="BaseTextBox" TargetType="TextBox">
-            <Style.Setters>
-                <Setter Property="Foreground" Value="DarkGray"/>
-                <Setter Property="FontFamily" Value="Segeo UI"/>
-                <Setter Property="FontSize" Value="12"/>
-                <Setter Property="BorderThickness" Value="0"/>
-                <Setter Property="Control.Foreground" Value="Gray"></Setter>
-                <Setter Property="CaretBrush" Value="Black"/>
-                <Setter Property="Background" Value="LightGray"/>
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="TextBox">
-                            <Border BorderBrush="LightGray" BorderThickness="1" CornerRadius="2">
-                                <Grid Margin="5">
-                                    <ScrollViewer x:Name="PART_ContentHost" Margin="0" VerticalAlignment="Center" />
-                                    <TextBlock 
-                                        x:Name="hint" 
-                                        VerticalAlignment="Center"
-                                        Background="Transparent"
-                                        FontSize="{TemplateBinding FontSize}"
-                                        Foreground="Gray"
-                                        IsHitTestVisible="False"
-                                        Text="{TemplateBinding Tag}"
-                                        TextAlignment="{TemplateBinding TextAlignment}"
-                                        Visibility="Collapsed"/>
-                                </Grid>
-                            </Border>
-                            <ControlTemplate.Triggers>
-                                <MultiTrigger>
-                                    <MultiTrigger.Conditions>
-                                        <Condition Property="Text" Value=""/>
-                                    </MultiTrigger.Conditions>
-                                    <Setter TargetName="hint" Property="Visibility" Value="Visible"></Setter>
-                                    <Setter Property="BorderBrush" Value="#AED500"/>
-                                </MultiTrigger>
-                            </ControlTemplate.Triggers>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style.Setters>
-            <Style.Triggers>
-                <Trigger Property="Control.IsFocused" Value="True">
-                    <Setter Property="BorderBrush" Value="#AED500"/>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-        <Style BasedOn="{StaticResource BaseTextBox}" TargetType="TextBox">
-            <Style.Triggers>
-                <Trigger Property="Control.IsFocused" Value="true">
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="TextBox">
-                                <Border BorderBrush="#ADD8E6" BorderThickness="2" CornerRadius="2">
-                                    <Grid Margin="5">
-                                        <ScrollViewer x:Name="PART_ContentHost" Margin="0" VerticalAlignment="Center" />
-                                        <TextBlock 
-                                        x:Name="hint" 
-                                        VerticalAlignment="Center"
-                                        Background="Transparent"
-                                        FontSize="{TemplateBinding FontSize}"
-                                        Foreground="Gray"
-                                        IsHitTestVisible="False"
-                                        Text="{TemplateBinding Tag}"
-                                        TextAlignment="{TemplateBinding TextAlignment}"
-                                        Visibility="Collapsed"/>
-                                    </Grid>
-                                </Border>
-                                <ControlTemplate.Triggers>
-                                    <MultiTrigger>
-                                        <MultiTrigger.Conditions>
-                                            <Condition Property="Text" Value=""/>
-                                        </MultiTrigger.Conditions>
-                                        <Setter TargetName="hint" Property="Visibility" Value="Visible"></Setter>
-                                        <Setter Property="BorderBrush" Value="#AED500"/>
-                                    </MultiTrigger>
-                                </ControlTemplate.Triggers>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
+﻿<Application
+    x:Class="ProgramManager.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:ProgramManager"
+    xmlns:views="clr-namespace:ProgramManager.Views">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/ProgramManager;component/Resources/Icons/Icons.xaml" />
+                <ResourceDictionary Source="/ProgramManager;component/Resources/Generic.xaml" />
+                <ResourceDictionary Source="/ProgramManager;component/Resources/Dictionary1.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
