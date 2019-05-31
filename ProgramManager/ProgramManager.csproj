@@ -82,8 +82,11 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Contracts\ISearchable.cs" />
+    <Compile Include="Converters\ContentConverter.cs" />
     <Compile Include="Converters\FieldConverter.cs" />
+    <Compile Include="Dict\CategoryDict.cs" />
     <Compile Include="Enums\FieldTypes.cs" />
+    <Compile Include="Enums\Keywords.cs" />
     <Compile Include="Filters\FilterProperties.cs" />
     <Compile Include="Converters\ConverterBase.cs" />
     <Compile Include="Models\PackageDrtails.cs" />
@@ -102,7 +105,7 @@
     <Compile Include="Services\EventAggregate.cs" />
     <Compile Include="Services\BaseEventArgs.cs" />
     <Compile Include="Converters\KeywordToTextConverter.cs" />
-    <Compile Include="Enums\Keywords.cs" />
+    <Compile Include="Enums\Categories.cs" />
     <Compile Include="Converters\NumberToStringConverterExtension.cs" />
     <Compile Include="Services\PackagesManager.cs" />
     <Compile Include="Models\PackageAccess.cs" />
@@ -113,6 +116,22 @@
     <Compile Include="ViewModels\PackagesDialogViewModel.cs" />
     <Compile Include="ViewModels\InputNameViewModel.cs" />
     <Compile Include="ViewModels\Base\RelayCommand.cs" />
+    <Page Include="Resources\Dictionary1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Generic.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Icons\Icons.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DialogIcons.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\DialogPacks\TagDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -143,6 +162,9 @@
     </Compile>
     <Compile Include="ViewModels\PackagesDialogVisibility.cs" />
     <Compile Include="ViewModels\TagDialogViewModel.cs" />
+    <Compile Include="Views\DialogIcons.xaml.cs">
+      <DependentUpon>DialogIcons.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\DialogPacks\TagDialog.xaml.cs">
       <DependentUpon>TagDialog.xaml</DependentUpon>
     </Compile>
@@ -244,6 +266,14 @@
   <ItemGroup>
     <Resource Include="Resources\User\ContextMenu.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\User\Images\Drivers.png" />
+    <Resource Include="Resources\User\Images\Games.png" />
+    <Resource Include="Resources\User\Images\Mods.png" />
+    <Resource Include="Resources\User\Images\Plugins.png" />
+    <Resource Include="Resources\User\Images\Programs.png" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

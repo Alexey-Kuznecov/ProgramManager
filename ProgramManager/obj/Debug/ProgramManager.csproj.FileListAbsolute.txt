@@ -57,7 +57,6 @@ D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\GalaSoft
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\GalaSoft.MvvmLight.Platform.xml
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\Microsoft.Practices.ServiceLocation.pdb
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\Microsoft.Practices.ServiceLocation.xml
-D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\ProgramManager.csprojResolveAssemblyReference.cache
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Views\DialogPacks\TabFiles.baml
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Views\DialogPacks\TagDialog.g.cs
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Views\PackagesDialog.g.cs
@@ -78,3 +77,9 @@ D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Views\Ma
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\ProgramManager.g.resources
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\ProgramManager.Properties.Resources.resources
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\ProgramManager.csproj.GenerateResource.Cache
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\ProgramManager.csprojResolveAssemblyReference.cache
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Views\DialogIcons.g.cs
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Views\DialogIcons.baml
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Resources\Icons\Icons.baml
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Resources\Generic.baml
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Resources\Dictionary1.baml

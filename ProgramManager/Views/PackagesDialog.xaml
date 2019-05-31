@@ -67,11 +67,22 @@
                 Margin="10,10,10,10"
                 Tag="Имя пакета..."
                 Text="{Binding PackageTitle, Mode=TwoWay}" />
-            <Image
+            <Button
                 Grid.Row="2"
                 Grid.Column="1"
+                Width="48"
                 Height="48"
-                Source="../Resources/User/Images/Adobe Photoshop.png" />
+                BorderBrush="{x:Null}"
+                Command="{Binding OpenDialogIcons}"
+                Content="{StaticResource SettingIcon}"
+                Style="{StaticResource BubleButton}">
+                <Button.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Загрузить" />
+                        <MenuItem Header="Загрузить в формате emf" />
+                    </ContextMenu>
+                </Button.ContextMenu>
+            </Button>
             <WrapPanel
                 Grid.Row="1"
                 Grid.ColumnSpan="3"

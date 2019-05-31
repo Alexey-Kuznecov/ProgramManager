@@ -1,0 +1,82 @@
+﻿<Window
+    x:Class="ProgramManager.Views.DialogIcons"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:ProgramManager.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:y="clr-namespace:ProgramManager.Converters"
+    Title="DialogIcons"
+    Width="405.882"
+    Height="429.412"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
+
+    <Grid x:Name="grid" Background="{Binding ElementName=window, Path=Background}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="50" />
+        </Grid.RowDefinitions>
+
+
+        <WrapPanel
+            Grid.Row="0"
+            Margin="10"
+            Background="#FFF7F3F3">
+            <ListView
+                Width="377"
+                HorizontalAlignment="Center"
+                HorizontalContentAlignment="Center" Height="328">
+                <ListBoxItem HorizontalContentAlignment="Center">
+                    <Button Content="{StaticResource SettingIcon}" Style="{StaticResource BubleButton}" />
+                </ListBoxItem>
+                <ListBoxItem>
+                    <Button Content="{StaticResource StarIcon}" Style="{StaticResource BubleButton}" />
+                </ListBoxItem>
+                <ListBoxItem>
+                    <Button Content="{StaticResource IdiaIcon}" Style="{StaticResource BubleButton}" />
+                </ListBoxItem>
+                <ListBoxItem>
+                    <Button Content="{StaticResource ChessIcon}" Style="{StaticResource BubleButton}" />
+                </ListBoxItem>
+            </ListView>
+        </WrapPanel>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="125" />
+            </Grid.ColumnDefinitions>
+            <Button
+                Grid.Column="1"
+                Margin="10"
+                Content="Выбрать" />
+            <ComboBox
+                x:Name="c"
+                Grid.Column="0"
+                Width="200"
+                Height="20"
+                Margin="0,10"
+                VerticalAlignment="Top"
+                SelectedIndex="0">
+                <ComboBoxItem>#DD2c2c00</ComboBoxItem>
+                <ComboBoxItem>#FF72f534</ComboBoxItem>
+                <ComboBoxItem>#FF184B9C</ComboBoxItem>
+                <ComboBoxItem>#FFffcd09</ComboBoxItem>
+                <ComboBoxItem>#FF0c6eb7</ComboBoxItem>
+                <ComboBoxItem>#FF9b993a</ComboBoxItem>
+                <ComboBoxItem>#FFbb4b9c</ComboBoxItem>
+                <ComboBoxItem>#FFf68f4d</ComboBoxItem>
+                <ComboBoxItem>#FF78c696</ComboBoxItem>
+                <ComboBoxItem>#FFf59eb3</ComboBoxItem>
+                <ComboBoxItem>#FFc5a3cc</ComboBoxItem>
+                <ComboBoxItem>#FFcec82b</ComboBoxItem>
+                <ComboBoxItem>#FFe0b03a</ComboBoxItem>
+                <ComboBoxItem>#FF8d663a</ComboBoxItem>
+                <ComboBoxItem>#FF028d5b</ComboBoxItem>
+                <ComboBoxItem>#FF89d3de</ComboBoxItem>
+                <ComboBoxItem>#FF672f8f</ComboBoxItem>
+            </ComboBox>
+        </Grid>
+    </Grid>
+</Window>

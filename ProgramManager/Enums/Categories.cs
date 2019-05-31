@@ -6,10 +6,13 @@ using System.Threading.Tasks;
 
 namespace ProgramManager.Enums
 {
-    enum Keywords
+    public enum Categories
     {
-        All,
-        Chosen,
-        Found
+        Programs,
+        Drivers,
+        Mods,
+        Plugins,
+        Games,
+        Null
     }
 }

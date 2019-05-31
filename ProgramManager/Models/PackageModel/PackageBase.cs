@@ -33,9 +33,10 @@ namespace ProgramManager.Models.PackageModel
         /// </summary>
         // public List<PropertyNotIsNull> Datails { get; set; }
         public List<TextFieldModel> TextField { get; set; }
-        public static Dictionary<string, string> MenuItem { get; set; } = new Dictionary<string, string>();
+        public static Dictionary<string, string> MenuItem { get; set; }
         public virtual Dictionary<string, string> LoadMenuItem()
         {
+            MenuItem = new Dictionary<string, string>();
             XDocument root = XDocument.Load("../../Resources/User/ContextMenu.xml");
             XElement menuItem = new XElement("MenuItem");
             MenuItem.Clear();
