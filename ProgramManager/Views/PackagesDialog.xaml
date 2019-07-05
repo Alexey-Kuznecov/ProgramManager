@@ -2,6 +2,7 @@
     x:Class="ProgramManager.Views.PackagesDialog"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Resources="clr-namespace:ProgramManager.Resources"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:ProgramManager.Views.DialogPacks"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -67,37 +68,32 @@
                 Margin="10,10,10,10"
                 Tag="Имя пакета..."
                 Text="{Binding PackageTitle, Mode=TwoWay}" />
-            <Button
-                Grid.Row="2"
-                Grid.Column="1"
-                Width="48"
-                Height="48"
-                BorderBrush="{x:Null}"
-                Command="{Binding OpenDialogIcons}"
-                Content="{StaticResource SettingIcon}"
-                Style="{StaticResource BubleButton}">
-                <Button.ContextMenu>
-                    <ContextMenu>
-                        <MenuItem Header="Загрузить" />
-                        <MenuItem Header="Загрузить в формате emf" />
-                    </ContextMenu>
-                </Button.ContextMenu>
-            </Button>
+            <Grid Grid.Row="2" Grid.Column="1">
+                <Grid.DataContext>
+                    <vm:IconViewModel />
+                </Grid.DataContext>
+                <ContentControl>
+                    <ContentControl.DataContext>
+                        <vm:IconViewModel />
+                    </ContentControl.DataContext>
+                    <local:IconCanvas />
+                </ContentControl>
+            </Grid>
             <WrapPanel
                 Grid.Row="1"
-                Grid.ColumnSpan="3"
+                Grid.Column="0"
                 VerticalAlignment="Center">
                 <Button
                     Height="28"
                     Margin="5,0,0,0"
                     Command="{Binding SavePackage}"
-                    CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
                     Style="{StaticResource btIcon}">
                     <ContentControl>
                         <WrapPanel>
                             <Image Width="18" Source="../Resources/Icons/Save_48px.png" />
                             <Label
-                                Name="SaveAndEdit"
+                                x:Name="SaveAndEdit"
                                 Height="26"
                                 BorderBrush="{x:Null}"
                                 Content="Сохранить" />
@@ -161,6 +157,7 @@
                         </ItemsControl>
                     </ScrollViewer>
                 </TabItem>
+
                 <TabItem Header="Описание">
                     <Grid>
                         <TextBox

@@ -8,7 +8,7 @@ using System.Collections;
 
 namespace ProgramManager.Converters
 {
-    public class FieldConverter : ConvertorBase<FieldConverter>, IEnumerable
+    public class FieldConverter : ConverterBase<FieldConverter>, IEnumerable
     {
         private static readonly IDictionary<string, string> _dictionary = new Dictionary<string, string>
         {

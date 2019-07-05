@@ -5,10 +5,9 @@ using System.Collections.ObjectModel;
 using System.Windows.Controls;
 using GalaSoft.MvvmLight.Messaging;
 using ProgramManager.Models.PackageModel;
-using ProgramManager.Converters;
-using ProgramManager.Enums;
-using ProgramManager.Services;
 using ProgramManager.Views;
+using System.Windows;
+using System.Windows.Media;
 
 namespace ProgramManager.ViewModels
 {
@@ -17,7 +16,7 @@ namespace ProgramManager.ViewModels
         private const string AutocompleteIcon = "../../Resources/Icons/Businessman_48px.png";
         private const string DeleteIcon = "../../Resources/Icons/Delete_48px.png";
         private static InputName _windowInputName;
-        private static TagDialog _windowTagModify;
+        private static IconViewModel _iconViewModel;
         private static DialogIcons _windowAddIcons;
         private string _description;
         private string _packageTitle;
@@ -28,8 +27,8 @@ namespace ProgramManager.ViewModels
         {
             // Initial fields.
             _windowInputName = new InputName();
-            _windowTagModify = new TagDialog();
             _windowAddIcons = new DialogIcons();
+            _iconViewModel= new IconViewModel();
 
             // Initial data.
             InitializePackageDialog();
@@ -42,6 +41,7 @@ namespace ProgramManager.ViewModels
             Messenger.Default.Register<InputName>(this, action => _windowInputName = action as InputName);
             Messenger.Default.Register<PackageBase>(this, action => LoadPackage(action));
             Messenger.Default.Register<List<string>>(this, InitialDataSource);
+            Messenger.Default.Register<IconEditorViewModel>(this, LoadIcon);
         }
 
         #endregion
@@ -70,12 +70,12 @@ namespace ProgramManager.ViewModels
         #endregion
 
         #region Commands
-
         public ICommand CmdRemoveTextField { get; }
         public static ICommand SavePackage { get; set; }
-        public ICommand OpenDialogIcons => new RelayCommand(obj => {
-            DialogIcons windowDialogIcon = new DialogIcons();
-            windowDialogIcon.ShowDialog();
+        public ICommand OpenDialogIcons => new RelayCommand(obj => 
+        {
+            _windowAddIcons = new DialogIcons();
+            _windowAddIcons.ShowDialog();
         });
         public ICommand OpenInputName => new RelayCommand(obj => 
         {
@@ -97,6 +97,11 @@ namespace ProgramManager.ViewModels
         });
 
         #endregion
+
+        private void LoadIcon(IconEditorViewModel obj)
+        {
+            //IconBrush = obj.IconBrush;
+        }
 
     }
     

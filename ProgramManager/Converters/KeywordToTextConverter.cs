@@ -7,7 +7,7 @@ using ProgramManager.MarkupExtensions;
 
 namespace ProgramManager.Converters
 {
-    public class KeywordToTextConverter : ConvertorBase<KeywordToTextConverter>
+    public class KeywordToTextConverter : ConverterBase<KeywordToTextConverter>
     {
         private static readonly IDictionary<Keywords, string> Descriptions = new Dictionary<Keywords, string>
         {

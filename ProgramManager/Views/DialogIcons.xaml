@@ -2,15 +2,18 @@
     x:Class="ProgramManager.Views.DialogIcons"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converter="clr-namespace:ProgramManager.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:ProgramManager.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:y="clr-namespace:ProgramManager.Converters"
+    xmlns:vm="clr-namespace:ProgramManager.ViewModels"
     Title="DialogIcons"
-    Width="405.882"
-    Height="429.412"
+    Width="520"
+    Height="470"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
+    <Window.DataContext>
+        <vm:IconEditorViewModel />
+    </Window.DataContext>
 
     <Grid x:Name="grid" Background="{Binding ElementName=window, Path=Background}">
         <Grid.RowDefinitions>
@@ -18,28 +21,15 @@
             <RowDefinition Height="50" />
         </Grid.RowDefinitions>
 
-
-        <WrapPanel
-            Grid.Row="0"
-            Margin="10"
-            Background="#FFF7F3F3">
-            <ListView
-                Width="377"
-                HorizontalAlignment="Center"
-                HorizontalContentAlignment="Center" Height="328">
-                <ListBoxItem HorizontalContentAlignment="Center">
-                    <Button Content="{StaticResource SettingIcon}" Style="{StaticResource BubleButton}" />
-                </ListBoxItem>
-                <ListBoxItem>
-                    <Button Content="{StaticResource StarIcon}" Style="{StaticResource BubleButton}" />
-                </ListBoxItem>
-                <ListBoxItem>
-                    <Button Content="{StaticResource IdiaIcon}" Style="{StaticResource BubleButton}" />
-                </ListBoxItem>
-                <ListBoxItem>
-                    <Button Content="{StaticResource ChessIcon}" Style="{StaticResource BubleButton}" />
-                </ListBoxItem>
-            </ListView>
+        <WrapPanel Margin="10" ScrollViewer.VerticalScrollBarVisibility="Visible">
+            <Button Content="{StaticResource SettingIcon}" Style="{StaticResource IconStyle}" />
+            <Button Content="{StaticResource ChessIcon}" Style="{StaticResource IconStyle}" />
+            <Button Content="{StaticResource IdiaIcon}" Style="{StaticResource IconStyle}" />
+            <Button Content="{StaticResource SearchIcon}" Style="{StaticResource IconStyle}" />
+            <Button Content="{StaticResource StarIcon}" Style="{StaticResource IconStyle}" />
+            <Button Content="{StaticResource RockIcon}" Style="{StaticResource IconStyle}" />
+            <Button Content="{StaticResource Photoshop}" Style="{StaticResource IconStyle}" />
+            <Button Content="{StaticResource SettingIcon}" Style="{StaticResource IconStyle}" />
         </WrapPanel>
 
         <Grid Grid.Row="1">
@@ -50,6 +40,7 @@
             <Button
                 Grid.Column="1"
                 Margin="10"
+                Command="{Binding SelectIcon}"
                 Content="Выбрать" />
             <ComboBox
                 x:Name="c"

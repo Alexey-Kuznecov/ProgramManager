@@ -18,7 +18,6 @@ namespace ProgramManager.ViewModels
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
         protected bool SetProperty<T>(ref T storage, T value, Expression<Func<T>> action)
         {
             if (Equals(storage, value))
