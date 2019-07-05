@@ -10,6 +10,9 @@ using ProgramManager.Services;
 using ProgramManager.Views;
 using GalaSoft.MvvmLight.Messaging;
 using System.Windows.Controls;
+using System.Windows.Media;
+using ProgramManager.Resources;
+using ProgramManager.Views.DialogPacks;
 
 namespace ProgramManager.ViewModels
 {
@@ -208,6 +211,10 @@ namespace ProgramManager.ViewModels
             _id = package.Id;
             Description = package.Description;
             PackageTitle = package.Name;
+            
+            //Посылает найденый ресурс иконки для пакета
+            Messenger.Default.Send(Application.Current.FindResource("Photoshop"));
+
             TextField.Clear();
 
             for (int index = 0; index < package.TextField.Count; index++)

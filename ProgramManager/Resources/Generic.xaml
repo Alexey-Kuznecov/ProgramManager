@@ -3,38 +3,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:ProgramManager">
 
-    <!--  ИКОНКИ  -->
-    <ControlTemplate x:Key="BubleButtonTempl" TargetType="Button">
-        <ControlTemplate.Resources>
-            <local:ContentConverter x:Key="ContentConverter" />
-        </ControlTemplate.Resources>
-        <Grid x:Name="grid">
-            <Path
-                x:Name="ellipse"
-                Fill="{TemplateBinding Background}"
-                Stretch="Uniform"
-                Stroke="{TemplateBinding Foreground}"
-                StrokeThickness="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=BorderThickness.Left}">
-                <Path.Data>
-                    <EllipseGeometry RadiusX="50" RadiusY="50" />
-                </Path.Data>
-            </Path>
-            <Path
-                x:Name="shape"
-                Width="48"
-                Height="48"
-                Data="{TemplateBinding Content,
-                                       Converter={StaticResource ContentConverter}}"
-                Fill="{TemplateBinding Foreground}"
-                Stretch="Uniform" />
-        </Grid>
-        <!--<ControlTemplate.Triggers>
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter TargetName="shape" Property="Fill" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Background}" />
-                <Setter TargetName="ellipse" Property="Fill" Value="{Binding RelativeSource={RelativeSource Self}, Path=Stroke}" />
-            </Trigger>
-        </ControlTemplate.Triggers>-->
-    </ControlTemplate>
     <!--
         КНОПКИ И ТЕКСТОВЫЕ ПОЛЯ
     -->

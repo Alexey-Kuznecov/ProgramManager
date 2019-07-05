@@ -1,0 +1,47 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converter="clr-namespace:ProgramManager.Converters">
+
+    <Style x:Key="IconStyle" TargetType="Button">
+        <Setter Property="Template" Value="{StaticResource IconTemplate}" />
+        <Setter Property="Height" Value="48" />
+        <Setter Property="Margin" Value="10" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Background" Value="#F3F3F3" />
+        <Setter Property="Foreground" Value="{Binding ElementName=c, Path=SelectedItem.Content}" />
+    </Style>
+
+    <!--  ИКОНКИ  -->
+    <ControlTemplate x:Key="IconTemplate" TargetType="Button">
+        <ControlTemplate.Resources>
+            <converter:ContentConverter x:Key="ContentConverter" />
+        </ControlTemplate.Resources>
+        <Grid x:Name="grid">
+            <Path
+                x:Name="Rectangle"
+                Fill="{TemplateBinding Background}"
+                Stretch="Uniform"
+                Stroke="{TemplateBinding Foreground}"
+                StrokeThickness="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=BorderThickness.Left}">
+                <Path.Data>
+                    <RectangleGeometry Rect="0,0,50,50" />
+                </Path.Data>
+            </Path>
+            <Path
+                x:Name="shape"
+                Width="32"
+                Height="32"
+                Data="{TemplateBinding Content,
+                                       Converter={StaticResource ContentConverter}}"
+                Fill="{TemplateBinding Foreground}"
+                Stretch="Uniform" />
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="shape" Property="Fill" Value="#FFFFFF" />
+                <Setter TargetName="Rectangle" Property="Fill" Value="{Binding RelativeSource={RelativeSource Self}, Path=Stroke}" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+</ResourceDictionary>

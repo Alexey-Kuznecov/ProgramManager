@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Markup;
 
 namespace ProgramManager.MarkupExtensions
 {
-    public abstract class ConvertorBase<T> : MarkupExtension, IValueConverter
+    public abstract class ConverterBase<T> : MarkupExtension, IValueConverter
         where T : class, new()
     {
         /// <summary>
