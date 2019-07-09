@@ -6,50 +6,88 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:ProgramManager.ViewModels"
+    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
     Title="DialogIcons"
-    Width="520"
+    Width="540"
     Height="470"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
     <Window.DataContext>
         <vm:IconEditorViewModel />
     </Window.DataContext>
-
-    <Grid x:Name="grid" Background="{Binding ElementName=window, Path=Background}">
+    <Grid Background="{Binding ElementName=window, Path=Background}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="60*" />
+            <ColumnDefinition Width="170*" />
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
             <RowDefinition Height="50" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="60" />
         </Grid.RowDefinitions>
+        <TextBox
+            Grid.Column="1"
+            Height="35"
+            Margin="15,5"
+            FontSize="16"
+            Text="#program" />
 
-        <WrapPanel Margin="10" ScrollViewer.VerticalScrollBarVisibility="Visible">
-            <Button Content="{StaticResource SettingIcon}" Style="{StaticResource IconStyle}" />
-            <Button Content="{StaticResource ChessIcon}" Style="{StaticResource IconStyle}" />
-            <Button Content="{StaticResource IdiaIcon}" Style="{StaticResource IconStyle}" />
-            <Button Content="{StaticResource SearchIcon}" Style="{StaticResource IconStyle}" />
-            <Button Content="{StaticResource StarIcon}" Style="{StaticResource IconStyle}" />
-            <Button Content="{StaticResource RockIcon}" Style="{StaticResource IconStyle}" />
-            <Button Content="{StaticResource Photoshop}" Style="{StaticResource IconStyle}" />
-            <Button Content="{StaticResource SettingIcon}" Style="{StaticResource IconStyle}" />
-        </WrapPanel>
-
-        <Grid Grid.Row="1">
+        <ListBox
+            Grid.Row="0"
+            Grid.RowSpan="2"
+            Grid.Column="0"
+            Margin="10,10,0,10"
+            FontSize="13"
+            Foreground="#FF6A6A6A">
+            <ListBox.BorderBrush>
+                <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                    <GradientStop Offset="0" Color="#FF919090" />
+                    <GradientStop Offset="1" Color="White" />
+                </LinearGradientBrush>
+            </ListBox.BorderBrush>
+            <ListBox.Background>
+                <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                    <GradientStop Offset="0" Color="#FFEEEEEE" />
+                    <GradientStop Offset="1" Color="White" />
+                </LinearGradientBrush>
+            </ListBox.Background>
+            <ListBoxItem Content="Программы" />
+            <ListBoxItem Content="Логотипы" />
+            <ListBoxItem Content="Игры" />
+            <ListBoxItem Content="Бренды" />
+            <ListBoxItem Content="Разное" />
+        </ListBox>
+        <ScrollViewer
+            Grid.Row="1"
+            Grid.Column="1"
+            VerticalScrollBarVisibility="Auto">
+            <StackPanel Margin="10">
+                <ItemsControl Width="380" ItemsSource="{Binding WrapIcons}" />
+            </StackPanel>
+        </ScrollViewer>
+        <Grid
+            Grid.Row="2"
+            Grid.Column="0"
+            Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="270" />
+                <ColumnDefinition Width="100" />
                 <ColumnDefinition Width="125" />
             </Grid.ColumnDefinitions>
             <Button
-                Grid.Column="1"
-                Margin="10"
-                Command="{Binding SelectIcon}"
-                Content="Выбрать" />
+                Grid.Column="2"
+                Margin="20,10,10,20"
+                Command="{Binding SetIcon}"
+                CommandParameter="{Binding ElementName=ccc, Path=ItemTemplate.Template}"
+                Content="Выбрать" ToolTip="adssadasd"/>
             <ComboBox
-                x:Name="c"
                 Grid.Column="0"
                 Width="200"
-                Height="20"
-                Margin="0,10"
-                VerticalAlignment="Top"
-                SelectedIndex="0">
+                Height="30"
+                Margin="30,10,40,20"
+                VerticalContentAlignment="Center"
+                SelectedIndex="0"
+                SelectedItem="{Binding Color}">
                 <ComboBoxItem>#DD2c2c00</ComboBoxItem>
                 <ComboBoxItem>#FF72f534</ComboBoxItem>
                 <ComboBoxItem>#FF184B9C</ComboBoxItem>
@@ -68,6 +106,10 @@
                 <ComboBoxItem>#FF89d3de</ComboBoxItem>
                 <ComboBoxItem>#FF672f8f</ComboBoxItem>
             </ComboBox>
+            <!--<xctk:CheckComboBox Grid.Column="0" SelectedValue="dfad">
+                <ComboBoxItem>#DD2c2c00</ComboBoxItem>
+                <ComboBoxItem>#FF72f534</ComboBoxItem>
+            </xctk:CheckComboBox>-->
         </Grid>
     </Grid>
 </Window>

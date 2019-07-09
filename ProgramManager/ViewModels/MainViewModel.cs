@@ -9,6 +9,8 @@ using ProgramManager.Models.PackageModel;
 using ProgramManager.Services;
 using GalaSoft.MvvmLight.Messaging;
 using System;
+using ProgramManager.Resources;
+using ProgramManager.ViewModels.Base;
 
 namespace ProgramManager.ViewModels
 {

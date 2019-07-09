@@ -1,8 +1,9 @@
 ﻿using GalaSoft.MvvmLight.Messaging;
 using ProgramManager.Views;
-using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
+using ProgramManager.Resources;
+using ProgramManager.ViewModels.Base;
 
 namespace ProgramManager.ViewModels
 {
@@ -10,44 +11,75 @@ namespace ProgramManager.ViewModels
     {
         public IconViewModel()
         {
-            Messenger.Default.Register<object>(this, LoadIcon);
-            CmdSelectDialogIcon = new RelayCommand(obj => SelectDialogIcon(obj));
+            Messenger.Default.Register<Icon>(this, LoadIcon);
+            CmdSelectDialogIcon = new RelayCommand(SelectDialogIcon);
         }
+        private DrawingBrush _iconGeometry;
+        private SolidColorBrush _iconBackground;
+        private SolidColorBrush _iconForeground;
 
-        private DrawingBrush _iconButton;
+        #region Properties
 
-        public DrawingBrush IconButton
+        public DrawingBrush IconGeometry
         {
-            get { return _iconButton; }
+            get { return _iconGeometry; }
             set
             {
-                _iconButton = value;
-                SetProperty(ref _iconButton, value, () => IconButton);
+                _iconGeometry = value;
+                SetProperty(ref _iconGeometry, value, () => IconGeometry);
             }
         }
+        public SolidColorBrush IconBackground
+        {
+            get { return _iconBackground; }
+            set
+            {
+                _iconBackground = value;
+                SetProperty(ref _iconBackground, value, () => IconBackground);
+            }
+        }
+        public SolidColorBrush IconForeground
+        {
+            get { return _iconForeground; }
+            set
+            {
+                _iconForeground = value;
+                SetProperty(ref _iconForeground, value, () => IconForeground);
+            }
+        }
+        public string IconName { get; set; }
+
+        #endregion
+
+        #region Commands
 
         public ICommand CmdSelectDialogIcon { get; }
 
-        private void LoadIcon(object obj)
-        {
-            DrawingBrush brush = obj as DrawingBrush;
-            DrawingGroup group = brush.Drawing as DrawingGroup;
-            DrawingBrush newBrush = new DrawingBrush();
-            DrawingGroup newGroup = new DrawingGroup();
-            SolidColorBrush color = new SolidColorBrush(Color.FromRgb(149, 130, 255));
+        #endregion
 
-            foreach (var item in group.Children)
-            {
-                GeometryDrawing geometry = item as GeometryDrawing;
-                newGroup.Children.Add(new GeometryDrawing() { Brush = color, Geometry = geometry.Geometry });
-                newBrush.Drawing = newGroup;
-            };                       
-            IconButton = newBrush;
+        #region Functions
+
+        private void LoadIcon(Icon icon)
+        {
+            DrawingBrush brush = icon.Brush;
+            DrawingGroup group = brush?.Drawing as DrawingGroup;
+            if (@group != null)
+                foreach (var item in @group.Children)
+                {
+                    var geometry = item as GeometryDrawing;
+                    if (geometry != null) geometry.Brush = icon.FgroundColor;
+                }
+            IconGeometry = brush;
+            IconBackground = icon.BgroundColor;
+            IconForeground = icon.FgroundColor;
+            IconName = icon.Name;
         }
         private void SelectDialogIcon(object obj)
         {
             DialogIcons instance = new DialogIcons();
             instance.Show();
         }
+
+        #endregion
     }
 }

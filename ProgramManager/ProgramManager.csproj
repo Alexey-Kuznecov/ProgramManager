@@ -121,7 +121,8 @@
     <Compile Include="Models\PackageModel\PackageBase.cs" />
     <Compile Include="Models\PackageModel\PluginModel.cs" />
     <Compile Include="Models\PackageModel\ProgramModel.cs" />
-    <Compile Include="Resources\IconResources .cs" />
+    <Compile Include="Resources\ConverterXamlToBitmap.cs" />
+    <Compile Include="Resources\IconCore.cs" />
     <Compile Include="Services\ProcessManager.cs" />
     <Compile Include="Services\EventAggregate.cs" />
     <Compile Include="Services\BaseEventArgs.cs" />
@@ -232,6 +233,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="bin\Debug\05170f1f-be5c-4b42-ac68-2662823367ab.tmp" />
+    <None Include="bin\Debug\be3cf7cc-a825-493c-95f6-75f3fb31160a.tmp" />
+    <None Include="bin\Debug\c6a3febc-fb60-4a96-8bd5-aa496a4dfc06.tmp" />
+    <None Include="bin\Debug\c6c898f4-1f59-45e7-92b5-7e45f7c8da08.tmp" />
+    <None Include="bin\Debug\e7d1524d-d8f9-4599-9acd-9abf2391d5e1.tmp" />
+    <None Include="bin\Debug\ProgramManager.vshost.exe.manifest" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -303,7 +310,46 @@
     <Resource Include="Resources\User\Images\Plugins.png" />
     <Resource Include="Resources\User\Images\Programs.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="bin\Debug\AsyncMvvmMessenger.dll" />
+    <Resource Include="bin\Debug\AsyncMvvmMessenger.xml" />
+    <Content Include="bin\Debug\de\Xceed.Wpf.AvalonDock.resources.dll" />
+    <Resource Include="bin\Debug\DriverPackages.xml" />
+    <Content Include="bin\Debug\es\Xceed.Wpf.AvalonDock.resources.dll" />
+    <Content Include="bin\Debug\fr\Xceed.Wpf.AvalonDock.resources.dll" />
+    <Content Include="bin\Debug\GalaSoft.MvvmLight.dll" />
+    <Content Include="bin\Debug\GalaSoft.MvvmLight.Extras.dll" />
+    <Content Include="bin\Debug\GalaSoft.MvvmLight.Extras.pdb" />
+    <Resource Include="bin\Debug\GalaSoft.MvvmLight.Extras.xml" />
+    <Content Include="bin\Debug\GalaSoft.MvvmLight.pdb" />
+    <Content Include="bin\Debug\GalaSoft.MvvmLight.Platform.dll" />
+    <Content Include="bin\Debug\GalaSoft.MvvmLight.Platform.pdb" />
+    <Resource Include="bin\Debug\GalaSoft.MvvmLight.Platform.xml" />
+    <Resource Include="bin\Debug\GalaSoft.MvvmLight.xml" />
+    <Content Include="bin\Debug\hu\Xceed.Wpf.AvalonDock.resources.dll" />
+    <Content Include="bin\Debug\it\Xceed.Wpf.AvalonDock.resources.dll" />
+    <Content Include="bin\Debug\Microsoft.Practices.ServiceLocation.dll" />
+    <Content Include="bin\Debug\Microsoft.Practices.ServiceLocation.pdb" />
+    <Resource Include="bin\Debug\Microsoft.Practices.ServiceLocation.xml" />
+    <Content Include="bin\Debug\ProgramManager.exe" />
+    <Content Include="bin\Debug\ProgramManager.pdb" />
+    <Content Include="bin\Debug\ProgramManager.vshost.exe" />
+    <Resource Include="bin\Debug\ProgramPackages.xml" />
+    <Content Include="bin\Debug\pt-BR\Xceed.Wpf.AvalonDock.resources.dll" />
+    <Content Include="bin\Debug\ro\Xceed.Wpf.AvalonDock.resources.dll" />
+    <Content Include="bin\Debug\ru\Xceed.Wpf.AvalonDock.resources.dll" />
+    <Content Include="bin\Debug\sv\Xceed.Wpf.AvalonDock.resources.dll" />
+    <Content Include="bin\Debug\System.Windows.Interactivity.dll" />
+    <Content Include="bin\Debug\Xceed.Wpf.AvalonDock.dll" />
+    <Content Include="bin\Debug\Xceed.Wpf.AvalonDock.Themes.Aero.dll" />
+    <Content Include="bin\Debug\Xceed.Wpf.AvalonDock.Themes.Metro.dll" />
+    <Content Include="bin\Debug\Xceed.Wpf.AvalonDock.Themes.VS2010.dll" />
+    <Content Include="bin\Debug\Xceed.Wpf.Toolkit.dll" />
+    <Content Include="bin\Debug\zh-Hans\Xceed.Wpf.AvalonDock.resources.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Release\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

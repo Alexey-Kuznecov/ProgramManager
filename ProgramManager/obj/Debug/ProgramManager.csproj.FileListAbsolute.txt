@@ -42,12 +42,6 @@ D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\ProgramM
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\ProgramManager.pdb
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\ProgramManager.exe
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\ProgramManager.pdb
-D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\AsyncMvvmMessenger.dll
-D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\GalaSoft.MvvmLight.dll
-D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\GalaSoft.MvvmLight.Extras.dll
-D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\GalaSoft.MvvmLight.Platform.dll
-D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\Microsoft.Practices.ServiceLocation.dll
-D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\System.Windows.Interactivity.dll
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\AsyncMvvmMessenger.xml
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\GalaSoft.MvvmLight.pdb
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\GalaSoft.MvvmLight.xml
@@ -80,11 +74,6 @@ D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\ProgramM
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Views\DialogIcons.g.cs
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Views\DialogIcons.baml
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Resources\Generic.baml
-D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\Xceed.Wpf.AvalonDock.dll
-D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\Xceed.Wpf.AvalonDock.Themes.Aero.dll
-D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\Xceed.Wpf.AvalonDock.Themes.Metro.dll
-D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\Xceed.Wpf.AvalonDock.Themes.VS2010.dll
-D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\Xceed.Wpf.Toolkit.dll
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\de\Xceed.Wpf.AvalonDock.resources.dll
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\es\Xceed.Wpf.AvalonDock.resources.dll
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\fr\Xceed.Wpf.AvalonDock.resources.dll
@@ -100,3 +89,4 @@ D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Views\Di
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Views\DialogPacks\IconCanvas.baml
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\ProgramManager.csprojResolveAssemblyReference.cache
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Resources\IconStyle.baml
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\ProgramManager_Content.g.cs

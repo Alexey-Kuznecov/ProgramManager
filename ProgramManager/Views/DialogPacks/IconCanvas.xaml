@@ -10,7 +10,61 @@
     d:DesignHeight="300"
     d:DesignWidth="300"
     mc:Ignorable="d">
-    <Grid Width="48" Height="48">
-        <Button Background="{Binding IconButton}" Command="{Binding CmdSelectDialogIcon}" />
+
+    <UserControl.Resources>
+        <Style x:Key="ContentControl" TargetType="ContentControl">
+            <Setter Property="Cursor" Value="Hand" />
+        </Style>
+    </UserControl.Resources>
+    <UserControl.DataContext>
+        <viewModels:IconViewModel />
+    </UserControl.DataContext>
+    <Grid
+        Width="50"
+        Height="50"
+        Background="WhiteSmoke">
+        <ContentControl Style="{StaticResource ContentControl}">
+            <ContentControl.Template>
+                <ControlTemplate>
+                    <ControlTemplate.Resources>
+                        <converters:ContentConverter x:Key="ContentConverter" />
+                        <converters:BrushConverter x:Key="BrushConverter" />
+                    </ControlTemplate.Resources>
+                    <Grid>
+                        <Path
+                            x:Name="rect"
+                            Fill="{Binding IconBackground, Mode=TwoWay}"
+                            Stretch="Uniform">
+                            <Path.Data>
+                                <RectangleGeometry Rect="0,0,50,50" />
+                            </Path.Data>
+                        </Path>
+                        <Path x:Name="rect2" Stretch="Uniform">
+                            <Path.Data>
+                                <RectangleGeometry Rect="0,0,40,40" />
+                            </Path.Data>
+                        </Path>
+                        <Path
+                            x:Name="shape"
+                            Width="36"
+                            Height="36"
+                            Data="{Binding IconGeometry, Mode=TwoWay, Converter={StaticResource ContentConverter}}"
+                            Fill="{Binding IconGeometry, Mode=TwoWay, Converter={StaticResource BrushConverter}, ConverterParameter=shape}"
+                            Stretch="Uniform" />
+                        <TextBlock>
+                            <TextBlock.InputBindings>
+                                <MouseBinding Command="{Binding CmdSelectDialogIcon}" Gesture="LeftClick" />
+                            </TextBlock.InputBindings>
+                        </TextBlock>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="rect2" Property="Fill" Value="#4DCCCCFF" />
+                            <Setter TargetName="shape" Property="Fill" Value="White" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </ContentControl.Template>
+        </ContentControl>
     </Grid>
 </UserControl>

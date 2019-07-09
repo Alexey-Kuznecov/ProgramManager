@@ -8,6 +8,8 @@ using ProgramManager.Models.PackageModel;
 using ProgramManager.Views;
 using System.Windows;
 using System.Windows.Media;
+using ProgramManager.Resources;
+using ProgramManager.ViewModels.Base;
 
 namespace ProgramManager.ViewModels
 {
@@ -16,10 +18,10 @@ namespace ProgramManager.ViewModels
         private const string AutocompleteIcon = "../../Resources/Icons/Businessman_48px.png";
         private const string DeleteIcon = "../../Resources/Icons/Delete_48px.png";
         private static InputName _windowInputName;
-        private static IconViewModel _iconViewModel;
         private static DialogIcons _windowAddIcons;
         private string _description;
         private string _packageTitle;
+        private IconCanvas _iconPanel;
 
         #region Constructor
 
@@ -28,20 +30,21 @@ namespace ProgramManager.ViewModels
             // Initial fields.
             _windowInputName = new InputName();
             _windowAddIcons = new DialogIcons();
-            _iconViewModel= new IconViewModel();
 
             // Initial data.
             InitializePackageDialog();
 
             // Activate commands.
-            CmdRemoveTextField = new RelayCommand(obj => RemoveTextField(obj));
+            CmdRemoveTextField = new RelayCommand(RemoveTextField);
 
             // Registration to receive data.
             Messenger.Default.Register<InputNameViewModel>(this, action => InputCustomName(action.Name));
-            Messenger.Default.Register<InputName>(this, action => _windowInputName = action as InputName);
-            Messenger.Default.Register<PackageBase>(this, action => LoadPackage(action));
+            Messenger.Default.Register<InputName>(this, action => _windowInputName = action);
+            Messenger.Default.Register<PackageBase>(this, LoadPackage);
             Messenger.Default.Register<List<string>>(this, InitialDataSource);
-            Messenger.Default.Register<IconEditorViewModel>(this, LoadIcon);
+            Messenger.Default.Register<Icon>(this, LoadIcon);
+
+            IconPanel = new IconCanvas();
         }
 
         #endregion
@@ -66,10 +69,20 @@ namespace ProgramManager.ViewModels
                 SetProperty(ref _packageTitle, value, () => PackageTitle);
             }
         }
+        public IconCanvas IconPanel
+        {
+            get { return _iconPanel; }
+            set
+            {
+                _iconPanel = value;
+               OnPropertyChanged("IconPanel");
+            }
+        }
 
         #endregion
 
         #region Commands
+
         public ICommand CmdRemoveTextField { get; }
         public static ICommand SavePackage { get; set; }
         public ICommand OpenDialogIcons => new RelayCommand(obj => 
@@ -98,11 +111,15 @@ namespace ProgramManager.ViewModels
 
         #endregion
 
-        private void LoadIcon(IconEditorViewModel obj)
+        private void LoadIcon(Icon obj)
         {
-            //IconBrush = obj.IconBrush;
-        }
+            //IconViewModel iconViewModel = IconPanel.DataContext as IconViewModel;
 
+            //if (iconViewModel != null)
+            //{
+            //    iconViewModel.IconBackground = obj.BgroundColor;
+            //    iconViewModel.IconGeometry = obj.Brush;
+            //}
+        }
     }
-    
 }

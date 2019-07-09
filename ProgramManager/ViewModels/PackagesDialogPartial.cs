@@ -10,9 +10,8 @@ using ProgramManager.Services;
 using ProgramManager.Views;
 using GalaSoft.MvvmLight.Messaging;
 using System.Windows.Controls;
-using System.Windows.Media;
 using ProgramManager.Resources;
-using ProgramManager.Views.DialogPacks;
+using ProgramManager.ViewModels.Base;
 
 namespace ProgramManager.ViewModels
 {
@@ -97,6 +96,7 @@ namespace ProgramManager.ViewModels
             // Получаем управление диалоговым окном пакетов.
             PackagesDialog window = data as PackagesDialog;
             EventAggregate connector = new EventAggregate();
+            IconViewModel iconViewModel = IconPanel.DataContext as IconViewModel;
 
             // Добавления полей базовго класса.
             T package = new T()
@@ -108,6 +108,7 @@ namespace ProgramManager.ViewModels
                 Source = TextField.SingleOrDefault(a => a.Types == FieldTypes.Source.ToString())?.FieldValue,
                 Version = TextField.SingleOrDefault(a => a.Types == FieldTypes.Version.ToString())?.FieldValue,
                 Image = TextField.SingleOrDefault(a => a.Types == FieldTypes.Image.ToString())?.FieldValue,
+                Icon = new Icon { FgroundColor = iconViewModel?.IconForeground, BgroundColor = iconViewModel?.IconBackground, Name = iconViewModel?.IconName},
                 TagList = _tagList,
                 Description = Description,
             };
@@ -116,7 +117,8 @@ namespace ProgramManager.ViewModels
             // Добавления пользовательских полей.
             AddCustomField(package);
 
-            if (window.Title == "Редактирование пакета")
+            // Todo: Убрать эти костыли немедленно!!!
+            if (window?.Title == "Редактирование пакета")
                 connector.OnPackageChanged(package);
             else
                 connector.OnNewPackage(package);
@@ -211,26 +213,24 @@ namespace ProgramManager.ViewModels
             _id = package.Id;
             Description = package.Description;
             PackageTitle = package.Name;
-            
-            //Посылает найденый ресурс иконки для пакета
-            Messenger.Default.Send(Application.Current.FindResource("Photoshop"));
-
             TextField.Clear();
 
-            for (int index = 0; index < package.TextField.Count; index++)
+            foreach (var textField in package.TextField)
             {
                 // Добавления полей данного пакета
-                TextField.Add(new TextFieldModel()
+                TextField.Add(new TextFieldModel
                 {
-                    FieldValue = package.TextField[index].FieldValue,
+                    FieldValue = textField.FieldValue,
                     AutoCompleteIcon = "../../Resources/Icons/Businessman_48px.png",
                     DeleteTextFieldIcon = "../../Resources/Icons/Delete_48px.png",
-                    Types = package.TextField[index].Types
+                    Types = textField.Types
                 });      
                 // Добавления данных полей в словарь ассоциаций 
-                if (!FieldConverter.Dictionary.ContainsKey(package.TextField[index].Types))
-                    FieldConverter.Dictionary.Add(package.TextField[index].Types, package.TextField[index].Label);
+                if (!FieldConverter.Dictionary.ContainsKey(textField.Types))
+                    FieldConverter.Dictionary.Add(textField.Types, textField.Label);
             }
+            //Посылает найденный ресурс иконки для пакета
+            Messenger.Default.Send(package.Icon);
         }
         /// <summary>
         /// Метод удаляет из коллекции TextField поля а также очищает словарь.

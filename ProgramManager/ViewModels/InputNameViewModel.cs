@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Messaging;
+using ProgramManager.ViewModels.Base;
 using ProgramManager.Views.DialogPacks;
 
 namespace ProgramManager.ViewModels
@@ -13,7 +14,7 @@ namespace ProgramManager.ViewModels
         public ICommand Cancel => new RelayCommand(obj =>
         {
             _inputName = obj as InputName;
-            if (_inputName != null) _inputName.Close();
+            _inputName?.Close();
         });
     }
 }

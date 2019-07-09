@@ -50,7 +50,7 @@ namespace ProgramManager.Models
             packageS.SetAttributeValue("Id", ++id);
             packageS.SetAttributeValue("Category", category);
             packageS.Add(package.Elements().OrderBy(p => p.Name.ToString().Substring(0, 2)));
-            xDoc.Root.Add(packageS);         
+            xDoc.Root?.Add(packageS);         
             xDoc.Save(DocumentName);
             
             // Обновление списка пакетов
@@ -65,21 +65,21 @@ namespace ProgramManager.Models
         public static void UpdatePackage(PackageBase data)
         {
             XElement root = XElement.Load(DocumentName),
-                     newPackage = FormatPackage(data);                   
-            
+                     newPackage = FormatPackage(data);
+
             foreach (var item in root.Elements("Package"))
+            {
                 if (item.FirstAttribute.Value == data.Id.ToString())
                 {
                     item.Elements().Remove();
                     item.Add(newPackage.Elements().OrderBy(p => p.Name.ToString().Substring(0, 2)));
                 }
-
+            }
             root.Save(DocumentName);
             
             // Обновление списка пакетов
             EventAggregate ins = new EventAggregate();
             ins.OnLoadPackage("");
-
         }
         /// <summary>
         /// Данный метод формирует пакет на основе данных, которые содержат свойства объекта. 
@@ -94,18 +94,28 @@ namespace ProgramManager.Models
             foreach (var property in properties)
             {
                 if (property.GetValue(data) == null) continue;
-
                 if (property.PropertyType.Name == "String")
                     package.Add(new XElement(property.Name, property.GetValue(data)));
-
                 if (property.Name == "FieldList")
                     AddUserfield(package, data);
-
                 if (property.Name == "TagList")
                     AddTag(package, data);
+                if (property.Name == "Icon")
+                    AddIcon(package, data);
             }
             // Группирует элементы с одинаковыми именами в один узел и добавляет "List" к имени нового узла.
             return package.CreatingNestedElements().PostfixElementName();
+        }
+        /// <summary>
+        /// Метод добавляет данные иконки: геометрия, цвет и фон иконки.
+        /// </summary>
+        /// <param name="currentPack">Пакет в который будут добавлены новые данные.</param>
+        /// <param name="data">Объект данных, ожидается объект типа PackageBase.</param>
+        public static void AddIcon(XElement currentPack, PackageBase data)
+        {
+            currentPack.Add(new XElement("Icon", new XAttribute("Name", data.Icon.Name), 
+                new XAttribute("Foreground", data.Icon.FgroundColor), 
+                new XAttribute("Background", data.Icon.BgroundColor)));
         }
         /// <summary>
         /// Метод формирует xml элементы на основе данных пользовательских полей (Имя, значение). 
@@ -137,7 +147,7 @@ namespace ProgramManager.Models
         public static void RemovePackage(int id)
         {
             XDocument xDoc = XDocument.Load(DocumentName);
-            var root = xDoc.Root.Elements("Package");
+            var root = xDoc.Root?.Elements("Package");
 
             foreach (var item in root)
                 if (item.FirstAttribute.Value == id.ToString())

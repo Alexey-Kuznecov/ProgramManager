@@ -7,6 +7,7 @@ using ProgramManager.Services;
 using ProgramManager.Views.DialogPacks;
 using ProgramManager.Models.PackageModel;
 using System.Linq;
+using ProgramManager.ViewModels.Base;
 
 namespace ProgramManager.ViewModels
 {

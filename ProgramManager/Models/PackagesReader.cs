@@ -7,6 +7,7 @@ using ProgramManager.Enums;
 using ProgramManager.Models.PackageModel;
 using ProgramManager.Converters;
 using ProgramManager.Dict;
+using ProgramManager.Resources;
 
 namespace ProgramManager.Models
 {
@@ -39,6 +40,11 @@ namespace ProgramManager.Models
             {
                 string image = element.Element(FieldTypes.Image.ToString())?.FirstAttribute.Value;
 
+                XElement iconElement = element.Element("Icon");
+                Icon conditionIcon = iconElement == null
+                    ? new Icon(SetIcons(element.LastAttribute.Value), "#ffffff", "#3676AE")
+                    : new Icon(iconElement.FirstAttribute.Value, iconElement.Attribute("Foreground")?.Value, iconElement.LastAttribute.Value);
+                
                 // Инициализация свойств из базового класса
                 packages.Add(new T
                 {
@@ -49,11 +55,11 @@ namespace ProgramManager.Models
                     Description = element.Element(FieldTypes.Description.ToString())?.Value,
                     TagOne = element.Element(FieldTypes.Tag.ToString())?.Value,
                     HashSumm = element.Element(FieldTypes.HashSumm.ToString())?.Value,
-                    Image = image == null ? SetIcons(image, element.LastAttribute.Value) : image,
                     // Вызов метода для создания коллекции тегов, если пакет имеет более одного тега
                     TagList = GetTagsList(element),
                     Category = element.LastAttribute.Value,
-                    TextField = SetFieldValue(element)
+                    TextField = SetFieldValue(element),
+                    Icon = conditionIcon
                 });
                 // Вызов метода для инициализации свойств производного класса.
                 SetValueDeclaredProperties(packages, element, index);
@@ -62,21 +68,19 @@ namespace ProgramManager.Models
             }
             return packages;
         }
-        private static string SetIcons(string iconPath, string category)
+        private static string SetIcons(string category)
         {
             CategoryDict cateDict = new CategoryDict();
-            string uri = @"..\Resources\User\Images\";
 
             if (category == cateDict.GetValue(Categories.Programs))
-                return uri + Categories.Programs.ToString() + ".png";
-            else if (category == cateDict.GetValue(Categories.Drivers))
-                return uri + Categories.Drivers.ToString() + ".png";
-            else if (category == cateDict.GetValue(Categories.Mods))
-                return uri + Categories.Mods.ToString() + ".png";
-            else if (category == cateDict.GetValue(Categories.Plugins))
-                return uri + Categories.Plugins.ToString() + ".png";
-            else
-                return uri + Categories.Games.ToString() + ".png";
+                return "ProgramIcon";
+            if (category == cateDict.GetValue(Categories.Drivers))
+                return "DriversIcon";
+            if (category == cateDict.GetValue(Categories.Mods))
+                return "ModsIcon";
+            if (category == cateDict.GetValue(Categories.Plugins))
+                return "PluginsIcon";
+            return "GamesIcon";
         }
         /// <summary>
         /// Вспомогательный метод для получения массива тегов(текст), так как пакеты могут иметь больше одного тега.
@@ -123,16 +127,16 @@ namespace ProgramManager.Models
             {
                 sbyte count = 0;
 
-                if (element.HasElements && element.Name == FieldTypes.Userfield.ToString() + "List")
+                if (element.HasElements && element.Name == FieldTypes.Userfield + "List")
                 {
                     foreach (var child in element.Elements())
                     {
                         count++;
 
-                        textField.Add(new TextFieldModel()
+                        textField.Add(new TextFieldModel
                         {
                             FieldValue = child.Value,
-                            Types = child.Name.ToString() + count.ToString(),
+                            Types = child.Name.ToString() + count,
                             Label = child.FirstAttribute.Value,
                             Hint = child.FirstAttribute.Value
                         });
@@ -140,7 +144,7 @@ namespace ProgramManager.Models
                 }
                 if (!element.HasElements && element.Name == FieldTypes.Userfield.ToString())
                 {
-                    textField.Add(new TextFieldModel()
+                    textField.Add(new TextFieldModel
                     {
                         FieldValue = element.Value,
                         Types = element.Name.ToString(),
@@ -148,10 +152,12 @@ namespace ProgramManager.Models
                         Hint = element.LastAttribute.Value
                     });
                 }
+                // TODO: Найти элегантное решение взамен этого куска кода.
                 // Добавление всех полей кроме основных и пользовательских.
-                if (!element.HasElements && element.Name != "Name" && element.Name != "Description" && element.Name != "Tag" && element.Name != "Image" && element.Name != "Userfield")
+                if (!element.HasElements && element.Name != "Name" && element.Name != "Description" 
+                    && element.Name != "Tag" && element.Name != "Image" && element.Name != "Userfield" && element.Name != "Icon")
                 {
-                    textField.Add(new TextFieldModel()
+                    textField.Add(new TextFieldModel
                     {
                         FieldValue = element.Value,
                         Types = element.Name.ToString()

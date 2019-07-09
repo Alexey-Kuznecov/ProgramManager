@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Windows;
 using System.Windows.Input;
 
-namespace ProgramManager.ViewModels
+namespace ProgramManager.ViewModels.Base
 {
     public class RelayCommand : ICommand
     {
@@ -15,7 +14,7 @@ namespace ProgramManager.ViewModels
         public RelayCommand(Action command, Func<bool> canExecute = null)
         {
             if (command == null)
-                throw new ArgumentNullException("command");
+                throw new ArgumentNullException(nameof(command));
             _command = command;
         }
         public RelayCommand(Action<object> execute, Predicate<object> canExecute = null)
@@ -35,8 +34,7 @@ namespace ProgramManager.ViewModels
         }
         public void RaiseCanExecuteChanged()
         {
-            if (CanExecuteChanged != null)
-                CanExecuteChanged(this, EventArgs.Empty);
+            CanExecuteChanged?.Invoke(this, EventArgs.Empty);
         }
     }
 }

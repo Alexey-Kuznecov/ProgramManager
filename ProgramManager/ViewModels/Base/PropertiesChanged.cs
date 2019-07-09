@@ -1,14 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace ProgramManager.ViewModels
+namespace ProgramManager.ViewModels.Base
 {
     public class PropertiesChanged : INotifyPropertyChanged
     {
@@ -43,8 +37,7 @@ namespace ProgramManager.ViewModels
         private void RaisePropertyChanged(string propertyName)
         {
             var handler = PropertyChanged;
-            if (handler != null)
-                handler.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            handler?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

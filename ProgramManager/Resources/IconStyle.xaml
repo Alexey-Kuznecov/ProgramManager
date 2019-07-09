@@ -4,44 +4,76 @@
     xmlns:converter="clr-namespace:ProgramManager.Converters">
 
     <Style x:Key="IconStyle" TargetType="Button">
-        <Setter Property="Template" Value="{StaticResource IconTemplate}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <!--  ИКОНКИ  -->
+                <ControlTemplate TargetType="Button">
+                    <ControlTemplate.Resources>
+                        <converter:ContentConverter x:Key="ContentConverter" />
+                    </ControlTemplate.Resources>
+                    <Grid x:Name="grid">
+                        <Path
+                            x:Name="rect"
+                            Fill="{TemplateBinding Background}"
+                            Stretch="Uniform"
+                            Stroke="{TemplateBinding Foreground}"
+                            StrokeThickness="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=BorderThickness.Left}">
+                            <Path.Data>
+                                <RectangleGeometry Rect="0,0,50,50" />
+                            </Path.Data>
+                        </Path>
+                        <Path
+                            x:Name="shape"
+                            Width="32"
+                            Height="32"
+                            Data="{TemplateBinding Content,
+                                                   Converter={StaticResource ContentConverter}}"
+                            Fill="{TemplateBinding Foreground}"
+                            Stretch="Uniform" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="shape" Property="Fill" Value="#FFFFFF" />
+                            <Setter TargetName="rect" Property="Fill" Value="{Binding RelativeSource={RelativeSource Self}, Path=Stroke}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
         <Setter Property="Height" Value="48" />
-        <Setter Property="Margin" Value="10" />
+        <Setter Property="Margin" Value="5" />
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="Background" Value="#F3F3F3" />
-        <Setter Property="Foreground" Value="{Binding ElementName=c, Path=SelectedItem.Content}" />
     </Style>
-
-    <!--  ИКОНКИ  -->
-    <ControlTemplate x:Key="IconTemplate" TargetType="Button">
-        <ControlTemplate.Resources>
-            <converter:ContentConverter x:Key="ContentConverter" />
-        </ControlTemplate.Resources>
-        <Grid x:Name="grid">
-            <Path
-                x:Name="Rectangle"
-                Fill="{TemplateBinding Background}"
-                Stretch="Uniform"
-                Stroke="{TemplateBinding Foreground}"
-                StrokeThickness="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=BorderThickness.Left}">
-                <Path.Data>
-                    <RectangleGeometry Rect="0,0,50,50" />
-                </Path.Data>
-            </Path>
-            <Path
-                x:Name="shape"
-                Width="32"
-                Height="32"
-                Data="{TemplateBinding Content,
-                                       Converter={StaticResource ContentConverter}}"
-                Fill="{TemplateBinding Foreground}"
-                Stretch="Uniform" />
-        </Grid>
-        <ControlTemplate.Triggers>
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter TargetName="shape" Property="Fill" Value="#FFFFFF" />
-                <Setter TargetName="Rectangle" Property="Fill" Value="{Binding RelativeSource={RelativeSource Self}, Path=Stroke}" />
-            </Trigger>
-        </ControlTemplate.Triggers>
-    </ControlTemplate>
+    <Style x:Key="IconStyle2" TargetType="ContentControl">
+        <Setter Property="Template">
+            <Setter.Value>
+                <!--  ИКОНКИ  -->
+                <ControlTemplate TargetType="ContentControl">
+                    <ControlTemplate.Resources>
+                        <converter:ContentConverter x:Key="ContentConverter" />
+                        <converter:BrushConverter x:Key="BrushConverter" />
+                    </ControlTemplate.Resources>
+                    <Grid x:Name="grid">
+                        <Path Fill="{TemplateBinding Content, Converter={StaticResource BrushConverter}, ConverterParameter=rect}" Stretch="Uniform">
+                            <Path.Data>
+                                <RectangleGeometry Rect="0,0,50,50" />
+                            </Path.Data>
+                        </Path>
+                        <Path
+                            Width="32"
+                            Height="32"
+                            Data="{TemplateBinding Content,
+                                                   Converter={StaticResource ContentConverter}}"
+                            Fill="{TemplateBinding Content,
+                                                   Converter={StaticResource BrushConverter},
+                                                   ConverterParameter=shape}"
+                            Stretch="Uniform" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Height" Value="48" />
+        <Setter Property="Margin" Value="5" />
+    </Style>
 </ResourceDictionary>
