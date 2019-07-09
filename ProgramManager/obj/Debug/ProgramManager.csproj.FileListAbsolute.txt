@@ -90,3 +90,5 @@ D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Views\Di
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\ProgramManager.csprojResolveAssemblyReference.cache
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Resources\IconStyle.baml
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\ProgramManager_Content.g.cs
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Views\DialogPacks\IconControl.g.cs
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Views\DialogPacks\IconControl.baml

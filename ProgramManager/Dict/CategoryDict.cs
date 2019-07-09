@@ -9,7 +9,7 @@ namespace ProgramManager.Dict
 {
     public class CategoryDict
     {
-        private Dictionary<Categories, string> TableCode = new Dictionary<Categories, string>(5)
+        private readonly Dictionary<Categories, string> _tableCode = new Dictionary<Categories, string>(5)
         {
             { Categories.Programs,  "Программы" },
             { Categories.Drivers,  "Драйвера" },
@@ -17,17 +17,17 @@ namespace ProgramManager.Dict
             { Categories.Plugins,  "Плагины" },
             { Categories.Games,  "Игры" }
         };
-        public Categories GetKey(string Key)
+        public Categories GetKey(string key)
         {
-            foreach (var item in TableCode)
-                if (Key == item.Value)
+            foreach (var item in _tableCode)
+                if (key == item.Value)
                     return item.Key;
             return Categories.Null;
         }
-        public string GetValue(Categories Value)
+        public string GetValue(Categories value)
         {
-            foreach (var item in TableCode)
-                if (Value == item.Key)
+            foreach (var item in _tableCode)
+                if (value == item.Key)
                     return item.Value;
             return null;
         }

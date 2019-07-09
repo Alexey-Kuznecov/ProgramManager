@@ -134,6 +134,7 @@
     <Compile Include="Models\PackageModel\TextFieldModel.cs" />
     <Compile Include="ViewModels\Base\PropertiesChanged.cs" />
     <Compile Include="ViewModels\IconEditorViewModel.cs" />
+    <Compile Include="ViewModels\IconEditorViewModelRework.cs" />
     <Compile Include="ViewModels\IconViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\PackagesDialogPartial.cs" />
@@ -157,6 +158,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\DialogPacks\IconCanvas.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DialogPacks\IconControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
