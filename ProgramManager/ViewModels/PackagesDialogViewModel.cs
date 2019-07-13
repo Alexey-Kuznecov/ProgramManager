@@ -21,7 +21,7 @@ namespace ProgramManager.ViewModels
         private static DialogIcons _windowAddIcons;
         private string _description;
         private string _packageTitle;
-        private IconCanvas _iconPanel;
+        private IconControl _iconControl;
 
         #region Constructor
 
@@ -44,7 +44,7 @@ namespace ProgramManager.ViewModels
             Messenger.Default.Register<List<string>>(this, InitialDataSource);
             Messenger.Default.Register<Icon>(this, LoadIcon);
 
-            IconPanel = new IconCanvas();
+            IconControl = new IconControl();
         }
 
         #endregion
@@ -69,13 +69,13 @@ namespace ProgramManager.ViewModels
                 SetProperty(ref _packageTitle, value, () => PackageTitle);
             }
         }
-        public IconCanvas IconPanel
+        public IconControl IconControl
         {
-            get { return _iconPanel; }
+            get { return _iconControl; }
             set
             {
-                _iconPanel = value;
-               OnPropertyChanged("IconPanel");
+                _iconControl = value;
+               OnPropertyChanged("IconsControl");
             }
         }
 

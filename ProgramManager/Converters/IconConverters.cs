@@ -4,17 +4,40 @@ using System.Diagnostics.CodeAnalysis;
 using System.Windows.Data;
 using System.Windows.Media;
 using System.Globalization;
+using System.Windows.Controls;
 using ProgramManager.Resources;
+using static System.Windows.Media.ColorConverter;
 
 namespace ProgramManager.Converters
 {
+    public class ColorConverterSolidColor : ConverterBase<ColorConverterSolidColor>
+    {
+        public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return null;
+        }
+        public override object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value != null)
+            {
+                var combobox = value as ComboBoxItem;
+                if (combobox != null)
+                    return new SolidColorBrush((Color)ConvertFromString(combobox.Content.ToString()));
+            }
+            return null;
+        }
+    }
     public class ScaleConverter : ConverterBase<ScaleConverter>, IValueConverter {
         public double Scale { get; set; }
 
         public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            double num = (double)value;
-            return (num * (Scale / 100));
+            if (value != null)
+            {
+                double num = (double)value;
+                return (num * (Scale / 100));
+            }
+            return null;
         }
     }
     public class BrushConverter : ConverterBase<BrushConverter>, IValueConverter {

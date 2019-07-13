@@ -96,7 +96,7 @@ namespace ProgramManager.ViewModels
             // Получаем управление диалоговым окном пакетов.
             PackagesDialog window = data as PackagesDialog;
             EventAggregate connector = new EventAggregate();
-            IconViewModel iconViewModel = IconPanel.DataContext as IconViewModel;
+            IconViewModel iconViewModel = IconControl.DataContext as IconViewModel;
 
             // Добавления полей базовго класса.
             T package = new T()
@@ -185,7 +185,7 @@ namespace ProgramManager.ViewModels
         /// Метод для добавления пользовательского поля.
         /// </summary>
         /// <param name="fieldName">Принимает имя поля</param>
-        private void InputCustomName(string fieldName)
+        private static void InputCustomName(string fieldName)
         {
             if (fieldName != null && fieldName != _name)
             {
@@ -241,7 +241,7 @@ namespace ProgramManager.ViewModels
             TextFieldModel field = obj as TextFieldModel;
 
             // Removing the user field association from the dictionary
-            if (field.Types.Contains(FieldTypes.Userfield.ToString()))
+            if (field != null && field.Types.Contains(FieldTypes.Userfield.ToString()))
                 FieldConverter.Dictionary.Remove(field.Types);
 
             TextField.Remove(field);

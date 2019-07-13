@@ -5,8 +5,8 @@ using GalaSoft.MvvmLight.Messaging;
 using ProgramManager.Converters;
 using ProgramManager.Enums;
 using System.Linq;
-// ReSharper disable All
 
+// ReSharper disable All
 namespace ProgramManager.ViewModels
 {
     /// <summary>

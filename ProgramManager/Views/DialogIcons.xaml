@@ -6,7 +6,6 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:ProgramManager.ViewModels"
-    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
     Title="DialogIcons"
     Width="540"
     Height="470"
@@ -21,19 +20,43 @@
             <ColumnDefinition Width="170*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="20" />
             <RowDefinition Height="50" />
             <RowDefinition Height="*" />
             <RowDefinition Height="60" />
         </Grid.RowDefinitions>
+        <Menu
+            Grid.Row="0"
+            Grid.ColumnSpan="2"
+            Background="#FFE6E6E6">
+            <MenuItem FontSize="12" Header="Файл">
+                <MenuItem Command="{Binding OpenFileIconCommand}" Header="Открыть" />
+                <MenuItem Header="Сохранить" />
+                <MenuItem Header="Экспорт" />
+                <Separator />
+                <MenuItem Header="Закрыть" />
+            </MenuItem>
+            <MenuItem FontSize="12" Header="Вид">
+                <MenuItem Header="Список" />
+                <MenuItem Header="Плитка" />
+                <MenuItem Header="Карточки" />
+            </MenuItem>
+            <MenuItem FontSize="12" Header="Инструменты">
+                <MenuItem Header="Ресурсы" />
+                <MenuItem Header="Палитра" />
+                <MenuItem Header="Форматер" />
+                <MenuItem Header="Плагины" />
+            </MenuItem>
+        </Menu>
         <TextBox
+            Grid.Row="1"
             Grid.Column="1"
             Height="35"
             Margin="15,5"
             FontSize="16"
             Text="#program" />
-
         <ListBox
-            Grid.Row="0"
+            Grid.Row="1"
             Grid.RowSpan="2"
             Grid.Column="0"
             Margin="10,10,0,10"
@@ -58,15 +81,19 @@
             <ListBoxItem Content="Разное" />
         </ListBox>
         <ScrollViewer
-            Grid.Row="1"
+            Grid.Row="2"
             Grid.Column="1"
             VerticalScrollBarVisibility="Auto">
             <StackPanel Margin="10">
+                <!--<ContentPresenter
+                    Width="40"
+                    Height="40"
+                    Content="{Binding IconControl}" />-->
                 <ItemsControl Width="380" ItemsSource="{Binding WrapIcons}" />
             </StackPanel>
         </ScrollViewer>
         <Grid
-            Grid.Row="2"
+            Grid.Row="3"
             Grid.Column="0"
             Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
@@ -74,12 +101,12 @@
                 <ColumnDefinition Width="100" />
                 <ColumnDefinition Width="125" />
             </Grid.ColumnDefinitions>
-            <Button
-                Grid.Column="2"
-                Margin="20,10,10,20"
-                Command="{Binding SetIcon}"
-                CommandParameter="{Binding ElementName=ccc, Path=ItemTemplate.Template}"
-                Content="Выбрать" ToolTip="adssadasd"/>
+            <Grid
+                Grid.Column="1"
+                Width="64"
+                Height="64">
+                <ContentPresenter Content="{Binding PreviewIcon, Mode=TwoWay}" />
+            </Grid>
             <ComboBox
                 Grid.Column="0"
                 Width="200"
@@ -87,7 +114,7 @@
                 Margin="30,10,40,20"
                 VerticalContentAlignment="Center"
                 SelectedIndex="0"
-                SelectedItem="{Binding Color}">
+                SelectedItem="{Binding Color, Converter={converter:ColorConverterSolidColor}}">
                 <ComboBoxItem>#DD2c2c00</ComboBoxItem>
                 <ComboBoxItem>#FF72f534</ComboBoxItem>
                 <ComboBoxItem>#FF184B9C</ComboBoxItem>
@@ -106,10 +133,13 @@
                 <ComboBoxItem>#FF89d3de</ComboBoxItem>
                 <ComboBoxItem>#FF672f8f</ComboBoxItem>
             </ComboBox>
-            <!--<xctk:CheckComboBox Grid.Column="0" SelectedValue="dfad">
-                <ComboBoxItem>#DD2c2c00</ComboBoxItem>
-                <ComboBoxItem>#FF72f534</ComboBoxItem>
-            </xctk:CheckComboBox>-->
+            <Button
+                Grid.Column="2"
+                Margin="20,10,10,20"
+                Command="{Binding LoadIconCommand}"
+                CommandParameter="{Binding ElementName=ccc, Path=ItemTemplate.Template}"
+                Content="Выбрать" />
         </Grid>
     </Grid>
 </Window>
+

@@ -8,6 +8,11 @@ namespace ProgramManager.Resources
 {
     class ConverterXamlToBitmap
     {
+        /// <summary>
+        /// Создает и сохраняет изображение из кисти.
+        /// </summary>
+        /// <param name="iconBrush">Кисть подразумевается что она содержит геометрию или фигуру.</param>
+        /// <param name="resName">Имя кисти.</param>
         public static void ConvertXamlToBitmap(DrawingBrush iconBrush, string resName)
         {
             BitmapSource bitmapSource = BitmapSourceFromBrush(iconBrush);

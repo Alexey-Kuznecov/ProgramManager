@@ -1,70 +1,66 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using GalaSoft.MvvmLight.Messaging;
+using ProgramManager.Contracts;
 using ProgramManager.Resources;
+using ProgramManager.Services;
 using ProgramManager.ViewModels.Base;
+using ProgramManager.Views.DialogPacks;
+using Icon = ProgramManager.Resources.Icon;
 
 namespace ProgramManager.ViewModels
 {
     class IconEditorViewModel : PropertiesChanged
     {
-        private object _color;
-        private ComboBoxItem _comboBox;
-        private string _nameResource;
+        private SolidColorBrush _color;
+        private IconControl _previewIcon;
+        private readonly IDialogService _dialogService;
+        private readonly IFileService _fileService;
 
         #region Constructors
 
         public IconEditorViewModel()
         {
-            Buttons = new List<Button>();
-            ResourceDictionary dictionary = Application.Current.Resources;
-
-            foreach (var dict in dictionary.MergedDictionaries)
-            {
-                if (dict.Source.OriginalString.Contains("Icons.xaml"))
-                {
-                    foreach (var key in dict.Keys)
-                    {
-                        var drawBrush = Application.Current.FindResource(key);
-                        var brush = drawBrush as DrawingBrush;
-
-                        if (brush != null)
-                        {
-                            Button bt = new Button { Content = brush, Name = key.ToString() };
-                            ToolTipService.SetToolTip(bt, key);
-                            Buttons.Add(bt);
-                        }
-                    }
-                    break;
-                }
-            }
-            WrapperIcons();
+            this._dialogService = new DefaultDialogService();
+            this._fileService = new XamlFileService();
+            LoadIcons();
         }
 
         #endregion
 
         #region Properties
 
-        public object Color
+        public SolidColorBrush Color
         {
             get { return _color; }
             set
-            { 
+            {
                 _color = value;
-                SetProperty(ref _color, value, () => IconBrush);
-
-                _comboBox = value as ComboBoxItem;
+                // Устанавливает цвет иконки.
                 if (_color != null)
-                    SetColor(_comboBox?.Content.ToString());
+                    foreach (var item in Buttons)
+                        item.Foreground = _color;
             }
         }
         public DrawingBrush IconBrush { get; set; }
         public List<WrapPanel> WrapIcons { get; set; }
         public List<Button> Buttons { get; set; }
+        public IconControl PreviewIcon
+        {
+            get { return _previewIcon; }
+            set
+            {
+                _previewIcon = value;
+                SetProperty(ref _previewIcon, value, () => PreviewIcon);
+            }
+        }
 
         #endregion
 
@@ -72,48 +68,90 @@ namespace ProgramManager.ViewModels
         /// <summary>
         /// Команда для иконки устанавлевает цвет иконки
         /// </summary>
-        [SuppressMessage("ReSharper", "PossibleNullReferenceException")]
-        public ICommand SelectIcon => new RelayCommand(obj =>
-        {
+        public ICommand SelectIconCommand => new RelayCommand(obj =>
+        {  
             Button bt = obj as Button;
-            DrawingBrush brush = bt.Content as DrawingBrush;
-            DrawingGroup group = brush.Drawing.Clone() as DrawingGroup;
-            IconBrush = new DrawingBrush();
-            Color hex = (Color) ColorConverter.ConvertFromString(_comboBox.Content.ToString());
-            Color backColor = (Color)ColorConverter.ConvertFromString("#FFFFFF");
-
-            foreach (var item in group.Children)
+            DrawingBrush brush = bt?.Content as DrawingBrush;
+            DrawingGroup group = brush?.Drawing.Clone() as DrawingGroup;
+            
+            if (@group != null)
             {
-                GeometryDrawing geometry = item as GeometryDrawing;
-                geometry.Brush = new SolidColorBrush(hex);
+                foreach (var item in @group.Children)
+                {
+                    var geometry = item as GeometryDrawing;
+                    if (geometry != null) geometry.Brush = Color;
+                }
+                IconBrush = new DrawingBrush { Drawing = @group };
             }
-            // Данные выбранной иконки готовые для отправки
-            _nameResource = bt.Name;
-            IconBrush.Drawing = group;
-            Messenger.Default.Send(new Icon { Brush = IconBrush, BgroundColor = new SolidColorBrush(hex), FgroundColor = new SolidColorBrush(backColor) });
+            PreviewIcon = new IconControl();
+            PreviewIcon.DataContext = new IconViewModel();
+            Messenger.Default.Send(new Icon(bt.Name, "#FFFFFF", "#3AE2CE"));
         });
         /// <summary>
-        /// Команда для кнопки устанавлевает иконку
+        /// Команда устанавливает иконку
         /// </summary>
-        public ICommand SetIcon => new RelayCommand(obj => { });
+        public ICommand LoadIconCommand => new RelayCommand(obj =>
+        {
+
+        });
+        /// <summary>
+        /// Команда физический добавляет новую иконку ресурса,
+        /// представленной в виде геометрической последовательности.
+        /// </summary>
+        public ICommand OpenFileIconCommand => new RelayCommand(obj =>
+        {
+            try
+            {
+                if (_dialogService.OpenFileDialog())
+                {
+                    var path = _fileService.Open(_dialogService.FilePath);
+                    // Загружает файл ресурса икоки, преобразует в форму GeometryDrawing. 
+                    XamlFileService xamlFile = new XamlFileService();
+                    List<GeometryDrawing> listGeometry =
+                        ConverterXamlResources.ConvertDataToGeometry(ConverterForeignPlugins.XamlExport64(path as Viewbox));
+
+                    // Упаковывает геометрию иконки в кисть. Добавляет новую кисть в словарь ресурсов.
+                    Collection<ResourceDictionary> collMergedDictionaries = Application.Current.Resources.MergedDictionaries;
+                    ResourceDictionary resourceDictionary = collMergedDictionaries.Single(p => p.Source.ToString().Contains("Icons.xaml"));
+                    resourceDictionary.Add(HelperFunctions.ClearExtension(_dialogService.FilePath),
+                        ConverterXamlResources.ConvertMarkupDrawingBrush(listGeometry));
+
+                    // Сохраняет словарь ресурсов.
+                    xamlFile.Save("../../Resources/Icons.xaml", resourceDictionary);
+                    _dialogService.ShowMessage("Файл открыт");
+                }
+            }
+            catch (Exception ex)
+            {
+                _dialogService.ShowMessage(ex.Message);
+            }
+        });
 
         #endregion
 
         #region Functions
 
         /// <summary>
-        /// Устанавливает цвет иконки.
+        /// Загуржает иконки в редактор иконок.
         /// </summary>
-        /// <param name="color">Цвет выбранный пользователем.</param>
-        [SuppressMessage("ReSharper", "PossibleNullReferenceException")]
-        public void SetColor(string color)
+        public void LoadIcons()
         {
-            if (color != null)
+            Buttons = new List<Button>();
+            Collection<ResourceDictionary> collMergedDictionaries = Application.Current.Resources.MergedDictionaries;
+            ResourceDictionary resourceDictionary = collMergedDictionaries.Single(p => p.Source.ToString().Contains("Icons.xaml"));
+
+            foreach (var key in resourceDictionary.Keys)
             {
-                Color hex = (Color)ColorConverter.ConvertFromString(color);
-                foreach (var item in Buttons)
-                    item.Foreground = new SolidColorBrush(hex);
-            }
+                var drawBrush = Application.Current.FindResource(key);
+                var brush = drawBrush as DrawingBrush;
+
+                Button bt = new Button { Content = brush, Name = key.ToString() };
+                if (brush != null)
+                {
+                    ToolTipService.SetToolTip(bt, key);
+                    Buttons.Add(bt);
+                }
+            } WrapperIcons();
         }
         /// <summary>
         /// Создает контейнер для иконок, метод нужнен для 
@@ -124,14 +162,14 @@ namespace ProgramManager.ViewModels
             WrapPanel wrap = new WrapPanel();
             for (int i = 0; i < Buttons.Count; i++)
             {
-                Buttons[i].Command = SelectIcon;
+                Buttons[i].Command = SelectIconCommand;
                 Buttons[i].CommandParameter = Buttons[i];
                 Buttons[i].Style = (Style)Application.Current.FindResource("IconStyle");
                 wrap.Children.Add(Buttons[i]);
             }
             WrapIcons = new List<WrapPanel> { wrap };
         }
-
+        
         #endregion
     }
 }

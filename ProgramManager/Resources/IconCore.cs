@@ -1,6 +1,4 @@
-﻿using System;
-using System.Windows;
-using System.Windows.Controls;
+﻿using System.Windows;
 using System.Windows.Media;
 
 namespace ProgramManager.Resources
@@ -57,9 +55,7 @@ namespace ProgramManager.Resources
         /// </summary>
         private SolidColorBrush ConvertFromStringToColor(string color)
         {
-            // ReSharper disable once PossibleNullReferenceException
-            Color hex = (Color)ColorConverter.ConvertFromString(color);
-            return new SolidColorBrush(hex);
+            return color.FormatStringToSolidColor();
         }
 
         #endregion
