@@ -1,15 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System.Windows.Controls;
 using System.Windows.Input;
-using ProgramManager.Views.DialogPacks;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Windows.Controls;
-using GalaSoft.MvvmLight.Messaging;
 using ProgramManager.Models.PackageModel;
-using ProgramManager.Views;
-using System.Windows;
-using System.Windows.Media;
-using ProgramManager.Resources;
+using ProgramManager.Views.DialogPacks;
 using ProgramManager.ViewModels.Base;
+using ProgramManager.Resources;
+using ProgramManager.Services;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace ProgramManager.ViewModels
 {
@@ -17,10 +15,10 @@ namespace ProgramManager.ViewModels
     {
         private const string AutocompleteIcon = "../../Resources/Icons/Businessman_48px.png";
         private const string DeleteIcon = "../../Resources/Icons/Delete_48px.png";
-        private static InputName _windowInputName;
-        private static DialogIcons _windowAddIcons;
         private string _description;
         private string _packageTitle;
+        private static InputName _windowInputName;
+        private static PackageBase _package;
         private IconControl _iconControl;
 
         #region Constructor
@@ -29,7 +27,7 @@ namespace ProgramManager.ViewModels
         {
             // Initial fields.
             _windowInputName = new InputName();
-            _windowAddIcons = new DialogIcons();
+            IconControl = new IconControl();
 
             // Initial data.
             InitializePackageDialog();
@@ -42,9 +40,7 @@ namespace ProgramManager.ViewModels
             Messenger.Default.Register<InputName>(this, action => _windowInputName = action);
             Messenger.Default.Register<PackageBase>(this, LoadPackage);
             Messenger.Default.Register<List<string>>(this, InitialDataSource);
-            Messenger.Default.Register<Icon>(this, LoadIcon);
-
-            IconControl = new IconControl();
+            Synchronizer.IconLoad = LoadSelectIcon;
         }
 
         #endregion
@@ -75,21 +71,16 @@ namespace ProgramManager.ViewModels
             set
             {
                 _iconControl = value;
-               OnPropertyChanged("IconsControl");
+                SetProperty(ref _iconControl, value, () => IconControl);
             }
         }
-
+        
         #endregion
 
         #region Commands
 
         public ICommand CmdRemoveTextField { get; }
         public static ICommand SavePackage { get; set; }
-        public ICommand OpenDialogIcons => new RelayCommand(obj => 
-        {
-            _windowAddIcons = new DialogIcons();
-            _windowAddIcons.ShowDialog();
-        });
         public ICommand OpenInputName => new RelayCommand(obj => 
         {
             InputName windowInputName = new InputName();
@@ -108,18 +99,33 @@ namespace ProgramManager.ViewModels
             if (type != null)
                 AddTextField((string)type);
         });
-
+        public static ICommand CancelChange => new RelayCommand(obj =>
+        {
+            Singleton._status = true;
+            Synchronizer.IconLoad.Invoke(null);
+        });
         #endregion
 
-        private void LoadIcon(Icon obj)
-        {
-            //IconViewModel iconViewModel = IconPanel.DataContext as IconViewModel;
+        #region Functions
 
-            //if (iconViewModel != null)
-            //{
-            //    iconViewModel.IconBackground = obj.BgroundColor;
-            //    iconViewModel.IconGeometry = obj.Brush;
-            //}
+        private void LoadSelectIcon(Icon obj)
+        {
+            if (Singleton._back == null)
+                Singleton._back = IconControl.DataContext as IconControlViewModel;
+
+            if (!Singleton._status)
+            {
+                IconControlViewModel iconViewModel = new IconControlViewModel();
+                _package.Icon.Brush = obj.Brush;
+                _package.Icon.Name = obj.Name;
+                _package.Icon.BgroundColor = obj.BgroundColor;
+                _package.Icon.FgroundColor = obj.FgroundColor;
+                iconViewModel.LoadIcon(_package.Icon);
+                IconControl.DataContext = iconViewModel;
+            }
+            else IconControl.DataContext = Singleton._back;
         }
+
+        #endregion
     }
 }

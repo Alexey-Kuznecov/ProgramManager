@@ -1,15 +1,12 @@
 ﻿using System.Collections.Generic;
-using ProgramManager.Models;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Threading;
+using ProgramManager.Models;
 using ProgramManager.Models.PackageModel;
 using ProgramManager.Services;
-using GalaSoft.MvvmLight.Messaging;
-using System;
-using ProgramManager.Resources;
 using ProgramManager.ViewModels.Base;
 
 namespace ProgramManager.ViewModels

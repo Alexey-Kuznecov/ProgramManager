@@ -3,14 +3,10 @@ using System.Windows.Media;
 
 namespace ProgramManager.Resources
 {
-    public class Icon : IconCore
-    {
-        public Icon(string icon, string color, string bg)
-            : base(icon, color, bg) { }
-        public Icon() { }
-    }
     public class IconCore
     {
+        #region Constructor
+
         protected IconCore(string name, string color, string bg)
         {
             Name = name;
@@ -18,7 +14,21 @@ namespace ProgramManager.Resources
             BgroundColor = ConvertFromStringToColor(bg);
             DrawIcon();
         }
-        public IconCore() { }
+        protected IconCore(string name, SolidColorBrush color, SolidColorBrush bg)
+        {
+            Name = name;
+            FgroundColor = color;
+            BgroundColor = bg;
+        }
+        protected IconCore(string name, DrawingBrush brush, SolidColorBrush color, SolidColorBrush bg)
+        {
+            Name = name;
+            Brush = brush;
+            FgroundColor = color;
+            BgroundColor = bg;
+        }
+
+        #endregion
 
         #region Properties
 
@@ -47,8 +57,7 @@ namespace ProgramManager.Resources
                     GeometryDrawing geometry = child as GeometryDrawing;
                     if (geometry != null) geometry.Brush = FgroundColor;
                 }
-            }
-            Brush = dBrush;
+            } Brush = dBrush;
         }
         /// <summary>
         /// Преобразует строку формата #FFFFFF в цвет для кисти.
@@ -59,5 +68,18 @@ namespace ProgramManager.Resources
         }
 
         #endregion
-    } 
+    }
+    public class Icon : IconCore
+    {
+        #region Constructor
+
+        public Icon(string icon, string color, string bg)
+            : base(icon, color, bg) { }
+        public Icon(string icon, SolidColorBrush color, SolidColorBrush bg)
+            : base(icon, color, bg) { }
+        public Icon(string name, DrawingBrush brush, SolidColorBrush color, SolidColorBrush bg)
+            : base(name, brush, color, bg) { }
+
+        #endregion
+    }
 }

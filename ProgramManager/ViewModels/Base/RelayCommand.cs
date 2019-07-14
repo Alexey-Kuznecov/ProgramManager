@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Input;
+using ProgramManager.Services;
 
 namespace ProgramManager.ViewModels.Base
 {
@@ -30,7 +31,7 @@ namespace ProgramManager.ViewModels.Base
         }
         public void Execute(object parameter)
         {
-            _execute?.Invoke(parameter);
+            _execute.Invoke(parameter);
         }
         public void RaiseCanExecuteChanged()
         {

@@ -10,6 +10,7 @@
                 <ControlTemplate TargetType="Button">
                     <ControlTemplate.Resources>
                         <converter:ContentConverter x:Key="ContentConverter" />
+                        <converter:ColorConverterSolidColor x:Key="ContentConverterSolidColor" />
                     </ControlTemplate.Resources>
                     <Grid x:Name="grid">
                         <Path

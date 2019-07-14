@@ -3,17 +3,13 @@ using ProgramManager.Views;
 using System.Windows.Input;
 using System.Windows.Media;
 using ProgramManager.Resources;
+using ProgramManager.Services;
 using ProgramManager.ViewModels.Base;
 
 namespace ProgramManager.ViewModels
 {
     public class IconViewModelBase : PropertiesChanged
     {
-        public IconViewModelBase()
-        {
-            Messenger.Default.Register<Icon>(this, LoadIcon);
-        }
-
         #region Properties
 
         public DrawingBrush IconGeometry { get; set; }
@@ -25,7 +21,7 @@ namespace ProgramManager.ViewModels
 
         #region Functions
 
-        protected void LoadIcon(Icon icon)
+        public void LoadIcon(Icon icon)
         {
             DrawingBrush brush = icon.Brush;
             DrawingGroup group = brush?.Drawing as DrawingGroup;
@@ -44,16 +40,17 @@ namespace ProgramManager.ViewModels
         }
         #endregion
     }
-    public class IconViewModel : IconViewModelBase
+    public class IconControlViewModel : IconViewModelBase
     {
-        public IconViewModel()
+        public IconControlViewModel()
         {
-            CmdSelectDialogIcon = new RelayCommand(obj =>
-            {
-                DialogIcons instance = new DialogIcons();
-                instance.Show();
-            });
+            WindowDispatchers.IconsEditor = new IconsEditor();            
+            CmdOpenDialogIcon = new RelayCommand(obj => OpenDialogIcon());
         }
-        public ICommand CmdSelectDialogIcon { get; }
+        public void OpenDialogIcon()
+        {
+            WindowDispatchers.IconsEditor.Show();
+        }
+        public ICommand CmdOpenDialogIcon { get; }
     }
 }

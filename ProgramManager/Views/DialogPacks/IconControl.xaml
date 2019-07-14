@@ -5,11 +5,15 @@
     xmlns:converters="clr-namespace:ProgramManager.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:ProgramManager.ViewModels"
     d:DataContext="d:DesignInstance viewModel:IconViewModel"
     d:DesignHeight="300"
     d:DesignWidth="300"
     mc:Ignorable="d">
 
+    <UserControl.DataContext>
+        <vm:IconControlViewModel />
+    </UserControl.DataContext>
     <UserControl.Resources>
         <Style x:Key="ContentControl" TargetType="ContentControl">
             <Setter Property="Cursor" Value="Hand" />
@@ -49,7 +53,7 @@
                             Stretch="Uniform" />
                         <TextBlock>
                             <TextBlock.InputBindings>
-                                <MouseBinding Command="{Binding CmdSelectDialogIcon}" Gesture="LeftClick" />
+                                <MouseBinding Command="{Binding CmdOpenDialogIcon}" Gesture="LeftClick" />
                             </TextBlock.InputBindings>
                         </TextBlock>
                     </Grid>

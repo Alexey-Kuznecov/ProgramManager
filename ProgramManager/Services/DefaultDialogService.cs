@@ -7,6 +7,7 @@ namespace ProgramManager.Services
     public class DefaultDialogService : IDialogService
     {
         public string FilePath { get; set; }
+        public string FileShortName { get; set; }
 
         public bool OpenFileDialog()
         {
@@ -14,6 +15,7 @@ namespace ProgramManager.Services
             if (openFileDialog.ShowDialog() == true)
             {
                 FilePath = openFileDialog.FileName;
+                FileShortName = openFileDialog.SafeFileName;
                 return true;
             }
             return false;

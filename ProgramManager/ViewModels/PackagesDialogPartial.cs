@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics.CodeAnalysis;
+using System.Windows.Controls;
 using System.Linq;
 using System.Windows;
 using ProgramManager.Converters;
@@ -8,8 +10,6 @@ using ProgramManager.Enums;
 using ProgramManager.Models.PackageModel;
 using ProgramManager.Services;
 using ProgramManager.Views;
-using GalaSoft.MvvmLight.Messaging;
-using System.Windows.Controls;
 using ProgramManager.Resources;
 using ProgramManager.ViewModels.Base;
 
@@ -20,7 +20,6 @@ namespace ProgramManager.ViewModels
     {
         private static List<string> _tagList;
         private int _id;
-        private static Dictionary<string, string> _dataList = new Dictionary<string, string>();
         public static CategoryModel _category;
 
         public void InitialDataSource(object data)
@@ -52,6 +51,7 @@ namespace ProgramManager.ViewModels
         /// <summary>
         /// Устанавливает категорию для целевого пакета.
         /// </summary>
+        [SuppressMessage("ReSharper", "ConvertClosureToMethodGroup")]
         public void SetCategory()
         {
             // Determining the type of package to send
@@ -68,7 +68,6 @@ namespace ProgramManager.ViewModels
                 _category = new CategoryModel();
                 SavePackage = new RelayCommand(obj => SendPackage<ProgramModel>(obj));
             }
-
             SetContextMenuItem();
         }
         /// <summary>
@@ -96,10 +95,10 @@ namespace ProgramManager.ViewModels
             // Получаем управление диалоговым окном пакетов.
             PackagesDialog window = data as PackagesDialog;
             EventAggregate connector = new EventAggregate();
-            IconViewModel iconViewModel = IconControl.DataContext as IconViewModel;
+            IconControlViewModel iconViewModel = IconControl.DataContext as IconControlViewModel;
 
             // Добавления полей базовго класса.
-            T package = new T()
+            var package = new T()
             {
                 Id = _id,
                 Name = PackageTitle,
@@ -108,7 +107,7 @@ namespace ProgramManager.ViewModels
                 Source = TextField.SingleOrDefault(a => a.Types == FieldTypes.Source.ToString())?.FieldValue,
                 Version = TextField.SingleOrDefault(a => a.Types == FieldTypes.Version.ToString())?.FieldValue,
                 Image = TextField.SingleOrDefault(a => a.Types == FieldTypes.Image.ToString())?.FieldValue,
-                Icon = new Icon { FgroundColor = iconViewModel?.IconForeground, BgroundColor = iconViewModel?.IconBackground, Name = iconViewModel?.IconName},
+                Icon = new Icon (iconViewModel?.IconName, iconViewModel?.IconForeground, iconViewModel?.IconBackground),
                 TagList = _tagList,
                 Description = Description,
             };
@@ -192,7 +191,7 @@ namespace ProgramManager.ViewModels
                 var formatKey = FieldTypes.Userfield.ToString() + (TextField.Count + 1);
 
                 FieldConverter.Dictionary.Add(formatKey, fieldName);
-                TextField.Add(new TextFieldModel()
+                TextField.Add(new TextFieldModel
                 {
                     FieldValue = fieldName,
                     Types = formatKey,
@@ -229,8 +228,10 @@ namespace ProgramManager.ViewModels
                 if (!FieldConverter.Dictionary.ContainsKey(textField.Types))
                     FieldConverter.Dictionary.Add(textField.Types, textField.Label);
             }
+            _package = package;
             //Посылает найденный ресурс иконки для пакета
-            Messenger.Default.Send(package.Icon);
+            var viewModel = IconControl.DataContext as IconControlViewModel;
+            viewModel?.LoadIcon(package.Icon);
         }
         /// <summary>
         /// Метод удаляет из коллекции TextField поля а также очищает словарь.

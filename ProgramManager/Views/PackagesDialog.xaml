@@ -43,7 +43,7 @@
                 <MenuItem FontSize="12" Header="Пакет">
                     <MenuItem Header="Сохранить" />
                     <MenuItem Header="Сохранить как шаблон" />
-                    <MenuItem Header="Отменить и выйти" />
+                    <MenuItem Command="{Binding CancelChange}" Header="Отменить и выйти" />
                     <Separator />
                     <MenuItem Header="Закрыть окно" />
                 </MenuItem>
@@ -69,9 +69,9 @@
                 Text="{Binding PackageTitle, Mode=TwoWay}" />
             <Grid Grid.Row="2" Grid.Column="1">
                 <Grid.DataContext>
-                    <vm:IconViewModel />
+                    <vm:IconControlViewModel />
                 </Grid.DataContext>
-                <ContentPresenter Content="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Path=DataContext.IconControl}" />
+                <ContentPresenter Content="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Path=DataContext.IconControl, Mode=TwoWay}" />
                 <!--<ContentControl>
                     <ContentControl.DataContext>
                         <vm:IconViewModel />

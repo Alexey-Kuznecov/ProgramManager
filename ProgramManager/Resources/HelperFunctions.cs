@@ -1,5 +1,7 @@
-﻿using System.IO;
-using System.Net.Http.Headers;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.IO;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 using static System.Windows.Media.ColorConverter;
 
@@ -12,6 +14,7 @@ namespace ProgramManager.Resources
         /// </summary>
         /// <param name="path">Путь или имя файла.</param>
         /// <returns>Возвращает имя файла.</returns>
+        [SuppressMessage("ReSharper", "AssignNullToNotNullAttribute")]
         public static string ClearExtension(string path)
         {
             var result = path;
@@ -33,8 +36,14 @@ namespace ProgramManager.Resources
         public static SolidColorBrush FormatStringToSolidColor(this string value)
         {
             SolidColorBrush solid =
+                // ReSharper disable once PossibleNullReferenceException
                 new SolidColorBrush((Color)ConvertFromString(value));
             return solid;
         }
+        public static void RemoveFromParent(this FrameworkElement item)
+        {
+            var parentItemsControl = (WrapPanel) item?.Parent;
+            parentItemsControl?.Children.Remove(item as UIElement);
+        }  
     }
 }

@@ -111,6 +111,7 @@
     <Compile Include="Enums\Keywords.cs" />
     <Compile Include="Filters\FilterProperties.cs" />
     <Compile Include="Converters\ConverterBase.cs" />
+    <Compile Include="Models\PackageModel\IconCategoryModel.cs" />
     <Compile Include="Models\PackageModel\FileModel.cs" />
     <Compile Include="Models\PackageDrtails.cs" />
     <Compile Include="Models\PackageModel\CategoryModel.cs" />
@@ -124,12 +125,14 @@
     <Compile Include="Models\PackageModel\PackageBase.cs" />
     <Compile Include="Models\PackageModel\PluginModel.cs" />
     <Compile Include="Models\PackageModel\ProgramModel.cs" />
+    <Compile Include="Resources\ButtonExtension.cs" />
     <Compile Include="Resources\ConverterForeignPlugins.cs" />
     <Compile Include="Resources\ConverterXamlToBitmap.cs" />
     <Compile Include="Resources\ConverterXamlResources.cs" />
     <Compile Include="Resources\HelperFunctions.cs" />
     <Compile Include="Resources\IconCore.cs" />
     <Compile Include="Services\DefaultDialogService.cs" />
+    <Compile Include="Services\Synchronizer.cs" />
     <Compile Include="Services\ProcessManager.cs" />
     <Compile Include="Services\EventAggregate.cs" />
     <Compile Include="Services\BaseEventArgs.cs" />
@@ -139,20 +142,17 @@
     <Compile Include="Services\PackagesManager.cs" />
     <Compile Include="Models\PackageAccess.cs" />
     <Compile Include="Models\PackageModel\TextFieldModel.cs" />
+    <Compile Include="Services\Singleton.cs" />
+    <Compile Include="Services\WindowDispatchers.cs" />
     <Compile Include="Services\XamlFileService.cs" />
     <Compile Include="ViewModels\Base\PropertiesChanged.cs" />
     <Compile Include="ViewModels\IconEditorViewModel.cs" />
-    <Compile Include="ViewModels\IconEditorViewModelRework.cs" />
-    <Compile Include="ViewModels\IconViewModel.cs" />
+    <Compile Include="ViewModels\IconControlViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\PackagesDialogPartial.cs" />
     <Compile Include="ViewModels\PackagesDialogViewModel.cs" />
     <Compile Include="ViewModels\InputNameViewModel.cs" />
     <Compile Include="ViewModels\Base\RelayCommand.cs" />
-    <Page Include="Resources\Allustrator.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Resources\IconStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -165,7 +165,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\DialogIcons.xaml">
+    <Page Include="Views\IconsEditor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -203,8 +203,8 @@
     </Compile>
     <Compile Include="Services\PackagesDialogVisibility.cs" />
     <Compile Include="ViewModels\TagDialogViewModel.cs" />
-    <Compile Include="Views\DialogIcons.xaml.cs">
-      <DependentUpon>DialogIcons.xaml</DependentUpon>
+    <Compile Include="Views\IconsEditor.xaml.cs">
+      <DependentUpon>IconsEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\DialogPacks\IconControl.xaml.cs">
       <DependentUpon>IconControl.xaml</DependentUpon>
