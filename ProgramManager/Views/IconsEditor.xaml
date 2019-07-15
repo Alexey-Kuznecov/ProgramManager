@@ -63,7 +63,7 @@
             Style="{StaticResource ListBox}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock ContextMenu="{Binding ContextCatMenu, Mode=TwoWay}" Text="{Binding Header}" />
+                    <TextBlock ContextMenu="{Binding ContextCatMenu}" Text="{Binding Header}" />
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
@@ -72,7 +72,7 @@
             Grid.Column="1"
             VerticalScrollBarVisibility="Auto">
             <StackPanel Margin="20,10,10,0">
-                <ItemsControl Width="{Binding ColumnDefinitions/Width, ElementName=grid}" ItemsSource="{Binding WrapIcons, Mode=TwoWay}" />
+                <ItemsControl Width="{Binding ColumnDefinitions/Width, ElementName=grid}" ItemsSource="{Binding WrapIcons}" />
             </StackPanel>
         </ScrollViewer>
         <Grid

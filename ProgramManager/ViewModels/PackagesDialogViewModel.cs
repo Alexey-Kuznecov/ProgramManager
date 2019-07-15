@@ -101,7 +101,7 @@ namespace ProgramManager.ViewModels
         });
         public static ICommand CancelChange => new RelayCommand(obj =>
         {
-            Singleton._status = true;
+            Singleton.Status = true;
             Synchronizer.IconLoad.Invoke(null);
         });
         #endregion
@@ -110,10 +110,10 @@ namespace ProgramManager.ViewModels
 
         private void LoadSelectIcon(Icon obj)
         {
-            if (Singleton._back == null)
-                Singleton._back = IconControl.DataContext as IconControlViewModel;
+            if (Singleton.Back == null)
+                Singleton.Back = IconControl.DataContext as IconControlViewModel;
 
-            if (!Singleton._status)
+            if (!Singleton.Status)
             {
                 IconControlViewModel iconViewModel = new IconControlViewModel();
                 _package.Icon.Brush = obj.Brush;
@@ -123,7 +123,7 @@ namespace ProgramManager.ViewModels
                 iconViewModel.LoadIcon(_package.Icon);
                 IconControl.DataContext = iconViewModel;
             }
-            else IconControl.DataContext = Singleton._back;
+            else IconControl.DataContext = Singleton.Back;
         }
 
         #endregion

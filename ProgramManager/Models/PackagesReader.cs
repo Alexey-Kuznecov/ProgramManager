@@ -13,7 +13,7 @@ namespace ProgramManager.Models
 {
     /// Этот класс является обобщенным поэтому каждый потомок класса PackageBase будет совместим с данным классом, свойства производных классов
     /// будут гарантированно проинициализированы значениями из элементов xml документа, если имена свойств совпадают с именами xml элементов.
-    /// По результатам работы класса создается коллекция объектов типа List Т, свойства объектов которых будут инициализированы значениями элементов xml документа.
+    /// По результатам работы класса, создается коллекция объектов типа List Т, свойства объектов которых будут инициализированы значениями элементов xml документа.
     public class PackagesReader<T> where T : PackageBase, new()
     {
         private const string DocumentName = "../../Resources/User/packages.xml";
@@ -68,6 +68,11 @@ namespace ProgramManager.Models
             }
             return packages;
         }
+        /// <summary>
+        /// Устанавливает иконку взависемости от категории.
+        /// </summary>
+        /// <param name="category">Получает текущею категорию.</param>
+        /// <returns>Возвращает имя иконки.</returns>
         private static string SetIcons(string category)
         {
             CategoryDict cateDict = new CategoryDict();

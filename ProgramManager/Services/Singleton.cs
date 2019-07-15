@@ -7,11 +7,11 @@ using ProgramManager.Resources;
 
 namespace ProgramManager.Services
 {
-    static class Singleton
+    struct Singleton
     {
-        public static object _back = null;
-        public static int _count = 0;
-        public static int _counter = 0;
-        public static bool _status = false;
+        public static object Back = null;
+        public static int Count = 0;
+        public static int Counter = 0;
+        public static bool Status = false;
     }
 }

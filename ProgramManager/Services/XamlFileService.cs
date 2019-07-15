@@ -30,8 +30,10 @@ namespace ProgramManager.Services
         {
             try
             {
-                StreamWriter writer = new StreamWriter(resPath);
-                XamlWriter.Save(resDict, writer);
+                using (StreamWriter writer = new StreamWriter(resPath))
+                {
+                    XamlWriter.Save(resDict, writer);
+                } 
             }
             catch (Exception e)
             {

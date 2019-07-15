@@ -1,22 +1,19 @@
-﻿using System.Windows;
+﻿using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Controls;
-using ProgramManager.Services;
 using ProgramManager.ViewModels.Base;
-using ProgramManager.ViewModels;
 
 namespace ProgramManager.Models.PackageModel
 {
-    class IconCategoryModel
+    class IconCategoryBase
     {
-        public IconCategoryModel()
+        public string Header { get; set; }
+        public ContextMenu ContextCatMenu { get; set; }
+        public ObservableCollection<WrapPanel> Categories { get; set; }
+        protected IconCategoryBase()
         {
             ContextCatMenu = new ContextMenu();
 
-            ContextCatMenu.Items.Add(new MenuItem
-            {
-                Header = "Добавить иконку",
-                Command = new RelayCommand(obj => { MessageBox.Show("it works!"); })
-            });
             ContextCatMenu.Items.Add(new MenuItem
             {
                 Header = "Добавить категорию",
@@ -33,9 +30,20 @@ namespace ProgramManager.Models.PackageModel
                 Command = new RelayCommand(obj => { MessageBox.Show("it works!"); })
             });
         }
-
-        public string Header { get; set; }
-
-        public ContextMenu ContextCatMenu { get; set; }
+    }
+    class IconCategoryModel : IconCategoryBase
+    {
+        public static ObservableCollection<IconCategoryModel> GetCategory()
+        {
+            var cat = new ObservableCollection<IconCategoryModel>
+            {
+                new IconCategoryModel { Header = "Программы" },
+                new IconCategoryModel { Header = "Логотипы" },
+                new IconCategoryModel { Header = "Игры" },
+                new IconCategoryModel { Header = "Бренды" },
+                new IconCategoryModel { Header = "Разное" }
+            };
+            return cat;
+        }
     }
 }

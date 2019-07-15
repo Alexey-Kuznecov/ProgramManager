@@ -133,7 +133,6 @@
     <Compile Include="Resources\IconCore.cs" />
     <Compile Include="Services\DefaultDialogService.cs" />
     <Compile Include="Services\Synchronizer.cs" />
-    <Compile Include="Services\ProcessManager.cs" />
     <Compile Include="Services\EventAggregate.cs" />
     <Compile Include="Services\BaseEventArgs.cs" />
     <Compile Include="Converters\KeywordToTextConverter.cs" />
