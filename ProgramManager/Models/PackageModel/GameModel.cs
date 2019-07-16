@@ -4,7 +4,7 @@ namespace ProgramManager.Models.PackageModel
 {
     public class GameModel : PackageBase
     {
-        protected override string Status { get; } = "Игры";
+        protected override string CatName { get; } = "Игры";
         public string CheatCode { get; set; }
 
         public GameModel()

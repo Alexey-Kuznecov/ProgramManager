@@ -44,13 +44,18 @@ namespace ProgramManager.ViewModels
     {
         public IconControlViewModel()
         {
-            WindowDispatchers.IconsEditor = new IconsEditor();            
             CmdOpenDialogIcon = new RelayCommand(obj => OpenDialogIcon());
         }
+
+        public ICommand CmdOpenDialogIcon { get; }
+
         public void OpenDialogIcon()
         {
-            WindowDispatchers.IconsEditor.Show();
+            using (WindowDispatchers wd = new WindowDispatchers())
+            {
+                wd.IconsEditor = new IconsEditor();
+                wd.IconsEditor.Show();
+            }
         }
-        public ICommand CmdOpenDialogIcon { get; }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
+using ProgramManager.Resources;
 using ProgramManager.ViewModels.Base;
 
 namespace ProgramManager.Models.PackageModel
@@ -35,14 +36,12 @@ namespace ProgramManager.Models.PackageModel
     {
         public static ObservableCollection<IconCategoryModel> GetCategory()
         {
-            var cat = new ObservableCollection<IconCategoryModel>
-            {
-                new IconCategoryModel { Header = "Программы" },
-                new IconCategoryModel { Header = "Логотипы" },
-                new IconCategoryModel { Header = "Игры" },
-                new IconCategoryModel { Header = "Бренды" },
-                new IconCategoryModel { Header = "Разное" }
-            };
+            var cat = new ObservableCollection<IconCategoryModel>();
+
+            foreach (var header in IconsOptionReader.GetCategory())
+                cat.Add(new IconCategoryModel { Header = header });
+
+            var dd = IconsOptionReader.GetIcons();
             return cat;
         }
     }

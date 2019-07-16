@@ -7,7 +7,7 @@ namespace ProgramManager.Models.PackageModel
 {
     public abstract class PackageBase : PackageDrtails
     {
-        protected virtual string Status { get; }
+        protected virtual string CatName { get; }
         private readonly IDictionary<string, string> _fieldList = new Dictionary<string, string>();
         public delegate Dictionary<string, string> DelegateMenuItem();
         public DelegateMenuItem LoadItem { get; set; }
@@ -44,7 +44,7 @@ namespace ProgramManager.Models.PackageModel
 
             foreach (var menu in root.Elements().Elements())
             {
-                if (menu.FirstAttribute.Value == Status || menu.FirstAttribute.Value == "Общие")
+                if (menu.FirstAttribute.Value == CatName || menu.FirstAttribute.Value == "Общие")
                 {
                     menuItem = menu;
 

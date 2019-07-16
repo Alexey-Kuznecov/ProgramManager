@@ -12,7 +12,6 @@ using ProgramManager.Models.PackageModel;
 using ProgramManager.Resources;
 using ProgramManager.Services;
 using ProgramManager.ViewModels.Base;
-using ProgramManager.Views.DialogPacks;
 using Application = System.Windows.Application;
 using Icon = ProgramManager.Resources.Icon;
 
@@ -20,13 +19,12 @@ namespace ProgramManager.ViewModels
 {
     class IconEditorViewModel : PropertiesChanged
     {
-        private SolidColorBrush _color;
         private readonly IDialogService _dialogService;
         private readonly IFileService _fileService;
-        private ObservableCollection<WrapPanel> _wrapIcons;
         private ListBoxItem _selectCategory;
         private string _filterText;
         private ObservableCollection<IconCategoryModel> _iconCategory;
+        private ObservableCollection<ButtonExtension> _buttons;
 
         #region Constructors
 
@@ -42,32 +40,22 @@ namespace ProgramManager.ViewModels
         #endregion
 
         #region Properties
+
         /// <summary>
         /// Устанавлевает цвет иконок из выбранного цвета в Combobox.
         /// </summary>
-        public SolidColorBrush Color
-        {
-            get { return _color; }
-            set
-            {
-                _color = value;
-                //Устанавливает цвет иконки.
-                if (_color != null)
-                    foreach (var item in Buttons)
-                        item.Foreground = _color;
-            }
-        }
+        public ComboBoxItem Color { get; set; }
         public DrawingBrush IconBrush { get; set; }
-        public ObservableCollection<WrapPanel> WrapIcons
+        public ObservableCollection<ButtonExtension> Buttons
         {
-            get { return _wrapIcons; }
+            get { return _buttons; }
             set
             {
-                _wrapIcons = value;
-                OnPropertyChanged("WrapIcons");
+                _buttons = value;
+                OnPropertyChanged("Buttons");
             }
         }
-        public ObservableCollection<ButtonExtension> Buttons { get; set; }
+        public ObservableCollection<ButtonExtension> ButtonsStore { get; set; }
         public ObservableCollection<IconCategoryModel> IconCategory
         {
             get { return _iconCategory; }
@@ -97,35 +85,23 @@ namespace ProgramManager.ViewModels
 
                 if (string.IsNullOrEmpty(_filterText))
                 {
-                    WrapIcons = new ObservableCollection<WrapPanel>();
-                    WrapPanel wrap = new WrapPanel();
-
-                    foreach (var bt in Buttons)
-                    {
-                        bt.RemoveFromParent();
-                        wrap.Children.Add(bt);
-                    } WrapIcons.Add(wrap);
+                    Buttons = ButtonsStore;
                 }
                 else
                 {
-                    ObservableCollection<ButtonExtension> filtered = new ObservableCollection<ButtonExtension>();
-                    WrapIcons = new ObservableCollection<WrapPanel>();
-                    WrapPanel wrap = new WrapPanel();
+                    ObservableCollection<ButtonExtension> filtered 
+                        = new ObservableCollection<ButtonExtension>();
 
                     var query = from button in Buttons
                         where button.IconName.ToLower().Contains(_filterText.ToLower())
                         select button;
+
                     foreach (var button in query)
                         filtered.Add(button);
-                    foreach (var bt in filtered)
-                    {
-                        bt.RemoveFromParent();
-                        wrap.Children.Add(bt);
-                    } WrapIcons.Add(wrap);
+                    Buttons = filtered;
                 }
             }
         }
-
         #endregion
 
         #region Commands
@@ -135,20 +111,22 @@ namespace ProgramManager.ViewModels
         public ICommand SelectIconCommand => new RelayCommand(obj =>
         {
             ButtonExtension bt = obj as ButtonExtension;
-            DrawingBrush brush = bt?.Content as DrawingBrush;
+            DrawingBrush brush = (DrawingBrush)bt?.Brush;
             DrawingGroup group = brush?.Drawing.Clone() as DrawingGroup;
-            
+            var colorBrush = Color.Content.ToString().FormatStringToSolidColor();
+
             if (@group != null)
             {
                 foreach (var item in @group.Children)
                 {
                     var geometry = item as GeometryDrawing;
-                    if (geometry != null) geometry.Brush = Color;
+                    if (geometry != null) geometry.Brush = colorBrush;
                 }
                 IconBrush = new DrawingBrush { Drawing = @group };
             }
+
             Singleton.Status = false;
-            Synchronizer.IconLoad.Invoke(new Icon(bt?.Name, IconBrush, "#FFFFFF".FormatStringToSolidColor(), Color));
+            Synchronizer.IconLoad.Invoke(new Icon(bt?.IconName, IconBrush, "#FFFFFF".FormatStringToSolidColor(), colorBrush));
         });
         /// <summary>
         /// Команда устанавливает иконку
@@ -222,9 +200,10 @@ namespace ProgramManager.ViewModels
         /// <summary>
         /// Загуржает иконки в редактор иконок.
         /// </summary>
-        public void LoadIcons(string category = null)
+        public void LoadIcons(string category = null, SolidColorBrush color = null)
         {
             Buttons = new ObservableCollection<ButtonExtension>();
+            ButtonsStore = new ObservableCollection<ButtonExtension>();
             Collection<ResourceDictionary> collMergedDictionaries = Application.Current.Resources.MergedDictionaries;
             ResourceDictionary resourceDictionary = collMergedDictionaries.Single(p => p.Source.ToString().Contains("Icons.xaml"));
 
@@ -237,39 +216,15 @@ namespace ProgramManager.ViewModels
                     Brush = brush,
                     IconName = key.ToString(),
                     Category = category,
-                    Command = SelectIconCommand,
-                    Style = (Style)Application.Current.FindResource("IconStyle")
+                    ToolTip = key
                 };
                 if (brush != null)
                 {
                     bt.CommandParameter = bt;
-                    ToolTipService.SetToolTip(bt, key);
                     Buttons.Add(bt);
+                    ButtonsStore.Add(bt);
                 }
-                //HelperFunctions.BinSerialize(Buttons);
             }
-            WrapperIcons();
-        }
-        /// <summary>
-        /// Создает контейнер для иконок, метод нужнен для 
-        /// отображения иконок по горизонтали 
-        /// </summary>
-        public void WrapperIcons()
-        {
-            WrapIcons = new ObservableCollection<WrapPanel>();
-            WrapPanel wrap = new WrapPanel();
-
-            foreach (var bt in Buttons)
-                    wrap.Children.Add(bt);
-
-            WrapIcons.Add(wrap);
-            
-            foreach (var category in IconCategory)
-            {
-                category.Categories = new ObservableCollection<WrapPanel>();
-                category.Categories.Add(wrap);
-            }
-            
         }
 
         #endregion

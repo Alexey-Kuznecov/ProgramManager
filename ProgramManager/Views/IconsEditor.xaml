@@ -2,19 +2,27 @@
     x:Class="ProgramManager.Views.IconsEditor"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:converter="clr-namespace:ProgramManager.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:ProgramManager.ViewModels"
     Title="IconsEditor"
     Width="540"
-    Height="470"
+    Height="480"
     WindowStartupLocation="Manual"
     mc:Ignorable="d">
     <Window.DataContext>
         <vm:IconEditorViewModel />
     </Window.DataContext>
-    <Grid x:Name="grid" Background="{Binding ElementName=window, Path=Background}">
+    <Window.Resources>
+        <Style x:Key="IconStyles" TargetType="Button">
+            <Setter Property="Foreground" Value="{Binding ElementName=ComboBox, Path=SelectedItem.Content}" />
+            <Setter Property="Height" Value="48" />
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Background" Value="#F3F3F3" />
+        </Style>
+    </Window.Resources>
+    <Grid Background="{Binding ElementName=window, Path=Background}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="60*" />
             <ColumnDefinition Width="170*" />
@@ -71,9 +79,24 @@
             Grid.Row="2"
             Grid.Column="1"
             VerticalScrollBarVisibility="Auto">
-            <StackPanel Margin="20,10,10,0">
-                <ItemsControl Width="{Binding ColumnDefinitions/Width, ElementName=grid}" ItemsSource="{Binding WrapIcons}" />
-            </StackPanel>
+            <ItemsControl ItemsSource="{Binding Buttons, Mode=TwoWay}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Button
+                            Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Path=DataContext.SelectIconCommand}"
+                            CommandParameter="{Binding CommandParameter}"
+                            Content="{Binding Brush}"
+                            Style="{StaticResource IconStyles}"
+                            Template="{StaticResource IconTemplate}"
+                            ToolTip="{Binding ToolTip}" />
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Margin="20,10,10,0" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
         </ScrollViewer>
         <Grid
             Grid.Row="3"
@@ -84,21 +107,16 @@
                 <ColumnDefinition Width="100" />
                 <ColumnDefinition Width="125" />
             </Grid.ColumnDefinitions>
-            <Grid
-                Grid.Column="1"
-                Width="64"
-                Height="64">
-                <ContentPresenter Content="{Binding PreviewIcon, Mode=TwoWay}" />
-            </Grid>
             <ComboBox
+                x:Name="ComboBox"
                 Grid.Column="0"
                 Width="200"
                 Height="30"
                 Margin="30,10,40,20"
                 VerticalContentAlignment="Center"
                 SelectedIndex="0"
-                SelectedItem="{Binding Color, Converter={converter:ColorConverterSolidColor}}">
-                <ComboBoxItem>#DD2c2c00</ComboBoxItem>
+                SelectedItem="{Binding Color}">
+                <ComboBoxItem>#ee2c2c00</ComboBoxItem>
                 <ComboBoxItem>#FF72f534</ComboBoxItem>
                 <ComboBoxItem>#FF184B9C</ComboBoxItem>
                 <ComboBoxItem>#FFffcd09</ComboBoxItem>

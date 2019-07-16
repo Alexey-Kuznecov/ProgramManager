@@ -71,7 +71,7 @@
                 <Grid.DataContext>
                     <vm:IconControlViewModel />
                 </Grid.DataContext>
-                <ContentPresenter Content="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Path=DataContext.IconControl, Mode=TwoWay}" />
+                <!--<ContentPresenter Content="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Path=DataContext.IconControl, Mode=TwoWay}" />-->
                 <!--<ContentControl>
                     <ContentControl.DataContext>
                         <vm:IconViewModel />

@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<IconCategories>
+    <Category Name="Программы">
+        <Icon Id="2" Name="Allustrator" Background="#FFF5F5F5" Foreground="#FFFFFF"/>
+        <Icon Id="4" Name="Photoshop" Background="#FFF5F5F5" Foreground="#FFFFFF"/>
+        <Icon Id="8" Name="ProgramIcon2" Background="#FFF5F5F5" Foreground="#FFFFFF"/>
+        <Icon Id="11" Name="ProgramIcon4" Background="#FFF5F5F5" Foreground="#FFFFFF"/>
+        <Icon Id="14" Name="PluginsIcon" Background="#FFF5F5F5" Foreground="#FFFFFF"/>
+        <Icon Id="21" Name="DriversIcon2" Background="#FFF5F5F5" Foreground="#FFFFFF"/>
+        <Icon Id="22" Name="ProgramIcon" Background="#FFF5F5F5" Foreground="#FFFFFF"/>
+        <Icon Id="23" Name="ModsIcon" Background="#FFF5F5F5" Foreground="#FFFFFF"/>
+        <Icon Id="9" Name="ModsIcon2" Background="#FFF5F5F5" Foreground="#FFFFFF"/>
+        <Icon Id="1" Name="PluginsIcon2" Background="#FFF5F5F5" Foreground="#FFFFFF"/>
+        <Icon Id="12" Name="ModificationIcon" Background="#FFF5F5F5" Foreground="#FFFFFF"/>
+   </Category>
+    <Category Name="Логотипы">
+        <Icon Id="16" Name="IdiaIcon" Background="#FFF5F5F5" Foreground="#FFFFFF"/>   
+   </Category>
+    <Category Name="Игры">
+        <Icon Id="13" Name="Games7" Background="#FFF5F5F5" Foreground="#FFFFFF"/>
+        <Icon Id="20" Name="Games6" Background="#FFF5F5F5" Foreground="#FFFFFF"/>
+        <Icon Id="17" Name="Games8" Background="#FFF5F5F5" Foreground="#FFFFFF"/>
+   </Category>
+    <Category Name="Бренды">
+        <Icon Id="6" Name="RockIcon" Background="#FFF5F5F5" Foreground="#FFFFFF"/>
+        <Icon Id="15" Name="ChessIcon" Background="#FFF5F5F5" Foreground="#FFFFFF"/>
+   </Category>
+    <Category Name="Диски">
+        <Icon Id="0" Name="DriversIcons" Background="#FFF5F5F5" Foreground="#FFFFFF"/>
+        <Icon Id="3" Name="DriversIcon3" Background="#FFF5F5F5" Foreground="#FFFFFF"/>
+        <Icon Id="7" Name="DriversIcon4" Background="#FFF5F5F5" Foreground="#FFFFFF"/>
+        <Icon Id="10" Name="DriversIcon5" Background="#FFF5F5F5" Foreground="#FFFFFF"/>
+        <Icon Id="24" Name="DriversIcon" Background="#FFF5F5F5" Foreground="#FFFFFF"/>
+   </Category>
+    <Category Name="Разное">      
+        <Icon Id="5" Name="SettingIcon" Background="#FFF5F5F5" Foreground="#FFFFFF"/>
+        <Icon Id="18" Name="SearchIcon" Background="#FFF5F5F5" Foreground="#FFFFFF"/>
+        <Icon Id="19" Name="FolderIcon" Background="#FFF5F5F5" Foreground="#FFFFFF"/>         
+   </Category>
+</IconCategories>

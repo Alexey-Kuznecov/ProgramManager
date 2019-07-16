@@ -14,16 +14,14 @@ namespace ProgramManager.Converters
     {
         public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return null;
+            return value;
         }
         public override object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value != null)
-            {
-                var combobox = value as ComboBoxItem;
-                if (combobox != null)
-                    return new SolidColorBrush((Color)ConvertFromString(combobox.Content.ToString()));
-            }
+            var combobox = value as ComboBoxItem;
+            if (combobox != null)
+                // ReSharper disable once PossibleNullReferenceException
+                return new SolidColorBrush((Color)ConvertFromString(combobox.Content.ToString()));
             return null;
         }
     }

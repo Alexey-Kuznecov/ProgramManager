@@ -4,7 +4,7 @@ namespace ProgramManager.Models.PackageModel
 {
     public class PluginModel : PackageBase
     {
-        protected override string Status { get; } = "Плагины";
+        protected override string CatName { get; } = "Плагины";
         public string Appointment { get; set; }
 
         public PluginModel()

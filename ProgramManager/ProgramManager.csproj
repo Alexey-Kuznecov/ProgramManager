@@ -113,7 +113,7 @@
     <Compile Include="Converters\ConverterBase.cs" />
     <Compile Include="Models\PackageModel\IconCategoryModel.cs" />
     <Compile Include="Models\PackageModel\FileModel.cs" />
-    <Compile Include="Models\PackageDrtails.cs" />
+    <Compile Include="Models\PackageModel\PackageDrtails.cs" />
     <Compile Include="Models\PackageModel\CategoryModel.cs" />
     <Compile Include="Models\Func\FuncHelper.cs" />
     <Compile Include="Models\PackagesReader.cs" />
@@ -131,6 +131,7 @@
     <Compile Include="Resources\ConverterXamlResources.cs" />
     <Compile Include="Resources\HelperFunctions.cs" />
     <Compile Include="Resources\IconCore.cs" />
+    <Compile Include="Resources\IconsOptionReader.cs" />
     <Compile Include="Services\DefaultDialogService.cs" />
     <Compile Include="Services\Synchronizer.cs" />
     <Compile Include="Services\EventAggregate.cs" />
@@ -316,7 +317,9 @@
     <Resource Include="Resources\User\Images\Plugins.png" />
     <Resource Include="Resources\User\Images\Programs.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\IconsOption.xml" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

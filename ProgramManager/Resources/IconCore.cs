@@ -36,6 +36,7 @@ namespace ProgramManager.Resources
         public SolidColorBrush BgroundColor { get; set; }
         public SolidColorBrush FgroundColor { get; set; }
         public string Name { get; set; }
+        public string Category { get; set; }
 
         #endregion
 
