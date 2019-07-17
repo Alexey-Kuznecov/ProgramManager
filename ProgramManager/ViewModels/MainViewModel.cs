@@ -1,13 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Windows.Forms;
+using System.Windows;
 using System.Windows.Input;
 using System.Windows.Threading;
 using ProgramManager.Models;
 using ProgramManager.Models.PackageModel;
 using ProgramManager.Services;
 using ProgramManager.ViewModels.Base;
+using ProgramManager.Views;
+using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace ProgramManager.ViewModels
 {
@@ -172,7 +174,15 @@ namespace ProgramManager.ViewModels
         });
         public ICommand CmdUpdatePackage => new RelayCommand(obj => { UpdatePackage(); });
         public ICommand CmdRemovePackage => new RelayCommand(obj => { RemovePackage(); });
-
+        public ICommand OpenIconEditor => new RelayCommand(obj =>
+        {
+            using (WindowDispatchers wd = new WindowDispatchers())
+            {
+                wd.IconsEditor = new IconsEditor();
+                wd.IconsEditor.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                wd.IconsEditor.Show();
+            }
+        });
         #endregion
 
         #region Method

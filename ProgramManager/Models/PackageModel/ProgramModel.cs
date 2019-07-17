@@ -6,7 +6,7 @@ namespace ProgramManager.Models.PackageModel
 {
     public class ProgramModel : PackageBase
     {
-        protected override string CatName { get; } = "Программы";
+        protected override string CatName { get; }
         public string License { get; set; }
         public string CompanySite { get; set; }
         public string SerialKey { get; set; }
@@ -14,6 +14,7 @@ namespace ProgramManager.Models.PackageModel
 
         public ProgramModel()
         {
+            CatName = "Программы";
             LoadItem += LoadMenuItem;
         }
     }

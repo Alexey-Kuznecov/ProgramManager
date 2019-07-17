@@ -12,10 +12,10 @@ namespace ProgramManager.Models.PackageModel
         public delegate Dictionary<string, string> DelegateMenuItem();
         public DelegateMenuItem LoadItem { get; set; }
         public int Id { get; set; }
-        public Icon Icon { get; set; }
         public string Image { get; set; }
         public string Category { get; set; }
         public string TagOne { get; set; }
+        public IconModel Icon { get; set; }
         public List<string> TagList { get; set; }
         public IDictionary<string, string> FieldList
         {
@@ -23,16 +23,9 @@ namespace ProgramManager.Models.PackageModel
             set
             {
                 if (value != null)
-                {
                     _fieldList.Add(value.Keys.ToString(), value.Values.ToString());
-                }
             }
         }
-        /// <summary>
-        /// Это коллекция вбирает в себя все другие свойства для вывода их в панель деталей.
-        /// При этом свойства не будут содержать пустые значения.
-        /// </summary>
-        // public List<PropertyNotIsNull> Datails { get; set; }
         public List<TextFieldModel> TextField { get; set; }
         public static Dictionary<string, string> MenuItem { get; set; }
         public virtual Dictionary<string, string> LoadMenuItem()
@@ -50,20 +43,19 @@ namespace ProgramManager.Models.PackageModel
 
                     foreach (var item in menuItem.Elements())
                     {
-                        if (!MenuItem.ContainsKey(item.Element("Key").Value))
-                        {
-                            MenuItem.Add(item.Element("Key").Value, item.Element("Value").Value);
+                        XElement key = item.Element("Key"),
+                            value = item.Element("Value");
 
-                            if (!FieldConverter.Dictionary.ContainsKey(item.Element("Key").Value))
-                            {
-                                FieldConverter.Dictionary.Add(item.Element("Key").Value, item.Element("Value").Value);
-                            }
+                        if (key == null || value == null) continue;
+                        if (!MenuItem.ContainsKey(key.Value))
+                        {
+                            MenuItem.Add(key.Value, value.Value);
+                            if (!FieldConverter.Dictionary.ContainsKey(key.Value))
+                                FieldConverter.Dictionary.Add(key.Value, value.Value);
                         }
                     }
-
                 }
-            }
-            return MenuItem;
+            } return MenuItem;
         }
     }
 }

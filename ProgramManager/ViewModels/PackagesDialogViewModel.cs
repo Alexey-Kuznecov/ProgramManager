@@ -2,12 +2,14 @@
 using System.Windows.Input;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Windows.Media;
 using ProgramManager.Models.PackageModel;
 using ProgramManager.Views.DialogPacks;
 using ProgramManager.ViewModels.Base;
 using ProgramManager.Resources;
 using ProgramManager.Services;
 using GalaSoft.MvvmLight.Messaging;
+using ProgramManager.Views;
 
 namespace ProgramManager.ViewModels
 {
@@ -18,8 +20,9 @@ namespace ProgramManager.ViewModels
         private string _description;
         private string _packageTitle;
         private static InputName _windowInputName;
-        private static PackageBase _package;
-        private IconControl _iconControl;
+        private DrawingBrush _iconBrush;
+        private SolidColorBrush _iconForeground;
+        private SolidColorBrush _iconBackground;
 
         #region Constructor
 
@@ -27,13 +30,13 @@ namespace ProgramManager.ViewModels
         {
             // Initial fields.
             _windowInputName = new InputName();
-            IconControl = new IconControl();
 
             // Initial data.
             InitializePackageDialog();
 
             // Activate commands.
             CmdRemoveTextField = new RelayCommand(RemoveTextField);
+            CmdOpenDialogIcon = new RelayCommand(obj => OpenDialogIcon());
 
             // Registration to receive data.
             Messenger.Default.Register<InputNameViewModel>(this, action => InputCustomName(action.Name));
@@ -65,16 +68,35 @@ namespace ProgramManager.ViewModels
                 SetProperty(ref _packageTitle, value, () => PackageTitle);
             }
         }
-        public IconControl IconControl
+        public DrawingBrush IconBrush
         {
-            get { return _iconControl; }
+            get { return _iconBrush; }
             set
             {
-                _iconControl = value;
-                SetProperty(ref _iconControl, value, () => IconControl);
+                _iconBrush = value;
+                OnPropertyChanged("IconBrush");
             }
         }
-        
+        public SolidColorBrush IconBackground
+        {
+            get { return _iconBackground; }
+            set
+            {
+                _iconBackground = value;
+                OnPropertyChanged("IconBackground");
+            }
+        }
+        public SolidColorBrush IconForeground
+        {
+            get { return _iconForeground; }
+            set
+            {
+                _iconForeground = value;
+                OnPropertyChanged("IconForeground");
+            }
+        }
+        public string Name  { get; set; }
+
         #endregion
 
         #region Commands
@@ -104,27 +126,40 @@ namespace ProgramManager.ViewModels
             Singleton.Status = true;
             Synchronizer.IconLoad.Invoke(null);
         });
+        public ICommand CmdOpenDialogIcon { get; }
         #endregion
 
         #region Functions
 
-        private void LoadSelectIcon(Icon obj)
-        {
-            if (Singleton.Back == null)
-                Singleton.Back = IconControl.DataContext as IconControlViewModel;
-
-            if (!Singleton.Status)
+        private void LoadSelectIcon(IconModel icon)
             {
-                IconControlViewModel iconViewModel = new IconControlViewModel();
-                _package.Icon.Brush = obj.Brush;
-                _package.Icon.Name = obj.Name;
-                _package.Icon.BgroundColor = obj.BgroundColor;
-                _package.Icon.FgroundColor = obj.FgroundColor;
-                iconViewModel.LoadIcon(_package.Icon);
-                IconControl.DataContext = iconViewModel;
+                if (Singleton.Back == null)
+                    Singleton.Back = new IconModel(Name, IconBrush, IconForeground, IconBackground);
+
+                if (!Singleton.Status)
+                {
+                    Name = icon.Name;
+                    IconBrush = icon.Brush;
+                    IconBackground = icon.BgroundColor;
+                    IconForeground = icon.FgroundColor;
+                }
+                else
+                {
+                    IconModel iconBack = (IconModel)Singleton.Back;
+                    Name = iconBack.Name;
+                    IconBrush = iconBack.Brush;
+                    IconBackground = iconBack.BgroundColor;
+                    IconForeground = iconBack.FgroundColor;
+                }
             }
-            else IconControl.DataContext = Singleton.Back;
-        }
+        public void OpenDialogIcon()
+            {
+                using (WindowDispatchers wd = new WindowDispatchers())
+                {
+                    wd.IconsEditor = new IconsEditor();
+                    wd.IconsEditor.Show();
+                }
+            }
 
         #endregion
     }

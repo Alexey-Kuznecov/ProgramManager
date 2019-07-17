@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -12,8 +13,7 @@ using ProgramManager.Models.PackageModel;
 using ProgramManager.Resources;
 using ProgramManager.Services;
 using ProgramManager.ViewModels.Base;
-using Application = System.Windows.Application;
-using Icon = ProgramManager.Resources.Icon;
+using ProgramManager.Views;
 
 namespace ProgramManager.ViewModels
 {
@@ -25,18 +25,19 @@ namespace ProgramManager.ViewModels
         private string _filterText;
         private ObservableCollection<IconCategoryModel> _iconCategory;
         private ObservableCollection<ButtonExtension> _buttons;
+        private static InputBox _inputBox;
 
         #region Constructors
 
         public IconEditorViewModel()
         {
-            _dialogService = new DefaultDialogService();
-            _fileService = new XamlFileService();
+            _dialogService = Singleton.InitialInstance<DefaultDialogService>();
+            _fileService = Singleton.InitialInstance<XamlFileService>();
+            _inputBox = Singleton.InitialInstance<InputBox>();
             IconCategory = IconCategoryModel.GetCategory();
             AddMenuItem();
             LoadIcons();
         }
-        
         #endregion
 
         #region Properties
@@ -44,7 +45,7 @@ namespace ProgramManager.ViewModels
         /// <summary>
         /// Устанавлевает цвет иконок из выбранного цвета в Combobox.
         /// </summary>
-        public ComboBoxItem Color { get; set; }
+        public ComboBoxItem ColorBrush { get; set; }
         public DrawingBrush IconBrush { get; set; }
         public ObservableCollection<ButtonExtension> Buttons
         {
@@ -113,7 +114,7 @@ namespace ProgramManager.ViewModels
             ButtonExtension bt = obj as ButtonExtension;
             DrawingBrush brush = (DrawingBrush)bt?.Brush;
             DrawingGroup group = brush?.Drawing.Clone() as DrawingGroup;
-            var colorBrush = Color.Content.ToString().FormatStringToSolidColor();
+            var colorBrush = ColorBrush.Content.ToString().FormatStringToSolidColor();
 
             if (@group != null)
             {
@@ -126,7 +127,7 @@ namespace ProgramManager.ViewModels
             }
 
             Singleton.Status = false;
-            Synchronizer.IconLoad.Invoke(new Icon(bt?.IconName, IconBrush, "#FFFFFF".FormatStringToSolidColor(), colorBrush));
+            Synchronizer.IconLoad.Invoke(new IconModel(bt?.IconName, IconBrush, "#FFFFFF".FormatStringToSolidColor(), colorBrush));
         });
         /// <summary>
         /// Команда устанавливает иконку
@@ -154,31 +155,54 @@ namespace ProgramManager.ViewModels
                 if (_dialogService.OpenFileDialog())
                 {
                     var path = _fileService.Open(_dialogService.FilePath);
+                    
                     // Загружает файл ресурса икоки, преобразует в форму GeometryDrawing. 
                     XamlFileService xamlFile = new XamlFileService();
-                    List<GeometryDrawing> listGeometry =
-                        ConverterXamlResources.ConvertDataToGeometry(ConverterForeignPlugins.XamlExport64(path as Viewbox));
+                    List<GeometryDrawing> listGeometry = ConverterXamlResources.ConvertDataToGeometry(ConverterForeignPlugins.XamlExport64(path as Viewbox));
 
+                    // Поиск ресурсов иконок
+                    ResourceDictionary resourceDictionary = HelperFunctions.GetResourceDictionary("Icons.xaml");
+                    
                     // Упаковывает геометрию иконки в кисть. Добавляет новую кисть в словарь ресурсов.
-                    Collection<ResourceDictionary> collMergedDictionaries = Application.Current.Resources.MergedDictionaries;
-                    ResourceDictionary resourceDictionary = collMergedDictionaries.Single(p => p.Source.ToString().Contains("Icons.xaml"));
-                    var brush = ConverterXamlResources.ConvertMarkupDrawingBrush(listGeometry);
+                    DrawingBrush brush = ConverterXamlResources.ConvertMarkupDrawingBrush(listGeometry);
                     string name = HelperFunctions.ClearExtension(_dialogService.FileShortName);
-                    resourceDictionary.Add(name, brush);
 
+                    try
+                    {
+                        resourceDictionary.Add(name, brush);
+                    }
+                    catch (Exception)
+                    {
+                        var result = Xceed.Wpf.Toolkit.MessageBox.Show("Заменить иконку?", "Иконка с именем\"" + name + "\" уже существует",
+                            MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes);
+
+                        if (result == MessageBoxResult.Yes)
+                        {
+                            resourceDictionary.Remove(name);
+                            resourceDictionary.Add(name, brush);
+                            xamlFile.Save("../../Resources/Icons.xaml", resourceDictionary);
+                            LoadIcons((string)obj);
+                        }
+                        else
+                        {
+                            Xceed.Wpf.Toolkit.MessageBox.Show("Заменить иконку?", "Иконка с именем\"" + name + "\" уже существует",
+                                MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes);
+                        }
+                    }
+                    
                     // Сохраняет словарь ресурсов.
                     xamlFile.Save("../../Resources/Icons.xaml", resourceDictionary);
-
+                    
+                    // Обнавление списка иконок
                     if (Buttons.Count != resourceDictionary.Count - 1)
-                        LoadIcons((string)obj);
+                        LoadIcons((string) obj);
                 }
             }
             catch (Exception ex)
             {
-                _dialogService.ShowMessage(ex.Message);
+               _dialogService.ShowMessage(ex.Message); 
             }
         });
-
         #endregion
 
         #region Functions
@@ -220,13 +244,51 @@ namespace ProgramManager.ViewModels
                 };
                 if (brush != null)
                 {
-                    bt.CommandParameter = bt;
+                    bt.RemoveIcon = new RelayCommand(obj => RemoveIcon(obj));
+                    bt.RenameIcon = new RelayCommand(obj => RenameIcon(obj));
                     Buttons.Add(bt);
                     ButtonsStore.Add(bt);
                 }
             }
         }
+        /// <summary>
+        /// Удаляет иконку из редактора иконок.
+        /// </summary>
+        /// <param name="name">Имя иконки.</param>
+        public void RemoveIcon(object name)
+        {
+            try
+            {
+                ResourceDictionary resDictionary = HelperFunctions.GetResourceDictionary("Icons.xaml");
+                XamlFileService xamlFile = new XamlFileService();
+                resDictionary.Remove((string) name);
+                xamlFile.Save("../../Resources/Icons.xaml", resDictionary);
+                LoadIcons();
+            }
+            catch (Exception e)
+            {
+                _dialogService.ShowMessage(e.Message);
+            }
+        }
+        /// <summary>
+        /// Метод присваивает новое имя для иконки.
+        /// </summary>
+        /// <param name="name"></param>
+        public void RenameIcon(object name)
+        {
+            ResourceDictionary resDictionary = HelperFunctions.GetResourceDictionary("Icons.xaml");
+            XamlFileService xamlFile = new XamlFileService();
+            string newName = null;
+            InputBoxViewModel vm = _inputBox.DataContext as InputBoxViewModel;
+            vm.Text = (string)name;
+            vm.Action = new RelayCommand(obj => { newName = vm.Text; });
+            _inputBox.Show();
 
+            //resDictionary.Remove((string)name);
+            //xamlFile.Save("../../Resources/Icons.xaml", resDictionary);
+            //LoadIcons();
+            MessageBox.Show(newName);
+        }
         #endregion
     }
 }

@@ -14,12 +14,11 @@
         <vm:IconEditorViewModel />
     </Window.DataContext>
     <Window.Resources>
-        <Style x:Key="IconStyles" TargetType="Button">
+        <Style
+            x:Key="Styles"
+            BasedOn="{StaticResource IconStylesEditor}"
+            TargetType="Button">
             <Setter Property="Foreground" Value="{Binding ElementName=ComboBox, Path=SelectedItem.Content}" />
-            <Setter Property="Height" Value="48" />
-            <Setter Property="Margin" Value="5" />
-            <Setter Property="Cursor" Value="Hand" />
-            <Setter Property="Background" Value="#F3F3F3" />
         </Style>
     </Window.Resources>
     <Grid Background="{Binding ElementName=window, Path=Background}">
@@ -79,16 +78,33 @@
             Grid.Row="2"
             Grid.Column="1"
             VerticalScrollBarVisibility="Auto">
-            <ItemsControl ItemsSource="{Binding Buttons, Mode=TwoWay}">
+            <ItemsControl ItemsSource="{Binding Buttons}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Button
-                            Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Path=DataContext.SelectIconCommand}"
-                            CommandParameter="{Binding CommandParameter}"
-                            Content="{Binding Brush}"
-                            Style="{StaticResource IconStyles}"
-                            Template="{StaticResource IconTemplate}"
-                            ToolTip="{Binding ToolTip}" />
+                        <Grid>
+                            <Button
+                                Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Path=DataContext.SelectIconCommand}"
+                                CommandParameter="{Binding CommandParameter}"
+                                Content="{Binding Brush}"
+                                Style="{StaticResource Styles}"
+                                Template="{StaticResource IconTemplateEditor}"
+                                ToolTip="{Binding ToolTip}" />
+                            <Grid.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Cursor="Hand" Header="Установить" />
+                                    <MenuItem
+                                        Command="{Binding RenameIcon}"
+                                        CommandParameter="{Binding IconName}"
+                                        Cursor="Hand"
+                                        Header="Переименовать" />
+                                    <MenuItem
+                                        Command="{Binding RemoveIcon}"
+                                        CommandParameter="{Binding IconName}"
+                                        Cursor="Hand"
+                                        Header="Удалить" />
+                                </ContextMenu>
+                            </Grid.ContextMenu>
+                        </Grid>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
                 <ItemsControl.ItemsPanel>
@@ -115,7 +131,7 @@
                 Margin="30,10,40,20"
                 VerticalContentAlignment="Center"
                 SelectedIndex="0"
-                SelectedItem="{Binding Color}">
+                SelectedItem="{Binding ColorBrush}">
                 <ComboBoxItem>#ee2c2c00</ComboBoxItem>
                 <ComboBoxItem>#FF72f534</ComboBoxItem>
                 <ComboBoxItem>#FF184B9C</ComboBoxItem>

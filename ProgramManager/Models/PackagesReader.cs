@@ -41,9 +41,9 @@ namespace ProgramManager.Models
                 string image = element.Element(FieldTypes.Image.ToString())?.FirstAttribute.Value;
 
                 XElement iconElement = element.Element("Icon");
-                Icon conditionIcon = iconElement == null
-                    ? new Icon(SetIcons(element.LastAttribute.Value), "#ffffff", "#3676AE")
-                    : new Icon(iconElement.FirstAttribute.Value, iconElement.Attribute("Foreground")?.Value, iconElement.LastAttribute.Value);
+                IconModel conditionIcon = iconElement == null
+                    ? new IconModel(SetIcons(element.LastAttribute.Value), "#ffffff", "#3676AE")
+                    : new IconModel(iconElement.FirstAttribute.Value, iconElement.Attribute("Foreground")?.Value, iconElement.LastAttribute.Value);
                 
                 // Инициализация свойств из базового класса
                 packages.Add(new T

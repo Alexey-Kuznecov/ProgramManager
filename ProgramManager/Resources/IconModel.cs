@@ -7,24 +7,24 @@ namespace ProgramManager.Resources
     {
         #region Constructor
 
-        protected IconCore(string name, string color, string bg)
+        protected IconCore(string name, string fg, string bg)
         {
             Name = name;
-            FgroundColor = ConvertFromStringToColor(color);
+            FgroundColor = ConvertFromStringToColor(fg);
             BgroundColor = ConvertFromStringToColor(bg);
             DrawIcon();
         }
-        protected IconCore(string name, SolidColorBrush color, SolidColorBrush bg)
+        protected IconCore(string name, SolidColorBrush fg, SolidColorBrush bg)
         {
             Name = name;
-            FgroundColor = color;
+            FgroundColor = fg;
             BgroundColor = bg;
         }
-        protected IconCore(string name, DrawingBrush brush, SolidColorBrush color, SolidColorBrush bg)
+        protected IconCore(string name, DrawingBrush brush, SolidColorBrush fg, SolidColorBrush bg)
         {
             Name = name;
             Brush = brush;
-            FgroundColor = color;
+            FgroundColor = fg;
             BgroundColor = bg;
         }
 
@@ -48,7 +48,7 @@ namespace ProgramManager.Resources
         /// </summary>
         private void DrawIcon()
         {
-            Brush = (DrawingBrush)Application.Current.FindResource(Name);
+            Brush = (DrawingBrush)Application.Current.TryFindResource(Name);
             DrawingBrush dBrush = Brush?.Clone();
             DrawingGroup group = dBrush?.Drawing as DrawingGroup;
             if (group != null)
@@ -70,16 +70,16 @@ namespace ProgramManager.Resources
 
         #endregion
     }
-    public class Icon : IconCore
+    public class IconModel : IconCore
     {
         #region Constructor
 
-        public Icon(string icon, string color, string bg)
-            : base(icon, color, bg) { }
-        public Icon(string icon, SolidColorBrush color, SolidColorBrush bg)
-            : base(icon, color, bg) { }
-        public Icon(string name, DrawingBrush brush, SolidColorBrush color, SolidColorBrush bg)
-            : base(name, brush, color, bg) { }
+        public IconModel(string icon, string fg, string bg)
+            : base(icon, fg, bg) { }
+        public IconModel(string icon, SolidColorBrush fg, SolidColorBrush bg)
+            : base(icon, fg, bg) { }
+        public IconModel(string name, DrawingBrush brush, SolidColorBrush fg, SolidColorBrush bg)
+            : base(name, brush, fg, bg) { }
 
         #endregion
     }

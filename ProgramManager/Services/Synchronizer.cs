@@ -10,6 +10,6 @@ namespace ProgramManager.Services
     static class Synchronizer
     {
         public static CancelChangeIcon IconLoad;
-        public delegate void CancelChangeIcon(Icon obj);
+        public delegate void CancelChangeIcon(IconModel obj);
     }
 }

@@ -71,7 +71,6 @@ D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Views\Ma
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\ProgramManager.g.resources
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\ProgramManager.Properties.Resources.resources
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\ProgramManager.csproj.GenerateResource.Cache
-D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Resources\Generic.baml
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\de\Xceed.Wpf.AvalonDock.resources.dll
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\es\Xceed.Wpf.AvalonDock.resources.dll
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\fr\Xceed.Wpf.AvalonDock.resources.dll
@@ -82,11 +81,6 @@ D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\ro\Xceed
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\ru\Xceed.Wpf.AvalonDock.resources.dll
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\sv\Xceed.Wpf.AvalonDock.resources.dll
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\zh-Hans\Xceed.Wpf.AvalonDock.resources.dll
-D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Resources\Icons.baml
-D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\ProgramManager.csprojResolveAssemblyReference.cache
-D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Resources\IconStyle.baml
-D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Views\DialogPacks\IconControl.g.cs
-D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Views\DialogPacks\IconControl.baml
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\AsyncMvvmMessenger.dll
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\GalaSoft.MvvmLight.dll
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\GalaSoft.MvvmLight.Extras.dll
@@ -100,3 +94,9 @@ D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\Xceed.Wp
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\Xceed.Wpf.Toolkit.dll
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Views\IconsEditor.g.cs
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Views\IconsEditor.baml
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Resources\Generic.baml
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Resources\Icons.baml
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Resources\IconsEditorDefaultStyles.baml
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\ProgramManager.csprojResolveAssemblyReference.cache
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Views\InputBox.g.cs
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Views\InputBox.baml

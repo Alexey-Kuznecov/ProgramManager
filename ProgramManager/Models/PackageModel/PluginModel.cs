@@ -9,6 +9,7 @@ namespace ProgramManager.Models.PackageModel
 
         public PluginModel()
         {
+            CatName = "Плагины";
             LoadItem += LoadMenuItem;
         }
     }

@@ -19,22 +19,22 @@ namespace ProgramManager.Services
 
         private void RemovePackage(object sender, BaseEventArgs e)
         {
-            PackageAccess.RemovePackage((int)e.Package);
+            PackagesWriter.RemovePackage((int)e.Package);
         }
         private void ChangePackage(object sender, BaseEventArgs e)
         {
             PackageBase package = e.Package as PackageBase;
-            PackageAccess.UpdatePackage(package);
+            PackagesWriter.UpdatePackage(package);
         }
         private void AddNewPackage(object sender, BaseEventArgs e)
         {
             PackageBase package = e.Package as PackageBase;
-            PackageAccess.AddPackage(package, _categoryStatus);
+            PackagesWriter.AddPackage(package, _categoryStatus);
         }
         public static ObservableCollection<WrapPackage> GetPackages(CategoryModel category)
         {
             _categoryStatus = category.Name;
-            PackagesDialogViewModel._category = category;
+            PackagesDialogViewModel.Category = category;
 
             if (category.PackageType is ProgramModel)
             {
@@ -70,6 +70,5 @@ namespace ProgramManager.Services
                 list: WrapPackage.WrapPackageTag(PackagesReader<ProgramModel>.GetPackages(CategoryModel.Categories[0])));
             return _wrapperPackages;
         }
-
     }
 }

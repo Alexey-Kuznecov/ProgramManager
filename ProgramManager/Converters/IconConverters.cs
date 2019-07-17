@@ -42,7 +42,7 @@ namespace ProgramManager.Converters
         [SuppressMessage("ReSharper", "PossibleInvalidCastExceptionInForeachLoop")]
         public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            Icon icon = value as Icon;
+            IconModel icon = value as IconModel;
             if (icon != null)
             {
                 Brush brush = parameter?.ToString() == "rect" ? icon.BgroundColor : icon.FgroundColor;
@@ -55,8 +55,8 @@ namespace ProgramManager.Converters
         public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             PathGeometry path = new PathGeometry();
-            DrawingGroup draw = value is Icon
-                ? (value as Icon).Brush.Drawing as DrawingGroup
+            DrawingGroup draw = value is IconModel
+                ? (value as IconModel).Brush.Drawing as DrawingGroup
                 : (value as DrawingBrush)?.Drawing as DrawingGroup;
 
             if (draw != null)

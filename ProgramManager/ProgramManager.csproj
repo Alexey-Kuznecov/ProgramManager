@@ -111,8 +111,11 @@
     <Compile Include="Enums\Keywords.cs" />
     <Compile Include="Filters\FilterProperties.cs" />
     <Compile Include="Converters\ConverterBase.cs" />
+    <Compile Include="ViewModels\InputBoxViewModel.cs" />
+    <Compile Include="Views\InputBox.xaml.cs">
+      <DependentUpon>InputBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Models\PackageModel\IconCategoryModel.cs" />
-    <Compile Include="Models\PackageModel\FileModel.cs" />
     <Compile Include="Models\PackageModel\PackageDrtails.cs" />
     <Compile Include="Models\PackageModel\CategoryModel.cs" />
     <Compile Include="Models\Func\FuncHelper.cs" />
@@ -130,7 +133,7 @@
     <Compile Include="Resources\ConverterXamlToBitmap.cs" />
     <Compile Include="Resources\ConverterXamlResources.cs" />
     <Compile Include="Resources\HelperFunctions.cs" />
-    <Compile Include="Resources\IconCore.cs" />
+    <Compile Include="Resources\IconModel.cs" />
     <Compile Include="Resources\IconsOptionReader.cs" />
     <Compile Include="Services\DefaultDialogService.cs" />
     <Compile Include="Services\Synchronizer.cs" />
@@ -140,20 +143,23 @@
     <Compile Include="Enums\Categories.cs" />
     <Compile Include="Converters\ConverterExtension.cs" />
     <Compile Include="Services\PackagesManager.cs" />
-    <Compile Include="Models\PackageAccess.cs" />
+    <Compile Include="Models\PackagesWriter.cs" />
     <Compile Include="Models\PackageModel\TextFieldModel.cs" />
     <Compile Include="Services\Singleton.cs" />
     <Compile Include="Services\WindowDispatchers.cs" />
     <Compile Include="Services\XamlFileService.cs" />
     <Compile Include="ViewModels\Base\PropertiesChanged.cs" />
     <Compile Include="ViewModels\IconEditorViewModel.cs" />
-    <Compile Include="ViewModels\IconControlViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\PackagesDialogPartial.cs" />
     <Compile Include="ViewModels\PackagesDialogViewModel.cs" />
     <Compile Include="ViewModels\InputNameViewModel.cs" />
     <Compile Include="ViewModels\Base\RelayCommand.cs" />
-    <Page Include="Resources\IconStyle.xaml">
+    <Page Include="Views\InputBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\IconsEditorDefaultStyles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -166,10 +172,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\IconsEditor.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\DialogPacks\IconControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -205,9 +207,6 @@
     <Compile Include="ViewModels\TagDialogViewModel.cs" />
     <Compile Include="Views\IconsEditor.xaml.cs">
       <DependentUpon>IconsEditor.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\DialogPacks\IconControl.xaml.cs">
-      <DependentUpon>IconControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\DialogPacks\TagDialog.xaml.cs">
       <DependentUpon>TagDialog.xaml</DependentUpon>
@@ -260,52 +259,36 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\19572.jpg" />
+  </ItemGroup>
+  <ItemGroup>
     <Resource Include="Resources\Icons\Aard.png" />
+    <Resource Include="Resources\Icons\Add_48px.png" />
     <Resource Include="Resources\Icons\Add_Folder_48px.png" />
     <Resource Include="Resources\Icons\Add_Tag_48px.png" />
+    <Resource Include="Resources\Icons\Add_Textfield_48px.png" />
     <Resource Include="Resources\Icons\Add_to_Favorites_48px.png" />
+    <Resource Include="Resources\Icons\Businessman_48px.png" />
     <Resource Include="Resources\Icons\Categorize_48px.png" />
+    <Resource Include="Resources\Icons\Category_40px.png" />
+    <Resource Include="Resources\Icons\Category_48px_1.png" />
+    <Resource Include="Resources\Icons\Collapse_Arrow_48px.png" />
+    <Resource Include="Resources\Icons\Customer_48px.png" />
     <Resource Include="Resources\Icons\Delete_48px.png" />
     <Resource Include="Resources\Icons\Edit_48px.png" />
+    <Resource Include="Resources\Icons\Expand_Arrow_48px.png" />
     <Resource Include="Resources\Icons\Open_48px.png" />
     <Resource Include="Resources\Icons\Optional_48px.png" />
     <Resource Include="Resources\Icons\Plus_Math_48px.png" />
     <Resource Include="Resources\Icons\Rename_48px.png" />
+    <Resource Include="Resources\Icons\Save_48px.png" />
     <Resource Include="Resources\Icons\Search_48px.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\19572.jpg" />
-  </ItemGroup>
-  <ItemGroup>
+    <Resource Include="Resources\Icons\Settings_48px.png" />
+    <Resource Include="Resources\Icons\User_48px.png" />
     <Resource Include="Resources\User\Images\Adobe Photoshop.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\User\packages.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Icons\Save_48px.png" />
-    <Resource Include="Resources\Icons\Settings_48px.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Icons\Businessman_48px.png" />
-    <Resource Include="Resources\Icons\Customer_48px.png" />
-    <Resource Include="Resources\Icons\User_48px.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Icons\Add_48px.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Icons\Collapse_Arrow_48px.png" />
-    <Resource Include="Resources\Icons\Expand_Arrow_48px.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Icons\Add_Textfield_48px.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Icons\Category_40px.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Icons\Category_48px_1.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\User\ContextMenu.xml" />
@@ -320,6 +303,7 @@
   <ItemGroup>
     <Resource Include="Resources\IconsOption.xml" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

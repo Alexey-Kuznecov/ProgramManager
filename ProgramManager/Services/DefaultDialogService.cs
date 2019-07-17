@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32;
 using System.Windows;
+using System.Windows.Controls;
 using ProgramManager.Contracts;
 
 namespace ProgramManager.Services
@@ -8,7 +9,6 @@ namespace ProgramManager.Services
     {
         public string FilePath { get; set; }
         public string FileShortName { get; set; }
-
         public bool OpenFileDialog()
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();

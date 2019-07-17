@@ -10,16 +10,16 @@ using ProgramManager.Converters;
 
 namespace ProgramManager.Models
 {
-    public class PackageAccess
+    public class PackagesWriter
     {
         const string DocumentName = "../../Resources/User/packages.xml";
         /// <summary>
         /// Конструктор по умолчанию
         /// </summary>
-        public PackageAccess()
+        public PackagesWriter()
         {
             if (!File.Exists(DocumentName))
-                PackageAccess.FormatHeadXmlDoc();
+                PackagesWriter.FormatHeadXmlDoc();
         }
         /// <summary>
         /// Создает заголовок XML документа
@@ -34,6 +34,8 @@ namespace ProgramManager.Models
             );
             xDoc.Save(DocumentName);
         }
+        
+        #region Functions changing data xml data
         /// <summary>
         /// Простой метод добавляет два атрибута Id, Catergory и делегирует работу для создания нового пакета.
         /// </summary>
@@ -50,9 +52,9 @@ namespace ProgramManager.Models
             packageS.SetAttributeValue("Id", ++id);
             packageS.SetAttributeValue("Category", category);
             packageS.Add(package.Elements().OrderBy(p => p.Name.ToString().Substring(0, 2)));
-            xDoc.Root?.Add(packageS);         
+            xDoc.Root?.Add(packageS);
             xDoc.Save(DocumentName);
-            
+
             // Обновление списка пакетов
             EventAggregate ins = new EventAggregate();
             ins.OnLoadPackage("");
@@ -76,11 +78,33 @@ namespace ProgramManager.Models
                 }
             }
             root.Save(DocumentName);
-            
+
             // Обновление списка пакетов
             EventAggregate ins = new EventAggregate();
             ins.OnLoadPackage("");
         }
+        /// <summary>
+        /// Удаляет полностью весь узел(package) по индексу и сохраняет документ 
+        /// </summary>
+        /// <param name="id">Индекс пакета который требуется удалить.</param>
+        public static void RemovePackage(int id)
+        {
+            XDocument xDoc = XDocument.Load(DocumentName);
+            var root = xDoc.Root?.Elements("Package");
+
+            foreach (var item in root)
+                if (item.FirstAttribute.Value == id.ToString())
+                    item.Remove();
+
+            xDoc.Save(DocumentName);
+
+            // Обновление списка пакетов`
+            EventAggregate ins = new EventAggregate();
+            ins.OnLoadPackage("");
+        }
+        #endregion
+
+        #region Functions additional data processing
         /// <summary>
         /// Данный метод формирует пакет на основе данных, которые содержат свойства объекта. 
         /// </summary>
@@ -113,8 +137,8 @@ namespace ProgramManager.Models
         /// <param name="data">Объект данных, ожидается объект типа PackageBase.</param>
         public static void AddIcon(XElement currentPack, PackageBase data)
         {
-            currentPack.Add(new XElement("Icon", new XAttribute("Name", data.Icon.Name), 
-                new XAttribute("Foreground", data.Icon.FgroundColor), 
+            currentPack.Add(new XElement("Icon", new XAttribute("Name", data.Icon.Name),
+                new XAttribute("Foreground", data.Icon.FgroundColor),
                 new XAttribute("Background", data.Icon.BgroundColor)));
         }
         /// <summary>
@@ -128,7 +152,7 @@ namespace ProgramManager.Models
             {
                 currentPack?.Add(new XElement(FieldTypes.Userfield.ToString(),
                     new XAttribute("Label", FieldConverter.Dictionary.Single(p => p.Key == item.Key).Value), item.Value));
-            }           
+            }
         }
         /// <summary>
         /// Метод создает xml элемент на основе элементов списка тегов. 
@@ -140,24 +164,6 @@ namespace ProgramManager.Models
             foreach (var value in data.TagList)
                 currentPack.Add(new XElement("Tag", value));
         }
-        /// <summary>
-        /// Удаляет полностью весь узел(package) по индексу и сохраняет документ 
-        /// </summary>
-        /// <param name="id">Индекс пакета который требуется удалить.</param>
-        public static void RemovePackage(int id)
-        {
-            XDocument xDoc = XDocument.Load(DocumentName);
-            var root = xDoc.Root?.Elements("Package");
-
-            foreach (var item in root)
-                if (item.FirstAttribute.Value == id.ToString())
-                    item.Remove();
-
-            xDoc.Save(DocumentName);
-
-            // Обновление списка пакетов`
-            EventAggregate ins = new EventAggregate();
-            ins.OnLoadPackage("");
-        }
+        #endregion
     }
 }

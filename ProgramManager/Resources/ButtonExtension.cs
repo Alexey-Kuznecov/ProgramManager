@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using ProgramManager.ViewModels.Base;
 
 namespace ProgramManager.Resources
 {
-    [Serializable]
     class ButtonExtension
     {
         public string Category { get; set; }
@@ -14,5 +13,10 @@ namespace ProgramManager.Resources
         public DrawingBrush Brush { get; set; }
         public ButtonExtension CommandParameter { get; internal set; }
         public object ToolTip { get; set; }
+        /// <summary>
+        /// Комманда для удаления икнок из редактора.
+        /// </summary>
+        public ICommand RemoveIcon { get; set; }
+        public ICommand RenameIcon { get; set; }
     }
 }

@@ -10,17 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ProgramManager.Views.DialogPacks
+namespace ProgramManager
 {
     /// <summary>
-    /// Логика взаимодействия для IconControl.xaml
+    /// Логика взаимодействия для InputBox.xaml
     /// </summary>
-    public partial class IconControl : UserControl
+    public partial class InputBox : Window
     {
-        public IconControl()
+        public InputBox()
         {
             InitializeComponent();
         }

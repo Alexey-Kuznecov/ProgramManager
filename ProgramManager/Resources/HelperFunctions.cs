@@ -1,5 +1,7 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System.Collections.ObjectModel;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
+using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows;
 using System.Windows.Controls;
@@ -44,12 +46,17 @@ namespace ProgramManager.Resources
         /// <summary>
         /// Решает проблему: Указанный элемент уже является логическим дочерним для другого элемента. Сначала отсоедините его.
         /// </summary>
-        /// <param name="item"></param>
+        /// <param name="item">Любой потомок класса Controls например (Кнопка).</param>
         public static void RemoveFromParent(this FrameworkElement item)
         {
             var parentItemsControl = (WrapPanel) item?.Parent;
             parentItemsControl?.Children.Remove(item as UIElement);
         }
+        /// <summary>
+        /// Бинарная сериализация данных объектов.
+        /// Внимание: Если объект наследует другие объекты они должны быть также помечены.
+        /// </summary>
+        /// <param name="obj">Любой объект который отмечен как стерилизуемый.</param>
         public static void BinSerialize(object obj)
         {
             BinaryFormatter bf = new BinaryFormatter();
@@ -58,6 +65,11 @@ namespace ProgramManager.Resources
                 bf.Serialize(fs, obj);
             }
         }
+        /// <summary>
+        /// Бинарная десериализация данных объектов из файла.
+        /// </summary>
+        /// <param name="obj">Возвращает объект, который необходимо будет привести к объекту,
+        /// который подвергался сериализации.</param>
         public static void BinDeserialize(out object obj)
         {
             BinaryFormatter bf = new BinaryFormatter();
@@ -65,6 +77,18 @@ namespace ProgramManager.Resources
             {
                 obj = bf.Deserialize(fs);
             }
+        }
+        /// <summary>
+        /// Ищет словарь в по ссылкам объяденненых словарей ресурсов,
+        /// данным метод не ищет ресурсы в главном словаре. 
+        /// </summary>
+        /// <param name="resourceName">Имя словаря ресурсов.</param>
+        /// <returns></returns>
+        public static ResourceDictionary GetResourceDictionary(string resourceName)
+        {
+            Collection<ResourceDictionary> collMergedDictionaries = Application.Current.Resources.MergedDictionaries;
+            ResourceDictionary resourceDictionary = collMergedDictionaries.Single(p => p.Source.ToString().Contains(resourceName));
+            return resourceDictionary;
         }
     }
 }

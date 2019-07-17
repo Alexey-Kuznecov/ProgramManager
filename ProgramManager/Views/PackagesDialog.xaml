@@ -2,6 +2,7 @@
     x:Class="ProgramManager.Views.PackagesDialog"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converters="clr-namespace:ProgramManager.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:ProgramManager.Views.DialogPacks"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -67,17 +68,16 @@
                 Margin="10,10,10,10"
                 Tag="Имя пакета..."
                 Text="{Binding PackageTitle, Mode=TwoWay}" />
-            <Grid Grid.Row="2" Grid.Column="1">
-                <Grid.DataContext>
-                    <vm:IconControlViewModel />
-                </Grid.DataContext>
-                <!--<ContentPresenter Content="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Path=DataContext.IconControl, Mode=TwoWay}" />-->
-                <!--<ContentControl>
-                    <ContentControl.DataContext>
-                        <vm:IconViewModel />
-                    </ContentControl.DataContext>
-                    <local:IconCanvas />
-                </ContentControl>-->
+            <Grid
+                Grid.Row="2"
+                Grid.Column="1"
+                Width="50"
+                Height="50"
+                Background="WhiteSmoke">
+                <Button
+                    Command="{Binding CmdOpenDialogIcon}"
+                    Foreground="{Binding IconForeground}"
+                    Template="{StaticResource IconTemplateDialogPack}" />
             </Grid>
             <WrapPanel
                 Grid.Row="1"
