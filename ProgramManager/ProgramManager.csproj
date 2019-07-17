@@ -111,6 +111,21 @@
     <Compile Include="Enums\Keywords.cs" />
     <Compile Include="Filters\FilterProperties.cs" />
     <Compile Include="Converters\ConverterBase.cs" />
+    <Compile Include="Test\Test1.cs" />
+    <Compile Include="Test\Test10.cs" />
+    <Compile Include="Test\Test11.cs" />
+    <Compile Include="Test\Test12.cs" />
+    <Compile Include="Test\Test13.cs" />
+    <Compile Include="Test\Test14.cs" />
+    <Compile Include="Test\Test15.cs" />
+    <Compile Include="Test\Test2.cs" />
+    <Compile Include="Test\Test3.cs" />
+    <Compile Include="Test\Test4.cs" />
+    <Compile Include="Test\Test5.cs" />
+    <Compile Include="Test\Test6.cs" />
+    <Compile Include="Test\Test7.cs" />
+    <Compile Include="Test\Test8.cs" />
+    <Compile Include="Test\Test9.cs" />
     <Compile Include="ViewModels\InputBoxViewModel.cs" />
     <Compile Include="Views\InputBox.xaml.cs">
       <DependentUpon>InputBox.xaml</DependentUpon>

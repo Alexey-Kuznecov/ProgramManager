@@ -12,6 +12,7 @@ using ProgramManager.Contracts;
 using ProgramManager.Models.PackageModel;
 using ProgramManager.Resources;
 using ProgramManager.Services;
+using ProgramManager.Test;
 using ProgramManager.ViewModels.Base;
 using ProgramManager.Views;
 
@@ -28,12 +29,12 @@ namespace ProgramManager.ViewModels
         private static InputBox _inputBox;
 
         #region Constructors
-
         public IconEditorViewModel()
         {
-            _dialogService = Singleton.InitialInstance<DefaultDialogService>();
-            _fileService = Singleton.InitialInstance<XamlFileService>();
-            _inputBox = Singleton.InitialInstance<InputBox>();
+            _dialogService = Singleton.SingleInstance<DefaultDialogService>();
+            _fileService = Singleton.SingleInstance<XamlFileService>();
+            _inputBox = Singleton.SingleInstance<InputBox>();
+
             IconCategory = IconCategoryModel.GetCategory();
             AddMenuItem();
             LoadIcons();
