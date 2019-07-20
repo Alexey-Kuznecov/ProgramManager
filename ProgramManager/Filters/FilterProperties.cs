@@ -32,7 +32,7 @@ namespace ProgramManager.Filters
                 {
                     field.Add(new PropertyNotIsNull()
                     {
-                        Name = FieldConverter.Dictionary.SingleOrDefault(k => k.Key == property.Name).Value,
+                        Name = PackageFieldConverter.Dictionary.SingleOrDefault(k => k.Key == property.Name).Value,
                         Value = obj.GetType().GetProperty(property.Name)?.GetValue(obj).ToString()
                     });
                 }

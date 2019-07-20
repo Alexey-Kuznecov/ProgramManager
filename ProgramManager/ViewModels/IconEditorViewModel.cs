@@ -9,10 +9,11 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using ProgramManager.Contracts;
+using ProgramManager.Converters;
+using ProgramManager.Enums;
 using ProgramManager.Models.PackageModel;
 using ProgramManager.Resources;
 using ProgramManager.Services;
-using ProgramManager.Test;
 using ProgramManager.ViewModels.Base;
 using ProgramManager.Views;
 
@@ -25,24 +26,19 @@ namespace ProgramManager.ViewModels
         private ListBoxItem _selectCategory;
         private string _filterText;
         private ObservableCollection<IconCategoryModel> _iconCategory;
-        private ObservableCollection<ButtonExtension> _buttons;
-        private static InputBox _inputBox;
+        private static ObservableCollection<ButtonExtension> _buttons;
 
         #region Constructors
         public IconEditorViewModel()
         {
             _dialogService = Singleton.SingleInstance<DefaultDialogService>();
             _fileService = Singleton.SingleInstance<XamlFileService>();
-            _inputBox = Singleton.SingleInstance<InputBox>();
-
             IconCategory = IconCategoryModel.GetCategory();
-            AddMenuItem();
             LoadIcons();
         }
         #endregion
 
         #region Properties
-
         /// <summary>
         /// Устанавлевает цвет иконок из выбранного цвета в Combobox.
         /// </summary>
@@ -53,11 +49,11 @@ namespace ProgramManager.ViewModels
             get { return _buttons; }
             set
             {
-                _buttons = value;
+                _buttons = value; 
                 OnPropertyChanged("Buttons");
             }
         }
-        public ObservableCollection<ButtonExtension> ButtonsStore { get; set; }
+        public ObservableCollection<ButtonExtension> ButtonsClone { get; set; }
         public ObservableCollection<IconCategoryModel> IconCategory
         {
             get { return _iconCategory; }
@@ -83,11 +79,10 @@ namespace ProgramManager.ViewModels
             set
             {
                 _filterText = value;
-                SetProperty(ref _filterText, value, () => FilterText);
 
                 if (string.IsNullOrEmpty(_filterText))
                 {
-                    Buttons = ButtonsStore;
+                    Buttons = ButtonsClone;
                 }
                 else
                 {
@@ -102,13 +97,14 @@ namespace ProgramManager.ViewModels
                         filtered.Add(button);
                     Buttons = filtered;
                 }
+                OnPropertyChanged("FilterText");
             }
         }
         #endregion
 
         #region Commands
         /// <summary>
-        /// Команда для иконки устанавлевает цвет иконки
+        /// Команда устанавлевает цвет кисти, цвет фона и имя для иконки.
         /// </summary>
         public ICommand SelectIconCommand => new RelayCommand(obj =>
         {
@@ -126,7 +122,6 @@ namespace ProgramManager.ViewModels
                 }
                 IconBrush = new DrawingBrush { Drawing = @group };
             }
-
             Singleton.Status = false;
             Synchronizer.IconLoad.Invoke(new IconModel(bt?.IconName, IconBrush, "#FFFFFF".FormatStringToSolidColor(), colorBrush));
         });
@@ -168,34 +163,18 @@ namespace ProgramManager.ViewModels
                     DrawingBrush brush = ConverterXamlResources.ConvertMarkupDrawingBrush(listGeometry);
                     string name = HelperFunctions.ClearExtension(_dialogService.FileShortName);
 
-                    try
-                    {
-                        resourceDictionary.Add(name, brush);
-                    }
+                    // Добавление иконки в словарь.
+                    try { resourceDictionary.Add(name, brush); }
                     catch (Exception)
                     {
-                        var result = Xceed.Wpf.Toolkit.MessageBox.Show("Заменить иконку?", "Иконка с именем\"" + name + "\" уже существует",
-                            MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes);
-
-                        if (result == MessageBoxResult.Yes)
-                        {
-                            resourceDictionary.Remove(name);
-                            resourceDictionary.Add(name, brush);
-                            xamlFile.Save("../../Resources/Icons.xaml", resourceDictionary);
-                            LoadIcons((string)obj);
-                        }
-                        else
-                        {
-                            Xceed.Wpf.Toolkit.MessageBox.Show("Заменить иконку?", "Иконка с именем\"" + name + "\" уже существует",
-                                MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes);
-                        }
+                        InputBoxViewModel.UserAction = Actions.Add;
+                        RenameIcon(name);
                     }
-                    
                     // Сохраняет словарь ресурсов.
                     xamlFile.Save("../../Resources/Icons.xaml", resourceDictionary);
                     
                     // Обнавление списка иконок
-                    if (Buttons.Count != resourceDictionary.Count - 1)
+                    if (Buttons.Count != resourceDictionary.Count)
                         LoadIcons((string) obj);
                 }
             }
@@ -208,34 +187,23 @@ namespace ProgramManager.ViewModels
 
         #region Functions
         /// <summary>
-        /// Добавляет элемент в контекстное меню категорий.
-        /// </summary>
-        public void AddMenuItem()
-        {
-            foreach (var category in IconCategory)
-            {
-                category.ContextCatMenu.Items.Add(new MenuItem
-                {
-                    Header = "Добавить иконку",
-                    Command = OpenFileIconCommand,
-                    CommandParameter = category.Header
-                });
-            }
-        }
-        /// <summary>
-        /// Загуржает иконки в редактор иконок.
+        /// Загружает иконки в редактор иконок.
         /// </summary>
         public void LoadIcons(string category = null, SolidColorBrush color = null)
         {
             Buttons = new ObservableCollection<ButtonExtension>();
-            ButtonsStore = new ObservableCollection<ButtonExtension>();
+            ButtonsClone = new ObservableCollection<ButtonExtension>();
             Collection<ResourceDictionary> collMergedDictionaries = Application.Current.Resources.MergedDictionaries;
             ResourceDictionary resourceDictionary = collMergedDictionaries.Single(p => p.Source.ToString().Contains("Icons.xaml"));
 
             foreach (var key in resourceDictionary.Keys)
             {
-                var drawBrush = Application.Current.FindResource(key);
+                var drawBrush = Application.Current.FindResource(key);                
                 var brush = drawBrush as DrawingBrush;
+
+                #region Инициализация иконок
+
+                // Инициализирует свойства иконоки и добавляет их в коллекцию  
                 var bt = new ButtonExtension
                 {
                     Brush = brush,
@@ -243,14 +211,27 @@ namespace ProgramManager.ViewModels
                     Category = category,
                     ToolTip = key
                 };
+                // Если убрать проверку в выборку попадают не только кисти
+                // но другие ресурсы, которые есть в словаре.
                 if (brush != null)
                 {
-                    bt.RemoveIcon = new RelayCommand(obj => RemoveIcon(obj));
-                    bt.RenameIcon = new RelayCommand(obj => RenameIcon(obj));
+                    bt.CommandParameter = bt;
+                    bt.RemoveIcon = new RelayCommand(RemoveIcon);
+                    bt.RenameIcon = new RelayCommand(oName =>
+                    {
+                        InputBoxViewModel.UserAction = Actions.Change;
+                        RenameIcon((string) oName);
+                    });
                     Buttons.Add(bt);
-                    ButtonsStore.Add(bt);
                 }
+
+                #endregion
             }
+            // Сортирует иконки по алфавиту и упаковывает в коллекцию.
+            Buttons = Buttons.OrderBy(p => p.IconName.Substring(0, 2)).ToObservableCollection();
+            // Клонирует коллекцию — для того чтобы восстановить в  
+            // исходное состояние коллекцию по необходимости.
+            ButtonsClone = Buttons;
         }
         /// <summary>
         /// Удаляет иконку из редактора иконок.
@@ -274,22 +255,84 @@ namespace ProgramManager.ViewModels
         /// <summary>
         /// Метод присваивает новое имя для иконки.
         /// </summary>
-        /// <param name="name"></param>
-        public void RenameIcon(object name)
+        /// <param name="oldName">Старое имя иконки.</param>
+        public void RenameIcon(string oldName)
         {
             ResourceDictionary resDictionary = HelperFunctions.GetResourceDictionary("Icons.xaml");
             XamlFileService xamlFile = new XamlFileService();
-            string newName = null;
-            InputBoxViewModel vm = _inputBox.DataContext as InputBoxViewModel;
-            vm.Text = (string)name;
-            vm.Action = new RelayCommand(obj => { newName = vm.Text; });
-            _inputBox.Show();
+            var dictionary = resDictionary;
+            _oldName = oldName;
+            // Добавляет имя иконок в исключение, чтобы конвертер знал какие имена уже существуют в словаре ресурсов 
+            // и блокировал кнопу действия, дабы избежать проблем с коллизией имен в словаре ресурсов.
+            if (ResourceNameValidation.Store != null)
+                ResourceNameValidation.Store.Add(oldName);
 
-            //resDictionary.Remove((string)name);
-            //xamlFile.Save("../../Resources/Icons.xaml", resDictionary);
-            //LoadIcons();
-            MessageBox.Show(newName);
+            #region Тело комманды изменения и добавления иконок
+
+            ICommand action = new RelayCommand(obj =>
+            {
+                string newName = InputBoxViewModel.Text;
+
+                #region Добавление или изменение иконок
+
+                foreach (var item in dictionary)
+                {
+                    var entry = (DictionaryEntry)item;
+                    var brush = entry.Value as DrawingBrush;
+                    var name = (string)entry.Key;
+                    if (name == _oldName)
+                    {
+                        try
+                        {
+                            dictionary.Add(newName, brush);
+                            if (_oldName != null && InputBoxViewModel.UserAction == Actions.Change) dictionary.Remove(_oldName);                          
+                            InputBox.Visibility = Visibility.Hidden; // Скрыть окно посли добавления:
+                            xamlFile.Save("../../Resources/Icons.xaml", resDictionary); // Сохранить данные в словарь:                          
+                            LoadIcons(); // Обновить редактор:
+                        }
+                        catch (Exception e)
+                        {
+                            MessageBoxResult choose;
+                            choose = MessageBox.Show(e.Message, "Введите другое имя", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes);
+                            if (choose == MessageBoxResult.No)
+                                InputBox.Visibility = Visibility.Hidden;
+                        }
+                        break;
+                    }
+                }
+                #endregion
+
+            });
+            #endregion
+
+            _cmd = action;
+            _userAction = InputBoxViewModel.UserAction;
+            InitInputBox();
         }
+
+        #region СОЗДАНИЕ ОКНА ВВОДА ИМЕНИ.
+
+        private static readonly Views.InputBox InputBox = Singleton.SingleInstance<Views.InputBox>();
+        private static readonly InputBoxViewModel InputBoxViewModel = Singleton.SingleInstance<InputBoxViewModel>();
+        private static ICommand _cmd; // Команда для обработки данных.
+        private static string _oldName; // Данные которое нужно корректировать, передаются в окно.
+        private static Actions _userAction; // Имя кнопки действие.
+        /// <summary>
+        /// Инициализирует окно для ввода имени, 
+        /// команду можно передать вторым параметром.
+        /// </summary>
+        private void InitInputBox()
+        {
+            IconsEditor parent = Singleton.Back as IconsEditor;
+            InputBox.DataContext = InputBoxViewModel;
+            InputBox.Owner = parent;
+            InputBoxViewModel.Text = _oldName;
+            InputBoxViewModel.Action = _cmd;
+            InputBoxViewModel.UserAction = _userAction;
+            InputBox.Visibility = Visibility.Visible;
+        }
+        #endregion
+
         #endregion
     }
 }

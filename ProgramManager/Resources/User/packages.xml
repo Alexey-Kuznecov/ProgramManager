@@ -13,7 +13,7 @@
   <Package Id="1" Category="Программы">
     <Author>Adobe</Author>
     <Description>Программа для оформления фотографий</Description>
-    <Icon Name="Allustrator" Foreground="#FFFFFFFF" Background="#FF184B9C" />
+    <Icon Name="Allustrator" Foreground="#FFFFFFFF" Background="#FFF68F4D" />
     <Name>Illustrator</Name>
     <Tag>Не подшитые</Tag>
     <Version>Cloud CC6</Version>

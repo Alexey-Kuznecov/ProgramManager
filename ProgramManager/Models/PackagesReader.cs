@@ -6,7 +6,7 @@ using System.Xml.Linq;
 using ProgramManager.Enums;
 using ProgramManager.Models.PackageModel;
 using ProgramManager.Converters;
-using ProgramManager.Dict;
+using ProgramManager.Associations;
 using ProgramManager.Resources;
 
 namespace ProgramManager.Models
@@ -75,7 +75,7 @@ namespace ProgramManager.Models
         /// <returns>Возвращает имя иконки.</returns>
         private static string SetIcons(string category)
         {
-            CategoryDict cateDict = new CategoryDict();
+            CategoryDictionary cateDict = new CategoryDictionary();
 
             if (category == cateDict.GetValue(Categories.Programs))
                 return "ProgramIcon";
@@ -172,7 +172,7 @@ namespace ProgramManager.Models
             return SetFieldLabel(textField);
         }
         /// <summary>
-        /// Метод инициализирует поля Label объекта TextFieldModel значениями словаря FieldConverter.Dictionary 
+        /// Метод инициализирует поля Label объекта TextFieldModel значениями словаря PackageFieldConverter.Dictionary 
         /// для вывода их в панель информации о пакете.
         /// </summary>
         /// <param name="textFields">Список полей выбранного пакета.</param>
@@ -180,7 +180,7 @@ namespace ProgramManager.Models
         private static List<TextFieldModel> SetFieldLabel(List<TextFieldModel> textFields)
         {
             for (var i = 0; i < textFields.Count; i++)
-                foreach (var item in FieldConverter.Dictionary.Where(d => d.Key == textFields[i].Types))
+                foreach (var item in PackageFieldConverter.Dictionary.Where(d => d.Key == textFields[i].Types))
                     textFields[i].Label = item.Value;
 
             return textFields;

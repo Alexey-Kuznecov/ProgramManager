@@ -1,4 +1,6 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
@@ -35,7 +37,7 @@ namespace ProgramManager.Resources
         /// Преобразует шестнадцатеричное значение в цвет кисти.
         /// </summary>
         /// <param name="value">Шестнадцатеричное значение.</param>
-        /// <returns>Возращает цвет кисти.</returns>
+        /// <returns>Возращает цвет кисти.</returns>    
         public static SolidColorBrush FormatStringToSolidColor(this string value)
         {
             SolidColorBrush solid =
@@ -47,6 +49,7 @@ namespace ProgramManager.Resources
         /// Решает проблему: Указанный элемент уже является логическим дочерним для другого элемента. Сначала отсоедините его.
         /// </summary>
         /// <param name="item">Любой потомок класса Controls например (Кнопка).</param>
+        [Conditional("DEBUG")]
         public static void RemoveFromParent(this FrameworkElement item)
         {
             var parentItemsControl = (WrapPanel) item?.Parent;
@@ -56,7 +59,8 @@ namespace ProgramManager.Resources
         /// Бинарная сериализация данных объектов.
         /// Внимание: Если объект наследует другие объекты они должны быть также помечены.
         /// </summary>
-        /// <param name="obj">Любой объект который отмечен как стерилизуемый.</param>
+        /// <param name="obj">Любой объект который отмечен как сериaлизуемый.</param>
+        [Conditional("DEBUG")]
         public static void BinSerialize(object obj)
         {
             BinaryFormatter bf = new BinaryFormatter();
@@ -79,16 +83,40 @@ namespace ProgramManager.Resources
             }
         }
         /// <summary>
-        /// Ищет словарь в по ссылкам объяденненых словарей ресурсов,
-        /// данным метод не ищет ресурсы в главном словаре. 
+        /// Ищет словарь по ссылкам объяденненых словарей ресурсов,
+        /// данным метод не ищет ресурсы в главном словаре App.xaml.
         /// </summary>
         /// <param name="resourceName">Имя словаря ресурсов.</param>
-        /// <returns></returns>
+        /// <returns>Возвращает словарь ресурсов.</returns>
+        [DebuggerStepThrough]
         public static ResourceDictionary GetResourceDictionary(string resourceName)
         {
             Collection<ResourceDictionary> collMergedDictionaries = Application.Current.Resources.MergedDictionaries;
             ResourceDictionary resourceDictionary = collMergedDictionaries.Single(p => p.Source.ToString().Contains(resourceName));
             return resourceDictionary;
+        }
+        /// <summary>
+        /// Выводит хеш-код и тип.
+        /// </summary>
+        [Conditional("DEBUG")]
+        public static void MessageBoxExtension(object obj)
+        {
+            MessageBox.Show(obj.GetHashCode().ToString(), obj.GetType().FullName);
+        }
+        /// <summary>
+        /// Упаковывает элементы перечислителя в отслеживаемую коллекцию. 
+        /// Используется как и стандартный метод расширения ToList.
+        /// </summary>
+        /// <typeparam name="T">Любой тип.</typeparam>
+        /// <param name="collect">Перечисляемая коллекция.</param>
+        /// <returns>Возвращает отслеживаемую коллекцию коллекция</returns>
+        [DebuggerStepThrough]
+        public static ObservableCollection<T> ToObservableCollection<T>(this IEnumerable<T> collect )
+        {
+            var ob = new ObservableCollection<T>();
+            foreach (var item in collect)
+                ob.Add(item);
+            return ob;
         }
     }
 }

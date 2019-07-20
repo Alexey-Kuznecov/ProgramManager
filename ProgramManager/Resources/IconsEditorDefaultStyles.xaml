@@ -53,8 +53,8 @@
             </Path>
             <Path
                 x:Name="shape"
-                Width="36"
-                Height="36"
+                Width="24"
+                Height="24"
                 Data="{Binding IconBrush, Converter={StaticResource ContentConverter}}"
                 Fill="{Binding IconForeground}"
                 Stretch="Uniform" />

@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using ProgramManager.Services;
 
 namespace ProgramManager.Views
 {
@@ -10,6 +11,7 @@ namespace ProgramManager.Views
         public IconsEditor()
         {
             InitializeComponent();
+            Singleton.Back = this;
         }
     }
 }

@@ -16,9 +16,17 @@ namespace ProgramManager.Services
         public object Open(string filepath)
         {
             DependencyObject rootXaml;
-            using (FileStream fs = new FileStream(filepath, FileMode.OpenOrCreate))
-                rootXaml = (DependencyObject) XamlReader.Load(fs);
-            return rootXaml;
+            try
+            {
+                using (FileStream fs = new FileStream(filepath, FileMode.OpenOrCreate))
+                    rootXaml = (DependencyObject)XamlReader.Load(fs);
+                return rootXaml;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+                throw;
+            }
         }
         /// <summary>
         /// Сохраняет(сериализует) словарь ресурсов. Словарь ресурсов обязательно должен 

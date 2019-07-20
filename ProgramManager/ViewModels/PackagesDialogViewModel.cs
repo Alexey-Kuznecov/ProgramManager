@@ -2,6 +2,7 @@
 using System.Windows.Input;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Media;
 using ProgramManager.Models.PackageModel;
 using ProgramManager.Views.DialogPacks;
@@ -25,7 +26,6 @@ namespace ProgramManager.ViewModels
         private SolidColorBrush _iconBackground;
 
         #region Constructor
-
         public PackagesDialogViewModel()
         {
             // Initial fields.
@@ -132,34 +132,34 @@ namespace ProgramManager.ViewModels
         #region Functions
 
         private void LoadSelectIcon(IconModel icon)
-            {
-                if (Singleton.Back == null)
-                    Singleton.Back = new IconModel(Name, IconBrush, IconForeground, IconBackground);
+        {
+            if (Singleton.Back == null)
+                Singleton.Back = new IconModel(Name, IconBrush, IconForeground, IconBackground);
 
-                if (!Singleton.Status)
-                {
-                    Name = icon.Name;
-                    IconBrush = icon.Brush;
-                    IconBackground = icon.BgroundColor;
-                    IconForeground = icon.FgroundColor;
-                }
-                else
-                {
-                    IconModel iconBack = (IconModel)Singleton.Back;
-                    Name = iconBack.Name;
-                    IconBrush = iconBack.Brush;
-                    IconBackground = iconBack.BgroundColor;
-                    IconForeground = iconBack.FgroundColor;
-                }
-            }
-        public void OpenDialogIcon()
+            if (!Singleton.Status)
             {
-                using (WindowDispatchers wd = new WindowDispatchers())
-                {
-                    wd.IconsEditor = new IconsEditor();
-                    wd.IconsEditor.Show();
-                }
+                Name = icon.Name;
+                IconBrush = icon.Brush;
+                IconBackground = icon.BgroundColor;
+                IconForeground = icon.FgroundColor;
             }
+            else
+            {
+                IconModel iconBack = (IconModel)Singleton.Back;
+                Name = iconBack.Name;
+                IconBrush = iconBack.Brush;
+                IconBackground = iconBack.BgroundColor;
+                IconForeground = iconBack.FgroundColor;
+            }
+        }
+        public void OpenDialogIcon()
+        {
+            using (WindowDispatchers wd = new WindowDispatchers())
+            {
+                wd.IconsEditor = new IconsEditor();
+                wd.IconsEditor.Show();
+            }
+        }
 
         #endregion
     }

@@ -105,7 +105,7 @@ namespace ProgramManager.Models.Func
                         {
                             Name = entry.Key,
                             Id = count++,
-                            FieldName = FieldConverter.Dictionary.Single(p => p.Key.ToString() == entry.Key.ToString()).Value
+                            FieldName = PackageFieldConverter.Dictionary.Single(p => p.Key.ToString() == entry.Key.ToString()).Value
                         };
                         dictionary.Add(key, entry.Value.ToString());
                     }

@@ -3,11 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Windows.Data;
-using ProgramManager.MarkupExtensions;
 
 namespace ProgramManager.Converters
 {
-    public class KeywordToTextConverter : ConverterBase<KeywordToTextConverter>
+    public class KeywordToTextConverter : BaseConverter<KeywordToTextConverter>
     {
         private static readonly IDictionary<Keywords, string> Descriptions = new Dictionary<Keywords, string>
         {
@@ -24,11 +23,6 @@ namespace ProgramManager.Converters
             if (!Descriptions.ContainsKey(keyword))
                 return null;
             return Descriptions[keyword];
-        }
-
-        public override object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotSupportedException();
         }
     }
 }

@@ -3,9 +3,9 @@ using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Markup;
 
-namespace ProgramManager.MarkupExtensions
+namespace ProgramManager.Converters
 {
-    public abstract class ConverterBase<T> : MarkupExtension, IValueConverter
+    public abstract class BaseConverter<T> : MarkupExtension, IValueConverter
         where T : class, new()
     {
         /// <summary>

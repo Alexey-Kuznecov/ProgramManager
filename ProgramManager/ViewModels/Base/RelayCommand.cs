@@ -1,15 +1,15 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Windows.Input;
-using ProgramManager.Services;
 
 namespace ProgramManager.ViewModels.Base
 {
+    [DebuggerStepThrough]
     public class RelayCommand : ICommand
     {
         private readonly Action _command;
         private readonly Action<object> _execute;
         private readonly Predicate<object> _canExecute;
-
         public event EventHandler CanExecuteChanged;
 
         public RelayCommand(Action command, Func<bool> canExecute = null)

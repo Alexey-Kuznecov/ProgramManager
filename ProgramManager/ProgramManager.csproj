@@ -101,16 +101,20 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Associations\ActionsDictionary.cs" />
     <Compile Include="Contracts\IDialogService.cs" />
     <Compile Include="Contracts\IFileService.cs" />
     <Compile Include="Contracts\ISearchable.cs" />
+    <Compile Include="Converters\ActionNameConverter.cs" />
     <Compile Include="Converters\IconConverters.cs" />
-    <Compile Include="Converters\FieldConverter.cs" />
-    <Compile Include="Dict\CategoryDict.cs" />
+    <Compile Include="Converters\PackageFieldConverter.cs" />
+    <Compile Include="Converters\ResourceNameValidation.cs" />
+    <Compile Include="Associations\CategoryDictionary.cs" />
+    <Compile Include="Enums\Actions.cs" />
     <Compile Include="Enums\FieldTypes.cs" />
     <Compile Include="Enums\Keywords.cs" />
     <Compile Include="Filters\FilterProperties.cs" />
-    <Compile Include="Converters\ConverterBase.cs" />
+    <Compile Include="Converters\BaseConverter.cs" />
     <Compile Include="Test\Test1.cs" />
     <Compile Include="Test\Test10.cs" />
     <Compile Include="Test\Test11.cs" />

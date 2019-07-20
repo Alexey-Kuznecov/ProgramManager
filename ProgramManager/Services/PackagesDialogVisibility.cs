@@ -28,12 +28,12 @@ namespace ProgramManager.ViewModels
             //Выполнение дополнительных действий после закрытия окна редактирования
             if (!packagesDialog.IsActive)
             {
-                var dictionary = FieldConverter.Dictionary;
+                var dictionary = PackageFieldConverter.Dictionary;
 
                 // Чистка словоря от пользовательских полей 
                 for (int i = 0; i <= dictionary.Count; i++)
                 {
-                    var item = FieldConverter.Dictionary.Select(p => p.Key.Substring(0, 4) == FieldTypes.Userfield.ToString().Substring(0, 4));
+                    var item = PackageFieldConverter.Dictionary.Select(p => p.Key.Substring(0, 4) == FieldTypes.Userfield.ToString().Substring(0, 4));
                     //dictionary.Remove(item);
                 }
             }          

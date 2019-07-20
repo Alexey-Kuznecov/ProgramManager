@@ -149,8 +149,8 @@ namespace ProgramManager.ViewModels
                     Types = textField.Types
                 });
                 // Добавления данных полей в словарь ассоциаций 
-                if (!FieldConverter.Dictionary.ContainsKey(textField.Types))
-                    FieldConverter.Dictionary.Add(textField.Types, textField.Label);
+                if (!PackageFieldConverter.Dictionary.ContainsKey(textField.Types))
+                    PackageFieldConverter.Dictionary.Add(textField.Types, textField.Label);
             }
 
             //Посылает найденный ресурс иконки для пакета
@@ -228,7 +228,7 @@ namespace ProgramManager.ViewModels
             {
                 var formatKey = FieldTypes.Userfield.ToString() + (TextField.Count + 1);
 
-                FieldConverter.Dictionary.Add(formatKey, fieldName);
+                PackageFieldConverter.Dictionary.Add(formatKey, fieldName);
                 TextField.Add(new TextFieldModel
                 {
                     FieldValue = fieldName,
@@ -250,7 +250,7 @@ namespace ProgramManager.ViewModels
 
             // Removing the user field association from the dictionary
             if (field != null && field.Types.Contains(FieldTypes.Userfield.ToString()))
-                FieldConverter.Dictionary.Remove(field.Types);
+                PackageFieldConverter.Dictionary.Remove(field.Types);
 
             TextField.Remove(field);
         }

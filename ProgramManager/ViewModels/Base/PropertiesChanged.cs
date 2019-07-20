@@ -1,9 +1,11 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq.Expressions;
 
 namespace ProgramManager.ViewModels.Base
 {
+    [DebuggerStepThrough]
     public class PropertiesChanged : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
@@ -20,20 +22,17 @@ namespace ProgramManager.ViewModels.Base
             RaisePropertyChanged(action);
             return true;
         }
-
         protected void RaisePropertyChanged<T>(Expression<Func<T>> action)
         {
             var propertyName = GetPropertyName(action);
             RaisePropertyChanged(propertyName);
         }
-
         private static string GetPropertyName<T>(Expression<Func<T>> action)
         {
             var expression = (MemberExpression)action.Body;
             var propertyName = expression.Member.Name;
             return propertyName;
         }
-
         private void RaisePropertyChanged(string propertyName)
         {
             var handler = PropertyChanged;

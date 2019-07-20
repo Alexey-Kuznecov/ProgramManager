@@ -1,13 +1,9 @@
 ﻿using ProgramManager.Enums;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace ProgramManager.Dict
+namespace ProgramManager.Associations
 {
-    public class CategoryDict
+    public class CategoryDictionary
     {
         private readonly Dictionary<Categories, string> _tableCode = new Dictionary<Categories, string>(5)
         {

@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using ProgramManager.MarkupExtensions;
-using ProgramManager.Models;
 using ProgramManager.Models.PackageModel;
 using System.Collections;
 
 namespace ProgramManager.Converters
 {
-    public class FieldConverter : ConverterBase<FieldConverter>, IEnumerable
+    public class PackageFieldConverter : BaseConverter<PackageFieldConverter>, IEnumerable
     {
         private static readonly IDictionary<string, string> _dictionary = new Dictionary<string, string>
         {

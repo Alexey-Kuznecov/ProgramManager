@@ -151,7 +151,7 @@ namespace ProgramManager.Models
             foreach (var item in data.FieldList)
             {
                 currentPack?.Add(new XElement(FieldTypes.Userfield.ToString(),
-                    new XAttribute("Label", FieldConverter.Dictionary.Single(p => p.Key == item.Key).Value), item.Value));
+                    new XAttribute("Label", PackageFieldConverter.Dictionary.Single(p => p.Key == item.Key).Value), item.Value));
             }
         }
         /// <summary>

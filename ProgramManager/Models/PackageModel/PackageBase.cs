@@ -50,8 +50,8 @@ namespace ProgramManager.Models.PackageModel
                         if (!MenuItem.ContainsKey(key.Value))
                         {
                             MenuItem.Add(key.Value, value.Value);
-                            if (!FieldConverter.Dictionary.ContainsKey(key.Value))
-                                FieldConverter.Dictionary.Add(key.Value, value.Value);
+                            if (!PackageFieldConverter.Dictionary.ContainsKey(key.Value))
+                                PackageFieldConverter.Dictionary.Add(key.Value, value.Value);
                         }
                     }
                 }

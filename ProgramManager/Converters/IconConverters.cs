@@ -1,5 +1,4 @@
-﻿using ProgramManager.MarkupExtensions;
-using System;
+﻿using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Windows.Data;
 using System.Windows.Media;
@@ -10,7 +9,7 @@ using static System.Windows.Media.ColorConverter;
 
 namespace ProgramManager.Converters
 {
-    public class ColorConverterSolidColor : ConverterBase<ColorConverterSolidColor>
+    public class ColorConverterSolidColor : BaseConverter<ColorConverterSolidColor>
     {
         public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -25,7 +24,7 @@ namespace ProgramManager.Converters
             return null;
         }
     }
-    public class ScaleConverter : ConverterBase<ScaleConverter>, IValueConverter {
+    public class ScaleConverter : BaseConverter<ScaleConverter>, IValueConverter {
         public double Scale { get; set; }
 
         public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -38,20 +37,22 @@ namespace ProgramManager.Converters
             return null;
         }
     }
-    public class BrushConverter : ConverterBase<BrushConverter>, IValueConverter {
+    public class BrushConverter : BaseConverter<BrushConverter>, IValueConverter {
         [SuppressMessage("ReSharper", "PossibleInvalidCastExceptionInForeachLoop")]
         public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             IconModel icon = value as IconModel;
             if (icon != null)
             {
-                Brush brush = parameter?.ToString() == "rect" ? icon.BgroundColor : icon.FgroundColor;
+                Brush brush = parameter?.ToString() == "rect" 
+                    ? icon.BgroundColor 
+                    : icon.FgroundColor;
                 return brush;
             }
             return value;
         }
     }
-    public class ContentConverter : ConverterBase<ContentConverter>, IValueConverter {
+    public class ContentConverter : BaseConverter<ContentConverter>, IValueConverter {
         public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             PathGeometry path = new PathGeometry();

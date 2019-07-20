@@ -16,7 +16,6 @@ namespace ProgramManager.Services
             EventAggregate.PackageChanged += ChangePackage;
             EventAggregate.RemovePackage += RemovePackage;
         }
-
         private void RemovePackage(object sender, BaseEventArgs e)
         {
             PackagesWriter.RemovePackage((int)e.Package);
