@@ -4,6 +4,7 @@ using System.Windows.Data;
 using System.Windows.Media;
 using System.Globalization;
 using System.Windows.Controls;
+using System.Windows.Shapes;
 using ProgramManager.Resources;
 using static System.Windows.Media.ColorConverter;
 
@@ -55,18 +56,24 @@ namespace ProgramManager.Converters
     public class ContentConverter : BaseConverter<ContentConverter>, IValueConverter {
         public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            PathGeometry path = new PathGeometry();
-            DrawingGroup draw = value is IconModel
-                ? (value as IconModel).Brush.Drawing as DrawingGroup
-                : (value as DrawingBrush)?.Drawing as DrawingGroup;
+            Path pathdata = value as Path;
 
-            if (draw != null)
-                foreach (var drawing in draw.Children)
-                {
-                    var item = (GeometryDrawing) drawing;
-                    path.AddGeometry(item.Geometry);
-                }
-            return path;
+            if (pathdata == null)
+            {
+                PathGeometry path = new PathGeometry();
+                DrawingGroup draw = value is IconModel
+                    ? (value as IconModel).Brush.Drawing as DrawingGroup
+                    : (value as DrawingBrush)?.Drawing as DrawingGroup;
+
+                if (draw != null)
+                    foreach (var drawing in draw.Children)
+                    {
+                        var item = (GeometryDrawing)drawing;
+                        path.AddGeometry(item.Geometry);
+                    }
+                return path;
+            }
+            return pathdata.Data;
         }
     }
 }

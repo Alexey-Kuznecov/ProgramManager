@@ -115,13 +115,7 @@
     <Compile Include="Enums\Keywords.cs" />
     <Compile Include="Filters\FilterProperties.cs" />
     <Compile Include="Converters\BaseConverter.cs" />
-    <Compile Include="Test\Test1.cs" />
-    <Compile Include="Test\Test10.cs" />
-    <Compile Include="Test\Test11.cs" />
-    <Compile Include="Test\Test12.cs" />
-    <Compile Include="Test\Test13.cs" />
-    <Compile Include="Test\Test14.cs" />
-    <Compile Include="Test\Test15.cs" />
+    <Compile Include="Models\CategoryModelOb.cs" />
     <Compile Include="Test\Test2.cs" />
     <Compile Include="Test\Test3.cs" />
     <Compile Include="Test\Test4.cs" />

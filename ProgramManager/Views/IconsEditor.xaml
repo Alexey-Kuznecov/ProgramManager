@@ -116,7 +116,7 @@
                             <Button
                                 Command="{Binding DataContext.SelectIconCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}"
                                 CommandParameter="{Binding CommandParameter}"
-                                Content="{Binding Brush}"
+                                Content="{Binding Path}"
                                 Style="{StaticResource Styles}"
                                 Template="{StaticResource IconTemplateEditor}"
                                 ToolTip="{Binding ToolTip, Mode=TwoWay}" />

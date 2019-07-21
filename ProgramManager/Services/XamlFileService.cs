@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using ProgramManager.Contracts;
 using System.Windows;
@@ -6,6 +7,7 @@ using System.Windows.Markup;
 
 namespace ProgramManager.Services
 {
+    [DebuggerStepThrough]
     class XamlFileService : IFileService
     {
         /// <summary>

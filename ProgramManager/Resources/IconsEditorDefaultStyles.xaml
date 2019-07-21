@@ -106,4 +106,35 @@
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
+
+    <ControlTemplate x:Key="IconTemplateEditorUsingPath" TargetType="Button">
+        <ControlTemplate.Resources>
+            <converters:ContentConverter x:Key="ContentConverter" />
+        </ControlTemplate.Resources>
+        <Grid x:Name="grid">
+            <Path
+                x:Name="rect"
+                Fill="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Background}"
+                Stretch="Uniform"
+                Stroke="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Foreground}"
+                StrokeThickness="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=BorderThickness.Left}">
+                <Path.Data>
+                    <RectangleGeometry Rect="0,0,50,50" />
+                </Path.Data>
+            </Path>
+            <Path
+                x:Name="shape"
+                Width="32"
+                Height="32"
+                Data="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Content}"
+                Fill="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Foreground}"
+                Stretch="Uniform" />
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="shape" Property="Fill" Value="#FFFFFF" />
+                <Setter TargetName="rect" Property="Fill" Value="{Binding RelativeSource={RelativeSource Self}, Path=Stroke}" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
 </ResourceDictionary>

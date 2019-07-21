@@ -1,8 +1,6 @@
 ﻿using System.Collections.ObjectModel;
-using System.Windows;
 using System.Windows.Controls;
 using ProgramManager.Resources;
-using ProgramManager.ViewModels.Base;
 
 namespace ProgramManager.Models.PackageModel
 {
@@ -21,7 +19,6 @@ namespace ProgramManager.Models.PackageModel
             foreach (var header in IconsOptionReader.GetCategory())
                 cat.Add(new IconCategoryModel { Header = header });
 
-            var dd = IconsOptionReader.GetIcons();
             return cat;
         }
     }

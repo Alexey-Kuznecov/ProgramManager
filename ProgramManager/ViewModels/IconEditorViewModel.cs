@@ -34,7 +34,9 @@ namespace ProgramManager.ViewModels
             _dialogService = Singleton.SingleInstance<DefaultDialogService>();
             _fileService = Singleton.SingleInstance<XamlFileService>();
             IconCategory = IconCategoryModel.GetCategory();
-            LoadIcons();
+            Buttons = IconsOptionReader.GetIcons();
+            ButtonsClone = Buttons;
+            //LoadIcons();
         }
         #endregion
 

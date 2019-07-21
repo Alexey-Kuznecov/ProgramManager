@@ -1,12 +1,17 @@
-﻿using System.Windows;
+﻿using System.Diagnostics;
+using System.Windows;
 using System.Windows.Media;
+using System.Windows.Shapes;
 
 namespace ProgramManager.Resources
 {
+    [DebuggerStepThrough]
     public class IconCore
     {
         #region Constructor
 
+        protected IconCore()
+        { }
         protected IconCore(string name, string fg, string bg)
         {
             Name = name;
@@ -35,8 +40,10 @@ namespace ProgramManager.Resources
         public DrawingBrush Brush { get; set; }
         public SolidColorBrush BgroundColor { get; set; }
         public SolidColorBrush FgroundColor { get; set; }
+        public Path Path { get; set; }
         public string Name { get; set; }
         public string Category { get; set; }
+        public string Scale { get; set; }
 
         #endregion
 
@@ -70,6 +77,7 @@ namespace ProgramManager.Resources
 
         #endregion
     }
+    [DebuggerStepThrough]
     public class IconModel : IconCore
     {
         #region Constructor
@@ -80,6 +88,7 @@ namespace ProgramManager.Resources
             : base(icon, fg, bg) { }
         public IconModel(string name, DrawingBrush brush, SolidColorBrush fg, SolidColorBrush bg)
             : base(name, brush, fg, bg) { }
+        public IconModel() { }
 
         #endregion
     }

@@ -19,7 +19,7 @@ namespace ProgramManager.Resources
         /// </summary>
         /// <param name="path">Путь или имя файла.</param>
         /// <returns>Возвращает имя файла.</returns>
-        [SuppressMessage("ReSharper", "AssignNullToNotNullAttribute")]
+        [SuppressMessage("ReSharper", "AssignNullToNotNullAttribute"), DebuggerStepThrough]
         public static string ClearExtension(string path)
         {
             var result = path;
@@ -37,7 +37,8 @@ namespace ProgramManager.Resources
         /// Преобразует шестнадцатеричное значение в цвет кисти.
         /// </summary>
         /// <param name="value">Шестнадцатеричное значение.</param>
-        /// <returns>Возращает цвет кисти.</returns>    
+        /// <returns>Возращает цвет кисти.</returns>  
+        [DebuggerStepThrough]  
         public static SolidColorBrush FormatStringToSolidColor(this string value)
         {
             SolidColorBrush solid =
@@ -49,7 +50,7 @@ namespace ProgramManager.Resources
         /// Решает проблему: Указанный элемент уже является логическим дочерним для другого элемента. Сначала отсоедините его.
         /// </summary>
         /// <param name="item">Любой потомок класса Controls например (Кнопка).</param>
-        [Conditional("DEBUG")]
+        [Conditional("DEBUG"), DebuggerStepThrough]
         public static void RemoveFromParent(this FrameworkElement item)
         {
             var parentItemsControl = (WrapPanel) item?.Parent;
@@ -98,7 +99,7 @@ namespace ProgramManager.Resources
         /// <summary>
         /// Выводит хеш-код и тип.
         /// </summary>
-        [Conditional("DEBUG")]
+        [Conditional("DEBUG"), DebuggerStepThrough]
         public static void MessageBoxExtension(object obj)
         {
             MessageBox.Show(obj.GetHashCode().ToString(), obj.GetType().FullName);
