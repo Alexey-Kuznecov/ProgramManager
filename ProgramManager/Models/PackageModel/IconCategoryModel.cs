@@ -16,7 +16,7 @@ namespace ProgramManager.Models.PackageModel
         {
             var cat = new ObservableCollection<IconCategoryModel>();
 
-            foreach (var header in IconsOptionReader.GetCategory())
+            foreach (var header in IconsDataReader.GetCategory())
                 cat.Add(new IconCategoryModel { Header = header });
 
             return cat;

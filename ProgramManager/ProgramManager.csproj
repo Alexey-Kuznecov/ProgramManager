@@ -147,7 +147,7 @@
     <Compile Include="Resources\ConverterXamlResources.cs" />
     <Compile Include="Resources\HelperFunctions.cs" />
     <Compile Include="Resources\IconModel.cs" />
-    <Compile Include="Resources\IconsOptionReader.cs" />
+    <Compile Include="Resources\IconsDataReader.cs" />
     <Compile Include="Services\DefaultDialogService.cs" />
     <Compile Include="Services\Synchronizer.cs" />
     <Compile Include="Services\EventAggregate.cs" />
@@ -314,7 +314,7 @@
     <Resource Include="Resources\User\Images\Programs.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\IconsOption.xml" />
+    <Resource Include="Resources\IconsData.xml" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

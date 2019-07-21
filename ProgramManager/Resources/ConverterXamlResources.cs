@@ -5,7 +5,7 @@ using System.Windows.Shapes;
 
 namespace ProgramManager.Resources
 {
-    //[DebuggerStepThrough]
+    [DebuggerStepThrough]
     class ConverterXamlResources
     {
         /// <summary>

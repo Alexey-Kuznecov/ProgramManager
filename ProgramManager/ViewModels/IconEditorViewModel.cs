@@ -34,9 +34,7 @@ namespace ProgramManager.ViewModels
             _dialogService = Singleton.SingleInstance<DefaultDialogService>();
             _fileService = Singleton.SingleInstance<XamlFileService>();
             IconCategory = IconCategoryModel.GetCategory();
-            Buttons = IconsOptionReader.GetIcons();
-            ButtonsClone = Buttons;
-            //LoadIcons();
+            LoadIcons();
         }
         #endregion
 
@@ -193,41 +191,17 @@ namespace ProgramManager.ViewModels
         /// </summary>
         public void LoadIcons(string category = null, SolidColorBrush color = null)
         {
-            Buttons = new ObservableCollection<ButtonExtension>();
-            ButtonsClone = new ObservableCollection<ButtonExtension>();
-            Collection<ResourceDictionary> collMergedDictionaries = Application.Current.Resources.MergedDictionaries;
-            ResourceDictionary resourceDictionary = collMergedDictionaries.Single(p => p.Source.ToString().Contains("Icons.xaml"));
-
-            foreach (var key in resourceDictionary.Keys)
+            Buttons = IconsDataReader.GetIcons();
+            // Инициализирует свойства иконоки и добавляет их в коллекцию  
+            foreach (var bt in Buttons)
             {
-                var drawBrush = Application.Current.FindResource(key);                
-                var brush = drawBrush as DrawingBrush;
-
-                #region Инициализация иконок
-
-                // Инициализирует свойства иконоки и добавляет их в коллекцию  
-                var bt = new ButtonExtension
+                bt.CommandParameter = bt;
+                bt.RemoveIcon = new RelayCommand(RemoveIcon);
+                bt.RenameIcon = new RelayCommand(oName =>
                 {
-                    Brush = brush,
-                    IconName = key.ToString(),
-                    Category = category,
-                    ToolTip = key
-                };
-                // Если убрать проверку в выборку попадают не только кисти
-                // но другие ресурсы, которые есть в словаре.
-                if (brush != null)
-                {
-                    bt.CommandParameter = bt;
-                    bt.RemoveIcon = new RelayCommand(RemoveIcon);
-                    bt.RenameIcon = new RelayCommand(oName =>
-                    {
-                        InputBoxViewModel.UserAction = Actions.Change;
-                        RenameIcon((string) oName);
-                    });
-                    Buttons.Add(bt);
-                }
-
-                #endregion
+                    InputBoxViewModel.UserAction = Actions.Change;
+                    RenameIcon((string)oName);
+                });
             }
             // Сортирует иконки по алфавиту и упаковывает в коллекцию.
             Buttons = Buttons.OrderBy(p => p.IconName.Substring(0, 2)).ToObservableCollection();
