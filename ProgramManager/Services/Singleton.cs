@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
+using System.Windows.Input;
+using ProgramManager.ViewModels;
 
 namespace ProgramManager.Services
 {
-    [DebuggerStepThrough]
+    //[DebuggerStepThrough]
     struct Singleton  
     {
         public static object Back = null;
@@ -28,23 +30,33 @@ namespace ProgramManager.Services
         {
             T singleInstance = new T();
             byte multi = 0, single = 0;
-
+            // If method was call one time then needed instantiated
             if (Instance.Count == 0)  
                 Instance.Add(new T());
- 
+            // Collection traversals and if type already exist returns it.
             for (var i = 0; i < Instance.Count; i++)
-
                 if (Instance[i] is T)
                 {
                     single++;
                     singleInstance = (T)Instance[i];
                 }
                 else multi++;
-
+            // If iterator didn't found same type then adds new type in collection. 
             if (multi <= (multi - single))
                 Instance.Add(new T());
-
             return singleInstance;
+        }
+        /// <summary>
+        /// Object returns that was queried.
+        /// </summary>
+        /// <typeparam name="T">Object type.</typeparam>
+        /// <returns>Reference into object.</returns>
+        public static T GetSingleInstance<T>() where T : new ()
+        {
+            foreach (var obj in Instance)
+                if (obj is T)
+                    return (T)obj;
+            return new T();
         }
     }
 }

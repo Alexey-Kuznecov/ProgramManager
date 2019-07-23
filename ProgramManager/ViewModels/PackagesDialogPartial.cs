@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Drawing;
 using System.Windows.Controls;
@@ -152,7 +153,6 @@ namespace ProgramManager.ViewModels
                 if (!PackageFieldConverter.Dictionary.ContainsKey(textField.Types))
                     PackageFieldConverter.Dictionary.Add(textField.Types, textField.Label);
             }
-
             //Посылает найденный ресурс иконки для пакета
             LoadIcon(package.Icon);
         }
@@ -263,19 +263,16 @@ namespace ProgramManager.ViewModels
         /// <param name="icon"></param>
         public void LoadIcon(IconModel icon)
         {
-            DrawingBrush brush = icon.Brush;
-            DrawingGroup group = brush?.Drawing as DrawingGroup;
-            if (@group != null)
+            try
             {
-                foreach (var item in @group.Children)
-                {
-                    var geometry = item as GeometryDrawing;
-                    if (geometry != null) geometry.Brush = icon.FgroundColor;
-                }
+                IconPath = IconsDataReader.GetIconPath(icon.Name);
+                IconBackground = icon.BgroundColor;
+                IconForeground = icon.FgroundColor;
             }
-            IconBrush = brush;
-            IconBackground = icon.BgroundColor;
-            IconForeground = icon.FgroundColor;
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
         }
         #endregion
     }

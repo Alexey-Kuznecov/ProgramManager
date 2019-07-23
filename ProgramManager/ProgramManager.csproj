@@ -116,19 +116,16 @@
     <Compile Include="Filters\FilterProperties.cs" />
     <Compile Include="Converters\BaseConverter.cs" />
     <Compile Include="Models\CategoryModelOb.cs" />
-    <Compile Include="Test\Test2.cs" />
-    <Compile Include="Test\Test3.cs" />
-    <Compile Include="Test\Test4.cs" />
-    <Compile Include="Test\Test5.cs" />
-    <Compile Include="Test\Test6.cs" />
-    <Compile Include="Test\Test7.cs" />
-    <Compile Include="Test\Test8.cs" />
-    <Compile Include="Test\Test9.cs" />
+    <Compile Include="Services\CommonProperties.cs" />
+    <Compile Include="Resources\Exceptions\XmlElementNotFoundException.cs" />
+    <Compile Include="Resources\IconsDataModifier.cs" />
+    <Compile Include="Resources\IconsDataWriter.cs" />
+    <Compile Include="Test\LogWriter.cs" />
     <Compile Include="ViewModels\InputBoxViewModel.cs" />
     <Compile Include="Views\InputBox.xaml.cs">
       <DependentUpon>InputBox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Models\PackageModel\IconCategoryModel.cs" />
+    <Compile Include="Resources\IconCategoryModel.cs" />
     <Compile Include="Models\PackageModel\PackageDrtails.cs" />
     <Compile Include="Models\PackageModel\CategoryModel.cs" />
     <Compile Include="Models\Func\FuncHelper.cs" />
@@ -159,7 +156,6 @@
     <Compile Include="Models\PackagesWriter.cs" />
     <Compile Include="Models\PackageModel\TextFieldModel.cs" />
     <Compile Include="Services\Singleton.cs" />
-    <Compile Include="Services\WindowDispatchers.cs" />
     <Compile Include="Services\XamlFileService.cs" />
     <Compile Include="ViewModels\Base\PropertiesChanged.cs" />
     <Compile Include="ViewModels\IconEditorViewModel.cs" />

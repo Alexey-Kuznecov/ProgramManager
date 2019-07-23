@@ -41,9 +41,11 @@ namespace ProgramManager.Resources
         public SolidColorBrush BgroundColor { get; set; }
         public SolidColorBrush FgroundColor { get; set; }
         public Path Path { get; set; }
+        public string StringPath { get; set; }
         public string Name { get; set; }
         public string Category { get; set; }
-        public string Scale { get; set; }
+        public int Scale { get; set; }
+        public int Id { get; set; }
 
         #endregion
 

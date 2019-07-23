@@ -48,8 +48,12 @@ namespace ProgramManager.ViewModels
             }
         }
         /// <summary>
+        /// Alternative text that 
+        /// </summary>
+        public string AlternativeText { get; set; }
+        /// <summary>
         /// Команда <see cref="Action"/> отвечает за действие которое необходимо выполнить,
-        /// реализация команды находится здесь <inheritdoc cref="IconEditorViewModel.RenameIcon"/>
+        /// реализация команды находится здесь <inheritdoc cref="IconEditorViewModel.InitWindowRanameIcon"/>
         /// </summary>
         public ICommand Action
         {
@@ -65,12 +69,35 @@ namespace ProgramManager.ViewModels
         /// </summary>
         public ICommand Cancel => new RelayCommand(obj =>
         {
-            // Так как поля Store хранит значения, которое используется для проверки существования ресурса 
+            // Так как поля StoreName хранит значения, которое используется для проверки существования ресурса 
             // в словаре ресурсов, его необходимо чистить после изменения имени ресурса, данная строка решает эту проблему.
             // TODO: Найти другой способ занулить это свойство, чтобы этот класс не знал про существования данного конвертера, а сам конвертер был самодостаточным.
-            //ResourceNameValidation.Store = null;
+            //ResourceNameValidation.StoreName = null;
             Window win = (Window) obj;
             win.Visibility = Visibility.Hidden;
         });
+        /// <summary>
+        /// Параметры которые неоходимо предать.
+        /// </summary>
+        public object CommandParam { get; set; }
+        /// <summary>
+        /// Intializaion inputbox by constructor argument 
+        /// </summary>
+        /// <param name="text">Text to be transferred to the window text box.</param>
+        /// <param name="action">Action that to be performed.</param>
+        /// <param name="actionType">Action type that be interpreted how button press.</param>
+        /// <param name="commandParam">Command parameter that transfer to context of command.</param>
+        public InputBoxViewModel(string text, ICommand action, Actions actionType, object commandParam)
+        {
+            // Добавляет имя иконок в исключение, чтобы конвертер знал какие имена уже существуют в словаре ресурсов 
+            // и блокировал кнопу действия, дабы избежать проблем с коллизией имен в словаре ресурсов.
+            if (ResourceNameValidation.StoreName != null)
+                ResourceNameValidation.StoreName.Add(text);
+
+            CommandParam = commandParam;
+            _text = text;
+            _userAction = actionType;
+            _action = action;
+        }
     }
 }

@@ -10,10 +10,8 @@ namespace ProgramManager
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            var window = new Window();
             var view = new MainView();
-
-            window = view;
+            Window window = view;
             window.Show();
         }
     }

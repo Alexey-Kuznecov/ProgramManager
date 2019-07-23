@@ -1,55 +1,125 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using System.Xml.Linq;
+using ProgramManager.Services;
 
 namespace ProgramManager.Resources
 {
-    class IconsDataReader
+    class IconsDataReader : IDisposable
     {
         private const string DocumentName = @"..\..\Resources\IconsData.xml";
-        private static IEnumerable<XElement> _elementIconAt;
-        private static IEnumerable<XElement> _elementCat;
+        private static IEnumerable<XElement> _elementIcons; // Gets all element named Icon
+        private static IEnumerable<XElement> _elementCollection; // Gets all category element
+
+        private static void InitialFields()
+        {
+            XElement root = XElement.Load(DocumentName);
+            _elementCollection    = from element in root.Elements() select element;
+            _elementIcons         = from icon in _elementCollection.Elements() select icon;
+        }
         /// <summary>
         /// Loads xml document and get icon categories from xml file.
         /// </summary>
         /// <returns>Returns names of categories in collection.</returns>
         public static List<string> GetCategory()
         {
-            List<string> categories = new List<string>();
-            XElement root = XElement.Load(DocumentName);
-            _elementCat = from element in root.Elements("Category") select element;
+            // It's a field not initialized. Do it.
+            if (_elementIcons == null)
+                InitialFields();
 
-            foreach (var cat in _elementCat)
+            List<string> categories = new List<string>();
+            foreach (var cat in _elementCollection)
                 categories.Add(cat.FirstAttribute.Value);
             return categories;
+        }
+        /// <summary>
+        /// Searches a icon in document that been specified value argument passing.
+        /// </summary>
+        /// <param name="name">Icon name that need be find.</param>
+        /// <returns>If the icon is found then the method returns path otherwise throw exception.</returns>
+        public static Path GetIconPath(string name)
+        {
+            Path paths = new Path();
+            string str = " ";
+
+            // It's a field not initialized. Do it.
+            if (_elementIcons == null)
+                InitialFields();
+
+            var queryPath = from icon in _elementIcons
+                where icon.Attribute("Name")?.Value == name
+                select icon;
+            // Concatenate paths to string.
+            foreach (var path in queryPath)
+                str += path.Value;
+            // Converted string to geomentry.
+            paths.Data = Geometry.Parse(str);
+            return paths;
         }
         /// <summary>
         /// Extract icon attribute values from an xml file.
         /// Icon attribute repacking from xml markup to icon type.
         /// </summary>
         /// <returns>The collection containing xml elements.</returns>
-        public static ObservableCollection<ButtonExtension> GetIcons()
+        public ObservableCollection<ButtonExtension> GetIcons()
         {
-            List<IconModel> iconList = new List<IconModel>();
-            _elementIconAt = from icon in _elementCat.Elements("Icon") select icon;
+            if (_elementIcons == null) InitialFields();
+                    
+            var iconList = new List<IconModel>();
+            var iconNames = new List<string>();
 
-            foreach (var element in _elementIconAt.ToList())
-                iconList.Add(new IconModel
+            if (_elementIcons != null)
+                foreach (var element in _elementIcons.ToList())
                 {
-                    Name = element.Attribute("Name")?.Value,
-                    FgroundColor = element.Attribute("Foreground")?.Value.FormatStringToSolidColor(),
-                    BgroundColor = element.Attribute("Background")?.Value.FormatStringToSolidColor(),
-                    Scale = element.Attribute("Scale")?.Value,
-                    Category = element.Parent?.FirstAttribute.Value,
-                    Path = CreatePathGeometry(element.Elements("Paths").ToList()),
-                    // If want use brush in the project, to uncomment this is line,
-                    // Brush = IconGeomertryToBrushPack(element.Elements().ToList())
-                });
+                    #region Create object by model Icon using data xml file.
+
+                    iconList.Add(new IconModel
+                    {
+                        // ReSharper disable once PossibleNullReferenceException
+                        Id = int.Parse(element.Attribute("Id").Value),
+                        Name = element.Attribute("Name")?.Value,
+                        FgroundColor = element.Attribute("Foreground")?.Value.FormatStringToSolidColor(),
+                        BgroundColor = element.Attribute("Background")?.Value.FormatStringToSolidColor(),
+                        // ReSharper disable once AssignNullToNotNullAttribute
+                        Scale = int.Parse(element.Attribute("Scale")?.Value),
+                        Category = element.Parent?.FirstAttribute.Value,
+                        Path = CreatePathGeometry(element.Elements("Path").ToList()),
+                    });
+
+                    #endregion
+
+                    // Fill the IconNames collection by icon names.
+                    iconNames.Add(element.Attribute("Name")?.Value);
+                }
+            // Stored the collection icon names.
+            CommonProperties.IconNames = new List<string>();
+            CommonProperties.IconNames = iconNames;
             // Packing an object before passing in the ViewModel.
             return InitialButtonProperties(iconList);
+        }
+
+        #region Method Get Icon Data To Packing
+        
+        /// <summary>
+        /// Extracts all elements named Path, if the paths are larger than one, 
+        /// path are merged then the value is converted into Data.
+        /// </summary>
+        /// <param name="pathElements">Node named Paths.</param>
+        /// <returns>Returns path as icon.</returns>
+        private static Path CreatePathGeometry(List<XElement> pathElements)
+        {
+            Path path = new Path();
+            string pathCancat = " ";
+
+            foreach (var xpath in pathElements)
+                pathCancat = pathCancat + xpath.Value;
+            path.Data = Geometry.Parse(pathCancat);
+
+            return path;
         }
         /// <summary>
         /// Initializes button properties of a using icon properties
@@ -65,6 +135,7 @@ namespace ProgramManager.Resources
             {
                 buttons.Add(new ButtonExtension
                 {
+                    Id = icon.Id,
                     IconName = icon.Name,
                     Brush = icon.Brush,
                     Category = icon.Category,
@@ -74,48 +145,16 @@ namespace ProgramManager.Resources
             }
             return buttons;
         }
-        /// <summary>
-        /// Extracts all elements named Path, if the paths are larger than one, 
-        /// path are merged then the value is converted into Data.
-        /// </summary>
-        /// <param name="pathElements">Node named Paths.</param>
-        /// <returns>Returns path as icon.</returns>
-        private static Path CreatePathGeometry(List<XElement> pathElements)
-        {
-            Path path = new Path();
-            string pathCancat = " ";
-
-            foreach (var xpath in pathElements.Elements())
-                pathCancat = pathCancat + xpath.Value;
-            path.Data = Geometry.Parse(pathCancat);
-
-            return path;
-        }
-
-        #region Archive
-
-        /// <summary>
-        /// Finds a icon geometric path and packs path into a brush.
-        /// </summary>
-        /// Elements named GeometryGroup in the xml file, that contain the geometry path.
-        /// <remarks>
-        /// If want use brush in the project uncomment this is line 63, then 
-        /// need defined source binding on <example>Button Content="{Binding Brush}"</example> in <view cref="Views.IconsEditor"/>.
-        /// </remarks>
-        /// <param name="nodePaths">Node named Paths.</param>
-        /// <returns>Returns a icon brush.</returns>
-        private static DrawingBrush IconGeomertryToBrushPack(List<XElement> nodePaths)
-        {
-            List<GeometryDrawing> geometryDrawing = new List<GeometryDrawing>();
-            var geometryDraw = from geometry in nodePaths select geometry;
-
-            foreach (var path in geometryDraw.Elements())
-                geometryDrawing.Add(new GeometryDrawing { Geometry = Geometry.Parse(path.Value) });
-
-            return ConverterXamlResources.ConvertMarkupDrawingBrush(geometryDrawing);
-        }
-
+        
         #endregion
-
+        
+        /// <summary>
+        /// Clear fields after build object.
+        /// </summary>
+        public void Dispose()
+        {
+            _elementIcons = null;
+            _elementCollection = null;
+        }
     }
 }

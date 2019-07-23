@@ -8,17 +8,18 @@ namespace ProgramManager.Resources
     [Serializable]
     class ButtonExtension
     {
-        public static int Id { get; set; }
+        public int Id { get; set; }
         public string Category { get; set; }
         public string IconName { get; set; }
         public DrawingBrush Brush { get; set; }
         public ButtonExtension CommandParameter { get; internal set; }
         public object ToolTip { get; set; }
+        public SolidColorBrush Color { get; set; }
         /// <summary>
         /// Комманда для удаления икнок из редактора.
         /// </summary>       
         public ICommand RemoveIcon { get; set; }
-        public ICommand RenameIcon { get; set; }
+        public ICommand RanameIcon { get; set; }
         public Path Path { get; internal set; }
     }
 }

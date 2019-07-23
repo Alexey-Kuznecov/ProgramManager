@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
-using System.Windows.Data;
 using System.Windows.Media;
 using System.Globalization;
 using System.Windows.Controls;
@@ -25,7 +24,7 @@ namespace ProgramManager.Converters
             return null;
         }
     }
-    public class ScaleConverter : BaseConverter<ScaleConverter>, IValueConverter {
+    public class ScaleConverter : BaseConverter<ScaleConverter> {
         public double Scale { get; set; }
 
         public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -38,7 +37,8 @@ namespace ProgramManager.Converters
             return null;
         }
     }
-    public class BrushConverter : BaseConverter<BrushConverter>, IValueConverter {
+    public class BrushConverter : BaseConverter<BrushConverter>
+    {
         [SuppressMessage("ReSharper", "PossibleInvalidCastExceptionInForeachLoop")]
         public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -53,7 +53,8 @@ namespace ProgramManager.Converters
             return value;
         }
     }
-    public class ContentConverter : BaseConverter<ContentConverter>, IValueConverter {
+    public class ContentConverter : BaseConverter<ContentConverter>
+    {
         public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             Path pathdata = value as Path;

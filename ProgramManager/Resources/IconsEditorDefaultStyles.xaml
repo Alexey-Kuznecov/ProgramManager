@@ -55,7 +55,7 @@
                 x:Name="shape"
                 Width="24"
                 Height="24"
-                Data="{Binding IconBrush, Converter={StaticResource ContentConverter}}"
+                Data="{Binding IconPath, Converter={StaticResource ContentConverter}}"
                 Fill="{Binding IconForeground}"
                 Stretch="Uniform" />
         </Grid>
@@ -105,5 +105,33 @@
                 <Setter TargetName="rect" Property="Fill" Value="{Binding RelativeSource={RelativeSource Self}, Path=Stroke}" />
             </Trigger>
         </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <Style x:Key="IconStylesEditorTooltip" TargetType="ContentControl">
+        <Setter Property="Margin" Value="5" />
+        <Setter Property="Background" Value="#F3F3F3" />
+    </Style>
+
+    <ControlTemplate x:Key="IconTemplateEditorTooltip" TargetType="ContentControl">
+        <ControlTemplate.Resources>
+            <converters:ContentConverter x:Key="ContentConverter" />
+        </ControlTemplate.Resources>
+        <Grid x:Name="grid">
+            <Path
+                x:Name="rect"
+                Fill="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Background}"
+                Stretch="Uniform">
+                <Path.Data>
+                    <RectangleGeometry Rect="0,0,50,50" />
+                </Path.Data>
+            </Path>
+            <Path
+                x:Name="shape"
+                Width="64"
+                Height="64"
+                Data="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Content, Converter={StaticResource ContentConverter}}"
+                Fill="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Foreground}"
+                Stretch="Uniform" />
+        </Grid>
     </ControlTemplate>
 </ResourceDictionary>

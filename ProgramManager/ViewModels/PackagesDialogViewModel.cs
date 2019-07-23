@@ -2,8 +2,8 @@
 using System.Windows.Input;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Windows;
 using System.Windows.Media;
+using System.Windows.Shapes;
 using ProgramManager.Models.PackageModel;
 using ProgramManager.Views.DialogPacks;
 using ProgramManager.ViewModels.Base;
@@ -24,6 +24,7 @@ namespace ProgramManager.ViewModels
         private DrawingBrush _iconBrush;
         private SolidColorBrush _iconForeground;
         private SolidColorBrush _iconBackground;
+        private Path _iconPath;
 
         #region Constructor
         public PackagesDialogViewModel()
@@ -54,12 +55,22 @@ namespace ProgramManager.ViewModels
         /// Контекстное меню для вкладки поля.
         /// </summary>
         public List<MenuItem> MenuItem { get; set; }
+        /// <summary>
+        /// Collection fields that user add in the package.
+        /// </summary>
         public static ObservableCollection<TextFieldModel> TextField { get; set; }
+        /// <summary>
+        /// Set an discription of current package.
+        /// Get description to add it in db.
+        /// </summary>
         public string Description
         {
             get { return _description;  }
             set { SetProperty(ref _description, value, () => Description); }
         }
+        /// <summary>
+        /// Set an name of current package.
+        /// </summary>
         public string PackageTitle
         {
             get { return _packageTitle; }
@@ -68,6 +79,10 @@ namespace ProgramManager.ViewModels
                 SetProperty(ref _packageTitle, value, () => PackageTitle);
             }
         }
+        /// <summary>
+        /// Set an brush of current package.
+        /// This property is not used. 
+        /// </summary>
         public DrawingBrush IconBrush
         {
             get { return _iconBrush; }
@@ -77,6 +92,10 @@ namespace ProgramManager.ViewModels
                 OnPropertyChanged("IconBrush");
             }
         }
+        /// <summary>
+        /// Contain an icon background, 
+        /// that can be set in the icon editor.
+        /// </summary>
         public SolidColorBrush IconBackground
         {
             get { return _iconBackground; }
@@ -86,6 +105,10 @@ namespace ProgramManager.ViewModels
                 OnPropertyChanged("IconBackground");
             }
         }
+        /// <summary>
+        /// Contain an icon color.
+        /// that can be set in the icon editor.
+        /// </summary>
         public SolidColorBrush IconForeground
         {
             get { return _iconForeground; }
@@ -95,7 +118,25 @@ namespace ProgramManager.ViewModels
                 OnPropertyChanged("IconForeground");
             }
         }
+        /// <summary>
+        /// Contain an icon geometry path that displayed in the View.
+        /// Property can be set from the icon editor.
+        /// </summary>
+        public Path IconPath
+        {
+            get { return _iconPath; }
+            set
+            {
+                _iconPath = value;
+                OnPropertyChanged("IconPath");
+            }
+        }
+        /// <summary>
+        /// Icon name that to be used to add to the database. Package remembers its icon name 
+        /// that to be displayed then next loading package. 
+        /// </summary>
         public string Name  { get; set; }
+
 
         #endregion
 
@@ -130,16 +171,22 @@ namespace ProgramManager.ViewModels
         #endregion
 
         #region Functions
-
+        /// <summary>
+        /// Function sets icon on button that open the icon editor. 
+        /// <see cref="IconEditorViewModel.SelectIconCommand">Command to add icon.</see>
+        /// </summary>
+        /// <param name="icon">Icon that user selected in the icon editor.</param>
         private void LoadSelectIcon(IconModel icon)
         {
+            // Save button source state.
             if (Singleton.Back == null)
                 Singleton.Back = new IconModel(Name, IconBrush, IconForeground, IconBackground);
-
+            
+            // Sets flag to null to restore button source state. If user remove been set icon.
             if (!Singleton.Status)
             {
                 Name = icon.Name;
-                IconBrush = icon.Brush;
+                IconPath = icon.Path;
                 IconBackground = icon.BgroundColor;
                 IconForeground = icon.FgroundColor;
             }
@@ -147,18 +194,15 @@ namespace ProgramManager.ViewModels
             {
                 IconModel iconBack = (IconModel)Singleton.Back;
                 Name = iconBack.Name;
-                IconBrush = iconBack.Brush;
+                IconPath = iconBack.Path;
                 IconBackground = iconBack.BgroundColor;
                 IconForeground = iconBack.FgroundColor;
             }
         }
         public void OpenDialogIcon()
         {
-            using (WindowDispatchers wd = new WindowDispatchers())
-            {
-                wd.IconsEditor = new IconsEditor();
-                wd.IconsEditor.Show();
-            }
+            IconsEditor singleInstance = Singleton.GetSingleInstance<IconsEditor>();
+            singleInstance.Show();
         }
 
         #endregion

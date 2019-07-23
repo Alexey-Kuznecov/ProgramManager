@@ -157,7 +157,6 @@
                         </ItemsControl>
                     </ScrollViewer>
                 </TabItem>
-
                 <TabItem Header="Описание">
                     <Grid>
                         <TextBox

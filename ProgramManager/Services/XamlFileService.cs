@@ -20,7 +20,7 @@ namespace ProgramManager.Services
             DependencyObject rootXaml;
             try
             {
-                using (FileStream fs = new FileStream(filepath, FileMode.OpenOrCreate))
+                using (FileStream fs = new FileStream(filepath, FileMode.Open))
                     rootXaml = (DependencyObject)XamlReader.Load(fs);
                 return rootXaml;
             }

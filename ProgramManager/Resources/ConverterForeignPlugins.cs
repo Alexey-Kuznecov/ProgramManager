@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Windows.Controls;
 using System.Windows.Shapes;
 
 namespace ProgramManager.Resources
 {
+    [DebuggerStepThrough]
     class ConverterForeignPlugins
     {
         /// <summary>
@@ -12,24 +14,26 @@ namespace ProgramManager.Resources
         /// для илюстратора XamlExport64, в читаемый вид для редактора иконок.
         /// </summary>
         /// <param name="rootXaml">Корневой элементы плагина XamlExport64.</param>
-        /// <returns></returns>
-        public static List<Path> XamlExport64(Viewbox rootXaml)
-        {            
+        /// <returns>Конкатенацию строк сожержащих путь.</returns>
+        public static string XamlExport64Path(Viewbox rootXaml)
+        {
             Canvas canvas = rootXaml.Child as Canvas;
-            List<Path> paths = new List<Path>();
+            string paths = " ";
             object check = null;
 
             while (check?.GetType() != typeof(Path))
             {
-                foreach (var child in canvas.Children)
-                {
-                    check = child;
-                    if (child is Path)
-                        paths.Add(child as Path);
-                    else
-                        canvas = (Canvas)child;
-                }
-            } return paths;
+                if (canvas != null)
+                    foreach (var child in canvas.Children)
+                    {
+                        check = child;
+                        if (child is Path)
+                            paths += (child as Path).Data.ToString().Substring(2).Replace(',', '.').Replace(';', ',');
+                        else
+                            canvas = (Canvas) child;
+                    }
+            }
+            return paths;
         }
     }
 }

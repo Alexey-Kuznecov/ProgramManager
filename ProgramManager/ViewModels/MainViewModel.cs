@@ -155,6 +155,7 @@ namespace ProgramManager.ViewModels
                 OnPropertyChanged("WrapPackage");
             }
         }
+        
         #endregion
 
         #region Commands
@@ -176,16 +177,13 @@ namespace ProgramManager.ViewModels
         public ICommand CmdRemovePackage => new RelayCommand(obj => { RemovePackage(); });
         public ICommand OpenIconEditor => new RelayCommand(obj =>
         {
-            using (WindowDispatchers wd = new WindowDispatchers())
-            {
-                wd.IconsEditor = new IconsEditor();
-                wd.IconsEditor.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-                wd.IconsEditor.Show();
-            }
+            IconsEditor singleInstance = Singleton.SingleInstance<IconsEditor>();
+            singleInstance.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            singleInstance.Show();
         });
         #endregion
 
-        #region Method
+        #region Methods
 
         private void LoadPackage(object message)
         {
