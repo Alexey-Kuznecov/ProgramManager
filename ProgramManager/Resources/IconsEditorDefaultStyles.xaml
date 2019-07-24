@@ -40,34 +40,6 @@
         </Grid>
     </ControlTemplate>
 
-    <Style x:Key="ComboBoxTemplate" TargetType="ComboBox">
-
-        <Setter Property="SelectedItem">
-            <Setter.Value>
-                <ContentControl>
-                    <Grid>
-                        <Grid.Style>
-                            <Style TargetType="Grid">
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="LightGray" />
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Grid.Style>
-                        <Grid>
-                            <TextBlock
-                                Grid.Row="0"
-                                FontWeight="Bold"
-                                Text="adsa" />
-                        </Grid>
-                    </Grid>
-                </ContentControl>
-            </Setter.Value>
-        </Setter>
-        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-        <Setter Property="Background" Value="#F3F3F3" />
-    </Style>
     <!--  СТИЛИ ДЛЯ ВСПЛЫВАЮЩЕЙ ПОДСКАЗКИ ИКОНОК  -->
 
     <Style x:Key="IconStylesEditorTooltip" TargetType="ContentControl">

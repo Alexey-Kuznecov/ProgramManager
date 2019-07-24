@@ -127,8 +127,8 @@ namespace ProgramManager.ViewModels
                                   where pack.Name.ToLower().Contains(_filterText.ToLower())
                                   select pack;
 
-                    foreach (var package in filters) result.Add(package);
                     // Добавления результатов фильтрации и обновления списка
+                    foreach (var package in filters) result.Add(package);
                     WrapPackage[_indexTag].Packages = result;
                 }
                 else
@@ -143,14 +143,13 @@ namespace ProgramManager.ViewModels
                     // Возврат к предыдущему состоянию списка и выбор первого элемента списка
                     foreach (var packageBase in query) reset.Add(packageBase);
                     
-                    // Сброс фильтрации:
+                    // Reset the filter result:
                     WrapPackage[_indexTag].Packages = tag == "Все теги" ? Models.WrapPackage.AllPackages : reset;
                 }
 
+                // Expand first pachage data in the detail panel.
                 if (_wrapPackage[_indexTag].Packages.Count > 0)
-                {
                     CurrentPackage = _wrapPackage[_indexTag]?.Packages[0];
-                }
                    
                 OnPropertyChanged("WrapPackage");
             }

@@ -26,6 +26,8 @@ namespace ProgramManager.ViewModels
         private ListBoxItem _selectCategory;
         private string _filterText;
         private ObservableCollection<IconCollectionModel> _iconCategory;
+        private string _selectItem;
+        private int _selectIndex;
         private static ObservableCollection<ButtonExtension> _buttons;
         
         #region Constructors
@@ -34,12 +36,16 @@ namespace ProgramManager.ViewModels
             _dialogService = Singleton.SingleInstance<DefaultDialogService>();
             _fileService = Singleton.SingleInstance<XamlFileService>();
             IconCategory = IconCollectionModel.GetCategory();
-            
-            // Решает проблему с многократным вызывом
+
+            // Solves the problem with multiple calls.
             if (!Singleton.Status)
             {
                 _inputBox = Singleton.GetSingleInstance<InputBox>();
+                // Init collection.
+                IconCollectionBase.FilterCollection = new RelayCommand(name => FilterCollection((string)name));
+                IconCategory = IconCollectionModel.GetCategory();
                 AddMenuItem();
+                // Loading icons...
                 LoadIcons();
             }
         }
@@ -50,8 +56,31 @@ namespace ProgramManager.ViewModels
         /// Устанавлевает цвет иконок из выбранного значение в Combobox.
         /// </summary>
         public ComboBoxItem ColorBrush { get; set; }
-        public ComboBox dd { get; set; }
         public DrawingBrush IconBrush { get; set; }
+        /// <summary>
+        /// Contains a corrent index of the icon collection.
+        /// </summary>
+        public int SelectIndex
+        {
+            get { return _selectIndex; }
+            set
+            {
+                _selectIndex = value;
+                OnPropertyChanged("SelectIndex");
+            }
+        }
+        /// <summary>
+        /// Contains a current name of the icon collection.
+        /// </summary>
+        public string SelectItem
+        {
+            get { return _selectItem; }
+            set
+            {
+                _selectItem = value;
+                OnPropertyChanged("SelectItem");
+            }
+        }
         public ObservableCollection<ButtonExtension> Buttons
         {
             get { return _buttons; }
@@ -97,9 +126,9 @@ namespace ProgramManager.ViewModels
                     ObservableCollection<ButtonExtension> filtered 
                         = new ObservableCollection<ButtonExtension>();
 
-                    var query = from button in Buttons
-                        where button.IconName.ToLower().Contains(_filterText.ToLower())
-                        select button;
+                    var query = from button in ButtonsClone
+                                where button.IconName.ToLower().Contains(_filterText.ToLower())
+                                select button;
 
                     foreach (var button in query)
                         filtered.Add(button);
@@ -195,8 +224,31 @@ namespace ProgramManager.ViewModels
             Buttons = Buttons.OrderBy(p => p.IconName.Substring(0, 2)).ToObservableCollection();
         });
         #endregion
-
+        /// <summary>
+        /// Filters collection by collection name.
+        /// </summary>
+        /// <param name="category">Collection name.</param>
         #region Functions
+        public void FilterCollection(string category)
+        {
+            Buttons = ButtonsClone;
+
+            var filtered
+                = new ObservableCollection<ButtonExtension>();
+
+            var query = from button in Buttons
+                        where button.Category.ToLower().Contains(category.ToLower())
+                select button;
+
+            foreach (var button in query)
+                filtered.Add(button);
+            Buttons = filtered;
+
+            IconCollectionModel catermodel = (IconCategory.Single(o => o.CollectionName == category));
+            SelectIndex = IconCategory.IndexOf(catermodel);
+            if (category == "Вся коллекция")
+                Buttons = ButtonsClone;
+        }
         /// <summary>
         /// Loading icons in the icon editor.
         /// </summary>
@@ -225,6 +277,9 @@ namespace ProgramManager.ViewModels
             }
             // Сортирует иконки по алфавиту и упаковывает в коллекцию.
             Buttons = Buttons.OrderBy(p => p.IconName.Substring(0, 2)).ToObservableCollection();
+            // Select current collection.
+            SelectIndex = 0;
+            SelectItem = "";
             // Клонирует коллекцию — для того чтобы восстановить в  
             // исходное состояние коллекцию по необходимости.
             ButtonsClone = Buttons;

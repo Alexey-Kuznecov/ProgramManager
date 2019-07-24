@@ -277,10 +277,7 @@
                     Style="{StaticResource btIcon}">
                     <Button.Content>
                         <ContentControl>
-                            <Image
-                                Grid.Column="2"
-                                Height="16"
-                                Source="../Resources/Icons/Delete_48px.png" />
+                            <Image Height="16" Source="../Resources/Icons/Delete_48px.png" />
                         </ContentControl>
                     </Button.Content>
                 </Button>

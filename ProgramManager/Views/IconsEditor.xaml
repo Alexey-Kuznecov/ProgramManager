@@ -6,8 +6,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:ProgramManager.ViewModels"
     Title="IconsEditor"
-    Width="700"
-    Height="480"
+    Width="800"
+    Height="520"
     WindowStartupLocation="Manual"
     mc:Ignorable="d">
     <Window.Resources>
@@ -59,28 +59,51 @@
             Grid.Column="1"
             Width="300"
             Height="35"
-            Margin="15,5"
+            Margin="10,11,246,9"
             FontSize="16"
             FontStyle="Italic"
             Tag="Имя..."
-            Text="{Binding FilterText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            Text="{Binding FilterText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+            <!--<TextBox.InputBindings>
+                <KeyBinding Command="{Binding FilterText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Gesture="back" />
+            </TextBox.InputBindings>-->
+        </TextBox>
+
         <ListBox
             x:Name="ListBox"
             Grid.Row="1"
             Grid.RowSpan="2"
             Grid.Column="0"
             ItemsSource="{Binding IconCategory}"
+            SelectedIndex="{Binding SelectIndex, Mode=TwoWay}"
+            SelectedItem="{Binding SelectItem, Mode=TwoWay}"
             Style="{StaticResource ListBox}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock ContextMenu="{Binding NameContextMenu}" Text="{Binding CollectionName}" />
+                    <ContentControl
+                        Width="180"
+                        Height="30"
+                        VerticalAlignment="Center">
+                        <TextBlock
+                            Height="30"
+                            Padding="5"
+                            ContextMenu="{Binding NameContextMenu}"
+                            Cursor="Hand"
+                            Text="{Binding CollectionName}" />
+                        <ContentControl.InputBindings>
+                            <MouseBinding
+                                Command="{Binding FilterCollection}"
+                                CommandParameter="{Binding CollectionName}"
+                                Gesture="LeftClick" />
+                        </ContentControl.InputBindings>
+                    </ContentControl>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
         <ScrollViewer
             Grid.Row="2"
             Grid.Column="1"
-            VerticalScrollBarVisibility="Auto">
+            VerticalScrollBarVisibility="Visible">
             <ItemsControl ItemsSource="{Binding Buttons, Mode=TwoWay}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
@@ -147,28 +170,28 @@
             Grid.ColumnSpan="2"
             Background="#EDEDED">
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="250" />
                 <ColumnDefinition Width="200*" />
-                <ColumnDefinition Width="200*" />
-                <ColumnDefinition Width="105*" />
+                <ColumnDefinition Width="160" />
             </Grid.ColumnDefinitions>
             <ComboBox
                 x:Name="ComboBox"
                 Width="200"
                 Height="35"
                 VerticalContentAlignment="Center"
+                Cursor="Hand"
                 SelectedIndex="0"
-                SelectedItem="{Binding ColorBrush}"
-                Style="{StaticResource ComboBoxTemplate}">
+                SelectedItem="{Binding ColorBrush}">
                 <ComboBoxItem Content="#FF1A1E24" Template="{StaticResource ComboBoxItemTemplate}" />
                 <ComboBoxItem Content="#ee2c2c00" Template="{StaticResource ComboBoxItemTemplate}" />
                 <ComboBoxItem Content="#ee2c2c00" Template="{StaticResource ComboBoxItemTemplate}" />
-                <ComboBoxItem Content="#FF72f534" Template="{StaticResource ComboBoxItemTemplate}" />
+                <ComboBoxItem Content="#FF79ED9A" Template="{StaticResource ComboBoxItemTemplate}" />
                 <ComboBoxItem Content="#FF184B9C" Template="{StaticResource ComboBoxItemTemplate}" />
-                <ComboBoxItem Content="#FFffcd09" Template="{StaticResource ComboBoxItemTemplate}" />
+                <ComboBoxItem Content="#FFE1D854" Template="{StaticResource ComboBoxItemTemplate}" />
                 <ComboBoxItem Content="#FF0c6eb7" Template="{StaticResource ComboBoxItemTemplate}" />
                 <ComboBoxItem Content="#FF9b993a" Template="{StaticResource ComboBoxItemTemplate}" />
                 <ComboBoxItem Content="#FFbb4b9c" Template="{StaticResource ComboBoxItemTemplate}" />
-                <ComboBoxItem Content="#FFf68f4d" Template="{StaticResource ComboBoxItemTemplate}" />
+                <ComboBoxItem Content="#FFF17A07" Template="{StaticResource ComboBoxItemTemplate}" />
                 <ComboBoxItem Content="#FF78c696" Template="{StaticResource ComboBoxItemTemplate}" />
                 <ComboBoxItem Content="#FFf59eb3" Template="{StaticResource ComboBoxItemTemplate}" />
                 <ComboBoxItem Content="#FFc5a3cc" Template="{StaticResource ComboBoxItemTemplate}" />
@@ -176,7 +199,7 @@
                 <ComboBoxItem Content="#FFe0b03a" Template="{StaticResource ComboBoxItemTemplate}" />
                 <ComboBoxItem Content="#FF8d663a" Template="{StaticResource ComboBoxItemTemplate}" />
                 <ComboBoxItem Content="#FF028d5b" Template="{StaticResource ComboBoxItemTemplate}" />
-                <ComboBoxItem Content="#FF89d3de" Template="{StaticResource ComboBoxItemTemplate}" />
+                <ComboBoxItem Content="#FF009FE3" Template="{StaticResource ComboBoxItemTemplate}" />
                 <ComboBoxItem Content="#FF672f8f" Template="{StaticResource ComboBoxItemTemplate}" />
             </ComboBox>
             <Button

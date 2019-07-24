@@ -13,7 +13,7 @@
   <Package Id="1" Category="Программы">
     <Author>Adobe</Author>
     <Description>Программа для оформления фотографий</Description>
-    <Icon Name="Allustrator" Foreground="#FFFFFFFF" Background="#FFF68F4D" />
+    <Icon Name="Allustrator" Foreground="#FFFFFFFF" Background="#FFF17A07" />
     <Name>Illustrator</Name>
     <Tag>Не подшитые</Tag>
     <Version>Cloud CC6</Version>
@@ -21,9 +21,9 @@
   <Package Id="2" Category="Программы">
     <Author>Axure Software Solution</Author>
     <Description>Программа для создания прототипов сайтов</Description>
-    <Image Source="../Resources/User/Images/Programs.png" />
+    <Icon Name="new_Netbeans752" Foreground="#FFFFFFFF" Background="#FFBB4B9C" />
     <Name>Axure</Name>
-    <Tag>Инструменты вебразработчика</Tag>
+    <Tag>Не подшитые</Tag>
     <Version>RP 8</Version>
   </Package>
   <Package Id="3" Category="Программы">
