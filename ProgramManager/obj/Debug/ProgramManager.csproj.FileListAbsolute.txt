@@ -97,6 +97,8 @@ D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Views\Ic
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Resources\Generic.baml
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Resources\Icons.baml
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Resources\IconsEditorDefaultStyles.baml
-D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\ProgramManager.csprojResolveAssemblyReference.cache
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Views\InputBox.g.cs
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Views\InputBox.baml
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Resources\MainStyles.baml
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Resources\PackageDialogStyles.baml
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\ProgramManager.csprojResolveAssemblyReference.cache

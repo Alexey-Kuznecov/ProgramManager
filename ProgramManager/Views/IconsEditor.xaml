@@ -35,7 +35,7 @@
         <Menu
             Grid.Row="0"
             Grid.ColumnSpan="2"
-            Background="#FFE6E6E6">
+            Background="#FFFFFF">
             <MenuItem FontSize="12" Header="Файл">
                 <MenuItem Command="{Binding OpenFileIconCommand}" Header="Открыть" />
                 <MenuItem Header="Сохранить" />
@@ -57,6 +57,7 @@
         <TextBox
             Grid.Row="1"
             Grid.Column="1"
+            Width="300"
             Height="35"
             Margin="15,5"
             FontSize="16"
@@ -72,19 +73,7 @@
             Style="{StaticResource ListBox}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock ContextMenu="{Binding NameContextMenu}" Text="{Binding CollectionName}">
-                        <!--<TextBlock.ContextMenu>
-                            <ContextMenu>
-                                <ContextMenu.DataContext>
-                                    <vm:IconEditorViewModel FilterText="ss" IconBrush="{StaticResource IdiaIcon}" x:Name="IconEditorViewModel" />
-                                </ContextMenu.DataContext>
-                                <MenuItem Command="{Binding OpenFileIconCommand}" Header="Добавить иконку" />
-                                <MenuItem Header="Добавить категорию" />
-                                <MenuItem Header="Добавить разделитель" />
-                                <MenuItem Header="Переименовать" />
-                            </ContextMenu>
-                        </TextBlock.ContextMenu>-->
-                    </TextBlock>
+                    <TextBlock ContextMenu="{Binding NameContextMenu}" Text="{Binding CollectionName}" />
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
@@ -156,8 +145,7 @@
             Grid.Row="3"
             Grid.Column="0"
             Grid.ColumnSpan="2"
-            Height="30"
-            Margin="10,10,40,20">
+            Background="#EDEDED">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="200*" />
                 <ColumnDefinition Width="200*" />
@@ -166,30 +154,35 @@
             <ComboBox
                 x:Name="ComboBox"
                 Width="200"
+                Height="35"
                 VerticalContentAlignment="Center"
                 SelectedIndex="0"
-                SelectedItem="{Binding ColorBrush}">
-                <ComboBoxItem Content="#FF1A1E24" />
-                <ComboBoxItem Content="#ee2c2c00" />
-                <ComboBoxItem Content="#FF72f534" />
-                <ComboBoxItem Content="#FF184B9C" />
-                <ComboBoxItem Content="#FFffcd09" />
-                <ComboBoxItem Content="#FF0c6eb7" />
-                <ComboBoxItem Content="#FF9b993a" />
-                <ComboBoxItem Content="#FFbb4b9c" />
-                <ComboBoxItem Content="#FFf68f4d" />
-                <ComboBoxItem Content="#FF78c696" />
-                <ComboBoxItem Content="#FFf59eb3" />
-                <ComboBoxItem Content="#FFc5a3cc" />
-                <ComboBoxItem Content="#FFcec82b" />
-                <ComboBoxItem Content="#FFe0b03a" />
-                <ComboBoxItem Content="#FF8d663a" />
-                <ComboBoxItem Content="#FF028d5b" />
-                <ComboBoxItem Content="#FF89d3de" />
-                <ComboBoxItem Content="#FF672f8f" />
+                SelectedItem="{Binding ColorBrush}"
+                Style="{StaticResource ComboBoxTemplate}">
+                <ComboBoxItem Content="#FF1A1E24" Template="{StaticResource ComboBoxItemTemplate}" />
+                <ComboBoxItem Content="#ee2c2c00" Template="{StaticResource ComboBoxItemTemplate}" />
+                <ComboBoxItem Content="#ee2c2c00" Template="{StaticResource ComboBoxItemTemplate}" />
+                <ComboBoxItem Content="#FF72f534" Template="{StaticResource ComboBoxItemTemplate}" />
+                <ComboBoxItem Content="#FF184B9C" Template="{StaticResource ComboBoxItemTemplate}" />
+                <ComboBoxItem Content="#FFffcd09" Template="{StaticResource ComboBoxItemTemplate}" />
+                <ComboBoxItem Content="#FF0c6eb7" Template="{StaticResource ComboBoxItemTemplate}" />
+                <ComboBoxItem Content="#FF9b993a" Template="{StaticResource ComboBoxItemTemplate}" />
+                <ComboBoxItem Content="#FFbb4b9c" Template="{StaticResource ComboBoxItemTemplate}" />
+                <ComboBoxItem Content="#FFf68f4d" Template="{StaticResource ComboBoxItemTemplate}" />
+                <ComboBoxItem Content="#FF78c696" Template="{StaticResource ComboBoxItemTemplate}" />
+                <ComboBoxItem Content="#FFf59eb3" Template="{StaticResource ComboBoxItemTemplate}" />
+                <ComboBoxItem Content="#FFc5a3cc" Template="{StaticResource ComboBoxItemTemplate}" />
+                <ComboBoxItem Content="#FFcec82b" Template="{StaticResource ComboBoxItemTemplate}" />
+                <ComboBoxItem Content="#FFe0b03a" Template="{StaticResource ComboBoxItemTemplate}" />
+                <ComboBoxItem Content="#FF8d663a" Template="{StaticResource ComboBoxItemTemplate}" />
+                <ComboBoxItem Content="#FF028d5b" Template="{StaticResource ComboBoxItemTemplate}" />
+                <ComboBoxItem Content="#FF89d3de" Template="{StaticResource ComboBoxItemTemplate}" />
+                <ComboBoxItem Content="#FF672f8f" Template="{StaticResource ComboBoxItemTemplate}" />
             </ComboBox>
             <Button
                 Grid.Column="2"
+                Width="100"
+                Height="35"
                 Command="{Binding ResetByDefault}"
                 CommandParameter="{Binding ItemTemplate.Template, ElementName=ccc}"
                 Content="Сбросить" />

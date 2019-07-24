@@ -1,0 +1,43 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converters="clr-namespace:ProgramManager.Converters"
+    xmlns:local="clr-namespace:ProgramManager.Resources">
+
+    <!--  СТИЛИ ДЛЯ ИКОНКИ ПАКЕТА В ОКНЕ ПАКЕТА  -->
+
+    <ControlTemplate x:Key="IconTemplateDialogPack" TargetType="Button">
+        <ControlTemplate.Resources>
+            <converters:ContentConverter x:Key="ContentConverter" />
+            <converters:BrushConverter x:Key="BrushConverter" />
+        </ControlTemplate.Resources>
+        <Grid>
+            <Path
+                x:Name="rect"
+                Fill="{Binding IconBackground, Mode=TwoWay}"
+                Stretch="Uniform">
+                <Path.Data>
+                    <RectangleGeometry Rect="0,0,50,50" />
+                </Path.Data>
+            </Path>
+            <Path x:Name="overRect" Stretch="Uniform">
+                <Path.Data>
+                    <RectangleGeometry Rect="0,0,40,40" />
+                </Path.Data>
+            </Path>
+            <Path
+                x:Name="shape"
+                Width="24"
+                Height="24"
+                Data="{Binding IconPath, Converter={StaticResource ContentConverter}}"
+                Fill="{Binding IconForeground}"
+                Stretch="Uniform" />
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="overRect" Property="Fill" Value="#4DCCCCFF" />
+                <Setter TargetName="shape" Property="Fill" Value="White" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+</ResourceDictionary>

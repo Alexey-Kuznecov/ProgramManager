@@ -3,68 +3,99 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:converters="clr-namespace:ProgramManager.Converters">
 
-    <!--  СТИЛИ ДЛЯ ИКОНОК ПАКЕТОВ ГЛАВНОГО ОКНА ПАКЕТОВ  -->
 
-    <Style x:Key="IconStylesMain" TargetType="ContentControl">
-        <Setter Property="Height" Value="48" />
-        <Setter Property="Margin" Value="5" />
-    </Style>
+    <ControlTemplate x:Key="ComboBoxItemTemplate" TargetType="ComboBoxItem">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="10*" />
+                <ColumnDefinition Width="25" />
+            </Grid.ColumnDefinitions>
+            <Grid.Style>
+                <Style TargetType="Grid">
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#EDEDED" />
+                            <Setter Property="Height" Value="40" />
 
-    <ControlTemplate x:Key="IconTemplateMain" TargetType="ContentControl">
-        <ControlTemplate.Resources>
-            <converters:ContentConverter x:Key="ContentConverter" />
-            <converters:BrushConverter x:Key="BrushConverter" />
-        </ControlTemplate.Resources>
-        <Grid x:Name="grid">
-            <Path Fill="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Content, Converter={StaticResource BrushConverter}, ConverterParameter=rect}" Stretch="Uniform">
-                <Path.Data>
-                    <RectangleGeometry Rect="0,0,50,50" />
-                </Path.Data>
-            </Path>
-            <Path
-                Width="32"
-                Height="32"
-                Data="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Content, Converter={StaticResource ContentConverter}}"
-                Fill="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Content, Converter={StaticResource BrushConverter}, ConverterParameter=shape}"
-                Stretch="Uniform" />
+                        </Trigger>
+                    </Style.Triggers>
+                    <Setter Property="Height" Value="25" />
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                    <Setter Property="Cursor" Value="Hand" />
+                </Style>
+            </Grid.Style>
+            <TextBlock
+                Height="25"
+                Padding="5"
+                Cursor="Hand"
+                FontSize="12"
+                Foreground="DimGray"
+                Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Content}" />
+            <Label
+                Grid.Column="1"
+                Width="10"
+                Height="10"
+                Padding="5"
+                Background="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Content}" />
         </Grid>
     </ControlTemplate>
 
-    <!--  СТИЛИ ДЛЯ ИКОНКИ ПАКЕТА В ОКНЕ ПАКЕТА  -->
+    <Style x:Key="ComboBoxTemplate" TargetType="ComboBox">
 
-    <ControlTemplate x:Key="IconTemplateDialogPack" TargetType="Button">
+        <Setter Property="SelectedItem">
+            <Setter.Value>
+                <ContentControl>
+                    <Grid>
+                        <Grid.Style>
+                            <Style TargetType="Grid">
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="LightGray" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Grid.Style>
+                        <Grid>
+                            <TextBlock
+                                Grid.Row="0"
+                                FontWeight="Bold"
+                                Text="adsa" />
+                        </Grid>
+                    </Grid>
+                </ContentControl>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="Background" Value="#F3F3F3" />
+    </Style>
+    <!--  СТИЛИ ДЛЯ ВСПЛЫВАЮЩЕЙ ПОДСКАЗКИ ИКОНОК  -->
+
+    <Style x:Key="IconStylesEditorTooltip" TargetType="ContentControl">
+        <Setter Property="Margin" Value="5" />
+        <Setter Property="Background" Value="#F3F3F3" />
+    </Style>
+
+    <ControlTemplate x:Key="IconTemplateEditorTooltip" TargetType="ContentControl">
         <ControlTemplate.Resources>
             <converters:ContentConverter x:Key="ContentConverter" />
-            <converters:BrushConverter x:Key="BrushConverter" />
         </ControlTemplate.Resources>
-        <Grid>
+        <Grid x:Name="grid">
             <Path
                 x:Name="rect"
-                Fill="{Binding IconBackground, Mode=TwoWay}"
+                Fill="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Background}"
                 Stretch="Uniform">
                 <Path.Data>
                     <RectangleGeometry Rect="0,0,50,50" />
                 </Path.Data>
             </Path>
-            <Path x:Name="overRect" Stretch="Uniform">
-                <Path.Data>
-                    <RectangleGeometry Rect="0,0,40,40" />
-                </Path.Data>
-            </Path>
             <Path
                 x:Name="shape"
-                Width="24"
-                Height="24"
-                Data="{Binding IconPath, Converter={StaticResource ContentConverter}}"
-                Fill="{Binding IconForeground}"
+                Width="64"
+                Height="64"
+                Data="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Content, Converter={StaticResource ContentConverter}}"
+                Fill="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Foreground}"
                 Stretch="Uniform" />
         </Grid>
-        <ControlTemplate.Triggers>
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter TargetName="overRect" Property="Fill" Value="#4DCCCCFF" />
-                <Setter TargetName="shape" Property="Fill" Value="White" />
-            </Trigger>
-        </ControlTemplate.Triggers>
     </ControlTemplate>
 
     <!--  СТИЛИ ДЛЯ ИКОНОК РЕДАКТОРА ИКОНОК  -->
@@ -105,33 +136,5 @@
                 <Setter TargetName="rect" Property="Fill" Value="{Binding RelativeSource={RelativeSource Self}, Path=Stroke}" />
             </Trigger>
         </ControlTemplate.Triggers>
-    </ControlTemplate>
-
-    <Style x:Key="IconStylesEditorTooltip" TargetType="ContentControl">
-        <Setter Property="Margin" Value="5" />
-        <Setter Property="Background" Value="#F3F3F3" />
-    </Style>
-
-    <ControlTemplate x:Key="IconTemplateEditorTooltip" TargetType="ContentControl">
-        <ControlTemplate.Resources>
-            <converters:ContentConverter x:Key="ContentConverter" />
-        </ControlTemplate.Resources>
-        <Grid x:Name="grid">
-            <Path
-                x:Name="rect"
-                Fill="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Background}"
-                Stretch="Uniform">
-                <Path.Data>
-                    <RectangleGeometry Rect="0,0,50,50" />
-                </Path.Data>
-            </Path>
-            <Path
-                x:Name="shape"
-                Width="64"
-                Height="64"
-                Data="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Content, Converter={StaticResource ContentConverter}}"
-                Fill="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Foreground}"
-                Stretch="Uniform" />
-        </Grid>
     </ControlTemplate>
 </ResourceDictionary>

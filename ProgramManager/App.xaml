@@ -5,6 +5,8 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/ProgramManager;component/Resources/MainStyles.xaml" />
+                <ResourceDictionary Source="/ProgramManager;component/Resources/PackageDialogStyles.xaml" />
                 <ResourceDictionary Source="/ProgramManager;component/Resources/IconsEditorDefaultStyles.xaml" />
                 <ResourceDictionary Source="/ProgramManager;component/Resources/Icons.xaml" />
                 <ResourceDictionary Source="/ProgramManager;component/Resources/Generic.xaml" />

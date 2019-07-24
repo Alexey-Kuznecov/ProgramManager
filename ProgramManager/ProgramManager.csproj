@@ -164,6 +164,14 @@
     <Compile Include="ViewModels\PackagesDialogViewModel.cs" />
     <Compile Include="ViewModels\InputNameViewModel.cs" />
     <Compile Include="ViewModels\Base\RelayCommand.cs" />
+    <Page Include="Resources\MainStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\PackageDialogStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\InputBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

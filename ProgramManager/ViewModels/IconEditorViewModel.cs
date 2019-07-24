@@ -26,7 +26,6 @@ namespace ProgramManager.ViewModels
         private ListBoxItem _selectCategory;
         private string _filterText;
         private ObservableCollection<IconCollectionModel> _iconCategory;
-        private SolidColorBrush _color;
         private static ObservableCollection<ButtonExtension> _buttons;
         
         #region Constructors
@@ -51,6 +50,7 @@ namespace ProgramManager.ViewModels
         /// Устанавлевает цвет иконок из выбранного значение в Combobox.
         /// </summary>
         public ComboBoxItem ColorBrush { get; set; }
+        public ComboBox dd { get; set; }
         public DrawingBrush IconBrush { get; set; }
         public ObservableCollection<ButtonExtension> Buttons
         {
@@ -161,7 +161,7 @@ namespace ProgramManager.ViewModels
                 IconModel iconModel = new IconModel()
                 {
                     Id = Buttons.Count + 1,
-                    Name = CommonProperties.IconNames.SingleOrDefault(n => n == name) != null ? "new_" + name : "new_" + name + Buttons.Count + 1,
+                    Name = CommonProperties.IconNames.SingleOrDefault(n => n == name) != null ? "new_" + name : "new_" + name + Buttons.Count,
                     BgroundColor = ColorBrush.Content.ToString().FormatStringToSolidColor(),
                     FgroundColor = "#FFFFFF".FormatStringToSolidColor(),
                     Category = "Разное",
