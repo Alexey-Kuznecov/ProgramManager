@@ -3,7 +3,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
-namespace ProgramManager.Resources
+namespace ProgramManager.Plugins.IconsEditor.Data
 {
     [Serializable]
     class ButtonExtension

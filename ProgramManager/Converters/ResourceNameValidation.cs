@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Globalization;
-using ProgramManager.Services;
+using ProgramManager.Plugins;
 
 namespace ProgramManager.Converters
 {

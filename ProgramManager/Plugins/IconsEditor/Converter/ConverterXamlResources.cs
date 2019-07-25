@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
-namespace ProgramManager.Resources
+namespace ProgramManager.Plugins.IconEditor.Converter
 {
     [DebuggerStepThrough]
     class ConverterXamlResources

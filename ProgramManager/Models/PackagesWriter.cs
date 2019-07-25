@@ -39,7 +39,7 @@ namespace ProgramManager.Models
         /// <summary>
         /// Простой метод добавляет два атрибута Id, Catergory и делегирует работу для создания нового пакета.
         /// </summary>
-        /// <param name="data">Объект данных, ожидается объект типа PackageBase.</param>
+        /// <param name="data">Данные пакета, ожидается объект типа PackageBase.</param>
         /// <param name="category">Категория в контексте которой будет создан пакет.</param>
         public static void AddPackage(PackageBase data, string category)
         {
@@ -57,13 +57,13 @@ namespace ProgramManager.Models
 
             // Обновление списка пакетов
             EventAggregate ins = new EventAggregate();
-            ins.OnLoadPackage("");
+            ins.OnLoadPackage("Update package list!");
         }
         /// <summary>
         /// Метод делегирует работу для обновления пакета.
         /// </summary>
         /// <param name="id">Уникальный номер пакета, который необходимо обновить</param>
-        /// <param name="data">Объект данных, ожидается объект типа PackageBase.</param>
+        /// <param name="data">Данные пакета, ожидается объект типа PackageBase.</param>
         public static void UpdatePackage(PackageBase data)
         {
             XElement root = XElement.Load(DocumentName),
@@ -137,9 +137,21 @@ namespace ProgramManager.Models
         /// <param name="data">Объект данных, ожидается объект типа PackageBase.</param>
         public static void AddIcon(XElement currentPack, PackageBase data)
         {
-            currentPack.Add(new XElement("Icon", new XAttribute("Name", data.Icon.Name),
-                new XAttribute("Foreground", data.Icon.FgroundColor),
-                new XAttribute("Background", data.Icon.BgroundColor)));
+            var iconData = "../../Resources/User/packageIcons.xml";
+            var root = XElement.Load(iconData);
+
+            var check = from icon in root.Elements()
+                where icon.Attribute("Id")?.Value == data.Id.ToString()
+                select icon;
+            check.Remove();
+
+            root.Add(new XElement("Icon", new XAttribute("Id", data.Id), 
+                new XAttribute("Name", data.Icon.Name), 
+                new XAttribute("Foreground", data.Icon.FgroundColor), 
+                new XAttribute("Background", data.Icon.BgroundColor), 
+                new XAttribute("Path", data.Icon.Path.Data.ToString().Replace(',', '.').Replace(';', ','))));
+
+            root.Save(iconData);
         }
         /// <summary>
         /// Метод формирует xml элементы на основе данных пользовательских полей (Имя, значение). 

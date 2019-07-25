@@ -116,16 +116,21 @@
     <Compile Include="Filters\FilterProperties.cs" />
     <Compile Include="Converters\BaseConverter.cs" />
     <Compile Include="Models\CategoryModelOb.cs" />
-    <Compile Include="Services\CommonProperties.cs" />
-    <Compile Include="Resources\Exceptions\XmlElementNotFoundException.cs" />
-    <Compile Include="Resources\IconsDataModifier.cs" />
-    <Compile Include="Resources\IconsDataWriter.cs" />
+    <Compile Include="Plugins\DataPackageEditor.cs" />
+    <Compile Include="Plugins\IconsEditor\Bin\IconsEditor.xaml.cs">
+      <DependentUpon>IconsEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Plugins\Plugin.cs" />
+    <Compile Include="Plugins\CommonProperties.cs" />
+    <Compile Include="Plugins\Exceptions\XmlElementNotFoundException.cs" />
+    <Compile Include="Plugins\IconsEditor\Data\IconsDataModifier.cs" />
+    <Compile Include="Plugins\IconsEditor\Data\IconsDataWriter.cs" />
     <Compile Include="Test\LogWriter.cs" />
     <Compile Include="ViewModels\InputBoxViewModel.cs" />
     <Compile Include="Views\InputBox.xaml.cs">
       <DependentUpon>InputBox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Resources\IconCategoryModel.cs" />
+    <Compile Include="Plugins\IconsEditor\Bin\IconCategoryModel.cs" />
     <Compile Include="Models\PackageModel\PackageDrtails.cs" />
     <Compile Include="Models\PackageModel\CategoryModel.cs" />
     <Compile Include="Models\Func\FuncHelper.cs" />
@@ -138,15 +143,15 @@
     <Compile Include="Models\PackageModel\PackageBase.cs" />
     <Compile Include="Models\PackageModel\PluginModel.cs" />
     <Compile Include="Models\PackageModel\ProgramModel.cs" />
-    <Compile Include="Resources\ButtonExtension.cs" />
-    <Compile Include="Resources\ConverterForeignPlugins.cs" />
-    <Compile Include="Resources\ConverterXamlToBitmap.cs" />
-    <Compile Include="Resources\ConverterXamlResources.cs" />
-    <Compile Include="Resources\HelperFunctions.cs" />
-    <Compile Include="Resources\IconModel.cs" />
-    <Compile Include="Resources\IconsDataReader.cs" />
+    <Compile Include="Plugins\IconsEditor\Data\ButtonExtension.cs" />
+    <Compile Include="Plugins\IconsEditor\Converter\ConverterForeignPlugins.cs" />
+    <Compile Include="Plugins\IconsEditor\Converter\ConverterXamlToBitmap.cs" />
+    <Compile Include="Plugins\IconsEditor\Converter\ConverterXamlResources.cs" />
+    <Compile Include="Services\HelperFunctions.cs" />
+    <Compile Include="Models\IconModel.cs" />
+    <Compile Include="Plugins\IconsEditor\Data\IconsDataReader.cs" />
     <Compile Include="Services\DefaultDialogService.cs" />
-    <Compile Include="Services\Synchronizer.cs" />
+    <Compile Include="Plugins\Synchronizer.cs" />
     <Compile Include="Services\EventAggregate.cs" />
     <Compile Include="Services\BaseEventArgs.cs" />
     <Compile Include="Converters\KeywordToTextConverter.cs" />
@@ -158,12 +163,16 @@
     <Compile Include="Services\Singleton.cs" />
     <Compile Include="Services\XamlFileService.cs" />
     <Compile Include="ViewModels\Base\PropertiesChanged.cs" />
-    <Compile Include="ViewModels\IconEditorViewModel.cs" />
+    <Compile Include="Plugins\IconsEditor\Bin\IconEditorViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\PackagesDialogPartial.cs" />
     <Compile Include="ViewModels\PackagesDialogViewModel.cs" />
     <Compile Include="ViewModels\InputNameViewModel.cs" />
     <Compile Include="ViewModels\Base\RelayCommand.cs" />
+    <Page Include="Plugins\IconsEditor\Bin\IconsEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resources\MainStyles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -185,10 +194,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\Icons.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\IconsEditor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -222,9 +227,6 @@
     </Compile>
     <Compile Include="Services\PackagesDialogVisibility.cs" />
     <Compile Include="ViewModels\TagDialogViewModel.cs" />
-    <Compile Include="Views\IconsEditor.xaml.cs">
-      <DependentUpon>IconsEditor.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\DialogPacks\TagDialog.xaml.cs">
       <DependentUpon>TagDialog.xaml</DependentUpon>
     </Compile>
@@ -318,9 +320,11 @@
     <Resource Include="Resources\User\Images\Programs.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\IconsData.xml" />
+    <Resource Include="Plugins\IconsEditor\Data\IconsData.xml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\User\packageIcons.xml" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

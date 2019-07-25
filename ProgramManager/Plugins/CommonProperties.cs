@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.Windows;
-using ProgramManager.Test;
 using ProgramManager.ViewModels.Base;
 
-namespace ProgramManager.Services
+namespace ProgramManager.Plugins
 {
     class CommonProperties : PropertiesChanged
     {

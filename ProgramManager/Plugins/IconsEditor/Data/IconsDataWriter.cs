@@ -1,13 +1,13 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Linq;
 using System.Xml.Linq;
+using ProgramManager.Models;
 
-namespace ProgramManager.Resources
+namespace ProgramManager.Plugins.IconsEditor.Data
 {
     class IconsDataWriter : IDisposable
     {
-        private const string DocumentName = @"..\..\Resources\IconsData.xml";
+        private const string DocumentName = @"..\..\Plugins\IconsEditor\Data\IconsData.xml";
 
         public void LoadDocument()
         {

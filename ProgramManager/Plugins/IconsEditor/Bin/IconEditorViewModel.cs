@@ -1,20 +1,23 @@
 ﻿using System;
+using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
-using System.Collections.ObjectModel;
-using System.Linq;
 using ProgramManager.Contracts;
 using ProgramManager.Converters;
 using ProgramManager.Enums;
+using ProgramManager.Models;
+using ProgramManager.Plugins.IconsEditor.Data;
 using ProgramManager.Resources;
 using ProgramManager.Services;
+using ProgramManager.ViewModels;
 using ProgramManager.ViewModels.Base;
 using ProgramManager.Views;
 
-namespace ProgramManager.ViewModels
+namespace ProgramManager.Plugins.IconsEditor.Bin
 {
     /// <summary>
     /// View model for window IconsEditor. 
@@ -53,11 +56,6 @@ namespace ProgramManager.ViewModels
 
         #region Properties
         /// <summary>
-        /// Устанавлевает цвет иконок из выбранного значение в Combobox.
-        /// </summary>
-        public ComboBoxItem ColorBrush { get; set; }
-        public DrawingBrush IconBrush { get; set; }
-        /// <summary>
         /// Contains a corrent index of the icon collection.
         /// </summary>
         public int SelectIndex
@@ -81,6 +79,11 @@ namespace ProgramManager.ViewModels
                 OnPropertyChanged("SelectItem");
             }
         }
+        /// <summary>
+        /// Устанавлевает цвет иконок из выбранного значение в Combobox.
+        /// </summary>
+        public ComboBoxItem ColorBrush { get; set; }
+        public DrawingBrush IconBrush { get; set; }
         public ObservableCollection<ButtonExtension> Buttons
         {
             get { return _buttons; }
@@ -146,8 +149,7 @@ namespace ProgramManager.ViewModels
         public ICommand SelectIconCommand => new RelayCommand(obj =>
         {
             ButtonExtension bt = obj as ButtonExtension;
-            // Sets flag to fasle to restore button source state.If user remove been set icon.
-            Singleton.Status = false;
+
             Synchronizer.IconLoad.Invoke(new IconModel()
             {
                 Name = bt?.IconName,
@@ -161,7 +163,6 @@ namespace ProgramManager.ViewModels
         /// </summary>
         public ICommand ResetByDefault => new RelayCommand(obj =>
         {
-            Singleton.Status = true;
             Synchronizer.IconLoad.Invoke(null);
         });
         /// <summary>
@@ -175,7 +176,7 @@ namespace ProgramManager.ViewModels
         /// Команда физический добавляет новую иконку ресурса,
         /// представленной в виде геометрической последовательности.
         /// </summary>
-        public ICommand OpenFileIconCommand => new RelayCommand(obj =>
+        public ICommand AddNewFileIconCommand => new RelayCommand(obj =>
         {
             if (_dialogService.OpenFileDialog())
             {
@@ -190,10 +191,10 @@ namespace ProgramManager.ViewModels
                 IconModel iconModel = new IconModel()
                 {
                     Id = Buttons.Count + 1,
-                    Name = CommonProperties.IconNames.SingleOrDefault(n => n == name) != null ? "new_" + name : "new_" + name + Buttons.Count,
+                    Name = CommonProperties.IconNames.SingleOrDefault(n => n == name) != null ? "new_" + name : "new_" + name + Buttons.Count + 1,
                     BgroundColor = ColorBrush.Content.ToString().FormatStringToSolidColor(),
                     FgroundColor = "#FFFFFF".FormatStringToSolidColor(),
-                    Category = "Разное",
+                    Category = obj == null ? "Разное" : (string)obj,
                     StringPath = paths,
                     Scale = 64
                 };
@@ -224,11 +225,12 @@ namespace ProgramManager.ViewModels
             Buttons = Buttons.OrderBy(p => p.IconName.Substring(0, 2)).ToObservableCollection();
         });
         #endregion
+
+        #region Functions
         /// <summary>
         /// Filters collection by collection name.
         /// </summary>
         /// <param name="category">Collection name.</param>
-        #region Functions
         public void FilterCollection(string category)
         {
             Buttons = ButtonsClone;
@@ -313,7 +315,7 @@ namespace ProgramManager.ViewModels
                 category.NameContextMenu.Items.Insert(0, new MenuItem
                 {
                     Header = "Add new icon",
-                    Command = OpenFileIconCommand,
+                    Command = AddNewFileIconCommand,
                     CommandParameter = category.CollectionName
                 });
             }

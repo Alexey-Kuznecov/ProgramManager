@@ -5,13 +5,14 @@ using System.Linq;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using System.Xml.Linq;
+using ProgramManager.Models;
 using ProgramManager.Services;
 
-namespace ProgramManager.Resources
+namespace ProgramManager.Plugins.IconsEditor.Data
 {
     class IconsDataReader : IDisposable
     {
-        private const string DocumentName = @"..\..\Resources\IconsData.xml";
+        private const string DocumentName = @"..\..\Plugins\IconsEditor\Data\IconsData.xml";
         private static IEnumerable<XElement> _elementIcons; // Gets all element named Icon
         private static IEnumerable<XElement> _elementCollection; // Gets all category element
 

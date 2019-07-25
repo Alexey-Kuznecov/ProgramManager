@@ -4,7 +4,7 @@ using System.Windows.Media;
 using System.Globalization;
 using System.Windows.Controls;
 using System.Windows.Shapes;
-using ProgramManager.Resources;
+using ProgramManager.Models;
 using static System.Windows.Media.ColorConverter;
 
 namespace ProgramManager.Converters
@@ -57,13 +57,13 @@ namespace ProgramManager.Converters
     {
         public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            Path pathdata = value as Path;
+            Path pathdata = value as Path ?? (value as IconModel)?.Path;
 
             if (pathdata == null)
             {
                 PathGeometry path = new PathGeometry();
                 DrawingGroup draw = value is IconModel
-                    ? (value as IconModel).Brush.Drawing as DrawingGroup
+                    ? ((IconModel)value).Brush.Drawing as DrawingGroup
                     : (value as DrawingBrush)?.Drawing as DrawingGroup;
 
                 if (draw != null)

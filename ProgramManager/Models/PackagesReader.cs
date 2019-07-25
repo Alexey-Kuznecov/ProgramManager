@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Windows.Media;
+using System.Windows.Shapes;
 using System.Xml.Linq;
 using ProgramManager.Enums;
 using ProgramManager.Models.PackageModel;
 using ProgramManager.Converters;
 using ProgramManager.Associations;
-using ProgramManager.Resources;
+using ProgramManager.Plugins;
+using ProgramManager.Services;
 
 namespace ProgramManager.Models
 {
@@ -26,7 +29,6 @@ namespace ProgramManager.Models
         public static List<T> GetPackages(CategoryModel category)
         {
             List<T> packages = new List<T>();
-            // FilterProperties<T> propNotIsEmpty = new FilterProperties<T>();
             XElement root = XElement.Load(DocumentName);
             int index = 0;
 
@@ -39,11 +41,6 @@ namespace ProgramManager.Models
             foreach (XElement element in document)
             {
                 string image = element.Element(FieldTypes.Image.ToString())?.FirstAttribute.Value;
-
-                XElement iconElement = element.Element("Icon");
-                IconModel conditionIcon = iconElement == null
-                    ? new IconModel(SetIcons(element.LastAttribute.Value), "#ffffff", "#3676AE")
-                    : new IconModel(iconElement.FirstAttribute.Value, iconElement.Attribute("Foreground")?.Value, iconElement.LastAttribute.Value);
                 
                 // Инициализация свойств из базового класса
                 packages.Add(new T
@@ -59,7 +56,7 @@ namespace ProgramManager.Models
                     TagList = GetTagsList(element),
                     Category = element.LastAttribute.Value,
                     TextField = SetFieldValue(element),
-                    Icon = conditionIcon
+                    Icon = GetIcons(element, element.FirstAttribute.Value)
                 });
                 // Вызов метода для инициализации свойств производного класса.
                 SetValueDeclaredProperties(packages, element, index);
@@ -67,6 +64,25 @@ namespace ProgramManager.Models
                 // packages[index].Datails = propNotIsEmpty.Filter(packages[index++]);             
             }
             return packages;
+        }
+        private static IconModel GetIcons(XElement element, string id)
+        {
+            var root = XElement.Load("../../Resources/User/packageIcons.xml");
+            var queryIcons = from icon in root.Elements() where icon.FirstAttribute.Value == id select icon;
+
+            foreach (var icon in queryIcons)
+            {
+                var iconModel = new IconModel(
+                    icon.Attribute("Name")?.Value, 
+                    icon.Attribute("Foreground")?.Value,
+                    icon.Attribute("Background")?.Value,
+                    icon.LastAttribute.Value
+                );
+                return iconModel;
+            }
+            // If user don't set custom icon then to the package be asigned a icon default.
+            return new IconModel(SetIcons(element.LastAttribute.Value), DataPackageEditor.IconForeDefault,
+                DataPackageEditor.IconBackDefault);
         }
         /// <summary>
         /// Устанавливает иконку взависемости от категории.

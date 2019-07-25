@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using ProgramManager.Plugins.IconsEditor.Data;
 using ProgramManager.ViewModels.Base;
 
-namespace ProgramManager.Resources
+namespace ProgramManager.Plugins.IconsEditor.Bin
 {
     /// <summary>
     /// Class of model that responsible to way display icons collection.
@@ -18,9 +18,9 @@ namespace ProgramManager.Resources
         protected IconCollectionBase()
         {
             NameContextMenu = new ContextMenu();
-            NameContextMenu.Items.Add(new MenuItem { Header = "Добавить категорию", Command = new RelayCommand(GetCollection) });
-            NameContextMenu.Items.Add(new MenuItem { Header = "Добавить разделитель", Command = new RelayCommand(GetCollection) });
-            NameContextMenu.Items.Add(new MenuItem { Header = "Переименовать", Command = new RelayCommand(GetCollection) });
+            NameContextMenu.Items.Add(new MenuItem { Header = "Добавить категорию", Command = new RelayCommand(AddNewCollection) });
+            NameContextMenu.Items.Add(new MenuItem { Header = "Добавить разделитель", Command = new RelayCommand(AddSeparator) });
+            NameContextMenu.Items.Add(new MenuItem { Header = "Переименовать", Command = new RelayCommand(RenameCollection) });
         }
         public string CollectionName { get; set; }
         public ContextMenu NameContextMenu { get; set; }
@@ -28,9 +28,17 @@ namespace ProgramManager.Resources
 
         public static ICommand FilterCollection { get; set; }
 
-        private void GetCollection()
+        private void AddNewCollection()
         {
-            MessageBox.Show("Collection");
+            throw new NotImplementedException();
+        }
+        private void AddSeparator()
+        {
+            throw new NotImplementedException();
+        }
+        private void RenameCollection()
+        {
+            throw new NotImplementedException();
         }
     }
     class IconCollectionModel : IconCollectionBase
@@ -42,7 +50,6 @@ namespace ProgramManager.Resources
         /// icon collection names and it context menu.</returns>
         public static ObservableCollection<IconCollectionModel> GetCategory()
         {
-
             var cat = new ObservableCollection<IconCollectionModel>();
             
             foreach (var name in IconsDataReader.GetCategory())

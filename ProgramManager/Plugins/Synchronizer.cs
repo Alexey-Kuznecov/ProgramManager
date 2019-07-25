@@ -1,4 +1,6 @@
-﻿using ProgramManager.Resources;
+﻿using ProgramManager.Models;
+using ProgramManager.Plugins.IconsEditor.Bin;
+using ProgramManager.Resources;
 using ProgramManager.ViewModels;
 using ProgramManager.ViewModels.Base;
 

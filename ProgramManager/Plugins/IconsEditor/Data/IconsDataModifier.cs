@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace ProgramManager.Resources
+namespace ProgramManager.Plugins.IconsEditor.Data
 {
     class IconsDataModifier
     {
-        private const string DocumentName = @"..\..\Resources\IconsData.xml";
+        private const string DocumentName = @"..\..\Plugins\IconsEditor\Data\IconsData.xml";
         public static void LoadDocument(ref XElement root)
         {
             if (root == null) throw new ArgumentNullException(nameof(root));

@@ -7,10 +7,10 @@ using System.Windows.Shapes;
 using ProgramManager.Models.PackageModel;
 using ProgramManager.Views.DialogPacks;
 using ProgramManager.ViewModels.Base;
-using ProgramManager.Resources;
 using ProgramManager.Services;
 using GalaSoft.MvvmLight.Messaging;
-using ProgramManager.Views;
+using ProgramManager.Models;
+using ProgramManager.Plugins.IconsEditor.Bin;
 
 namespace ProgramManager.ViewModels
 {
@@ -21,7 +21,6 @@ namespace ProgramManager.ViewModels
         private string _description;
         private string _packageTitle;
         private static InputName _windowInputName;
-        private DrawingBrush _iconBrush;
         private SolidColorBrush _iconForeground;
         private SolidColorBrush _iconBackground;
         private Path _iconPath;
@@ -80,19 +79,6 @@ namespace ProgramManager.ViewModels
             }
         }
         /// <summary>
-        /// Set an brush of current package.
-        /// This property is not used. 
-        /// </summary>
-        public DrawingBrush IconBrush
-        {
-            get { return _iconBrush; }
-            set
-            {
-                _iconBrush = value;
-                OnPropertyChanged("IconBrush");
-            }
-        }
-        /// <summary>
         /// Contain an icon background, 
         /// that can be set in the icon editor.
         /// </summary>
@@ -137,7 +123,6 @@ namespace ProgramManager.ViewModels
         /// </summary>
         public string Name  { get; set; }
 
-
         #endregion
 
         #region Commands
@@ -175,15 +160,15 @@ namespace ProgramManager.ViewModels
         /// Function sets icon on button that open the icon editor. 
         /// <see cref="IconEditorViewModel.SelectIconCommand">Command to add icon.</see>
         /// </summary>
-        /// <param name="icon">Icon that user selected in the icon editor.</param>
+        /// <param name="icon">Custom icon selected in the icon editor.</param>
         private void LoadSelectIcon(IconModel icon)
         {
             // Save button source state.
             if (Singleton.Back == null)
-                Singleton.Back = new IconModel(Name, IconBrush, IconForeground, IconBackground);
+                Singleton.Back = new IconModel(Name, IconPath, IconForeground, IconBackground);
             
             // Sets flag to null to restore button source state. If user remove been set icon.
-            if (!Singleton.Status)
+            if (icon != null)
             {
                 Name = icon.Name;
                 IconPath = icon.Path;

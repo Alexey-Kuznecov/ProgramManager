@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Drawing;
 using System.Windows.Controls;
 using System.Linq;
 using System.Windows;
-using System.Windows.Media;
 using ProgramManager.Converters;
 using ProgramManager.Enums;
+using ProgramManager.Models;
 using ProgramManager.Models.PackageModel;
+using ProgramManager.Plugins;
+using ProgramManager.Plugins.IconsEditor.Data;
 using ProgramManager.Services;
 using ProgramManager.Views;
-using ProgramManager.Resources;
 using ProgramManager.ViewModels.Base;
 
 namespace ProgramManager.ViewModels
@@ -69,7 +69,9 @@ namespace ProgramManager.ViewModels
                 SavePackage = new RelayCommand(SendPackage<ProgramModel>);
             }
             SetContextMenuItem();
-            LoadIcon(new IconModel("AddNewIcon", "#FFFFFF", "#3676AE"));
+            LoadIcon(
+                new IconModel(DataPackageEditor.IconDefault, 
+                DataPackageEditor.IconForeDefault, DataPackageEditor.IconBackDefault));
         }
         /// <summary>
         /// Метод добавляет элементы в контекстное меню диалогового
@@ -110,7 +112,7 @@ namespace ProgramManager.ViewModels
                 Source = TextField.SingleOrDefault(a => a.Types == FieldTypes.Source.ToString())?.FieldValue,
                 Version = TextField.SingleOrDefault(a => a.Types == FieldTypes.Version.ToString())?.FieldValue,
                 Image = TextField.SingleOrDefault(a => a.Types == FieldTypes.Image.ToString())?.FieldValue,
-                Icon = new IconModel(Name, IconForeground, IconBackground),
+                Icon = new IconModel(Name, IconPath, IconForeground, IconBackground),
                 TagList = _tagList,
                 Description = Description,
             };

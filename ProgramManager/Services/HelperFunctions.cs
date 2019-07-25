@@ -8,9 +8,8 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using static System.Windows.Media.ColorConverter;
 
-namespace ProgramManager.Resources
+namespace ProgramManager.Services
 {
     static class HelperFunctions
     {
@@ -43,7 +42,7 @@ namespace ProgramManager.Resources
         {
             SolidColorBrush solid =
                 // ReSharper disable once PossibleNullReferenceException
-                new SolidColorBrush((Color)ConvertFromString(value));
+                new SolidColorBrush((Color)ColorConverter.ConvertFromString(value));
             return solid;
         }
         /// <summary>

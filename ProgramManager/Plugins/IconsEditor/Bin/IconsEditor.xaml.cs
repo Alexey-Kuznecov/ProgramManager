@@ -1,8 +1,6 @@
-﻿using System;
-using System.Windows;
-using ProgramManager.Services;
+﻿using System.Windows;
 
-namespace ProgramManager.Views
+namespace ProgramManager.Plugins.IconsEditor.Bin
 {
     /// <summary>
     /// Логика взаимодействия для IconsEditor.xaml
@@ -12,7 +10,6 @@ namespace ProgramManager.Views
         public IconsEditor()
         {
             InitializeComponent();
-            Singleton.Back = this;
         }
     }
 }

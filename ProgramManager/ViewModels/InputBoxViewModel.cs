@@ -2,6 +2,7 @@
 using System.Windows.Input;
 using ProgramManager.Converters;
 using ProgramManager.Enums;
+using ProgramManager.Plugins.IconsEditor.Bin;
 using ProgramManager.ViewModels.Base;
 
 namespace ProgramManager.ViewModels

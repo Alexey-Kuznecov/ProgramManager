@@ -6,9 +6,9 @@ using System.Windows.Input;
 using System.Windows.Threading;
 using ProgramManager.Models;
 using ProgramManager.Models.PackageModel;
+using ProgramManager.Plugins.IconsEditor.Bin;
 using ProgramManager.Services;
 using ProgramManager.ViewModels.Base;
-using ProgramManager.Views;
 using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace ProgramManager.ViewModels

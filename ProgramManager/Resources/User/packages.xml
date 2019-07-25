@@ -4,7 +4,7 @@
     <Author>Adobe</Author>
     <CompanySite>https://www.Adobe.com/</CompanySite>
     <Description>Программа для оформления фотографий</Description>
-    <Icon Name="Photoshop" Foreground="#FFFFFFFF" Background="#FF0C6EB7" />
+    <Icon Name="Photoshop" Foreground="#FFFFFFFF" Background="#FF78C696" />
     <License>5Q86W-TFPN7-K8VCJ-PH3CT</License>
     <Name>Photoshop</Name>
     <Tag>Не подшитые</Tag>
@@ -21,9 +21,10 @@
   <Package Id="2" Category="Программы">
     <Author>Axure Software Solution</Author>
     <Description>Программа для создания прототипов сайтов</Description>
-    <Icon Name="new_Netbeans752" Foreground="#FFFFFFFF" Background="#FFBB4B9C" />
     <Name>Axure</Name>
+    <Source>tytyty</Source>
     <Tag>Не подшитые</Tag>
+    <Userfield Label="ewrr">ewrr</Userfield>
     <Version>RP 8</Version>
   </Package>
   <Package Id="3" Category="Программы">
@@ -37,17 +38,16 @@
   <Package Id="4" Category="Программы">
     <Author>Mozilla</Author>
     <Description>Программа для просмотра вебстраниц</Description>
-    <Image Source="../Resources/User/Images/Programs.png" />
     <Name>Firefox</Name>
-    <Tag>Браузеры</Tag>
+    <Tag>Не подшитые</Tag>
     <Version>7.9.4</Version>
   </Package>
   <Package Id="5" Category="Программы">
     <Author>Google</Author>
     <Description>Программа для просмотра вебстраниц</Description>
-    <Image Source="../Resources/User/Images/Programs.png" />
     <Name>Chrome</Name>
-    <Tag>Браузеры</Tag>
+    <Tag>Не подшитые</Tag>
+    <Userfield Label="sadasdd">sadasdd</Userfield>
     <Version>8.5.0</Version>
   </Package>
   <Package Id="6" Category="Программы">
@@ -144,9 +144,8 @@
   <Package Id="17" Category="Программы">
     <Author>Discord Team</Author>
     <Description>Программа для создания сообществ</Description>
-    <Image Source="../Resources/User/Images/Programs.png" />
     <Name>Discord</Name>
-    <Tag>Меседжеры</Tag>
+    <Tag>Не подшитые</Tag>
     <Version>3.0</Version>
   </Package>
   <Package Id="18" Category="Программы">
