@@ -1,10 +1,12 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using ProgramManager.Models.PackageModel;
 using ProgramManager.Views;
 using GalaSoft.MvvmLight.Messaging;
 using ProgramManager.Converters;
 using ProgramManager.Enums;
 using System.Linq;
+using ProgramManager.Plugins.Exceptions;
 
 // ReSharper disable All
 namespace ProgramManager.ViewModels
@@ -19,12 +21,26 @@ namespace ProgramManager.ViewModels
         public static void EditPackageDialog(PackageBase currPackage)
         {
             PackagesDialog packagesDialog = new PackagesDialog();
-
-            Messenger.Default.Send(currPackage);
-            packagesDialog.SaveAndEdit.Content = "Изменить";
-            packagesDialog.Title = "Редактирование пакета";
-            packagesDialog.ShowDialog();
-            
+            try
+            {
+                Messenger.Default.Send(currPackage);
+                packagesDialog.SaveAndEdit.Content = "Изменить";
+                packagesDialog.Title = "Редактирование пакета";
+                packagesDialog.ShowDialog();
+            }
+            catch (PluginMissingException e)
+            {
+                MessageBox.Show(e.Message);
+            }
+            catch (PluginTypeDoubleDefinedException e)
+            {
+                MessageBox.Show(e.Message);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+                throw;
+            }
             //Выполнение дополнительных действий после закрытия окна редактирования
             if (!packagesDialog.IsActive)
             {

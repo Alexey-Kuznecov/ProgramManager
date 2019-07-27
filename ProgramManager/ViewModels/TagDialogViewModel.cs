@@ -7,6 +7,7 @@ using ProgramManager.Services;
 using ProgramManager.Views.DialogPacks;
 using ProgramManager.Models.PackageModel;
 using System.Linq;
+using ProgramManager.Plugins;
 using ProgramManager.ViewModels.Base;
 
 namespace ProgramManager.ViewModels
@@ -24,12 +25,12 @@ namespace ProgramManager.ViewModels
                 OnPropertyChanged("IsChecked");
             }
         }
-        protected static List<string> _list = new List<string>();
+        public static List<string> List = new List<string>();
 
         public ICommand Checked => new RelayCommand(obj =>
         {
-            if ((bool)obj)  _list.Add(Name);
-            else _list.Remove(Name);              
+            if ((bool)obj)  List.Add(Name);
+            else List.Remove(Name);              
         });
     }
     public class TagDialogViewModel : TagDialogModel
@@ -40,9 +41,12 @@ namespace ProgramManager.ViewModels
         }
         private static TagDialog _tagDialog;
         public static ObservableCollection<TagDialogModel> TagList { get; set; }
+
+        #region Commads
+
         public ICommand SendSelected => new RelayCommand(obj =>
         {
-            Messenger.Default.Send(_list);
+            Messenger.Default.Send(List);
             _tagDialog = obj as TagDialog;
             if (_tagDialog != null) _tagDialog.Close();
         });
@@ -56,39 +60,43 @@ namespace ProgramManager.ViewModels
             if (Name != null)
                 TagList.Add(new TagDialogModel() { Name = Name });
         });
+
+        #endregion
+
         /// <summary>
         /// Получает данные(список тегов текущей категории).
         /// </summary>
         /// <param name="sender">Источник</param>
-        /// <param name="wrapPackage">Ожидается объект типа WrapPackage и его свойство Name</param>
-        public static void DisplayTagList(object sender, BaseEventArgs wrapPackage)
+        /// <param name="packaArgs">Ожидается объект типа List&lt;TagDialogModel&gt; и его свойство Name</param>
+        public static void DisplayTagList(object sender, BaseEventArgs packaArgs)
         {
-            List<WrapPackage> packs = wrapPackage.Package as List<WrapPackage>;
+            List<TagDialogModel> tagsList = InteractonTagEditor.TagList ?? (List<TagDialogModel>)packaArgs.Package;
+            TagList = new ObservableCollection<TagDialogModel>();
 
-            if (packs != null)
-            {
-                TagList = new ObservableCollection<TagDialogModel>();
-
-                foreach (var item in packs)
-                    TagList.Add(new TagDialogModel() { Name = item.Name });
-            }
+            if (tagsList != null)
+                foreach (var name in tagsList)
+                    TagList.Add(new TagDialogModel { Name = name.Name });
         }
         /// <summary>
-        /// Отмечает теги которые содержит пакет
+        /// Marks tags that contained in the package.
+        /// <property cref="TagList">Property fire event.<event cref="EventAggregate.OnLoadTagsList"/></property>
         /// </summary>
         /// <param name="obj">Список тегов и одиночный тег.</param>
         private void InitialTagList(PackageBase obj)
         {
+            List<string> list = obj.TagList;
+            string single = InteractonTagEditor.TagSingle ?? obj.TagOne;
+
             foreach (var tag in TagList)
             {
-                if (obj.TagList.Count > 1)
+                if (list.Count > 1)
                 {
-                    if (obj.TagList.Any(n => n == tag.Name)) tag.IsChecked = true;
+                    if (list.Any(n => n == tag.Name)) tag.IsChecked = true;
                     else tag.IsChecked = false;
                 }
                 else
                 {
-                    if (obj.TagOne == tag.Name) tag.IsChecked = true;
+                    if (single == tag.Name) tag.IsChecked = true;
                     else tag.IsChecked = false;
                 }
             }

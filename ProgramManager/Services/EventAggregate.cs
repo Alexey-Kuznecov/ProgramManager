@@ -1,4 +1,5 @@
 ﻿using System;
+using ProgramManager.ViewModels;
 
 namespace ProgramManager.Services
 {
@@ -18,7 +19,6 @@ namespace ProgramManager.Services
         {
             UpdateCollectionNames?.Invoke(this, new BaseEventArgs(collectionNames));
         }
-
         #endregion
 
         #region Package Event
@@ -51,7 +51,7 @@ namespace ProgramManager.Services
         /// <param name="package">Package that conains tags.</param>
         public void OnLoadTagsList(object package)
         {
-            TagListUpdate?.Invoke(this, new BaseEventArgs(package));
+            TagListUpdate?.Invoke(this, new BaseEventArgs(EventInterceptor.ConvertTotype(this, package)));
         }
         /// <summary>
         /// The event raise when user delete package of list package.

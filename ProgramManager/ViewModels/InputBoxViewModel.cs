@@ -54,7 +54,7 @@ namespace ProgramManager.ViewModels
         public string AlternativeText { get; set; }
         /// <summary>
         /// Команда <see cref="Action"/> отвечает за действие которое необходимо выполнить,
-        /// реализация команды находится здесь <inheritdoc cref="IconEditorViewModel.InitWindowRanameIcon"/>
+        /// реализация команды находится здесь <inheritdoc cref="IconsEditorViewModel.InitWindowRanameIcon"/>
         /// </summary>
         public ICommand Action
         {

@@ -41,19 +41,19 @@ namespace ProgramManager.Plugins.IconsEditor.Bin
             throw new NotImplementedException();
         }
     }
-    class IconCollectionModel : IconCollectionBase
+    class IconsCollectionModel : IconCollectionBase
     {
         /// <summary>
         /// Adds headers of icons collection.
         /// </summary>
         /// <returns>Retruns collection objects which contain 
         /// icon collection names and it context menu.</returns>
-        public static ObservableCollection<IconCollectionModel> GetCategory()
+        public static ObservableCollection<IconsCollectionModel> GetCategory()
         {
-            var cat = new ObservableCollection<IconCollectionModel>();
+            var cat = new ObservableCollection<IconsCollectionModel>();
             
             foreach (var name in IconsDataReader.GetCategory())
-                cat.Add(new IconCollectionModel { CollectionName = name });
+                cat.Add(new IconsCollectionModel { CollectionName = name });
             return cat;
         }
     }

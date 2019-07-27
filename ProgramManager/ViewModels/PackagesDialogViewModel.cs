@@ -10,6 +10,7 @@ using ProgramManager.ViewModels.Base;
 using ProgramManager.Services;
 using GalaSoft.MvvmLight.Messaging;
 using ProgramManager.Models;
+using ProgramManager.Plugins;
 using ProgramManager.Plugins.IconsEditor.Bin;
 
 namespace ProgramManager.ViewModels
@@ -36,14 +37,13 @@ namespace ProgramManager.ViewModels
 
             // Activate commands.
             CmdRemoveTextField = new RelayCommand(RemoveTextField);
-            CmdOpenDialogIcon = new RelayCommand(obj => OpenDialogIcon());
 
             // Registration to receive data.
             Messenger.Default.Register<InputNameViewModel>(this, action => InputCustomName(action.Name));
             Messenger.Default.Register<InputName>(this, action => _windowInputName = action);
             Messenger.Default.Register<PackageBase>(this, LoadPackage);
             Messenger.Default.Register<List<string>>(this, InitialDataSource);
-            Synchronizer.IconLoad = LoadSelectIcon;
+            DataSync.IconLoad = LoadSelectIcon;
         }
 
         #endregion
@@ -150,15 +150,19 @@ namespace ProgramManager.ViewModels
         public static ICommand CancelChange => new RelayCommand(obj =>
         {
             Singleton.Status = true;
-            Synchronizer.IconLoad.Invoke(null);
+            DataSync.IconLoad.Invoke(null);
         });
-        public ICommand CmdOpenDialogIcon { get; }
+        public ICommand CmdOpenDialogIcon => new RelayCommand(obj =>
+        {
+            Plugin plugin = PluginManager.Execute(PluginType.IconEditor);
+            plugin.ExecuteAction("It works!");
+        });
         #endregion
 
         #region Functions
         /// <summary>
         /// Function sets icon on button that open the icon editor. 
-        /// <see cref="IconEditorViewModel.SelectIconCommand">Command to add icon.</see>
+        /// <see cref="IconsEditorViewModel.SelectIconCommand">Command to add icon.</see>
         /// </summary>
         /// <param name="icon">Custom icon selected in the icon editor.</param>
         private void LoadSelectIcon(IconModel icon)
@@ -184,12 +188,6 @@ namespace ProgramManager.ViewModels
                 IconForeground = iconBack.FgroundColor;
             }
         }
-        public void OpenDialogIcon()
-        {
-            IconsEditor singleInstance = Singleton.GetSingleInstance<IconsEditor>();
-            singleInstance.Show();
-        }
-
         #endregion
     }
 }

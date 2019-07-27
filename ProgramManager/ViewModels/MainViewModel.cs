@@ -6,6 +6,7 @@ using System.Windows.Input;
 using System.Windows.Threading;
 using ProgramManager.Models;
 using ProgramManager.Models.PackageModel;
+using ProgramManager.Plugins;
 using ProgramManager.Plugins.IconsEditor.Bin;
 using ProgramManager.Services;
 using ProgramManager.ViewModels.Base;
@@ -176,9 +177,8 @@ namespace ProgramManager.ViewModels
         public ICommand CmdRemovePackage => new RelayCommand(obj => { RemovePackage(); });
         public ICommand OpenIconEditor => new RelayCommand(obj =>
         {
-            IconsEditor singleInstance = Singleton.SingleInstance<IconsEditor>();
-            singleInstance.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            singleInstance.Show();
+            Plugin plugin = PluginManager.Execute(PluginType.IconEditor);
+            plugin.ExecuteAction(null);
         });
         #endregion
 

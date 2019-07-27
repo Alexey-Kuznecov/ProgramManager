@@ -22,23 +22,23 @@ namespace ProgramManager.Plugins.IconsEditor.Bin
     /// <summary>
     /// View model for window IconsEditor. 
     /// </summary>
-    class IconEditorViewModel : PropertiesChanged , IDisposable
+    class IconsEditorViewModel : PropertiesChanged , IDisposable
     {
         private readonly IDialogService _dialogService;
         private readonly IFileService _fileService;
         private ListBoxItem _selectCategory;
         private string _filterText;
-        private ObservableCollection<IconCollectionModel> _iconCategory;
+        private ObservableCollection<IconsCollectionModel> _iconCategory;
         private string _selectItem;
         private int _selectIndex;
         private static ObservableCollection<ButtonExtension> _buttons;
         
         #region Constructors
-        public IconEditorViewModel()
+        public IconsEditorViewModel()
         {
             _dialogService = Singleton.SingleInstance<DefaultDialogService>();
             _fileService = Singleton.SingleInstance<XamlFileService>();
-            IconCategory = IconCollectionModel.GetCategory();
+            IconCategory = IconsCollectionModel.GetCategory();
 
             // Solves the problem with multiple calls.
             if (!Singleton.Status)
@@ -46,7 +46,7 @@ namespace ProgramManager.Plugins.IconsEditor.Bin
                 _inputBox = Singleton.GetSingleInstance<InputBox>();
                 // Init collection.
                 IconCollectionBase.FilterCollection = new RelayCommand(name => FilterCollection((string)name));
-                IconCategory = IconCollectionModel.GetCategory();
+                IconCategory = IconsCollectionModel.GetCategory();
                 AddMenuItem();
                 // Loading icons...
                 LoadIcons();
@@ -94,7 +94,7 @@ namespace ProgramManager.Plugins.IconsEditor.Bin
             }
         }
         public ObservableCollection<ButtonExtension> ButtonsClone { get; set; }
-        public ObservableCollection<IconCollectionModel> IconCategory
+        public ObservableCollection<IconsCollectionModel> IconCategory
         {
             get { return _iconCategory; }
             set
@@ -150,7 +150,7 @@ namespace ProgramManager.Plugins.IconsEditor.Bin
         {
             ButtonExtension bt = obj as ButtonExtension;
 
-            Synchronizer.IconLoad.Invoke(new IconModel()
+            DataSync.IconLoad.Invoke(new IconModel()
             {
                 Name = bt?.IconName,
                 Path = bt?.Path,
@@ -163,7 +163,7 @@ namespace ProgramManager.Plugins.IconsEditor.Bin
         /// </summary>
         public ICommand ResetByDefault => new RelayCommand(obj =>
         {
-            Synchronizer.IconLoad.Invoke(null);
+            DataSync.IconLoad.Invoke(null);
         });
         /// <summary>
         /// Команда устанавливает иконку
@@ -246,7 +246,7 @@ namespace ProgramManager.Plugins.IconsEditor.Bin
                 filtered.Add(button);
             Buttons = filtered;
 
-            IconCollectionModel catermodel = (IconCategory.Single(o => o.CollectionName == category));
+            IconsCollectionModel catermodel = (IconCategory.Single(o => o.CollectionName == category));
             SelectIndex = IconCategory.IndexOf(catermodel);
             if (category == "Вся коллекция")
                 Buttons = ButtonsClone;

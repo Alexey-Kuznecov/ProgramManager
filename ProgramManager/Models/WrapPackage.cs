@@ -4,7 +4,6 @@ using System.Linq;
 using System.Xml.Linq;
 using ProgramManager.Models.PackageModel;
 using ProgramManager.Services;
-using ProgramManager.ViewModels;
 
 namespace ProgramManager.Models
 {
@@ -90,6 +89,8 @@ namespace ProgramManager.Models
                 index++;
             }
         }
+
+        #region Methods for handling package tags.
         /// <summary>
         /// Метод распределяет пакеты по тегам, если пакеты принадлежат сразу нескольким тегам.
         /// </summary>
@@ -97,8 +98,8 @@ namespace ProgramManager.Models
         /// <param name="wrapperPackages">Коллекция класса оболочки</param>
         /// <param name="wrapper">Контекст текущей оболочки</param>
         /// <param name="index">Индекс текущей оболочки</param>
-        private static void InsertTags(dynamic @collection, List<WrapPackage> wrapperPackages, WrapPackage wrapper,  int index)
-        {         
+        private static void InsertTags(dynamic @collection, List<WrapPackage> wrapperPackages, WrapPackage wrapper, int index)
+        {
             // Вставляет пакеты которые могут иметь больше одного тега 
             foreach (var package in @collection)
             {
@@ -128,8 +129,8 @@ namespace ProgramManager.Models
             XElement root = XElement.Load(xmlDoc);
 
             var queryTag = (from e in root.Descendants("Package").Elements()
-                where e.Name == "Tag" && e.Parent?.LastAttribute.Value == category
-                select e.Value).ToList();
+                            where e.Name == "Tag" && e.Parent?.LastAttribute.Value == category
+                            select e.Value).ToList();
 
             var queryTags = root.Descendants("Package").Elements().Elements()
                 .Where(e => e.Name == "TagList" && e.Parent?.Parent?.LastAttribute.Value == category)
@@ -141,7 +142,9 @@ namespace ProgramManager.Models
                 .Select(element => new WrapPackage() { Name = element }).ToList();
 
             return TagList;
-        }
+        } 
+        #endregion
+
         /// <summary>
         /// Реализалация интерфеса IEnumerator
         /// </summary>

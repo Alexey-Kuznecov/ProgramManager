@@ -1,12 +1,11 @@
 ﻿using ProgramManager.Models;
 using ProgramManager.Plugins.IconsEditor.Bin;
-using ProgramManager.Resources;
 using ProgramManager.ViewModels;
 using ProgramManager.ViewModels.Base;
 
-namespace ProgramManager.Services
+namespace ProgramManager.Plugins
 {
-    class Synchronizer : PropertiesChanged
+    class DataSync : PropertiesChanged
     {
         private SearchIcon _iconSearch;
         public SearchIcon IconSearch
@@ -25,7 +24,7 @@ namespace ProgramManager.Services
         public static CancelChangeIcon IconLoad;
         /// <summary>
         /// Transfers icon data:
-        /// from <source cref="IconEditorViewModel.SelectIconCommand"/> 
+        /// from <source cref="IconsEditorViewModel.SelectIconCommand"/> 
         /// in <target cref="PackagesDialogViewModel.LoadSelectIcon"/>
         /// </summary>
         /// <param name="obj">Icon data as <model cref="IconModel"/></param>

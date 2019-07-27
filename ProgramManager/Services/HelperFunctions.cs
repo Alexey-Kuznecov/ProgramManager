@@ -56,33 +56,6 @@ namespace ProgramManager.Services
             parentItemsControl?.Children.Remove(item as UIElement);
         }
         /// <summary>
-        /// Бинарная сериализация данных объектов.
-        /// Внимание: Если объект наследует другие объекты они должны быть также помечены.
-        /// </summary>
-        /// <param name="obj">Любой объект который отмечен как сериaлизуемый.</param>
-        [Conditional("DEBUG")]
-        public static void BinSerialize(object obj)
-        {
-            BinaryFormatter bf = new BinaryFormatter();
-            using (FileStream fs = new FileStream(@"../../Buttons.bin", FileMode.OpenOrCreate))
-            {
-                bf.Serialize(fs, obj);
-            }
-        }
-        /// <summary>
-        /// Бинарная десериализация данных объектов из файла.
-        /// </summary>
-        /// <param name="obj">Возвращает объект, который необходимо будет привести к объекту,
-        /// который подвергался сериализации.</param>
-        public static void BinDeserialize(out object obj)
-        {
-            BinaryFormatter bf = new BinaryFormatter();
-            using (FileStream fs = new FileStream(@"../../Buttons.bin", FileMode.OpenOrCreate))
-            {
-                obj = bf.Deserialize(fs);
-            }
-        }
-        /// <summary>
         /// Ищет словарь по ссылкам объяденненых словарей ресурсов,
         /// данным метод не ищет ресурсы в главном словаре App.xaml.
         /// </summary>
@@ -117,6 +90,20 @@ namespace ProgramManager.Services
             foreach (var item in collect)
                 ob.Add(item);
             return ob;
+        }
+        /// <summary>
+        /// Joins two collection to one.
+        /// </summary>
+        /// <typeparam name="T">The object type of collection.</typeparam>
+        /// <param name="container">The collection as container to merge.</param>
+        /// <param name="combined">The collection to be merged into a container..</param>
+        /// <returns></returns>
+        [DebuggerStepThrough]
+        public static List<T> MergeList<T>(this List<T> container, List<T> combined)
+        {
+            foreach (var item in combined)
+                container.Add(item);
+            return container;
         }
     }
 }

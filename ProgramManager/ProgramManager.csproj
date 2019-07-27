@@ -56,8 +56,10 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Portable.MvvmLightLibs.4.4.32.1\lib\net45\System.Windows.Interactivity.dll</HintPath>
@@ -72,9 +74,11 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="UIAutomationProvider" />
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsFormsIntegration" />
     <Reference Include="Xceed.Wpf.AvalonDock, Version=3.5.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
       <HintPath>..\packages\Extended.Wpf.Toolkit.3.5.0\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
       <Private>True</Private>
@@ -104,33 +108,45 @@
     <Compile Include="Associations\ActionsDictionary.cs" />
     <Compile Include="Contracts\IDialogService.cs" />
     <Compile Include="Contracts\IFileService.cs" />
+    <Compile Include="Contracts\IPluginStarter.cs" />
     <Compile Include="Contracts\ISearchable.cs" />
     <Compile Include="Converters\ActionNameConverter.cs" />
     <Compile Include="Converters\IconConverters.cs" />
     <Compile Include="Converters\PackageFieldConverter.cs" />
     <Compile Include="Converters\ResourceNameValidation.cs" />
     <Compile Include="Associations\CategoryDictionary.cs" />
+    <Compile Include="Plugins\Exceptions\PluginNotFoundException.cs" />
+    <Compile Include="Plugins\Exceptions\PluginTypeDoubleDefinedException.cs" />
+    <Compile Include="Data\Settings.cs" />
+    <Compile Include="Data\Themes.cs" />
     <Compile Include="Enums\Actions.cs" />
     <Compile Include="Enums\FieldTypes.cs" />
     <Compile Include="Enums\Keywords.cs" />
     <Compile Include="Filters\FilterProperties.cs" />
     <Compile Include="Converters\BaseConverter.cs" />
     <Compile Include="Models\CategoryModelOb.cs" />
-    <Compile Include="Plugins\DataPackageEditor.cs" />
+    <Compile Include="Plugins\InteractonTagEditor.cs" />
+    <Compile Include="Plugins\InteractonPackageEditor.cs" />
+    <Compile Include="Plugins\Exceptions\PluginMissingException.cs" />
     <Compile Include="Plugins\IconsEditor\Bin\IconsEditor.xaml.cs">
       <DependentUpon>IconsEditor.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Plugins\Plugin.cs" />
+    <Compile Include="Plugins\IconsEditor\Bin\StartPlugin.cs" />
+    <Compile Include="Plugins\PluginManager.cs" />
     <Compile Include="Plugins\CommonProperties.cs" />
     <Compile Include="Plugins\Exceptions\XmlElementNotFoundException.cs" />
     <Compile Include="Plugins\IconsEditor\Data\IconsDataModifier.cs" />
     <Compile Include="Plugins\IconsEditor\Data\IconsDataWriter.cs" />
+    <Compile Include="Plugins\PluginType.cs" />
+    <Compile Include="Services\EventInterceptor.cs" />
+    <Compile Include="Services\Serialization.cs" />
+    <Compile Include="Settings.cs" />
     <Compile Include="Test\LogWriter.cs" />
     <Compile Include="ViewModels\InputBoxViewModel.cs" />
     <Compile Include="Views\InputBox.xaml.cs">
       <DependentUpon>InputBox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Plugins\IconsEditor\Bin\IconCategoryModel.cs" />
+    <Compile Include="Plugins\IconsEditor\Bin\IconsCollectionModel.cs" />
     <Compile Include="Models\PackageModel\PackageDrtails.cs" />
     <Compile Include="Models\PackageModel\CategoryModel.cs" />
     <Compile Include="Models\Func\FuncHelper.cs" />
@@ -151,7 +167,7 @@
     <Compile Include="Models\IconModel.cs" />
     <Compile Include="Plugins\IconsEditor\Data\IconsDataReader.cs" />
     <Compile Include="Services\DefaultDialogService.cs" />
-    <Compile Include="Plugins\Synchronizer.cs" />
+    <Compile Include="Plugins\DataSync.cs" />
     <Compile Include="Services\EventAggregate.cs" />
     <Compile Include="Services\BaseEventArgs.cs" />
     <Compile Include="Converters\KeywordToTextConverter.cs" />
@@ -163,7 +179,7 @@
     <Compile Include="Services\Singleton.cs" />
     <Compile Include="Services\XamlFileService.cs" />
     <Compile Include="ViewModels\Base\PropertiesChanged.cs" />
-    <Compile Include="Plugins\IconsEditor\Bin\IconEditorViewModel.cs" />
+    <Compile Include="Plugins\IconsEditor\Bin\IconsEditorViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\PackagesDialogPartial.cs" />
     <Compile Include="ViewModels\PackagesDialogViewModel.cs" />
@@ -264,7 +280,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="app.config" />
     <None Include="packages.config" />
+    <Content Include="Plugins\plugin.xml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -324,6 +342,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\User\packageIcons.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Image1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

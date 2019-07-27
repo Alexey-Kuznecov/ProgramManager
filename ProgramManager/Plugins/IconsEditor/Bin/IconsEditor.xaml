@@ -19,7 +19,7 @@
         </Style>
     </Window.Resources>
     <Window.DataContext>
-        <bin:IconEditorViewModel />
+        <bin:IconsEditorViewModel />
     </Window.DataContext>
     <Grid Background="{Binding Background, ElementName=window}">
         <Grid.ColumnDefinitions>

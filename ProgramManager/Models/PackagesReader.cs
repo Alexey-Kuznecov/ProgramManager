@@ -56,8 +56,10 @@ namespace ProgramManager.Models
                     TagList = GetTagsList(element),
                     Category = element.LastAttribute.Value,
                     TextField = SetFieldValue(element),
-                    Icon = GetIcons(element, element.FirstAttribute.Value)
-                });
+                    // If user don't set custom icon then to the package be asigned a icon default.
+                    Icon = GetIcons(element.FirstAttribute.Value) ?? new IconModel(SetIcons(element.LastAttribute.Value), InteractonPackageEditor.IconForeDefault,
+                               InteractonPackageEditor.IconBackDefault)
+            });
                 // Вызов метода для инициализации свойств производного класса.
                 SetValueDeclaredProperties(packages, element, index);
                 // Вызов метода фильтрации полей с пустыми значениями данного объекта.
@@ -65,7 +67,29 @@ namespace ProgramManager.Models
             }
             return packages;
         }
-        private static IconModel GetIcons(XElement element, string id)
+        /// <summary>
+        /// Устанавливает значения свойствам объявленным в производном классе.
+        /// </summary>
+        /// <param name="packages">Коллекция объектов(пактов)</param>
+        /// <param name="element">Контекст текущего родительского элемента xml документа.</param>
+        /// <param name="index">Текущий индекс элемента коллекции.</param>
+        private static void SetValueDeclaredProperties(List<T> packages, XElement element, int index)
+        {
+            PropertyInfo[] properties = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly);
+
+            foreach (var property in properties)
+            {
+                property.SetValue(packages[index], element.Element(property.Name)?.Value);
+            }
+        }
+
+        #region Methods for handling package icons.
+        /// <summary>
+        /// Loads custom icons for package. 
+        /// </summary>
+        /// <param name="id">Package id to search a icon.</param>
+        /// <returns></returns>
+        private static IconModel GetIcons(string id)
         {
             var root = XElement.Load("../../Resources/User/packageIcons.xml");
             var queryIcons = from icon in root.Elements() where icon.FirstAttribute.Value == id select icon;
@@ -73,16 +97,14 @@ namespace ProgramManager.Models
             foreach (var icon in queryIcons)
             {
                 var iconModel = new IconModel(
-                    icon.Attribute("Name")?.Value, 
+                    icon.Attribute("Name")?.Value,
                     icon.Attribute("Foreground")?.Value,
                     icon.Attribute("Background")?.Value,
                     icon.LastAttribute.Value
                 );
                 return iconModel;
             }
-            // If user don't set custom icon then to the package be asigned a icon default.
-            return new IconModel(SetIcons(element.LastAttribute.Value), DataPackageEditor.IconForeDefault,
-                DataPackageEditor.IconBackDefault);
+            return null;
         }
         /// <summary>
         /// Устанавливает иконку взависемости от категории.
@@ -103,6 +125,9 @@ namespace ProgramManager.Models
                 return "PluginsIcon";
             return "GamesIcon";
         }
+        #endregion
+
+        #region Methods for handling package tags.
         /// <summary>
         /// Вспомогательный метод для получения массива тегов(текст), так как пакеты могут иметь больше одного тега.
         /// Метод находит элемент <TagList></TagList> и формирует массив на основе содержимого данного элемента.
@@ -118,21 +143,9 @@ namespace ProgramManager.Models
 
             return tags;
         }
-        /// <summary>
-        /// Устанавливает значения свойствам объявленным в производном классе.
-        /// </summary>
-        /// <param name="packages">Коллекция объектов(пактов)</param>
-        /// <param name="element">Контекст текущего родительского элемента xml документа.</param>
-        /// <param name="index">Текущий индекс элемента коллекции.</param>
-        private static void SetValueDeclaredProperties(List<T> packages, XElement element, int index)
-        {
-            PropertyInfo[] properties = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly);
+        #endregion
 
-            foreach (var property in properties)
-            {
-                property.SetValue(packages[index], element.Element(property.Name)?.Value);
-            }
-        }
+        #region Methods for handling package fields.
         /// <summary>
         /// Adding user field to property of collection. 
         /// </summary>
@@ -141,19 +154,16 @@ namespace ProgramManager.Models
         private static List<TextFieldModel> SetFieldValue(XElement node)
         {
             List<TextFieldModel> textField = new List<TextFieldModel>();
-
             IEnumerable<XElement> elements = node.Elements();
 
             foreach (var element in elements)
             {
                 sbyte count = 0;
-
+                // This part of the method will work if the package contains more than one user field.
                 if (element.HasElements && element.Name == FieldTypes.Userfield + "List")
-                {
                     foreach (var child in element.Elements())
                     {
                         count++;
-
                         textField.Add(new TextFieldModel
                         {
                             FieldValue = child.Value,
@@ -162,9 +172,8 @@ namespace ProgramManager.Models
                             Hint = child.FirstAttribute.Value
                         });
                     }
-                }
+                // This part of the method will work if the package contains single user field.
                 if (!element.HasElements && element.Name == FieldTypes.Userfield.ToString())
-                {
                     textField.Add(new TextFieldModel
                     {
                         FieldValue = element.Value,
@@ -172,18 +181,15 @@ namespace ProgramManager.Models
                         Label = element.LastAttribute.Value,
                         Hint = element.LastAttribute.Value
                     });
-                }
                 // TODO: Найти элегантное решение взамен этого куска кода.
                 // Добавление всех полей кроме основных и пользовательских.
-                if (!element.HasElements && element.Name != "Name" && element.Name != "Description" 
+                if (!element.HasElements && element.Name != "Name" && element.Name != "Description"
                     && element.Name != "Tag" && element.Name != "Image" && element.Name != "Userfield" && element.Name != "Icon")
-                {
                     textField.Add(new TextFieldModel
                     {
                         FieldValue = element.Value,
                         Types = element.Name.ToString()
                     });
-                }
             }
             return SetFieldLabel(textField);
         }
@@ -201,5 +207,6 @@ namespace ProgramManager.Models
 
             return textFields;
         }
+        #endregion
     }
 }

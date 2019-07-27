@@ -70,8 +70,8 @@ namespace ProgramManager.ViewModels
             }
             SetContextMenuItem();
             LoadIcon(
-                new IconModel(DataPackageEditor.IconDefault, 
-                DataPackageEditor.IconForeDefault, DataPackageEditor.IconBackDefault));
+                new IconModel(InteractonPackageEditor.IconDefault, 
+                InteractonPackageEditor.IconForeDefault, InteractonPackageEditor.IconBackDefault));
         }
         /// <summary>
         /// Метод добавляет элементы в контекстное меню диалогового

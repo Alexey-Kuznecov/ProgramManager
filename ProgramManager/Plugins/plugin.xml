@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Cofiguration>
+  <Plugin Name="IconEditor" Type="IconEditor" StartPath="IconsEditor.Bin.StartPlugin" Execute="RunPlugin">
+    <Author>AlexSofar</Author>
+    <Version>1.0</Version>
+    <Description>PluginExecute to manage icons.</Description>
+  </Plugin>
+</Cofiguration>
+

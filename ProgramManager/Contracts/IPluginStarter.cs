@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProgramManager.Plugins
+namespace ProgramManager.Contracts
 {
-    class Plugin
+    interface IPluginStarter
     {
-    }
+         void Start(object x);
+    } 
 }

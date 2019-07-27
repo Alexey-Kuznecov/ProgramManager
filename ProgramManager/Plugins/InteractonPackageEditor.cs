@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Media;
-using ProgramManager.Services;
 
 namespace ProgramManager.Plugins
 {
@@ -12,7 +7,7 @@ namespace ProgramManager.Plugins
     /// Dialog package data, declared here properties can be using
     /// for creating the package editor plugins.
     /// </summary>
-    struct DataPackageEditor
+    struct InteractonPackageEditor
     {
         private static string _iconDefault;
         private static SolidColorBrush _iconBackDefault;

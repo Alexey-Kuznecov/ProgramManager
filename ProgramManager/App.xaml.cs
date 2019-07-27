@@ -1,6 +1,6 @@
 ﻿using System.Windows;
+using ProgramManager.Plugins;
 using ProgramManager.Views;
-
 namespace ProgramManager
 {
     /// <summary>
@@ -12,6 +12,7 @@ namespace ProgramManager
         {
             var view = new MainView();
             Window window = view;
+            PluginManager.PluginReader();
             window.Show();
         }
     }
