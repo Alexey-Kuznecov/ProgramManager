@@ -138,6 +138,7 @@
     <Compile Include="Plugins\IconsEditor\Data\IconsDataModifier.cs" />
     <Compile Include="Plugins\IconsEditor\Data\IconsDataWriter.cs" />
     <Compile Include="Plugins\PluginType.cs" />
+    <Compile Include="Plugins\TagList\TagList.cs" />
     <Compile Include="Services\EventInterceptor.cs" />
     <Compile Include="Services\Serialization.cs" />
     <Compile Include="Settings.cs" />
@@ -338,13 +339,12 @@
     <Resource Include="Resources\User\Images\Programs.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Plugins\IconsEditor\Data\IconsData.xml" />
+    <Resource Include="Plugins\IconsEditor\Data\IconsData.xml">
+      <SubType>Designer</SubType>
+    </Resource>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\User\packageIcons.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Image1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

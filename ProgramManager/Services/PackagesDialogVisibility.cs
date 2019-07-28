@@ -36,11 +36,6 @@ namespace ProgramManager.ViewModels
             {
                 MessageBox.Show(e.Message);
             }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message);
-                throw;
-            }
             //Выполнение дополнительных действий после закрытия окна редактирования
             if (!packagesDialog.IsActive)
             {

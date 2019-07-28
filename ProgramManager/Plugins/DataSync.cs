@@ -7,16 +7,6 @@ namespace ProgramManager.Plugins
 {
     class DataSync : PropertiesChanged
     {
-        private SearchIcon _iconSearch;
-        public SearchIcon IconSearch
-        {
-            get { return _iconSearch; }
-            set
-            {
-                _iconSearch = value;
-                OnPropertyChanged("IconSearch");
-            }
-        }
         /// <summary>
         /// Contains reference to the Method
         /// <ref cref="PackagesDialogViewModel.LoadSelectIcon"/>
@@ -29,6 +19,5 @@ namespace ProgramManager.Plugins
         /// </summary>
         /// <param name="obj">Icon data as <model cref="IconModel"/></param>
         public delegate void CancelChangeIcon(IconModel obj);
-        public delegate void SearchIcon(string name);
     }
 }

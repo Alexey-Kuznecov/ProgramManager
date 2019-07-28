@@ -5,7 +5,7 @@ using ProgramManager.ViewModels;
 
 namespace ProgramManager.Services
 {
-    //[DebuggerStepThrough]
+    [DebuggerStepThrough]
     struct Singleton  
     {
         public static object Back = null;

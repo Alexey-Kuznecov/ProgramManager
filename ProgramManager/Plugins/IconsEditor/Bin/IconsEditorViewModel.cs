@@ -5,7 +5,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Threading;
 using ProgramManager.Contracts;
 using ProgramManager.Converters;
 using ProgramManager.Enums;
@@ -39,18 +38,13 @@ namespace ProgramManager.Plugins.IconsEditor.Bin
             _dialogService = Singleton.SingleInstance<DefaultDialogService>();
             _fileService = Singleton.SingleInstance<XamlFileService>();
             IconCategory = IconsCollectionModel.GetCategory();
-
-            // Solves the problem with multiple calls.
-            if (!Singleton.Status)
-            {
-                _inputBox = Singleton.GetSingleInstance<InputBox>();
-                // Init collection.
-                IconCollectionBase.FilterCollection = new RelayCommand(name => FilterCollection((string)name));
-                IconCategory = IconsCollectionModel.GetCategory();
-                AddMenuItem();
-                // Loading icons...
-                LoadIcons();
-            }
+            
+            // Init collection.
+            IconCollectionBase.FilterCollection = new RelayCommand(name => FilterCollection((string)name));
+            IconCategory = IconsCollectionModel.GetCategory();
+            AddMenuItem();
+            // Loading icons...
+            LoadIcons();
         }
         #endregion
 
@@ -170,7 +164,8 @@ namespace ProgramManager.Plugins.IconsEditor.Bin
         /// </summary>
         public ICommand Shutdown => new RelayCommand(obj =>
         {
-            Dispatcher.CurrentDispatcher.InvokeShutdown();
+            Application app = Application.Current;
+            app.Shutdown();
         });
         /// <summary>
         /// Команда физический добавляет новую иконку ресурса,
@@ -233,12 +228,10 @@ namespace ProgramManager.Plugins.IconsEditor.Bin
         /// <param name="category">Collection name.</param>
         public void FilterCollection(string category)
         {
-            Buttons = ButtonsClone;
-
             var filtered
                 = new ObservableCollection<ButtonExtension>();
 
-            var query = from button in Buttons
+            var query = from button in ButtonsClone
                         where button.Category.ToLower().Contains(category.ToLower())
                 select button;
 
@@ -246,8 +239,8 @@ namespace ProgramManager.Plugins.IconsEditor.Bin
                 filtered.Add(button);
             Buttons = filtered;
 
-            IconsCollectionModel catermodel = (IconCategory.Single(o => o.CollectionName == category));
-            SelectIndex = IconCategory.IndexOf(catermodel);
+            IconsCollectionModel collectionModel = (IconCategory.Single(o => o.CollectionName == category));
+            SelectIndex = IconCategory.IndexOf(collectionModel);
             if (category == "Вся коллекция")
                 Buttons = ButtonsClone;
         }
@@ -300,10 +293,11 @@ namespace ProgramManager.Plugins.IconsEditor.Bin
         public void InitWindowRanameIcon(ButtonExtension bt)
         {
             _oldName = bt.IconName;
-            // Intializaion inputbox by constructor argument 
+            // Intializaion inputbox by constructor argument
+            _inputBox = new InputBox();
             _inputBoxViewModel = new InputBoxViewModel(_oldName, RemaneIcon, Actions.Change, bt);
             _inputBox.DataContext = _inputBoxViewModel;
-            _inputBox.Visibility = Visibility.Visible;
+            _inputBox.ShowDialog();
         }
         /// <summary>
         /// Adds contextmenu item for the command of adding.

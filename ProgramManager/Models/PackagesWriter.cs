@@ -137,21 +137,24 @@ namespace ProgramManager.Models
         /// <param name="data">Объект данных, ожидается объект типа PackageBase.</param>
         public static void AddIcon(XElement currentPack, PackageBase data)
         {
-            var iconData = "../../Resources/User/packageIcons.xml";
-            var root = XElement.Load(iconData);
+            if (data.Icon.Name != null)
+            {
+                var iconData = "../../Resources/User/packageIcons.xml";
+                var root = XElement.Load(iconData);
 
-            var check = from icon in root.Elements()
-                where icon.Attribute("Id")?.Value == data.Id.ToString()
-                select icon;
-            check.Remove();
+                var check = from icon in root.Elements()
+                    where icon.Attribute("Id")?.Value == data.Id.ToString()
+                    select icon;
+                check.Remove();
 
-            root.Add(new XElement("Icon", new XAttribute("Id", data.Id), 
-                new XAttribute("Name", data.Icon.Name), 
-                new XAttribute("Foreground", data.Icon.FgroundColor), 
-                new XAttribute("Background", data.Icon.BgroundColor), 
-                new XAttribute("Path", data.Icon.Path.Data.ToString().Replace(',', '.').Replace(';', ','))));
+                root.Add(new XElement("Icon", new XAttribute("Id", data.Id),
+                    new XAttribute("Name", data.Icon.Name),
+                    new XAttribute("Foreground", data.Icon.FgroundColor),
+                    new XAttribute("Background", data.Icon.BgroundColor),
+                    new XAttribute("Path", data.Icon.Path.Data.ToString().Replace(',', '.').Replace(';', ','))));
 
-            root.Save(iconData);
+                root.Save(iconData);
+            }
         }
         /// <summary>
         /// Метод формирует xml элементы на основе данных пользовательских полей (Имя, значение). 

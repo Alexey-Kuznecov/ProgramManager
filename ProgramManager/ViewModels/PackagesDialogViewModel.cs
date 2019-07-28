@@ -11,7 +11,6 @@ using ProgramManager.Services;
 using GalaSoft.MvvmLight.Messaging;
 using ProgramManager.Models;
 using ProgramManager.Plugins;
-using ProgramManager.Plugins.IconsEditor.Bin;
 
 namespace ProgramManager.ViewModels
 {
@@ -155,7 +154,7 @@ namespace ProgramManager.ViewModels
         public ICommand CmdOpenDialogIcon => new RelayCommand(obj =>
         {
             Plugin plugin = PluginManager.Execute(PluginType.IconEditor);
-            plugin.ExecuteAction("It works!");
+            plugin.ExecuteAction(this);
         });
         #endregion
 

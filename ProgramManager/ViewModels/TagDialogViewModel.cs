@@ -14,8 +14,15 @@ namespace ProgramManager.ViewModels
 {
     public class TagDialogModel : PropertiesChanged
     {
+        public static List<string> List = new List<string>();
+        // ReSharper disable once InconsistentNaming
         protected bool _isChecked;
         public string Name { get; set; }
+
+        #region Properties
+        /// <summary>
+        /// Property binding with property IsChecked of Checkbox.
+        /// </summary>
         public bool IsChecked
         {
             get { return _isChecked; }
@@ -25,52 +32,120 @@ namespace ProgramManager.ViewModels
                 OnPropertyChanged("IsChecked");
             }
         }
-        public static List<string> List = new List<string>();
-
+        /// <summary>
+        /// Marks tag as select.
+        /// </summary>
         public ICommand Checked => new RelayCommand(obj =>
         {
-            if ((bool)obj)  List.Add(Name);
-            else List.Remove(Name);              
+            if ((bool)obj) List.Add(Name);
+            else List.Remove(Name);
         });
+        #endregion
     }
     public class TagDialogViewModel : TagDialogModel
     {
         public TagDialogViewModel()
         {
-            Messenger.Default.Register<PackageBase>(this, obj => InitialTagList(obj));
+            Messenger.Default.Register<PackageBase>(this, InitialTagList);
         }
         private static TagDialog _tagDialog;
-        public static ObservableCollection<TagDialogModel> TagList { get; set; }
+        private static ObservableCollection<TagDialogModel> _tagList;
+        private string _filterTags;
+
+        #region Properties
+        /// <summary>
+        /// Property contains list tags.
+        /// </summary>
+        public ObservableCollection<TagDialogModel> TagList
+        {
+            get { return _tagList; }
+            set
+            {
+                _tagList = value;
+                OnPropertyChanged("TagList");
+            }
+        }
+        /// <summary>
+        /// Compares box text with text of Name property
+        /// and replaces tags on filter result.
+        /// </summary>
+        public string FilterTags
+        {
+            get { return _filterTags; }
+            set
+            {
+                _filterTags = value;
+
+                if (string.IsNullOrEmpty(_filterTags))
+                    TagList = InteractonTagEditor.TagList.ToObservableCollection();
+                else
+                {
+                    #region Filter body
+
+                    // Compares box text with text of Name property.
+                    var query = from name in InteractonTagEditor.TagList
+                        where !name.Name.ToLower().Contains(_filterTags.ToLower())
+                        select name;
+                    // Removes tags from the collection.
+                    // This way allows to keep tags tagged.
+                    foreach (var tag in query)
+                        TagList.Remove(tag);
+                    // Replace tags on filter result. 
+                    TagList = TagList;
+
+                    #endregion
+                }
+                OnPropertyChanged("FilterTags");
+                OnPropertyChanged("TagList");
+            }
+        }
+        #endregion
 
         #region Commads
-
+        /// <summary>
+        /// Send tag list to package dialog.
+        /// </summary>
         public ICommand SendSelected => new RelayCommand(obj =>
         {
             Messenger.Default.Send(List);
-            _tagDialog = obj as TagDialog;
-            if (_tagDialog != null) _tagDialog.Close();
+            Cancel.Execute(obj);
         });
+        /// <summary>
+        /// Button to close the window. 
+        /// </summary>
         public ICommand Cancel => new RelayCommand(obj =>
         {
             _tagDialog = obj as TagDialog;
-            if (_tagDialog != null) _tagDialog.Close();
+            _tagDialog?.Close();
         });
+        /// <summary>
+        /// Button to add new tag if list has no tag yet..
+        /// </summary>
         public ICommand AddTag => new RelayCommand(obj =>
         {
-            if (Name != null)
-                TagList.Add(new TagDialogModel() { Name = Name });
+            if (FilterTags != null)
+            {
+                TagList.Add(new TagDialogModel { Name = FilterTags });
+                InteractonTagEditor.TagList.Add(new TagDialogModel { Name = FilterTags });
+            }
         });
-
+        public ICommand ClearBox => new RelayCommand(obj =>
+        {
+            FilterTags = null;
+            OnPropertyChanged("FilterTags");
+        });
         #endregion
 
+        #region Functions
         /// <summary>
-        /// Получает данные(список тегов текущей категории).
+        /// Receives data (list tags of current categories).
         /// </summary>
-        /// <param name="sender">Источник</param>
-        /// <param name="packaArgs">Ожидается объект типа List&lt;TagDialogModel&gt; и его свойство Name</param>
-        public static void DisplayTagList(object sender, BaseEventArgs packaArgs)
+        /// <param name="sender">Object type BaseEventArgs.</param>
+        /// <param name="packaArgs">Waiting object type TagDialogModul and its Name property.</param>
+        public void DisplayTagList(object sender, BaseEventArgs packaArgs)
         {
-            List<TagDialogModel> tagsList = InteractonTagEditor.TagList ?? (List<TagDialogModel>)packaArgs.Package;
+            InteractonTagEditor.TagList = (List<TagDialogModel>)packaArgs.Package;
+            List<TagDialogModel> tagsList = InteractonTagEditor.TagList;
             TagList = new ObservableCollection<TagDialogModel>();
 
             if (tagsList != null)
@@ -81,7 +156,7 @@ namespace ProgramManager.ViewModels
         /// Marks tags that contained in the package.
         /// <property cref="TagList">Property fire event.<event cref="EventAggregate.OnLoadTagsList"/></property>
         /// </summary>
-        /// <param name="obj">Список тегов и одиночный тег.</param>
+        /// <param name="obj">List tags or single tag.</param>
         private void InitialTagList(PackageBase obj)
         {
             List<string> list = obj.TagList;
@@ -101,5 +176,7 @@ namespace ProgramManager.ViewModels
                 }
             }
         }
+
+        #endregion
     }
 }

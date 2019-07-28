@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -9,9 +10,11 @@ using ProgramManager.Services;
 
 namespace ProgramManager.Plugins
 {
+    [DebuggerStepThrough]
     class PluginManager
     {
         private const string Name = "../../DataPlugins.bin"; // File name for serialization.
+        public static Action<object> PluginLoader;
         internal static List<Plugin> RegistPlugins = new List<Plugin>(); // List plugin registered.
         /// <summary>
         /// Registers plugin and serialize it. If IconEditor type is already registered
@@ -20,13 +23,10 @@ namespace ProgramManager.Plugins
         /// <param name="inst"></param>
         public static void Register(Plugin inst)
         {
-            if (!File.Exists(Name))
-            {
-                if (RegistPlugins.All(p => p.Type != inst.Type))
-                    RegistPlugins.Add(inst);
-                else throw new PluginTypeDoubleDefinedException();
-                Serialization.BinSerialize(RegistPlugins, Name);
-            }
+            if (RegistPlugins.All(p => p.Type != inst.Type))
+                RegistPlugins.Add(inst);
+            else throw new PluginTypeDoubleDefinedException();
+            Serialization.BinSerialize(RegistPlugins, Name);
         }
         /// <summary>
         /// It executes a plugin that has been registered,
@@ -54,20 +54,37 @@ namespace ProgramManager.Plugins
             {
                 XElement root = XElement.Load("../../Plugins/plugin.xml");
                 var plugins = from element in root.Elements() select element;
-
-                Plugin plugin = new Plugin();
+                
                 PluginType type;
-
                 foreach (var element in plugins)
                 {
+                    Plugin plugin = new Plugin();
                     Enum.TryParse(element.Attribute("Type")?.Value, true, out type);
                     plugin.Type = type;
                     plugin.Name = element.Attribute("Name")?.Value;
                     plugin.Author = element.Element("Author")?.Value;
                     plugin.Discription = element.Element("Description")?.Value;
                     plugin.ExecuteAction = ParseExecute(element);
+                    plugin.StartPriority = PluginLoader;
                     Register(plugin);
                 }
+            }
+            LaunchPriority();
+        }
+        /// <summary>
+        /// Runs plugins which needed to make changes before loading the program.
+        /// Set the value of the attribute “StartPriority” to 1 so that the plug-in
+        /// starts before the program is loaded.
+        /// </summary>
+        private static void LaunchPriority()
+        {
+            if (File.Exists(Name))
+            {
+                object inst;
+                Serialization.BinDeserialize(out inst, Name);
+                List<Plugin> priority = (List<Plugin>)inst;
+                foreach (var vars in priority)
+                    vars.StartPriority?.Invoke("");
             }
         }
         /// <summary>
@@ -92,10 +109,12 @@ namespace ProgramManager.Plugins
 
                     if (execute != null)
                     {
-                        var instanceBoo = (Action<object>)
+                        var @delegate = (Action<object>)
                             Delegate.CreateDelegate(type: typeof(Action<object>), method: execute);
 
-                        return instanceBoo;
+                        if (element.Attribute("StartPriority")?.Value == "1")
+                            PluginLoader += @delegate;
+                        return @delegate;
                     }
                     throw new PluginNotFoundException("Method named: \"" + method + "\" is not found.");
                 }
@@ -111,6 +130,7 @@ namespace ProgramManager.Plugins
     class Plugin
     {
         public Action<object> ExecuteAction { get; set; }
+        public Action<object> StartPriority { get; set; }
         public string Name { get; set; }
         public PluginType Type { get; set; }
         public string Author { get; set; }

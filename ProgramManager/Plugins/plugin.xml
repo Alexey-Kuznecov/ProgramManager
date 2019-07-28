@@ -5,5 +5,10 @@
     <Version>1.0</Version>
     <Description>PluginExecute to manage icons.</Description>
   </Plugin>
+  <Plugin Name="TagEditor" Type="TagEditor" StartPath="TagList.TagList" Execute="SetTags" StartPriority="1">
+    <Author>AlexSofar</Author>
+    <Version>1.0</Version>
+    <Description>Load list tags.</Description>
+  </Plugin>
 </Cofiguration>
 

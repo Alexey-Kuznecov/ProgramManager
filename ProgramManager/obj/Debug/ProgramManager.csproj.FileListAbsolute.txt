@@ -101,6 +101,6 @@ D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Resource
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Plugins\IconsEditor\Bin\IconsEditor.g.cs
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Plugins\IconsEditor\Bin\IconsEditor.baml
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Resources\IconsEditorDefaultStyles.baml
-D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\ProgramManager.csprojResolveAssemblyReference.cache
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\ProgramManager.exe.config
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\ProgramManager_Content.g.cs
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\ProgramManager.csprojResolveAssemblyReference.cache

@@ -4,10 +4,9 @@
     <Author>Adobe</Author>
     <CompanySite>https://www.Adobe.com/</CompanySite>
     <Description>Программа для оформления фотографий</Description>
-    <Icon Name="Photoshop" Foreground="#FFFFFFFF" Background="#FF78C696" />
     <License>5Q86W-TFPN7-K8VCJ-PH3CT</License>
     <Name>Photoshop</Name>
-    <Tag>Не подшитые</Tag>
+    <Tag>Редактор графики</Tag>
     <Version>Cloud CC6</Version>
   </Package>
   <Package Id="1" Category="Программы">

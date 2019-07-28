@@ -31,17 +31,16 @@ namespace ProgramManager.Models
             List<T> packages = new List<T>();
             XElement root = XElement.Load(DocumentName);
             int index = 0;
-
             // Запрос с фильтрацией данных. 
             IEnumerable<XElement> document = from element in root.Elements("Package")
                                              where (string)element.Attribute("Category") == category.Name
-                                             select element;
-
+                                             select element; 
             // Формирования нового объекта на основе данных xml документа.
             foreach (XElement element in document)
             {
                 string image = element.Element(FieldTypes.Image.ToString())?.FirstAttribute.Value;
-                
+               
+                #region Creating package base on xml data
                 // Инициализация свойств из базового класса
                 packages.Add(new T
                 {
@@ -59,7 +58,10 @@ namespace ProgramManager.Models
                     // If user don't set custom icon then to the package be asigned a icon default.
                     Icon = GetIcons(element.FirstAttribute.Value) ?? new IconModel(SetIcons(element.LastAttribute.Value), InteractonPackageEditor.IconForeDefault,
                                InteractonPackageEditor.IconBackDefault)
-            });
+                });
+
+                #endregion
+
                 // Вызов метода для инициализации свойств производного класса.
                 SetValueDeclaredProperties(packages, element, index);
                 // Вызов метода фильтрации полей с пустыми значениями данного объекта.

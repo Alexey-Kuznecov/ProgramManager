@@ -10,9 +10,9 @@ namespace ProgramManager
     {
         protected override void OnStartup(StartupEventArgs e)
         {
+            PluginManager.PluginReader();
             var view = new MainView();
             Window window = view;
-            PluginManager.PluginReader();
             window.Show();
         }
     }

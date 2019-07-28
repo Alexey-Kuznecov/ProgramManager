@@ -50,28 +50,44 @@
                 <RowDefinition Height="55" />
                 <RowDefinition Height="50" />
             </Grid.RowDefinitions>
-            <TextBox
-                Margin="10,10,10,8"
-                Tag="Поиск или добавить.."
-                Text="{Binding Name}" />
-            <WrapPanel Grid.Row="1" Margin="0,8,0,0">
+            <Grid Grid.Row="0" Margin="10,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="25" />
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="25" />
+                </Grid.ColumnDefinitions>
                 <Button
-                    Width="70"
-                    Height="25"
-                    Margin="10,0,5,0"
+                    Margin="0,13,0,14"
                     Command="{Binding AddTag}"
-                    Content="Добавить" />
+                    Cursor="Hand"
+                    Style="{StaticResource btIcon}">
+                    <Image Source="../../Resources/Icons/Add_48px.png" />
+                </Button>
+                <TextBox
+                    Grid.Column="1"
+                    Margin="5,10"
+                    Tag="Поиск или добавить.."
+                    Text="{Binding FilterTags, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 <Button
-                    Width="70"
-                    Height="25"
-                    Margin="52,0,5,0"
+                    Grid.Column="2"
+                    Margin="0,13,0,14"
+                    Command="{Binding ClearBox}"
+                    Cursor="Hand"
+                    Style="{StaticResource btIcon}">
+                    <Image Source="../../Resources/Icons/Delete_48px.png" />
+                </Button>
+            </Grid>
+            <WrapPanel Grid.Row="1">
+                <Button
+                    Width="80"
+                    Height="30"
+                    Margin="10"
                     Command="{Binding SendSelected}"
                     CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
                     Content="Ок" />
                 <Button
-                    Width="70"
-                    Height="25"
-                    Margin="10,0,5,0"
+                    Width="80"
+                    Height="30"
                     Command="{Binding Cancel}"
                     CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
                     Content="Отмена" />

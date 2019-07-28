@@ -12,7 +12,7 @@ namespace ProgramManager.Services
         public PackagesManager()
         {
             EventAggregate.NewPackage += AddNewPackage;
-            EventAggregate.TagListUpdate += TagDialogViewModel.DisplayTagList;
+            EventAggregate.TagListUpdate += new TagDialogViewModel().DisplayTagList;
             EventAggregate.PackageChanged += ChangePackage;
             EventAggregate.RemovePackage += RemovePackage;
         }
