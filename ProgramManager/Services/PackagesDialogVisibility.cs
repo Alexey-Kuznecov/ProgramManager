@@ -28,6 +28,9 @@ namespace ProgramManager.ViewModels
                 packagesDialog.Title = "Редактирование пакета";
                 packagesDialog.ShowDialog();
             }
+
+            #region Block of capture exceptions
+
             catch (PluginMissingException e)
             {
                 MessageBox.Show(e.Message);
@@ -36,6 +39,9 @@ namespace ProgramManager.ViewModels
             {
                 MessageBox.Show(e.Message);
             }
+
+            #endregion
+
             //Выполнение дополнительных действий после закрытия окна редактирования
             if (!packagesDialog.IsActive)
             {

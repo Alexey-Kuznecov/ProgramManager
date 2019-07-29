@@ -1,16 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Windows.Input;
-using GalaSoft.MvvmLight.Messaging;
-using ProgramManager.Models;
-using ProgramManager.Services;
-using ProgramManager.Views.DialogPacks;
-using ProgramManager.Models.PackageModel;
 using System.Linq;
-using ProgramManager.Plugins;
+using System.Windows.Input;
+using ProgramManager.Models;
+using ProgramManager.Models.PackageModel;
+using ProgramManager.Services;
 using ProgramManager.ViewModels.Base;
+using ProgramManager.Views.DialogPacks;
 
-namespace ProgramManager.ViewModels
+namespace ProgramManager.Plugins.TagsEditor
 {
     public class TagDialogModel : PropertiesChanged
     {
@@ -46,7 +44,7 @@ namespace ProgramManager.ViewModels
     {
         public TagDialogViewModel()
         {
-            Messenger.Default.Register<PackageBase>(this, InitialTagList);
+            DataSync.PackageLoad += InitialTagList;
         }
         private static TagDialog _tagDialog;
         private static ObservableCollection<TagDialogModel> _tagList;
@@ -80,6 +78,7 @@ namespace ProgramManager.ViewModels
                    TagList = InteractonTagEditor.TagList.ToObservableCollection();
                 else
                 {
+                    TagList.Clear();
                     #region Filter body
                     // Compares box text with text of Name property.
                     var query = from name in InteractonTagEditor.TagList
@@ -104,7 +103,7 @@ namespace ProgramManager.ViewModels
         /// </summary>
         public ICommand SendSelected => new RelayCommand(obj =>
         {
-            Messenger.Default.Send(List);
+            DataSync.TagLoad.Invoke(List);
             Cancel.Execute(obj);
         });
         /// <summary>
@@ -126,6 +125,9 @@ namespace ProgramManager.ViewModels
                 InteractonTagEditor.TagList.Add(new TagDialogModel { Name = FilterTags });
             }
         });
+        /// <summary>
+        /// Clear textbox.
+        /// </summary>
         public ICommand ClearBox => new RelayCommand(obj =>
         {
             FilterTags = null;
@@ -139,14 +141,15 @@ namespace ProgramManager.ViewModels
         /// </summary>
         /// <param name="sender">Object type BaseEventArgs.</param>
         /// <param name="packaArgs">Waiting object type TagDialogModul and its Name property.</param>
-        public void DisplayTagList(object sender, BaseEventArgs packaArgs)
+        public void DisplayLoadTagList(object sender, BaseEventArgs packaArgs)
         {
-            List<TagDialogModel> tagsList = (List<TagDialogModel>)packaArgs.Package;
+            List<WrapPackage> tagsList = packaArgs.Package as List<WrapPackage>;
             TagList = new ObservableCollection<TagDialogModel>();
 
             if (tagsList != null)
-                foreach (var name in tagsList)
-                    TagList.Add(new TagDialogModel { Name = name.Name });
+                foreach (var tag in tagsList)
+                    TagList.Add(new TagDialogModel { Name = tag.Name });
+
         }
         /// <summary>
         /// Marks tags that contained in the package.
@@ -156,7 +159,7 @@ namespace ProgramManager.ViewModels
         private void InitialTagList(PackageBase obj)
         {
             List<string> list = obj.TagList;
-            string single = InteractonTagEditor.TagSingle ?? obj.TagOne;
+            string single = obj.TagOne;
 
             foreach (var tag in TagList)
             {
@@ -164,19 +167,19 @@ namespace ProgramManager.ViewModels
                 {
                     if (list.Any(n => n == tag.Name))
                     {
-                        tag.IsChecked = true;
                         List.Add(tag.Name);
+                        tag.IsChecked = true;
                     }
-                    else tag.IsChecked = false;
                 }
-                else
+                if (single == tag.Name)
                 {
-                    if (single == tag.Name) tag.IsChecked = true;
-                    else tag.IsChecked = false;
-                }
+                    List.Add(tag.Name);
+                    tag.IsChecked = single == tag.Name;
+                }   
             }
+            InteractonTagEditor.TagList = TagList.ToList();
+            List = List?.Distinct().ToList();
         }
-
         #endregion
     }
 }

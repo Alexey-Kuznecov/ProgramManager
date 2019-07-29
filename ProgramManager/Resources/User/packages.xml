@@ -6,21 +6,14 @@
     <Description>Программа для оформления фотографий</Description>
     <License>5Q86W-TFPN7-K8VCJ-PH3CT</License>
     <Name>Photoshop</Name>
-    <TagList>
-      <Tag>Офисные</Tag>
-      <Tag>Редакторы кода</Tag>
-      <Tag>Органазеры</Tag>
-    </TagList>
+    <Tag>Редакторы графики</Tag>
     <Version>Cloud CC6</Version>
   </Package>
   <Package Id="1" Category="Программы">
     <Author>Adobe</Author>
     <Description>Программа для оформления фотографий</Description>
     <Name>Illustrator</Name>
-    <TagList>
-      <Tag>Редактор графики</Tag>
-      <Tag>Редактор графики</Tag>
-    </TagList>
+    <Tag>Редакторы графики</Tag>
     <Version>Cloud CC6</Version>
   </Package>
   <Package Id="2" Category="Программы">
@@ -45,8 +38,7 @@
     <Description>Программа для просмотра вебстраниц</Description>
     <Name>Firefox</Name>
     <TagList>
-      <Tag>Редактор графики</Tag>
-      <Tag>Браузеры</Tag>
+      <Tag>Редакторы графики</Tag>
       <Tag>Браузеры</Tag>
     </TagList>
     <Version>7.9.4</Version>

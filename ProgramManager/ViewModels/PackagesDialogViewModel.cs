@@ -11,7 +11,6 @@ using ProgramManager.Services;
 using GalaSoft.MvvmLight.Messaging;
 using ProgramManager.Models;
 using ProgramManager.Plugins;
-using ProgramManager.Plugins.IconsEditor.Bin;
 
 namespace ProgramManager.ViewModels
 {
@@ -42,14 +41,13 @@ namespace ProgramManager.ViewModels
             Messenger.Default.Register<InputNameViewModel>(this, action => InputCustomName(action.Name));
             Messenger.Default.Register<InputName>(this, action => _windowInputName = action);
             Messenger.Default.Register<PackageBase>(this, LoadPackage);
-            Messenger.Default.Register<List<string>>(this, InitialDataSource);
+            DataSync.TagLoad = InitialTagLs;
             DataSync.IconLoad = LoadSelectIcon;
         }
 
         #endregion
 
         #region Properties
-
         /// <summary>
         /// Контекстное меню для вкладки поля.
         /// </summary>
@@ -136,8 +134,8 @@ namespace ProgramManager.ViewModels
         });
         public ICommand OpenTagDialog => new RelayCommand(obj => 
         {
-            TagDialog windowTagModify = new TagDialog();
-            windowTagModify.ShowDialog();
+            Plugin plugin = PluginManager.Execute(PluginType.TagEditor);
+            plugin.ExecuteAction(this);
         });
         /// <summary>
         /// Контекстное меню, команды для добавления полей.

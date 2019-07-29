@@ -133,13 +133,13 @@ namespace ProgramManager.Models
                             select e.Value).ToList();
 
             var queryTags = root.Descendants("Package").Elements().Elements()
-                .Where(e => e.Name == "TagList" && e.Parent?.Parent?.LastAttribute.Value == category)
+                .Where(e => e.Name == "Tag" && e.Parent?.Parent?.LastAttribute.Value == category)
                 .Select(e => e.Value).ToList();
 
             queryTag.AddRange(queryTags);
             // Сортирует, фильтрует, выберает и преобразует в список:
             TagList = queryTag.Distinct().OrderBy(x => x.Substring(0, 3))
-                .Select(element => new WrapPackage() { Name = element }).ToList();
+                .Select(element => new WrapPackage { Name = element }).ToList();
 
             return TagList;
         } 

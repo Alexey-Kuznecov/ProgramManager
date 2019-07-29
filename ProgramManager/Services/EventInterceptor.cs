@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ProgramManager.Models;
-using ProgramManager.ViewModels;
+using ProgramManager.Plugins.TagsEditor;
 
 namespace ProgramManager.Services
 {

@@ -14,7 +14,7 @@ namespace ProgramManager.Plugins
     class PluginManager
     {
         private const string Name = "../../DataPlugins.bin"; // File name for serialization.
-        public static Action<object> PluginLoader;
+        public static Action<object> StartPriority;
         internal static List<Plugin> RegistPlugins = new List<Plugin>(); // List plugin registered.
         /// <summary>
         /// Registers plugin and serialize it. If IconEditor type is already registered
@@ -65,7 +65,7 @@ namespace ProgramManager.Plugins
                     plugin.Author = element.Element("Author")?.Value;
                     plugin.Discription = element.Element("Description")?.Value;
                     plugin.ExecuteAction = ParseExecute(element);
-                    plugin.StartPriority = PluginLoader;
+                    plugin.StartPriority = StartPriority;
                     Register(plugin);
                 }
             }
@@ -111,9 +111,26 @@ namespace ProgramManager.Plugins
                     {
                         var @delegate = (Action<object>)
                             Delegate.CreateDelegate(type: typeof(Action<object>), method: execute);
+                        
+                        #region Creating a method that will be run before loading the program. 
 
-                        if (element.Attribute("StartPriority")?.Value == "1")
-                            PluginLoader += @delegate;
+                        string priority = element.Attribute("StartPriority")?.Value;
+
+                        if (priority != null)
+                        {
+                            var priorityMethod = startPath.GetMethod(priority);
+
+                            if (priorityMethod != null)
+                            {
+                                var delegatePriority = (Action<object>)
+                                    Delegate.CreateDelegate(type: typeof(Action<object>), method: priorityMethod);
+                                StartPriority += delegatePriority;
+                            }
+                            else throw new PluginNotFoundException("Method named: \"" + priority + "\" is not found.");
+                        }
+
+                        #endregion
+
                         return @delegate;
                     }
                     throw new PluginNotFoundException("Method named: \"" + method + "\" is not found.");

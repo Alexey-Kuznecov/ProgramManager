@@ -1,5 +1,5 @@
 ﻿using System.Windows;
-namespace ProgramManager.Views.DialogPacks
+namespace ProgramManager.Plugins.TagsEditor
 {
     /// <summary>
     /// Логика взаимодействия для TagDialog.xaml

@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using ProgramManager.Models;
 using ProgramManager.Models.PackageModel;
+using ProgramManager.Plugins.TagsEditor;
 using ProgramManager.ViewModels;
 
 namespace ProgramManager.Services
@@ -12,7 +13,6 @@ namespace ProgramManager.Services
         public PackagesManager()
         {
             EventAggregate.NewPackage += AddNewPackage;
-            EventAggregate.TagListUpdate += new TagDialogViewModel().DisplayTagList;
             EventAggregate.PackageChanged += ChangePackage;
             EventAggregate.RemovePackage += RemovePackage;
         }

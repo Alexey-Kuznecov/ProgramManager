@@ -138,7 +138,11 @@
     <Compile Include="Plugins\IconsEditor\Data\IconsDataModifier.cs" />
     <Compile Include="Plugins\IconsEditor\Data\IconsDataWriter.cs" />
     <Compile Include="Plugins\PluginType.cs" />
-    <Compile Include="Plugins\TagList\TagList.cs" />
+    <Compile Include="Plugins\TagsEditor\TagDialog.xaml.cs">
+      <DependentUpon>TagDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Plugins\TagsEditor\TagDialogViewModel.cs" />
+    <Compile Include="Plugins\TagsEditor\TagList.cs" />
     <Compile Include="Services\EventInterceptor.cs" />
     <Compile Include="Services\Serialization.cs" />
     <Compile Include="Settings.cs" />
@@ -190,6 +194,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Plugins\TagsEditor\TagDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Resources\MainStyles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -211,10 +219,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\Icons.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\DialogPacks\TagDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -243,10 +247,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Services\PackagesDialogVisibility.cs" />
-    <Compile Include="ViewModels\TagDialogViewModel.cs" />
-    <Compile Include="Views\DialogPacks\TagDialog.xaml.cs">
-      <DependentUpon>TagDialog.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\PackagesDialog.xaml.cs">
       <DependentUpon>PackagesDialog.xaml</DependentUpon>
     </Compile>

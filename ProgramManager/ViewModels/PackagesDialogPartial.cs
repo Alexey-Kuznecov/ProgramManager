@@ -23,7 +23,7 @@ namespace ProgramManager.ViewModels
         public static CategoryModel Category;
 
         #region INITIALIZE DATA AND COMPONENTS
-        public void InitialDataSource(object data)
+        public void InitialTagLs(object data)
         {
             var list = data as List<string>;
             if (list != null)
@@ -96,7 +96,7 @@ namespace ProgramManager.ViewModels
         public void SendPackage<T>(object data) where T : PackageBase, new()
         {
             if (_tagList == null)
-                _tagList = new List<string>() { "Не подшитые" };
+                _tagList = new List<string> { "Не подшитые" };
 
             // Получаем управление диалоговым окном пакетов.
             PackagesDialog window = data as PackagesDialog;
@@ -157,6 +157,7 @@ namespace ProgramManager.ViewModels
             }
             //Посылает найденный ресурс иконки для пакета
             LoadIcon(package.Icon);
+            DataSync.PackageLoad.Invoke(package);
         }
         #endregion
 

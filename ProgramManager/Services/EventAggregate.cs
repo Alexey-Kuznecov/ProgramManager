@@ -25,7 +25,7 @@ namespace ProgramManager.Services
 
         public static event EventHandler<BaseEventArgs> PackageChanged;
         public static event EventHandler<BaseEventArgs> NewPackage;
-        public static event EventHandler<BaseEventArgs> TagListUpdate;
+        public static event EventHandler<BaseEventArgs> LoadTagList;
         public static event EventHandler<BaseEventArgs> RemovePackage;
         public static event EventHandler<BaseEventArgs> CategoryChanged;
         public static event Action<string> LoadPackage;
@@ -51,7 +51,7 @@ namespace ProgramManager.Services
         /// <param name="package">Package that conains tags.</param>
         public void OnLoadTagsList(object package)
         {
-            TagListUpdate?.Invoke(this, new BaseEventArgs(EventInterceptor.ConvertTotype(this, package)));
+            LoadTagList?.Invoke(this, new BaseEventArgs(package));
         }
         /// <summary>
         /// The event raise when user delete package of list package.
