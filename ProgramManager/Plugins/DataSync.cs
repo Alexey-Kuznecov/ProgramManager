@@ -19,5 +19,7 @@ namespace ProgramManager.Plugins
         /// </summary>
         /// <param name="obj">Icon data as <model cref="IconModel"/></param>
         public delegate void CancelChangeIcon(IconModel obj);
+        public static ChangeTag TagLoad;
+        public delegate void ChangeTag(IconModel obj);
     }
 }

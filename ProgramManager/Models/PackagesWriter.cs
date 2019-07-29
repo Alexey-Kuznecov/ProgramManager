@@ -34,17 +34,17 @@ namespace ProgramManager.Models
             );
             xDoc.Save(DocumentName);
         }
-        
+
         #region Functions changing data xml data
         /// <summary>
         /// Простой метод добавляет два атрибута Id, Catergory и делегирует работу для создания нового пакета.
         /// </summary>
-        /// <param name="data">Данные пакета, ожидается объект типа PackageBase.</param>
+        /// <param name="currentPack">Данные пакета, ожидается объект типа PackageBase.</param>
         /// <param name="category">Категория в контексте которой будет создан пакет.</param>
-        public static void AddPackage(PackageBase data, string category)
+        public static void AddPackage(PackageBase currentPack, string category)
         {
             XDocument xDoc = XDocument.Load(DocumentName);
-            XElement package = FormatPackage(data);
+            XElement package = FormatPackage(currentPack);
             XElement packageS = new XElement("Package");
             // Получает индекс последнего элемента в xml документе
             short id = BaseXml.GetIdLastElement();
@@ -108,24 +108,24 @@ namespace ProgramManager.Models
         /// <summary>
         /// Данный метод формирует пакет на основе данных, которые содержат свойства объекта. 
         /// </summary>
-        /// <param name="data">Объект данных, ожидается объект типа PackageBase.</param>
+        /// <param name="currentPack">Объект данных, ожидается объект типа PackageBase.</param>
         /// <returns>Возвращает готовый пакет в виде xml элементов.</returns>
-        private static XElement FormatPackage(PackageBase data)
+        private static XElement FormatPackage(PackageBase currentPack)
         {
             XElement package = new XElement("Package");
-            var properties = data.GetType().GetProperties();
+            var properties = currentPack.GetType().GetProperties();
 
             foreach (var property in properties)
             {
-                if (property.GetValue(data) == null) continue;
+                if (property.GetValue(currentPack) == null) continue;
                 if (property.PropertyType.Name == "String")
-                    package.Add(new XElement(property.Name, property.GetValue(data)));
+                    package.Add(new XElement(property.Name, property.GetValue(currentPack)));
                 if (property.Name == "FieldList")
-                    AddUserfield(package, data);
+                    AddUserfield(package, currentPack);
                 if (property.Name == "TagList")
-                    AddTag(package, data);
+                    AddTag(package, currentPack);
                 if (property.Name == "Icon")
-                    AddIcon(package, data);
+                    AddIcon(package, currentPack);
             }
             // Группирует элементы с одинаковыми именами в один узел и добавляет "List" к имени нового узла.
             return package.CreatingNestedElements().PostfixElementName();
@@ -133,25 +133,25 @@ namespace ProgramManager.Models
         /// <summary>
         /// Метод добавляет данные иконки: геометрия, цвет и фон иконки.
         /// </summary>
-        /// <param name="currentPack">Пакет в который будут добавлены новые данные.</param>
-        /// <param name="data">Объект данных, ожидается объект типа PackageBase.</param>
-        public static void AddIcon(XElement currentPack, PackageBase data)
+        /// <param name="currentPackXml">Пакет в который будут добавлены новые данные.</param>
+        /// <param name="currentPack">Объект данных, ожидается объект типа PackageBase.</param>
+        public static void AddIcon(XElement currentPackXml, PackageBase currentPack)
         {
-            if (data.Icon.Name != null)
+            if (currentPack.Icon.Name != null)
             {
                 var iconData = "../../Resources/User/packageIcons.xml";
                 var root = XElement.Load(iconData);
 
                 var check = from icon in root.Elements()
-                    where icon.Attribute("Id")?.Value == data.Id.ToString()
+                    where icon.Attribute("Id")?.Value == currentPack.Id.ToString()
                     select icon;
                 check.Remove();
 
-                root.Add(new XElement("Icon", new XAttribute("Id", data.Id),
-                    new XAttribute("Name", data.Icon.Name),
-                    new XAttribute("Foreground", data.Icon.FgroundColor),
-                    new XAttribute("Background", data.Icon.BgroundColor),
-                    new XAttribute("Path", data.Icon.Path.Data.ToString().Replace(',', '.').Replace(';', ','))));
+                root.Add(new XElement("Icon", new XAttribute("Id", currentPack.Id),
+                    new XAttribute("Name", currentPack.Icon.Name),
+                    new XAttribute("Foreground", currentPack.Icon.FgroundColor),
+                    new XAttribute("Background", currentPack.Icon.BgroundColor),
+                    new XAttribute("Path", currentPack.Icon.Path.Data.ToString().Replace(',', '.').Replace(';', ','))));
 
                 root.Save(iconData);
             }
@@ -159,25 +159,25 @@ namespace ProgramManager.Models
         /// <summary>
         /// Метод формирует xml элементы на основе данных пользовательских полей (Имя, значение). 
         /// </summary>
-        /// <param name="currentPack">Текущий пакет.</param>
-        /// <param name="data">Объект данных, ожидается объект типа PackageBase.</param>
-        private static void AddUserfield(XElement currentPack, PackageBase data)
+        /// <param name="currentPackXml">Текущий пакет.</param>
+        /// <param name="currentPack">Объект данных, ожидается объект типа PackageBase.</param>
+        private static void AddUserfield(XElement currentPackXml, PackageBase currentPack)
         {
-            foreach (var item in data.FieldList)
+            foreach (var item in currentPack.FieldList)
             {
-                currentPack?.Add(new XElement(FieldTypes.Userfield.ToString(),
+                currentPackXml?.Add(new XElement(FieldTypes.Userfield.ToString(),
                     new XAttribute("Label", PackageFieldConverter.Dictionary.Single(p => p.Key == item.Key).Value), item.Value));
             }
         }
         /// <summary>
         /// Метод создает xml элемент на основе элементов списка тегов. 
         /// </summary>
-        /// <param name="currentPack">Текущий пакет.</param>
-        /// <param name="data">Объект данных, ожидается объект типа PackageBase.</param>
-        private static void AddTag(XElement currentPack, PackageBase data)
+        /// <param name="currentPackXml">Текущий пакет.</param>
+        /// <param name="currentPack">Объект данных, ожидается объект типа PackageBase.</param>
+        private static void AddTag(XElement currentPackXml, PackageBase currentPack)
         {
-            foreach (var value in data.TagList)
-                currentPack.Add(new XElement("Tag", value));
+            foreach (var value in currentPack.TagList)
+                currentPackXml.Add(new XElement("Tag", value));
         }
         #endregion
     }

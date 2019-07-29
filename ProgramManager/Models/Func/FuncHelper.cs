@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Xml.Linq;
@@ -7,6 +8,7 @@ using ProgramManager.Converters;
 
 namespace ProgramManager.Models.Func
 {
+    [DebuggerStepThrough]
     public static class FuncHelper 
     {
         private static XElement _document;
@@ -127,8 +129,11 @@ namespace ProgramManager.Models.Func
             XDocument node = XDocument.Parse(str);
             var names = node.Elements().Elements().Select(e => e);
 
-            // Поиск элементов с одинаковыми именами
-            foreach (var name in names)
+            #region Поиск элементов с одинаковыми именами..
+
+            var xElements = names as XElement[] ?? names.ToArray();
+
+            foreach (var name in xElements)
             {
                 foreach (var element in node.Elements().Elements())
                 {
@@ -141,9 +146,10 @@ namespace ProgramManager.Models.Func
             }
             foreach (var item in nameList)
             {
-                foreach (var name in names)
+                foreach (var name in xElements)
                 {
-                    // Группирование одинаковых элементов в отдельные узлы.
+                    #region Группирование одинаковых элементов в отдельные узлы.
+
                     if (name.Name == item.ToString())
                     {
                         if (!nested.HasElements)
@@ -161,14 +167,23 @@ namespace ProgramManager.Models.Func
                                 nested.Add(new XElement(name.Name, name));
                         }
                     }
-                    // Элементы с уникальными именами.
+
+                    #region Элементы с уникальными именами.
+                    
                     if (!nameList.Contains(name.Name))
                     {
                         if (!document.Elements().Contains(document.Element(name.Name)))
                             document.Add(name);
                     }
+
+                    #endregion
+                    
+                    #endregion
                 }
             }
+
+            #endregion
+
             // Добавление узлов в общий узел.
             document.Add(nested.Elements());
 

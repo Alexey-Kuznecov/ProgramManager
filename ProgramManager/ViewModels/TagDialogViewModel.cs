@@ -77,21 +77,18 @@ namespace ProgramManager.ViewModels
                 _filterTags = value;
 
                 if (string.IsNullOrEmpty(_filterTags))
-                    TagList = InteractonTagEditor.TagList.ToObservableCollection();
+                   TagList = InteractonTagEditor.TagList.ToObservableCollection();
                 else
                 {
                     #region Filter body
-
                     // Compares box text with text of Name property.
                     var query = from name in InteractonTagEditor.TagList
-                        where !name.Name.ToLower().Contains(_filterTags.ToLower())
+                        where name.Name.ToLower().Contains(_filterTags.ToLower())
                         select name;
                     // Removes tags from the collection.
                     // This way allows to keep tags tagged.
                     foreach (var tag in query)
-                        TagList.Remove(tag);
-                    // Replace tags on filter result. 
-                    TagList = TagList;
+                        TagList.Add(tag);
 
                     #endregion
                 }
@@ -138,14 +135,13 @@ namespace ProgramManager.ViewModels
 
         #region Functions
         /// <summary>
-        /// Receives data (list tags of current categories).
+        /// Receives data (list tags of current categories) and repackage List&lt;TagDialogModel&gt; in .
         /// </summary>
         /// <param name="sender">Object type BaseEventArgs.</param>
         /// <param name="packaArgs">Waiting object type TagDialogModul and its Name property.</param>
         public void DisplayTagList(object sender, BaseEventArgs packaArgs)
         {
-            InteractonTagEditor.TagList = (List<TagDialogModel>)packaArgs.Package;
-            List<TagDialogModel> tagsList = InteractonTagEditor.TagList;
+            List<TagDialogModel> tagsList = (List<TagDialogModel>)packaArgs.Package;
             TagList = new ObservableCollection<TagDialogModel>();
 
             if (tagsList != null)
@@ -166,7 +162,11 @@ namespace ProgramManager.ViewModels
             {
                 if (list.Count > 1)
                 {
-                    if (list.Any(n => n == tag.Name)) tag.IsChecked = true;
+                    if (list.Any(n => n == tag.Name))
+                    {
+                        tag.IsChecked = true;
+                        List.Add(tag.Name);
+                    }
                     else tag.IsChecked = false;
                 }
                 else

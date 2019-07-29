@@ -11,6 +11,7 @@ using ProgramManager.Services;
 using GalaSoft.MvvmLight.Messaging;
 using ProgramManager.Models;
 using ProgramManager.Plugins;
+using ProgramManager.Plugins.IconsEditor.Bin;
 
 namespace ProgramManager.ViewModels
 {
@@ -148,7 +149,6 @@ namespace ProgramManager.ViewModels
         });
         public static ICommand CancelChange => new RelayCommand(obj =>
         {
-            Singleton.Status = true;
             DataSync.IconLoad.Invoke(null);
         });
         public ICommand CmdOpenDialogIcon => new RelayCommand(obj =>
