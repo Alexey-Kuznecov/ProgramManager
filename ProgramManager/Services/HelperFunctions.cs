@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
@@ -104,6 +105,19 @@ namespace ProgramManager.Services
             foreach (var item in combined)
                 container.Add(item);
             return container;
+        }
+        /// <summary>
+        /// Find the maximum number in an array or collections consisting of integers.
+        /// </summary>
+        /// <param name="ob"></param>
+        /// <returns></returns>
+        public static int MaxValue(this IEnumerable ob)
+        {
+            int max = 0;
+            foreach (var o in ob)
+                if ((int)o > max)
+                    max = (int)o;
+            return max;
         }
     }
 }

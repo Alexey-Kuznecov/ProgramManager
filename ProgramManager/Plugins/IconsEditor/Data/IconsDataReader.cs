@@ -89,6 +89,7 @@ namespace ProgramManager.Plugins.IconsEditor.Data
                         Scale = int.Parse(element.Attribute("Scale")?.Value),
                         Category = element.Parent?.FirstAttribute.Value,
                         Path = CreatePathGeometry(element.Elements("Path").ToList()),
+                        Brush = CreateBrush(element.Elements("Path").ToList())
                     });
 
                     #endregion
@@ -102,9 +103,29 @@ namespace ProgramManager.Plugins.IconsEditor.Data
             // Packing an object before passing in the ViewModel.
             return InitialButtonProperties(iconList);
         }
+        /// <summary>
+        /// Creates the brush on base of xml data.
+        /// </summary>
+        /// <param name="pathElements">Node named Path.</param>
+        /// <returns></returns>
+        private static DrawingBrush CreateBrush(List<XElement> pathElements)
+        {
+            DrawingBrush dBrush = new DrawingBrush();
+            DrawingGroup group = new DrawingGroup();
+            
+            foreach (var path in pathElements)
+            {
+                GeometryDrawing geometryDrawing = new GeometryDrawing();
+                geometryDrawing.Geometry = Geometry.Parse(path.Value);
+                geometryDrawing.Brush = path.Attribute("Fill")?.Value.FormatStringToSolidColor();
+                group.Children.Add(geometryDrawing);
+            }
+            dBrush.Drawing = group;
+            dBrush.Stretch = Stretch.Uniform;
+            return dBrush;
+        }
 
-        #region Method Get Icon Data To Packing
-        
+        #region Methods Gets Icon Data To Packing
         /// <summary>
         /// Extracts all elements named Path, if the paths are larger than one, 
         /// path are merged then the value is converted into Data.
@@ -117,9 +138,12 @@ namespace ProgramManager.Plugins.IconsEditor.Data
             string pathCancat = " ";
 
             foreach (var xpath in pathElements)
+            {
                 pathCancat = pathCancat + xpath.Value;
+                path.Fill = xpath.FirstAttribute.Value.FormatStringToSolidColor();
+            }
             path.Data = Geometry.Parse(pathCancat);
-
+             
             return path;
         }
         /// <summary>
@@ -146,7 +170,6 @@ namespace ProgramManager.Plugins.IconsEditor.Data
             }
             return buttons;
         }
-        
         #endregion
         
         /// <summary>

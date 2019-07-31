@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Shapes;
@@ -44,6 +45,7 @@ namespace ProgramManager.Models
         public SolidColorBrush BgroundColor { get; set; }
         public SolidColorBrush FgroundColor { get; set; }
         public Path Path { get; set; }
+        public List<Path> PathList { get; set; }
         public string StringPath { get; set; }
         public string Name { get; set; }
         public string Category { get; set; }

@@ -1,14 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Shapes;
 using ProgramManager.Contracts;
 using ProgramManager.Converters;
 using ProgramManager.Enums;
 using ProgramManager.Models;
+using ProgramManager.Plugins.IconsEditor.Converter;
 using ProgramManager.Plugins.IconsEditor.Data;
 using ProgramManager.Resources;
 using ProgramManager.Services;
@@ -30,6 +33,7 @@ namespace ProgramManager.Plugins.IconsEditor.Bin
         private ObservableCollection<IconsCollectionModel> _iconCategory;
         private string _selectItem;
         private int _selectIndex;
+        private bool _enableColourIcon;
         private static ObservableCollection<ButtonExtension> _buttons;
         
         #region Constructors
@@ -134,6 +138,15 @@ namespace ProgramManager.Plugins.IconsEditor.Bin
                 OnPropertyChanged("FilterText");
             }
         }
+        public bool EnableColourIcon
+        {
+            get { return _enableColourIcon; }
+            set
+            {
+                _enableColourIcon = value;
+                LoadIcons();
+            }
+        }
         #endregion
 
         #region Commands
@@ -178,19 +191,18 @@ namespace ProgramManager.Plugins.IconsEditor.Bin
                 var path = _fileService.Open(_dialogService.FilePath);
                 //  filename and extract geometry path of xaml file and .
                 string name = HelperFunctions.ClearExtension(_dialogService.FileShortName);
-                string paths = ConverterForeignPlugins.XamlExport64Path(path as Viewbox);
+                List<Path> paths = ConverterForeignPlugins.XamlExport64PathArray(path as Viewbox);
 
                 if (ResourceNameValidation.StoreName != null)
                     CommonProperties.IconNames.Add(name);
                 // Icon data packing to saving.
-                IconModel iconModel = new IconModel()
+                IconModel iconModel = new IconModel
                 {
-                    Id = Buttons.Count + 1,
-                    Name = CommonProperties.IconNames.SingleOrDefault(n => n == name) != null ? "new_" + name : "new_" + name + Buttons.Count + 1,
+                    Name = CommonProperties.IconNames.SingleOrDefault(n => n == name) != null ? name : name + Buttons.Count + 1,
                     BgroundColor = ColorBrush.Content.ToString().FormatStringToSolidColor(),
                     FgroundColor = "#FFFFFF".FormatStringToSolidColor(),
-                    Category = obj == null ? "Разное" : (string)obj,
-                    StringPath = paths,
+                    Category = obj == null ? "Вся коллекция" : (string)obj,
+                    PathList = paths,
                     Scale = 64
                 };
                 IconsDataWriter.Save(iconModel);
@@ -233,7 +245,7 @@ namespace ProgramManager.Plugins.IconsEditor.Bin
 
             var query = from button in ButtonsClone
                         where button.Category.ToLower().Contains(category.ToLower())
-                select button;
+                        select button;
 
             foreach (var button in query)
                 filtered.Add(button);
@@ -268,6 +280,8 @@ namespace ProgramManager.Plugins.IconsEditor.Bin
                         InitWindowRanameIcon(bts);
                     });
                     bt.Color = "#1A1E24".FormatStringToSolidColor();
+                    bt.Template = EnableColourIcon ? Application.Current.TryFindResource("IconTemplateEditorColour") : Application.Current.TryFindResource("IconTemplateEditor");
+                    bt.Style = EnableColourIcon ? (Style)Application.Current.TryFindResource("IconStylesEditorColour") : (Style)Application.Current.TryFindResource("IconStylesEditor");
                 }
             }
             // Сортирует иконки по алфавиту и упаковывает в коллекцию.

@@ -11,7 +11,10 @@ namespace ProgramManager.Services
         public string FileShortName { get; set; }
         public bool OpenFileDialog()
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
+           
+            FileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.DefaultExt = ".png";
+
             if (openFileDialog.ShowDialog() == true)
             {
                 FilePath = openFileDialog.FileName;

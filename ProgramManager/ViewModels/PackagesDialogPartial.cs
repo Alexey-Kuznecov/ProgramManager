@@ -266,16 +266,9 @@ namespace ProgramManager.ViewModels
         /// <param name="icon"></param>
         public void LoadIcon(IconModel icon)
         {
-            try
-            {
-                IconPath = IconsDataReader.GetIconPath(icon.Name);
-                IconBackground = icon.BgroundColor;
-                IconForeground = icon.FgroundColor;
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message);
-            }
+            IconPath = icon.Path;
+            IconBackground = icon.BgroundColor;
+            IconForeground = icon.FgroundColor;
         }
         #endregion
     }

@@ -37,10 +37,7 @@
     <Author>Mozilla</Author>
     <Description>Программа для просмотра вебстраниц</Description>
     <Name>Firefox</Name>
-    <TagList>
-      <Tag>Редакторы графики</Tag>
-      <Tag>Браузеры</Tag>
-    </TagList>
+    <Tag>Не подшитые</Tag>
     <Version>7.9.4</Version>
   </Package>
   <Package Id="5" Category="Программы">

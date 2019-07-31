@@ -36,6 +36,10 @@ namespace ProgramManager.Converters
             }
             return null;
         }
+        public override object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            return null;
+        }
     }
     public class BrushConverter : BaseConverter<BrushConverter>
     {

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
@@ -15,6 +16,8 @@ namespace ProgramManager.Plugins.IconsEditor.Data
         public ButtonExtension CommandParameter { get; internal set; }
         public object ToolTip { get; set; }
         public SolidColorBrush Color { get; set; }
+        public Style Style { get; set; }
+        public object Template { get; set; }
         /// <summary>
         /// Комманда для удаления икнок из редактора.
         /// </summary>       

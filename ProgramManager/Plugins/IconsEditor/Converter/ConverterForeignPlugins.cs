@@ -1,8 +1,12 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Shapes;
+using ProgramManager.Services;
 
-namespace ProgramManager.Resources
+namespace ProgramManager.Plugins.IconsEditor.Converter
 {
     [DebuggerStepThrough]
     class ConverterForeignPlugins
@@ -29,6 +33,32 @@ namespace ProgramManager.Resources
                             paths += (child as Path).Data.ToString().Substring(2).Replace(',', '.').Replace(';', ',');
                         else
                             canvas = (Canvas) child;
+                    }
+            }
+            return paths;
+        }
+        /// <summary>
+        /// Метод конвертирует xaml разметку сгенерированную плагином 
+        /// для илюстратора XamlExport64, в читаемый вид для редактора иконок.
+        /// </summary>
+        /// <param name="rootXaml">Корневой элементы плагина XamlExport64.</param>
+        /// <returns>Конкатенацию строк сожержащих путь.</returns>
+        public static List<Path> XamlExport64PathArray(Viewbox rootXaml)
+        {
+            Canvas canvas = rootXaml.Child as Canvas;
+            List<Path> paths = new List<Path>();
+            object check = null;
+
+            while (check?.GetType() != typeof(Path))
+            {
+                if (canvas != null)
+                    foreach (var child in canvas.Children)
+                    {
+                        check = child;
+                        if (child is Path)
+                            paths.Add(new Path { Fill = (child as Path).Fill, Data = (child as Path).Data });
+                        else
+                            canvas = (Canvas)child;
                     }
             }
             return paths;
