@@ -51,6 +51,7 @@ namespace ProgramManager.Models
                     Description = element.Element(FieldTypes.Description.ToString())?.Value,
                     TagOne = element.Element(FieldTypes.Tag.ToString())?.Value,
                     HashSumm = element.Element(FieldTypes.HashSumm.ToString())?.Value,
+                    Image = new ImageCover(element.Element("Image")?.Attribute("Source")?.Value),
                     // Вызов метода для создания коллекции тегов, если пакет имеет более одного тега
                     TagList = GetTagsList(element),
                     Category = element.LastAttribute.Value,

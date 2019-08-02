@@ -85,7 +85,7 @@
     </xs:simpleType>
     <xs:simpleType name="ImagePath">
         <xs:restriction base="xs:string">
-            <xs:pattern value="\.\./Resources/User/Images/[-a-zA-Z0-9\-_]+\.(jpg|png)" />
+            <xs:pattern value="\.\./Resources/User/Images/[-a-zA-Z0-9\-_]+\.(jpg|png|jpeg)" />
         </xs:restriction>
     </xs:simpleType>
     <xs:simpleType name="FormatHEX">

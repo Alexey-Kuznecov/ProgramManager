@@ -1,8 +1,8 @@
 ﻿using System.Collections.ObjectModel;
 using ProgramManager.Models;
 using ProgramManager.Models.PackageModel;
-using ProgramManager.Plugins.TagsEditor;
 using ProgramManager.ViewModels;
+using static ProgramManager.Services.EventAggregate;
 
 namespace ProgramManager.Services
 {
@@ -12,8 +12,8 @@ namespace ProgramManager.Services
         private static string _categoryStatus;
         public PackagesManager()
         {
-            EventAggregate.NewPackage += AddNewPackage;
-            EventAggregate.PackageChanged += ChangePackage;
+            NewPackage += AddNewPackage;
+            PackageChanged += ChangePackage;
             EventAggregate.RemovePackage += RemovePackage;
         }
         private void RemovePackage(object sender, BaseEventArgs e)

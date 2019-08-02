@@ -1,4 +1,5 @@
 ﻿using System;
+using ProgramManager.Models;
 using ProgramManager.ViewModels;
 
 namespace ProgramManager.Services
@@ -28,6 +29,7 @@ namespace ProgramManager.Services
         public static event EventHandler<BaseEventArgs> LoadTagList;
         public static event EventHandler<BaseEventArgs> RemovePackage;
         public static event EventHandler<BaseEventArgs> CategoryChanged;
+        public static event EventHandler<BaseEventArgs> ImageLaod;
         public static event Action<string> LoadPackage;
         /// <summary>
         /// The event raise when the package was changed.
@@ -72,12 +74,19 @@ namespace ProgramManager.Services
         /// <summary>
         /// The event raise when the user selected category in combobox.
         /// </summary>
-        /// <param name="package">Package that was selected.</param>
+        /// <param name="category">Сategory that was selected.</param>
         public void OnCategoryChanged(object category)
         {
             CategoryChanged?.Invoke(this, new BaseEventArgs(category));
         }
-
+        /// <summary>
+        /// The event raise when the user selected images in package dialog.
+        /// </summary>
+        /// <param name="imageCover">Image object type ImageCover.</param>
+        public void OnImageLoad(object imageCover)
+        {
+            ImageLaod?.Invoke(this, new BaseEventArgs(imageCover));
+        }
         #endregion
     }
 }

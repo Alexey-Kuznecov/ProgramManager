@@ -32,5 +32,12 @@ namespace ProgramManager.Plugins
         /// <param name="package">Contains package to edit.</param>
         public delegate void PackageLoader(PackageBase package);
         public static PackageLoader PackageLoad;
+        /// <summary>
+        /// Calls the method that is communicated with the delegate,
+        /// when load image cover in the package dialog.
+        /// </summary>
+        /// <param name="package">Contains package to edit.</param>
+        public delegate void ImageLoader(ImageCover package);
+        public static ImageLoader ImageLoad;
     }
 }

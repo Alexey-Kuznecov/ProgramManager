@@ -2,6 +2,7 @@
 using System.Windows.Input;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Drawing.Imaging;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using ProgramManager.Models.PackageModel;
@@ -11,6 +12,7 @@ using ProgramManager.Services;
 using GalaSoft.MvvmLight.Messaging;
 using ProgramManager.Models;
 using ProgramManager.Plugins;
+using ProgramManager.Plugins.IconsEditor.Bin;
 
 namespace ProgramManager.ViewModels
 {
@@ -24,6 +26,7 @@ namespace ProgramManager.ViewModels
         private SolidColorBrush _iconForeground;
         private SolidColorBrush _iconBackground;
         private Path _iconPath;
+        private ImageCover _image;
 
         #region Constructor
         public PackagesDialogViewModel()
@@ -120,6 +123,14 @@ namespace ProgramManager.ViewModels
         /// that to be displayed then next loading package. 
         /// </summary>
         public string Name  { get; set; }
+        public ImageCover ImageCover
+        {
+            get { return _image; }
+            set
+            {
+                _image = value;
+            }
+        }
 
         #endregion
 
@@ -174,7 +185,9 @@ namespace ProgramManager.ViewModels
                 Name = icon.Name;
                 IconPath = icon.Path;
                 IconBackground = icon.BgroundColor;
-                IconForeground = icon.FgroundColor;
+                IconForeground = icon.FgroundColor;       
+                ImageCover = new ImageCover(icon);
+                //ImageCover?.Save(".png", "../../Resources/User/Images/");
             }
             else
             {

@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Xml.Linq;
 
 namespace ProgramManager.Models
 {
+    [DebuggerStepThrough]
     public class BaseXml
     {
         const string DocumentName = "../../Resources/User/packages.xml";
@@ -32,30 +34,5 @@ namespace ProgramManager.Models
             }
             return id;
         }
-        /// <summary>
-        /// Обновляет данные по индексу и сохраняет документ 
-        /// </summary>
-        /// <remarks>Возможна переработка метода так как является не автоматизированным и требует ручнго расширения</remarks>
-        /// <param name="id">Индекс пакета который требуется изменить.</param>
-        /// <param name="data">Коллекция объектов данных</param>
-        //public static void UpdatePackage2(int id, PackageBase data)
-        //{
-        //    XElement root = XElement.Load(DocumentName),
-        //             el = root.Elements("Package").ElementAt(id),
-        //             newField = new XElement(el.Element("UserfieldList"));
-
-        //    el?.Element("UserfieldList").RemoveAll();
-
-
-        //    el.SetElementValue("Name", data.Name);
-        //    el.SetElementValue("Author", data.Author);
-        //    el.SetElementValue("Category", data.Category);
-        //    el.SetElementValue("Tag", data.TagOne);
-        //    el.SetElementValue("Version", data.Version);
-        //    el.SetElementValue("Description", data.Description);
-        //    el.Element("Image")?.SetAttributeValue("Source", data.Image);
-
-        //    root.Save(DocumentName);
-        //}
     }
 }

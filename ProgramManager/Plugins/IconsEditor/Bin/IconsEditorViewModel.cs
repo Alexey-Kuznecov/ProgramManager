@@ -13,11 +13,11 @@ using ProgramManager.Enums;
 using ProgramManager.Models;
 using ProgramManager.Plugins.IconsEditor.Converter;
 using ProgramManager.Plugins.IconsEditor.Data;
-using ProgramManager.Resources;
 using ProgramManager.Services;
 using ProgramManager.ViewModels;
 using ProgramManager.ViewModels.Base;
 using ProgramManager.Views;
+using ImageFormat = System.Drawing.Imaging.ImageFormat;
 
 namespace ProgramManager.Plugins.IconsEditor.Bin
 {
@@ -156,14 +156,16 @@ namespace ProgramManager.Plugins.IconsEditor.Bin
         public ICommand SelectIconCommand => new RelayCommand(obj =>
         {
             ButtonExtension bt = obj as ButtonExtension;
-
-            DataSync.IconLoad.Invoke(new IconModel()
+            IconModel iconModel = new IconModel
             {
                 Name = bt?.IconName,
                 Path = bt?.Path,
                 FgroundColor = "#FFFFFF".FormatStringToSolidColor(),
-                BgroundColor = ColorBrush.Content.ToString().FormatStringToSolidColor()
-            });
+                BgroundColor = ColorBrush.Content.ToString().FormatStringToSolidColor(),
+                Scale = 254,
+                Brush = bt?.Brush
+            };
+            DataSync.IconLoad.Invoke(iconModel);
         });
         /// <summary>
         /// Команда устанавливает иконку по умолчанию.

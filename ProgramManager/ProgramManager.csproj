@@ -115,6 +115,7 @@
     <Compile Include="Converters\PackageFieldConverter.cs" />
     <Compile Include="Converters\ResourceNameValidation.cs" />
     <Compile Include="Associations\CategoryDictionary.cs" />
+    <Compile Include="Models\ImageCover.cs" />
     <Compile Include="Plugins\Exceptions\PluginNotFoundException.cs" />
     <Compile Include="Plugins\Exceptions\PluginTypeDoubleDefinedException.cs" />
     <Compile Include="Data\Settings.cs" />
@@ -277,6 +278,16 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Resource Include="Resources\User\Images\Empire_Earth_2_Искусство_побеждать.png" />
+    <Resource Include="Resources\User\Images\GoogleChromealt2.png" />
+    <Resource Include="Resources\User\Images\Firefoxalt3.png" />
+    <Resource Include="Resources\User\Images\Firefoxalt.png" />
+    <Resource Include="Resources\User\Images\00480175.jpeg" />
+    <Resource Include="Resources\User\Images\0_30e92_4a2e5eef_XL.png" />
+    <Resource Include="Resources\User\Images\938.jpg" />
+    <Resource Include="Resources\User\Images\preview.png" />
+    <Resource Include="Resources\User\Images\webdesign.png" />
+    <Resource Include="Resources\User\Images\1.png" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -297,7 +308,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\19572.jpg" />
+    <Resource Include="Resources\User\Images\19572.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Icons\Aard.png" />
@@ -323,7 +334,7 @@
     <Resource Include="Resources\Icons\Search_48px.png" />
     <Resource Include="Resources\Icons\Settings_48px.png" />
     <Resource Include="Resources\Icons\User_48px.png" />
-    <Resource Include="Resources\User\Images\Adobe Photoshop.png" />
+    <Resource Include="Resources\User\Images\AdobePhotoshop.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\User\packages.xml" />

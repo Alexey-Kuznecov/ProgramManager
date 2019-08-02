@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Xml.Linq;
 using ProgramManager.Models.PackageModel;
@@ -98,6 +99,7 @@ namespace ProgramManager.Models
         /// <param name="wrapperPackages">Коллекция класса оболочки</param>
         /// <param name="wrapper">Контекст текущей оболочки</param>
         /// <param name="index">Индекс текущей оболочки</param>
+        [DebuggerStepThrough]
         private static void InsertTags(dynamic @collection, List<WrapPackage> wrapperPackages, WrapPackage wrapper, int index)
         {
             // Вставляет пакеты которые могут иметь больше одного тега 
@@ -123,6 +125,7 @@ namespace ProgramManager.Models
         /// </summary>
         /// <param name="category">Категория пакетов, необходимая для учтонения выборки.</param>
         /// <returns>Возвращает коллекцию уникальных значений.</returns>
+        [DebuggerStepThrough]
         private static List<WrapPackage> TagFinder(string category)
         {
             string xmlDoc = "../../Resources/User/packages.xml";

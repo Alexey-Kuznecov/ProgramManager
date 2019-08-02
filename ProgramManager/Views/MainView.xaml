@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:user="clr-namespace:ProgramManager.Models.Func"
     xmlns:vm="clr-namespace:ProgramManager.ViewModels"
     Title="Pragram Manager"
     Width="900"
@@ -16,11 +17,11 @@
         <vm:MainViewModel />
     </Window.DataContext>
 
-    <Grid Height="566" VerticalAlignment="Top">
+    <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.2*" />
-            <ColumnDefinition Width="0.3*" />
-            <ColumnDefinition Width="0.2*" />
+            <ColumnDefinition Width="240" />
+            <ColumnDefinition Width="1.4*" />
+            <ColumnDefinition Width="1.5*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="25" />
@@ -97,6 +98,7 @@
         </Menu>
         <WrapPanel
             Grid.Row="1"
+            Grid.Column="0"
             Grid.ColumnSpan="3"
             VerticalAlignment="Center">
             <Button
@@ -212,11 +214,13 @@
         <!--  Боковая панель  -->
         <Rectangle
             Grid.Row="2"
+            Grid.Column="0"
             Grid.ColumnSpan="3"
             Height="1"
             Fill="#CDCDCD" />
         <ComboBox
             Grid.Row="3"
+            Grid.Column="0"
             Margin="5,5,5,5"
             Padding="10,7"
             VerticalAlignment="Center"
@@ -238,6 +242,7 @@
         <ListBox
             Grid.Row="4"
             Grid.RowSpan="4"
+            Grid.Column="0"
             Margin="5,0"
             IsSynchronizedWithCurrentItem="True"
             ItemsSource="{Binding WrapPackage}"
@@ -317,42 +322,50 @@
             </ListBox.ItemTemplate>
         </ListBox>
         <!--  Панель с информацией об моде  -->
-        <Grid Grid.Row="2" Grid.Column="2">
-            <Grid.RowDefinitions>
-                <RowDefinition />
-                <RowDefinition />
-            </Grid.RowDefinitions>
-        </Grid>
         <Image
-            Grid.Row="3"
+            Grid.Row="4"
             Grid.RowSpan="2"
             Grid.Column="2"
-            Width="250"
-            Height="320"
-            Margin="10"
-            HorizontalAlignment="Right"
-            OpacityMask="Black"
-            RenderTransformOrigin="0.5,0.5"
-            Source="../Resources/19572.jpg" />
-        <StackPanel
+            Width="263"
+            Height="274"
+            Opacity="0.215"
+            Source="{Binding CurrentPackage.Image.Uri}"
+            Stretch="Uniform">
+            <Image.Effect>
+                <BlurEffect Radius="0" />
+            </Image.Effect>
+            <Image.OpacityMask>
+                <SolidColorBrush Opacity="0.7" Color="Black" />
+            </Image.OpacityMask>
+        </Image>
+        <ScrollViewer
             Grid.Row="5"
             Grid.Column="2"
-            Margin="5">
-            <Rectangle
-                Width="240"
-                Height="1"
-                Fill="#CDCDCD" />
-            <ItemsControl ItemsSource="{Binding CurrentPackage.TextField}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <WrapPanel>
-                            <Label Content="{Binding Label, StringFormat={}{0}{:}}" FontWeight="Bold" />
-                            <Label Name="PackageName" Content="{Binding FieldValue}" />
-                        </WrapPanel>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </StackPanel>
+            VerticalScrollBarVisibility="Hidden">
+            <StackPanel Margin="5">
+                <ItemsControl ItemsSource="{Binding CurrentPackage.TextField}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="25" />
+                                    <RowDefinition />
+                                    <RowDefinition Height="10" />
+                                </Grid.RowDefinitions>
+                                <Label Content="{Binding Label, StringFormat={}{0}:}" FontWeight="Bold" />
+                                <Label
+                                    Name="PackageName"
+                                    Grid.Row="1"
+                                    Content="{Binding FieldValue}" />
+                                <Separator Grid.Row="2" />
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <Label Content="Описание" FontWeight="Bold" />
+                <Label Height="64" Content="{Binding CurrentPackage.Description}" />
+            </StackPanel>
+        </ScrollViewer>
         <!--  Область кнопки установить  -->
         <StackPanel
             Grid.Row="6"

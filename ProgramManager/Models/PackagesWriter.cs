@@ -75,6 +75,7 @@ namespace ProgramManager.Models
                 {
                     item.Elements().Remove();
                     item.Add(newPackage.Elements().OrderBy(p => p.Name.ToString().Substring(0, 2)));
+                    break;
                 }
             }
             root.Save(DocumentName);
@@ -126,6 +127,8 @@ namespace ProgramManager.Models
                     AddTag(package, currentPack);
                 if (property.Name == "Icon")
                     AddIcon(package, currentPack);
+                if (property.Name == "Image")
+                    AddImage(package, currentPack);
             }
             // Группирует элементы с одинаковыми именами в один узел и добавляет "List" к имени нового узла.
             return package.CreatingNestedElements().PostfixElementName();
@@ -155,6 +158,17 @@ namespace ProgramManager.Models
 
                 root.Save(iconData);
             }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="currentPackXml"></param>
+        /// <param name="currentPack"></param>
+        public static void AddImage(XElement currentPackXml, PackageBase currentPack)
+        {
+            var imgcover = currentPack.Image;
+            string uri = "../Resources/User/Images/" + imgcover?.Name + ".png";
+            currentPackXml.Add(new XElement("Image", new XAttribute("Source", uri)));
         }
         /// <summary>
         /// Метод формирует xml элементы на основе данных пользовательских полей (Имя, значение). 

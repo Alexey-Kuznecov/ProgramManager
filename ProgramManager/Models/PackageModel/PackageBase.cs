@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Xml.Linq;
 using ProgramManager.Converters;
-using ProgramManager.Resources;
 
 namespace ProgramManager.Models.PackageModel
 {
@@ -12,7 +11,7 @@ namespace ProgramManager.Models.PackageModel
         public delegate Dictionary<string, string> DelegateMenuItem();
         public DelegateMenuItem LoadItem { get; set; }
         public int Id { get; set; }
-        public string Image { get; set; }
+        public ImageCover Image { get; set; }
         public string Category { get; set; }
         public string TagOne { get; set; }
         public IconModel Icon { get; set; }

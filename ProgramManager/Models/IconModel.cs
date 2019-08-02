@@ -41,16 +41,16 @@ namespace ProgramManager.Models
 
         #region Properties
 
+        public int Id { get; set; }
+        public string StringPath { get; set; }
+        public string Name { get; set; }
+        public string Category { get; set; }
+        public int Scale { get; set; }
         public DrawingBrush Brush { get; set; }
         public SolidColorBrush BgroundColor { get; set; }
         public SolidColorBrush FgroundColor { get; set; }
         public Path Path { get; set; }
         public List<Path> PathList { get; set; }
-        public string StringPath { get; set; }
-        public string Name { get; set; }
-        public string Category { get; set; }
-        public int Scale { get; set; }
-        public int Id { get; set; }
 
         #endregion
 

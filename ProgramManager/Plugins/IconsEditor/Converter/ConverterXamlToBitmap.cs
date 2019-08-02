@@ -1,10 +1,10 @@
-﻿using System.Windows;
+﻿using System.IO;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using System.IO;
 using System.Windows.Media.Imaging;
 
-namespace ProgramManager.Resources
+namespace ProgramManager.Plugins.IconsEditor.Converter
 {
     class ConverterXamlToBitmap
     {
@@ -13,11 +13,11 @@ namespace ProgramManager.Resources
         /// </summary>
         /// <param name="iconBrush">Кисть подразумевается что она содержит геометрию или фигуру.</param>
         /// <param name="resName">Имя кисти.</param>
-        public static void ConvertXamlToBitmap(DrawingBrush iconBrush, string resName)
+        public static void ConvertXamlToBitmap(DrawingBrush iconBrush, string resName, int size)
         {
             BitmapSource bitmapSource = BitmapSourceFromBrush(iconBrush);
             Image myImage = new Image();
-            myImage.Width = 32;
+            myImage.Width = size;
             myImage.Source = bitmapSource;
 
             var encoder = new PngBitmapEncoder();

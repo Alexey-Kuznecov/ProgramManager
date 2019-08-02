@@ -102,8 +102,9 @@ namespace ProgramManager.ViewModels
             PackagesDialog window = data as PackagesDialog;
             EventAggregate connector = new EventAggregate();
 
-            // Добавления полей базовго класса.
-            var package = new T()
+            #region  Добавления полей базовго класса...
+
+            var package = new T
             {
                 Id = _id,
                 Name = PackageTitle,
@@ -111,11 +112,14 @@ namespace ProgramManager.ViewModels
                 HashSumm = TextField.SingleOrDefault(a => a.Types == FieldTypes.HashSumm.ToString())?.FieldValue,
                 Source = TextField.SingleOrDefault(a => a.Types == FieldTypes.Source.ToString())?.FieldValue,
                 Version = TextField.SingleOrDefault(a => a.Types == FieldTypes.Version.ToString())?.FieldValue,
-                Image = TextField.SingleOrDefault(a => a.Types == FieldTypes.Image.ToString())?.FieldValue,
+                Image = ImageCover,
                 Icon = new IconModel(Name, IconPath, IconForeground, IconBackground),
                 TagList = _tagList,
                 Description = Description,
             };
+
+            #endregion
+
             // Добавления полей производных классов.
             AddUniqueField(package);
             // Добавления пользовательских полей.
@@ -126,7 +130,6 @@ namespace ProgramManager.ViewModels
                 connector.OnPackageChanged(package);
             else
                 connector.OnNewPackage(package);
-
             window?.Close();
         }
         /// <summary>

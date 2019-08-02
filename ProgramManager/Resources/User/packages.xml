@@ -5,6 +5,7 @@
     <CompanySite>https://www.Adobe.com/</CompanySite>
     <Description>Программа для оформления фотографий</Description>
     <License>5Q86W-TFPN7-K8VCJ-PH3CT</License>
+    <Image Source="../Resources/User/Images/19572.jpg" />
     <Name>Photoshop</Name>
     <Tag>Редакторы графики</Tag>
     <Version>Cloud CC6</Version>
@@ -19,23 +20,23 @@
   <Package Id="2" Category="Программы">
     <Author>Axure Software Solution</Author>
     <Description>Программа для создания прототипов сайтов</Description>
+    <Image Source="../Resources/User/Images/Empire_Earth_2_Искусство_побеждать.png" />
     <Name>Axure</Name>
-    <Source>tytyty</Source>
     <Tag>Не подшитые</Tag>
-    <Userfield Label="ewrr">ewrr</Userfield>
     <Version>RP 8</Version>
   </Package>
   <Package Id="3" Category="Программы">
     <Author>Andrei Kulabukhau</Author>
     <Description>Программа для измерения времени</Description>
-    <Image Source="../Resources/User/Images/Programs.png" />
+    <Image Source="../Resources/User/Images/new_Clock.png" />
     <Name>LazyCure</Name>
-    <Tag>Органазеры</Tag>
+    <Tag>Не подшитые</Tag>
     <Version>0.10</Version>
   </Package>
   <Package Id="4" Category="Программы">
     <Author>Mozilla</Author>
     <Description>Программа для просмотра вебстраниц</Description>
+    <Image Source="../Resources/User/Images/Firefoxalt.png" />
     <Name>Firefox</Name>
     <Tag>Не подшитые</Tag>
     <Version>7.9.4</Version>
@@ -43,6 +44,7 @@
   <Package Id="5" Category="Программы">
     <Author>Google</Author>
     <Description>Программа для просмотра вебстраниц</Description>
+    <Image Source="../Resources/User/Images/GoogleChromealt2.png" />
     <Name>Chrome</Name>
     <Tag>Не подшитые</Tag>
     <Userfield Label="sadasdd">sadasdd</Userfield>
@@ -51,7 +53,7 @@
   <Package Id="6" Category="Программы">
     <Author>Microsoft</Author>
     <Description>Программа для организации электронных писем</Description>
-    <Image Source="../Resources/User/Images/Programs.png" />
+    <Image Source="../Resources/User/Images/938.jpg" />
     <Name>Microsoft Outlook</Name>
     <Tag>Офисные</Tag>
     <Version>2017</Version>
@@ -59,7 +61,7 @@
   <Package Id="7" Category="Программы">
     <Author>Microsoft</Author>
     <Description>Программа для написания, редактирования, оформления текста и многое другое.</Description>
-    <Image Source="../Resources/User/Images/Programs.png" />
+    <Image Source="../Resources/User/Images/webdesign.png" />
     <Name>Microsoft Word</Name>
     <Tag>Офисные</Tag>
     <Version>2017</Version>
@@ -75,7 +77,7 @@
   <Package Id="9" Category="Программы">
     <Author>ChemTable Software</Author>
     <Description>Программа для оптимизации, отчиски, дефрагментации реестра и многое другое</Description>
-    <Image Source="../Resources/User/Images/Programs.png" />
+    <Image Source="../Resources/User/Images/preview.png" />
     <Name>Reg Organizer</Name>
     <Tag>Оптимизатры</Tag>
     <Version>8.16</Version>
@@ -165,7 +167,7 @@
   <Package Id="20" Category="Игры">
     <Author>Mod Doc Software</Author>
     <Description>Игра для настоящих царей</Description>
-    <Image Source="../Resources/User/Images/Games.png" />
+    <Image Source="../Resources/User/Images/Empire_Earth_2_Искусство_побеждать.png" />
     <Name>Empire Earth 2</Name>
     <Tag>Не подшитые</Tag>
     <Version>2.2</Version>
@@ -195,7 +197,7 @@
   <Package Id="25" Category="Игры">
     <Author>Valve</Author>
     <Description>Игра для настоящих ассов</Description>
-    <Image Source="../Resources/User/Images/Games.png" />
+    <Image Source="../Resources/User/Images/00480175.jpeg" />
     <Name>Counter Strike GO</Name>
     <Tag>Shooter</Tag>
     <Version>2.2</Version>
@@ -225,5 +227,22 @@
     <Name>фвфыф</Name>
     <Tag>Не подшитые</Tag>
     <Version>фывфывф</Version>
+  </Package>
+  <Package Id="30" Category="Программы">
+    <Author>This is Author2</Author>
+    <Description>awdwad</Description>
+    <Name>awdawd</Name>
+    <Tag>Не подшитые</Tag>
+    <UserfieldList>
+      <Userfield Label="awdawd">awdawd</Userfield>
+      <Userfield Label="awdawdww">awdawdww</Userfield>
+      <Userfield Label="awdawdww22">awdawdww22</Userfield>
+      <Userfield Label="awdawdww22333">awdawdww22333</Userfield>
+      <Userfield Label="22222wd">22222wd</Userfield>
+      <Userfield Label="22222wdeqweq">22222wdeqweq</Userfield>
+      <Userfield Label="2223355">2223355</Userfield>
+      <Userfield Label="2132ddadd">2132ddadd</Userfield>
+    </UserfieldList>
+    <Version>This is Versiwadaon</Version>
   </Package>
 </Packages>
