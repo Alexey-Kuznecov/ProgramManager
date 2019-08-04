@@ -14,7 +14,7 @@ namespace ProgramManager.Plugins.IconsEditor.Data
     {
         private const string DocumentName = @"..\..\Plugins\IconsEditor\Data\IconsData.xml";
         private static IEnumerable<XElement> _elementIcons; // Gets all element named Icon
-        private static IEnumerable<XElement> _elementCollection; // Gets all category element
+        private static IEnumerable<XElement> _elementCollection; // Gets all collection element
 
         private static void InitialFields()
         {
@@ -26,16 +26,16 @@ namespace ProgramManager.Plugins.IconsEditor.Data
         /// Loads xml document and get icon categories from xml file.
         /// </summary>
         /// <returns>Returns names of categories in collection.</returns>
-        public static List<string> GetCategory()
+        public static List<string> GetCollection()
         {
             // It's a field not initialized. Do it.
             if (_elementIcons == null)
                 InitialFields();
 
-            List<string> categories = new List<string>();
+            List<string> collection = new List<string>();
             foreach (var cat in _elementCollection)
-                categories.Add(cat.FirstAttribute.Value);
-            return categories;
+                collection.Add(cat.FirstAttribute.Value);
+            return collection;
         }
         /// <summary>
         /// Searches a icon in document that been specified value argument passing.

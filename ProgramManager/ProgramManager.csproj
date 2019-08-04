@@ -106,6 +106,13 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Associations\ActionsDictionary.cs" />
+    <Compile Include="Components\InputBox\ActionNameConverter.cs" />
+    <Compile Include="Components\InputBox\Actions.cs" />
+    <Compile Include="Components\InputBox\ActionsDictionary.cs" />
+    <Compile Include="Components\InputBox\InputBox.xaml.cs">
+      <DependentUpon>InputBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\InputBox\InputBoxViewModel.cs" />
     <Compile Include="Contracts\IDialogService.cs" />
     <Compile Include="Contracts\IFileService.cs" />
     <Compile Include="Contracts\IPluginStarter.cs" />
@@ -191,6 +198,10 @@
     <Compile Include="ViewModels\PackagesDialogViewModel.cs" />
     <Compile Include="ViewModels\InputNameViewModel.cs" />
     <Compile Include="ViewModels\Base\RelayCommand.cs" />
+    <Page Include="Components\InputBox\InputBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Plugins\IconsEditor\Bin\IconsEditor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

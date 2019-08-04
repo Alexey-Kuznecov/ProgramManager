@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using ProgramManager.Plugins.IconsEditor.Data;
+using ProgramManager.Components.InputBox;
 using ProgramManager.ViewModels.Base;
 
 namespace ProgramManager.Plugins.IconsEditor.Bin
@@ -18,20 +20,23 @@ namespace ProgramManager.Plugins.IconsEditor.Bin
         protected IconCollectionBase()
         {
             NameContextMenu = new ContextMenu();
-            NameContextMenu.Items.Add(new MenuItem { Header = "Добавить категорию", Command = new RelayCommand(AddNewCollection) });
+            NameContextMenu.Items.Add(newItem: new MenuItem
+            {
+                Header = "Добавить категорию",
+                Command = new RelayCommand(obj => { InputBox.Show(AddNewCollection, Actions.Add); })
+            });
             NameContextMenu.Items.Add(new MenuItem { Header = "Добавить разделитель", Command = new RelayCommand(AddSeparator) });
             NameContextMenu.Items.Add(new MenuItem { Header = "Переименовать", Command = new RelayCommand(RenameCollection) });
         }
         public string CollectionName { get; set; }
         public ContextMenu NameContextMenu { get; set; }
         public ObservableCollection<WrapPanel> IconCollection { get; set; }
-
         public static ICommand FilterCollection { get; set; }
-
-        private void AddNewCollection()
+        public static ICommand AddNewCollection => new RelayCommand(name =>
         {
-            throw new NotImplementedException();
-        }
+            IconsDataWriter.AddNewCollection((string)name);
+            InputBox.Close();
+        });
         private void AddSeparator()
         {
             throw new NotImplementedException();
@@ -48,11 +53,11 @@ namespace ProgramManager.Plugins.IconsEditor.Bin
         /// </summary>
         /// <returns>Retruns collection objects which contain 
         /// icon collection names and it context menu.</returns>
-        public static ObservableCollection<IconsCollectionModel> GetCategory()
+        public static ObservableCollection<IconsCollectionModel> GetCollection()
         {
             var cat = new ObservableCollection<IconsCollectionModel>();
             
-            foreach (var name in IconsDataReader.GetCategory())
+            foreach (var name in IconsDataReader.GetCollection())
                 cat.Add(new IconsCollectionModel { CollectionName = name });
             return cat;
         }

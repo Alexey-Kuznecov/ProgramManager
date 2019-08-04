@@ -14,10 +14,9 @@ using ProgramManager.Models;
 using ProgramManager.Plugins.IconsEditor.Converter;
 using ProgramManager.Plugins.IconsEditor.Data;
 using ProgramManager.Services;
-using ProgramManager.ViewModels;
 using ProgramManager.ViewModels.Base;
+using ProgramManager.ViewModels;
 using ProgramManager.Views;
-using ImageFormat = System.Drawing.Imaging.ImageFormat;
 
 namespace ProgramManager.Plugins.IconsEditor.Bin
 {
@@ -35,17 +34,18 @@ namespace ProgramManager.Plugins.IconsEditor.Bin
         private int _selectIndex;
         private bool _enableColourIcon;
         private static ObservableCollection<ButtonExtension> _buttons;
-        
+        private static ButtonExtension _buttonExtension;
+
         #region Constructors
         public IconsEditorViewModel()
         {
             _dialogService = Singleton.SingleInstance<DefaultDialogService>();
             _fileService = Singleton.SingleInstance<XamlFileService>();
-            IconCategory = IconsCollectionModel.GetCategory();
+            IconCategory = IconsCollectionModel.GetCollection();
             
             // Init collection.
             IconCollectionBase.FilterCollection = new RelayCommand(name => FilterCollection((string)name));
-            IconCategory = IconsCollectionModel.GetCategory();
+            IconCategory = IconsCollectionModel.GetCollection();
             AddMenuItem();
             // Loading icons...
             LoadIcons();
@@ -214,24 +214,20 @@ namespace ProgramManager.Plugins.IconsEditor.Bin
         /// <summary>
         /// Command assign new name for icon.
         /// </summary>
-        private ICommand RemaneIcon => new RelayCommand(obj =>
+        private ICommand RemaneIcon => new RelayCommand(name =>
         {
-            string newName = _inputBoxViewModel.Text;
-            // Get button from view.
-            var bt = _inputBoxViewModel.CommandParam as ButtonExtension;
-            // Hide inputbox if name was success renamed.
-            if (_oldName != null && _inputBoxViewModel.UserAction == Actions.Change)
-                _inputBox.Visibility = Visibility.Hidden;
+            string newName = (string)name;
             // Save new name to xmal file.
-            IconsDataWriter.SetName(_oldName, newName); 
+            IconsDataWriter.SetName(_buttonExtension.IconName, newName);
             // Update icon name without reload icon collection.
-            if (bt != null)
+            if (_buttonExtension != null)
             {
-                bt.IconName = newName;
-                bt.ToolTip = newName;
+                _buttonExtension.IconName = newName;
+                _buttonExtension.ToolTip = newName;
             }
             // Sort by name and updated the collection.
             Buttons = Buttons.OrderBy(p => p.IconName.Substring(0, 2)).ToObservableCollection();
+            Components.InputBox.InputBox.Close();
         });
         #endregion
 
@@ -278,42 +274,27 @@ namespace ProgramManager.Plugins.IconsEditor.Bin
                     });
                     bt.RanameIcon = new RelayCommand(obj =>
                     {
-                        var bts = obj as ButtonExtension;
-                        InitWindowRanameIcon(bts);
+                        _buttonExtension = obj as ButtonExtension;
+                        Components.InputBox.InputBox.Show(RemaneIcon, Components.InputBox.Actions.Change, (obj as ButtonExtension)?.IconName);
                     });
                     bt.Color = "#1A1E24".FormatStringToSolidColor();
-                    bt.Template = EnableColourIcon ? Application.Current.TryFindResource("IconTemplateEditorColour") : Application.Current.TryFindResource("IconTemplateEditor");
-                    bt.Style = EnableColourIcon ? (Style)Application.Current.TryFindResource("IconStylesEditorColour") : (Style)Application.Current.TryFindResource("IconStylesEditor");
+                    bt.Template = EnableColourIcon 
+                        ? Application.Current.TryFindResource("IconTemplateEditorColour") 
+                        : Application.Current.TryFindResource("IconTemplateEditor");
+                    bt.Style = EnableColourIcon 
+                        ? (Style)Application.Current.TryFindResource("IconStylesEditorColour") 
+                        : (Style)Application.Current.TryFindResource("IconStylesEditor");
                 }
             }
-            // Сортирует иконки по алфавиту и упаковывает в коллекцию.
+            // Sorts icons alphabetically and packs them into a collection.
             Buttons = Buttons.OrderBy(p => p.IconName.Substring(0, 2)).ToObservableCollection();
             // Select current collection.
             SelectIndex = 0;
             SelectItem = "";
-            // Клонирует коллекцию — для того чтобы восстановить в  
-            // исходное состояние коллекцию по необходимости.
+            // Clones a collection in order to restore the collection as needed.
             ButtonsClone = Buttons;
-            Singleton.Status = true;
-        }
-        /// <summary>
-        /// Field declaration for inputbox.
-        /// </summary>
-        private static InputBox _inputBox;
-        private static InputBoxViewModel _inputBoxViewModel;
-        private static string _oldName;
-        /// <summary>
-        /// Method creates new window of inputbox to rename icon.
-        /// </summary>
-        /// <param name="bt">Button was selected.</param>
-        public void InitWindowRanameIcon(ButtonExtension bt)
-        {
-            _oldName = bt.IconName;
-            // Intializaion inputbox by constructor argument
-            _inputBox = new InputBox();
-            _inputBoxViewModel = new InputBoxViewModel(_oldName, RemaneIcon, Actions.Change, bt);
-            _inputBox.DataContext = _inputBoxViewModel;
-            _inputBox.ShowDialog();
+            // Add forbidden words to exclude unwanted names in the collection.
+            Components.InputBox.InputBox.AddForditWord(CommonProperties.IconNames);
         }
         /// <summary>
         /// Adds contextmenu item for the command of adding.
@@ -337,7 +318,6 @@ namespace ProgramManager.Plugins.IconsEditor.Bin
         {
             Singleton.Status = true;
         }
-        
         #endregion
     }
 }

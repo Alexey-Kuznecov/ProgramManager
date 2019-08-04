@@ -197,9 +197,9 @@
   <Package Id="25" Category="Игры">
     <Author>Valve</Author>
     <Description>Игра для настоящих ассов</Description>
-    <Image Source="../Resources/User/Images/00480175.jpeg" />
+    <Image Source="../Resources/User/Images/CSGO291.png" />
     <Name>Counter Strike GO</Name>
-    <Tag>Shooter</Tag>
+    <Tag>Не подшитые</Tag>
     <Version>2.2</Version>
   </Package>
   <Package Id="27" Category="Программы">

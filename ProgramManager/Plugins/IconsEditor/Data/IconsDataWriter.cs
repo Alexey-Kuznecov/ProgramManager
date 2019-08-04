@@ -77,8 +77,8 @@ namespace ProgramManager.Plugins.IconsEditor.Data
         /// <summary>
         /// Replace icon name on new name.
         /// </summary>
-        /// <param name="oldName"></param>
-        /// <param name="newName"></param>
+        /// <param name="oldName">Old name icons for finding it in a collection.</param>
+        /// <param name="newName">New name.</param>
         public static void SetName(string oldName, string newName)
         {
             XElement root = XElement.Load(DocumentName);
@@ -89,6 +89,16 @@ namespace ProgramManager.Plugins.IconsEditor.Data
                 if (icon != null)
                     // ReSharper disable once PossibleNullReferenceException
                     icon.Attribute(name: "Name").Value = newName;
+            root.Save(DocumentName);
+        }
+        /// <summary>
+        /// Adds new icons collection in the xml file.
+        /// </summary>
+        /// <param name="name">Name new collection.</param>
+        public static void AddNewCollection(string name)
+        {
+            XElement root = XElement.Load(DocumentName);
+            root.Add(new XElement("Collection", new XAttribute("Name", name)));
             root.Save(DocumentName);
         }
         public void Dispose()

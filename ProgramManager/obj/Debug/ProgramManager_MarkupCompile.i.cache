@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\App.xaml
-13-2017872872
+14994339111
 11112053176
-94-1850756870
+99-1520232141
 811647361980
-Plugins\IconsEditor\Bin\IconsEditor.xaml;Plugins\TagsEditor\TagDialog.xaml;Resources\MainStyles.xaml;Resources\PackageDialogStyles.xaml;Views\InputBox.xaml;Resources\IconsEditorDefaultStyles.xaml;Resources\Generic.xaml;Resources\Icons.xaml;Views\PackagesDialog.xaml;Views\DialogPacks\InputName.xaml;Views\DialogPacks\TabFields.xaml;Views\DialogPacks\TabFiles.xaml;Views\MainView.xaml;
+Components\InputBox\InputBox.xaml;Plugins\IconsEditor\Bin\IconsEditor.xaml;Plugins\TagsEditor\TagDialog.xaml;Resources\MainStyles.xaml;Resources\PackageDialogStyles.xaml;Views\InputBox.xaml;Resources\IconsEditorDefaultStyles.xaml;Resources\Generic.xaml;Resources\Icons.xaml;Views\PackagesDialog.xaml;Views\DialogPacks\InputName.xaml;Views\DialogPacks\TabFields.xaml;Views\DialogPacks\TabFiles.xaml;Views\MainView.xaml;
 
-False
+True
 

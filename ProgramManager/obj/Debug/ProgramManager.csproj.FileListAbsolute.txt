@@ -104,3 +104,5 @@ D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\ProgramM
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\ProgramManager.exe
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\ProgramManager.pdb
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\ProgramManager.csprojResolveAssemblyReference.cache
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Components\InputBox\InputBox.baml
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Components\InputBox\InputBox.g.cs
