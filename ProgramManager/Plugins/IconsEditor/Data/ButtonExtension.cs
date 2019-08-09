@@ -9,20 +9,21 @@ namespace ProgramManager.Plugins.IconsEditor.Data
     [Serializable]
     class ButtonExtension
     {
-        public int Id { get; set; }
-        public string Category { get; set; }
-        public string IconName { get; set; }
+        public ushort Id { get; set; }
         public DrawingBrush Brush { get; set; }
         public ButtonExtension CommandParameter { get; internal set; }
-        public object ToolTip { get; set; }
         public SolidColorBrush Color { get; set; }
         public Style Style { get; set; }
+        public Path Path { get; internal set; }
+        public string CollectionName { get; set; }
+        public string IconName { get; set; }
+        public object ToolTip { get; set; }
         public object Template { get; set; }
         /// <summary>
         /// Комманда для удаления икнок из редактора.
         /// </summary>       
         public ICommand RemoveIcon { get; set; }
-        public ICommand RanameIcon { get; set; }
-        public Path Path { get; internal set; }
+        public ICommand RenameIcon { get; set; }
+        public ICommand ReplaceIcon { get; set; }
     }
 }

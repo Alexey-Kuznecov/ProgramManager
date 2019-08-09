@@ -113,7 +113,7 @@
 
     <!--  СТИЛИ И ШАБЛОНЫ ДЛЯ ЦВЕТНЫХ ИКОНОК  -->
 
-    <Style x:Key="IconStylesEditorColour" TargetType="Button">
+    <Style x:Key="IconStylesEditorColor" TargetType="Button">
         <Setter Property="Foreground" Value="{x:Null}" />
         <Setter Property="BorderBrush" Value="{x:Null}" />
         <Setter Property="Height" Value="{Binding ElementName=s, Path=Value}" />
@@ -123,7 +123,7 @@
         <Setter Property="Background" Value="{Binding Brush}" />
     </Style>
 
-    <ControlTemplate x:Key="IconTemplateEditorColour" TargetType="Button">
+    <ControlTemplate x:Key="IconTemplateEditorColor" TargetType="Button">
         <ControlTemplate.Resources>
             <converters:ContentConverter x:Key="ContentConverter" />
         </ControlTemplate.Resources>

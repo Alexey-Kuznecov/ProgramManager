@@ -20,7 +20,7 @@
   <Package Id="2" Category="Программы">
     <Author>Axure Software Solution</Author>
     <Description>Программа для создания прототипов сайтов</Description>
-    <Image Source="../Resources/User/Images/Empire_Earth_2_Искусство_побеждать.png" />
+    <Image Source="../Resources/User/Images/Add141.png" />
     <Name>Axure</Name>
     <Tag>Не подшитые</Tag>
     <Version>RP 8</Version>

@@ -14,7 +14,7 @@ namespace ProgramManager.Services
     {
         /// <summary>
         /// Бинарная сериализация данных объектов.
-        /// Внимание: Если объект наследует другие объекты они должны быть также помечены атрибутом [Seralizble].
+        /// Внимание: Если объект наследует другие объекты они должны быть также помечены атрибутом [Serializable].
         /// </summary>
         /// <param name="obj">Любой объект который отмечен как сериaлизуемый.</param>
         /// <param name="filename">Filename to serialize object.</param>

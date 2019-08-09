@@ -13,7 +13,7 @@ namespace ProgramManager.Services
         {
            
             FileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.DefaultExt = ".png";
+            openFileDialog.Filter = "Файлы xaml|*.xaml|Файлы svg|*.svg";
 
             if (openFileDialog.ShowDialog() == true)
             {

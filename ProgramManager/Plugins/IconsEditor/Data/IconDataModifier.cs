@@ -4,14 +4,16 @@ using System.Xml.Linq;
 
 namespace ProgramManager.Plugins.IconsEditor.Data
 {
-    class IconsDataModifier
+    class IconDataModifier
     {
         private const string DocumentName = @"..\..\Plugins\IconsEditor\Data\IconsData.xml";
+
         public static void LoadDocument(ref XElement root)
         {
             if (root == null) throw new ArgumentNullException(nameof(root));
             root = XElement.Load(DocumentName);
         }
+
         /// <summary>
         /// Removes the icon from collection using id which passed in argument.
         /// The second argument needs for specific query.
@@ -25,7 +27,8 @@ namespace ProgramManager.Plugins.IconsEditor.Data
             LoadDocument(ref root);
             // Find collection by name.
             var collectionName = from coll in root.Elements()
-                where coll.Attribute("Name")?.Value == collectName select coll;
+                                 where coll.Attribute("Name")?.Value == collectName
+                                 select coll;
             // Find icon by id.
             var iconId = from icon in collectionName.Elements()
                 where icon.Attribute("Id")?.Value == id.ToString()

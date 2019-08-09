@@ -77,7 +77,6 @@ D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Views\Di
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\App.baml
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Plugins\IconsEditor\Bin\IconsEditor.g.cs
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Plugins\TagsEditor\TagDialog.g.cs
-D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Views\InputBox.g.cs
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Views\PackagesDialog.g.cs
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Views\DialogPacks\InputName.g.cs
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Views\DialogPacks\TabFields.g.cs
@@ -92,7 +91,6 @@ D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Plugins\
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Plugins\TagsEditor\TagDialog.baml
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Resources\MainStyles.baml
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Resources\PackageDialogStyles.baml
-D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Views\InputBox.baml
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Resources\IconsEditorDefaultStyles.baml
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Views\PackagesDialog.baml
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Views\DialogPacks\InputName.baml
@@ -106,3 +104,14 @@ D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\ProgramM
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\ProgramManager.csprojResolveAssemblyReference.cache
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Components\InputBox\InputBox.baml
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Components\InputBox\InputBox.g.cs
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\Microsoft.Expression.Interactions.dll
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\de\Microsoft.Expression.Interactions.resources.dll
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\en\Microsoft.Expression.Interactions.resources.dll
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\es\Microsoft.Expression.Interactions.resources.dll
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\fr\Microsoft.Expression.Interactions.resources.dll
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\it\Microsoft.Expression.Interactions.resources.dll
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\ja\Microsoft.Expression.Interactions.resources.dll
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\ko\Microsoft.Expression.Interactions.resources.dll
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\ru\Microsoft.Expression.Interactions.resources.dll
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\zh-Hans\Microsoft.Expression.Interactions.resources.dll
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\zh-Hant\Microsoft.Expression.Interactions.resources.dll

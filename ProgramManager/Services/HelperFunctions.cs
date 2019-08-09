@@ -5,7 +5,6 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
-using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -39,11 +38,10 @@ namespace ProgramManager.Services
         /// <param name="value">Шестнадцатеричное значение.</param>
         /// <returns>Возращает цвет кисти.</returns>  
         [DebuggerStepThrough]  
-        public static SolidColorBrush FormatStringToSolidColor(this string value)
+        public static SolidColorBrush StringFormatToSolidColor(this string value)
         {
-            SolidColorBrush solid =
-                // ReSharper disable once PossibleNullReferenceException
-                new SolidColorBrush((Color)ColorConverter.ConvertFromString(value));
+            BrushConverter converter = new BrushConverter();          
+            SolidColorBrush solid = (SolidColorBrush)converter.ConvertFromString(value);
             return solid;
         }
         /// <summary>

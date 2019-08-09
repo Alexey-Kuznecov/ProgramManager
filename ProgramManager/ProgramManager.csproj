@@ -51,6 +51,7 @@
       <HintPath>..\packages\Portable.MvvmLightLibs.4.4.32.1\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.Expression.Interactions, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
       <Private>True</Private>
@@ -117,7 +118,6 @@
     <Compile Include="Contracts\IFileService.cs" />
     <Compile Include="Contracts\IPluginStarter.cs" />
     <Compile Include="Contracts\ISearchable.cs" />
-    <Compile Include="Converters\ActionNameConverter.cs" />
     <Compile Include="Converters\IconConverters.cs" />
     <Compile Include="Converters\PackageFieldConverter.cs" />
     <Compile Include="Converters\ResourceNameValidation.cs" />
@@ -133,6 +133,12 @@
     <Compile Include="Filters\FilterProperties.cs" />
     <Compile Include="Converters\BaseConverter.cs" />
     <Compile Include="Models\CategoryModelOb.cs" />
+    <Compile Include="Plugins\IconsEditor\Bin\DragDrop.cs" />
+    <Compile Include="Plugins\IconsEditor\Bin\IconEditorPatial.cs" />
+    <Compile Include="Plugins\IconsEditor\Bin\NewControl.cs" />
+    <Compile Include="Plugins\IconsEditor\Data\IconDataModifier.cs" />
+    <Compile Include="Plugins\IconsEditor\Data\IXmlWriter.cs" />
+    <Compile Include="Plugins\IconsEditor\Data\NamesEnum.cs" />
     <Compile Include="Plugins\InteractonTagEditor.cs" />
     <Compile Include="Plugins\InteractonPackageEditor.cs" />
     <Compile Include="Plugins\Exceptions\PluginMissingException.cs" />
@@ -143,7 +149,6 @@
     <Compile Include="Plugins\PluginManager.cs" />
     <Compile Include="Plugins\CommonProperties.cs" />
     <Compile Include="Plugins\Exceptions\XmlElementNotFoundException.cs" />
-    <Compile Include="Plugins\IconsEditor\Data\IconsDataModifier.cs" />
     <Compile Include="Plugins\IconsEditor\Data\IconsDataWriter.cs" />
     <Compile Include="Plugins\PluginType.cs" />
     <Compile Include="Plugins\TagsEditor\TagDialog.xaml.cs">
@@ -155,10 +160,6 @@
     <Compile Include="Services\Serialization.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="Test\LogWriter.cs" />
-    <Compile Include="ViewModels\InputBoxViewModel.cs" />
-    <Compile Include="Views\InputBox.xaml.cs">
-      <DependentUpon>InputBox.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Plugins\IconsEditor\Bin\IconsCollectionModel.cs" />
     <Compile Include="Models\PackageModel\PackageDrtails.cs" />
     <Compile Include="Models\PackageModel\CategoryModel.cs" />
@@ -215,10 +216,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\PackageDialogStyles.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\InputBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

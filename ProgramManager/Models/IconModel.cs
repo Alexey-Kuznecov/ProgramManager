@@ -19,7 +19,7 @@ namespace ProgramManager.Models
             FgroundColor = ConvertFromStringToColor(fg);
             BgroundColor = ConvertFromStringToColor(bg);
             Path = new Path { Data = Geometry.Parse(path) };
-            StringPath = path;
+            //StringPath = path;
             DrawIcon();
         }
         public IconModel(string name, SolidColorBrush fg, SolidColorBrush bg)
@@ -41,10 +41,10 @@ namespace ProgramManager.Models
 
         #region Properties
 
-        public int Id { get; set; }
+        public ushort Id { get; set; }
         public string StringPath { get; set; }
         public string Name { get; set; }
-        public string Category { get; set; }
+        public string CollectionName { get; set; }
         public int Scale { get; set; }
         public DrawingBrush Brush { get; set; }
         public SolidColorBrush BgroundColor { get; set; }
@@ -80,7 +80,7 @@ namespace ProgramManager.Models
         /// </summary>
         private SolidColorBrush ConvertFromStringToColor(string color)
         {
-            return color.FormatStringToSolidColor();
+            return color.StringFormatToSolidColor();
         }
         
         #endregion

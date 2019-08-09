@@ -26,7 +26,7 @@ namespace ProgramManager.Plugins.IconsEditor.Data
         /// Loads xml document and get icon categories from xml file.
         /// </summary>
         /// <returns>Returns names of categories in collection.</returns>
-        public static List<string> GetCollection()
+        public List<string> GetCollection()
         {
             // It's a field not initialized. Do it.
             if (_elementIcons == null)
@@ -65,44 +65,41 @@ namespace ProgramManager.Plugins.IconsEditor.Data
         /// Extract icon attribute values from an xml file.
         /// Icon attribute repacking from xml markup to icon type.
         /// </summary>
-        /// <returns>The collection containing xml elements.</returns>
-        public ObservableCollection<ButtonExtension> GetIcons()
+        /// <param name="collectionName"></param>
+        /// <returns>The collection IconModel type.</returns>
+        public List<IconModel> GetIcons(string collectionName)
         {
-            if (_elementIcons == null) InitialFields();
-                    
+            XElement root = XElement.Load(DocumentName);
+            var queryCollection = from collect in root.Elements()
+                        where collect.FirstAttribute.Value == collectionName
+                        select collect;
+
             var iconList = new List<IconModel>();
-            var iconNames = new List<string>();
 
-            if (_elementIcons != null)
-                foreach (var element in _elementIcons.ToList())
+            foreach (var element in queryCollection.Elements())
+            {
+                #region Create object by model Icon using data xml file.
+
+                iconList.Add(new IconModel
                 {
-                    #region Create object by model Icon using data xml file.
-
-                    iconList.Add(new IconModel
-                    {
-                        // ReSharper disable once PossibleNullReferenceException
-                        Id = int.Parse(element.Attribute("Id").Value),
-                        Name = element.Attribute("Name")?.Value,
-                        FgroundColor = element.Attribute("Foreground")?.Value.FormatStringToSolidColor(),
-                        BgroundColor = element.Attribute("Background")?.Value.FormatStringToSolidColor(),
-                        // ReSharper disable once AssignNullToNotNullAttribute
-                        Scale = int.Parse(element.Attribute("Scale")?.Value),
-                        Category = element.Parent?.FirstAttribute.Value,
-                        Path = CreatePathGeometry(element.Elements("Path").ToList()),
-                        Brush = CreateBrush(element.Elements("Path").ToList())
-                    });
-
-                    #endregion
-
-                    // Fill the IconNames collection by icon names.
-                    iconNames.Add(element.Attribute("Name")?.Value);
-                }
-            // Stored the collection icon names.
-            CommonProperties.IconNames = new List<string>();
-            CommonProperties.IconNames = iconNames;
-            // Packing an object before passing in the ViewModel.
-            return InitialButtonProperties(iconList);
+                    // ReSharper disable once PossibleNullReferenceException
+                    Id = ushort.Parse(element.Attribute("Id").Value),
+                    Name = element.Attribute("Name")?.Value,
+                    FgroundColor = element.Attribute("Foreground")?.Value.StringFormatToSolidColor(),
+                    BgroundColor = element.Attribute("Background")?.Value.StringFormatToSolidColor(),
+                    // ReSharper disable once AssignNullToNotNullAttribute
+                    Scale = int.Parse(element.Attribute("Scale")?.Value),
+                    CollectionName = element.Parent?.FirstAttribute.Value,
+                    Path = CreatePathGeometry(element.Elements("Path").ToList()),
+                    Brush = CreateBrush(element.Elements("Path").ToList())
+                });
+                #endregion
+            }
+            return iconList;
         }
+        
+        #region Methods Gets Icon Data To Packing
+
         /// <summary>
         /// Creates the brush on base of xml data.
         /// </summary>
@@ -117,7 +114,7 @@ namespace ProgramManager.Plugins.IconsEditor.Data
             {
                 GeometryDrawing geometryDrawing = new GeometryDrawing();
                 geometryDrawing.Geometry = Geometry.Parse(path.Value);
-                geometryDrawing.Brush = path.Attribute("Fill")?.Value.FormatStringToSolidColor();
+                geometryDrawing.Brush = path.Attribute("Fill")?.Value.StringFormatToSolidColor();
                 group.Children.Add(geometryDrawing);
             }
             dBrush.Drawing = group;
@@ -125,7 +122,6 @@ namespace ProgramManager.Plugins.IconsEditor.Data
             return dBrush;
         }
 
-        #region Methods Gets Icon Data To Packing
         /// <summary>
         /// Extracts all elements named Path, if the paths are larger than one, 
         /// path are merged then the value is converted into Data.
@@ -140,36 +136,13 @@ namespace ProgramManager.Plugins.IconsEditor.Data
             foreach (var xpath in pathElements)
             {
                 pathCancat = pathCancat + xpath.Value;
-                path.Fill = xpath.FirstAttribute.Value.FormatStringToSolidColor();
+                path.Fill = xpath.FirstAttribute.Value.StringFormatToSolidColor();
             }
             path.Data = Geometry.Parse(pathCancat);
              
             return path;
         }
-        /// <summary>
-        /// Initializes button properties of a using icon properties
-        /// then packs to ObservableCollection.
-        /// </summary>
-        /// <param name="icons">Waiting for an object of type IconModel.</param>
-        /// <returns>Returns the final object that can be transfer to the ViewModel.</returns>
-        private static ObservableCollection<ButtonExtension> InitialButtonProperties(List<IconModel> icons)
-        {
-            ObservableCollection<ButtonExtension> buttons = new ObservableCollection<ButtonExtension>();
 
-            foreach (var icon in icons)
-            {
-                buttons.Add(new ButtonExtension
-                {
-                    Id = icon.Id,
-                    IconName = icon.Name,
-                    Brush = icon.Brush,
-                    Category = icon.Category,
-                    Path = icon.Path,
-                    ToolTip = icon.Name
-                });
-            }
-            return buttons;
-        }
         #endregion
         
         /// <summary>

@@ -1,58 +1,99 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Shapes;
 using ProgramManager.Contracts;
 using ProgramManager.Converters;
-using ProgramManager.Enums;
 using ProgramManager.Models;
 using ProgramManager.Plugins.IconsEditor.Converter;
 using ProgramManager.Plugins.IconsEditor.Data;
 using ProgramManager.Services;
 using ProgramManager.ViewModels.Base;
-using ProgramManager.ViewModels;
-using ProgramManager.Views;
+using Path = System.Windows.Shapes.Path;
 
 namespace ProgramManager.Plugins.IconsEditor.Bin
 {
     /// <summary>
     /// View model for window IconsEditor. 
     /// </summary>
-    class IconsEditorViewModel : PropertiesChanged , IDisposable
+    partial class IconsEditorViewModel : PropertiesChanged
     {
         private readonly IDialogService _dialogService;
         private readonly IFileService _fileService;
-        private ListBoxItem _selectCategory;
         private string _filterText;
-        private ObservableCollection<IconsCollectionModel> _iconCategory;
-        private string _selectItem;
+        private ObservableCollection<IconsCollectionModel> _iconCollection;
+        private ObservableCollection<ButtonExtension> _buttons;
         private int _selectIndex;
-        private bool _enableColourIcon;
-        private static ObservableCollection<ButtonExtension> _buttons;
+        private bool _enableColorIcon;
+        private ButtonExtension _currentButtonExtension;
         private static ButtonExtension _buttonExtension;
+        private static string _currentCollection;
 
         #region Constructors
+
         public IconsEditorViewModel()
         {
             _dialogService = Singleton.SingleInstance<DefaultDialogService>();
             _fileService = Singleton.SingleInstance<XamlFileService>();
-            IconCategory = IconsCollectionModel.GetCollection();
-            
             // Init collection.
-            IconCollectionBase.FilterCollection = new RelayCommand(name => FilterCollection((string)name));
-            IconCategory = IconsCollectionModel.GetCollection();
+            IconCollectionBase.OnCollectionChanged += UpdateCollection;
+            IconCollection = IconsCollectionModel.GetCollection();
+
             AddMenuItem();
-            // Loading icons...
-            LoadIcons();
+            //// Loading icons...
+            LoadCollection();
         }
+        
         #endregion
 
         #region Properties
+
+        public ButtonExtension CurrentButtonExtension
+        {
+            get { return _currentButtonExtension; }
+            set
+            {
+                _currentButtonExtension = value;
+                OnPropertyChanged("CurrnButtonExtension");
+            }
+        }
+        
+        /// <summary>
+        /// Contains a current name of the icon collection.
+        /// </summary>
+        public ObservableCollection<ButtonExtension> Buttons
+        {
+            get { return _buttons; }
+            set
+            {
+                _buttons = value;
+                OnPropertyChanged("Buttons");
+            }
+        }
+
+        public ObservableCollection<ButtonExtension> ButtonsClone { get; set; }
+
+        public ObservableCollection<IconsCollectionModel> IconCollection
+        {
+            get { return _iconCollection; }
+            set
+            {
+                _iconCollection = value;
+                OnPropertyChanged("IconCollection");
+            }
+        }
+        /// <summary>
+        /// Sets the color of the icons using the Combobox value.
+        /// </summary>
+        public ComboBoxItem ColorBrush { get; set; }
+
+        public DrawingBrush IconBrush { get; set; }
+        
         /// <summary>
         /// Contains a corrent index of the icon collection.
         /// </summary>
@@ -62,55 +103,16 @@ namespace ProgramManager.Plugins.IconsEditor.Bin
             set
             {
                 _selectIndex = value;
+                if (Buttons == null)
+                    return;
+                LoadCollection();
                 OnPropertyChanged("SelectIndex");
             }
         }
+
         /// <summary>
-        /// Contains a current name of the icon collection.
+        /// Filters colection by icon name.
         /// </summary>
-        public string SelectItem
-        {
-            get { return _selectItem; }
-            set
-            {
-                _selectItem = value;
-                OnPropertyChanged("SelectItem");
-            }
-        }
-        /// <summary>
-        /// Устанавлевает цвет иконок из выбранного значение в Combobox.
-        /// </summary>
-        public ComboBoxItem ColorBrush { get; set; }
-        public DrawingBrush IconBrush { get; set; }
-        public ObservableCollection<ButtonExtension> Buttons
-        {
-            get { return _buttons; }
-            set
-            {
-                _buttons = value; 
-                OnPropertyChanged("Buttons");
-            }
-        }
-        public ObservableCollection<ButtonExtension> ButtonsClone { get; set; }
-        public ObservableCollection<IconsCollectionModel> IconCategory
-        {
-            get { return _iconCategory; }
-            set
-            {
-                _iconCategory = value;               
-                OnPropertyChanged("IconCategory");
-            }
-        }
-        public ListBoxItem SelectedCategory
-        {
-            get { return _selectCategory; }
-            set
-            {
-                _selectCategory = value;
-                FilterText = _selectCategory.Content.ToString();
-                OnPropertyChanged("FilterText");
-            }
-        }
         public string FilterText
         {
             get { return _filterText; }
@@ -118,35 +120,44 @@ namespace ProgramManager.Plugins.IconsEditor.Bin
             {
                 _filterText = value;
 
-                if (string.IsNullOrEmpty(_filterText))
+                if (!string.IsNullOrEmpty(_filterText))
                 {
-                    Buttons = ButtonsClone;
-                }
-                else
-                {
-                    ObservableCollection<ButtonExtension> filtered 
-                        = new ObservableCollection<ButtonExtension>();
-
+                    var filtered = new ObservableCollection<ButtonExtension>();
                     var query = from button in ButtonsClone
-                                where button.IconName.ToLower().Contains(_filterText.ToLower())
-                                select button;
+                        where button.IconName.ToLower().Contains(_filterText.ToLower())
+                        select button;
 
                     foreach (var button in query)
+                    {
+                        if (EnableColorIcon)
+                        {
+                            button.Style = (Style)Application.Current.FindResource("IconStylesEditorColor");
+                            button.Template = Application.Current.FindResource("IconTemplateEditorColor");
+                        }
                         filtered.Add(button);
+                    }
                     Buttons = filtered;
-                }
+                } 
+                else
+                    Buttons = ButtonsClone;
+
                 OnPropertyChanged("FilterText");
             }
         }
-        public bool EnableColourIcon
+        
+        /// <summary>
+        /// Allows display color icons if property is enabled.
+        /// </summary>
+        public bool EnableColorIcon
         {
-            get { return _enableColourIcon; }
+            get { return _enableColorIcon; }
             set
             {
-                _enableColourIcon = value;
-                LoadIcons();
+                _enableColorIcon = value;
+                LoadCollection();
             }
         }
+        
         #endregion
 
         #region Commands
@@ -156,37 +167,41 @@ namespace ProgramManager.Plugins.IconsEditor.Bin
         public ICommand SelectIconCommand => new RelayCommand(obj =>
         {
             ButtonExtension bt = obj as ButtonExtension;
-            IconModel iconModel = new IconModel
-            {
-                Name = bt?.IconName,
-                Path = bt?.Path,
-                FgroundColor = "#FFFFFF".FormatStringToSolidColor(),
-                BgroundColor = ColorBrush.Content.ToString().FormatStringToSolidColor(),
-                Scale = 254,
-                Brush = bt?.Brush
-            };
-            DataSync.IconLoad.Invoke(iconModel);
+            CurrentButtonExtension = bt;
+            OnPropertyChanged("CurrnButtonExtension");
+            //IconModel iconModel = new IconModel
+            //{
+            //    Name = bt?.IconName,
+            //    Path = bt?.Path,
+            //    FgroundColor = "#FFFFFF".FormatStringToSolidColor(),
+            //    BgroundColor = ColorBrush.Content.ToString().FormatStringToSolidColor(),
+            //    Scale = 254,
+            //    Brush = bt?.Brush
+            //};
+            //DataSync.IconLoad.Invoke(iconModel);
         });
+
         /// <summary>
-        /// Команда устанавливает иконку по умолчанию.
+        /// The command sets the default icon.
         /// </summary>
         public ICommand ResetByDefault => new RelayCommand(obj =>
         {
             DataSync.IconLoad.Invoke(null);
         });
+        
         /// <summary>
-        /// Команда устанавливает иконку
+        /// Close icon editor.
         /// </summary>
         public ICommand Shutdown => new RelayCommand(obj =>
         {
             Application app = Application.Current;
             app.Shutdown();
         });
+
         /// <summary>
-        /// Команда физический добавляет новую иконку ресурса,
-        /// представленной в виде геометрической последовательности.
+        /// Loads an xaml format icon from a computer and writes it to an xml file.
         /// </summary>
-        public ICommand AddNewFileIconCommand => new RelayCommand(obj =>
+        public ICommand AddNewIconCommand => new RelayCommand(obj =>
         {
             if (_dialogService.OpenFileDialog())
             {
@@ -200,17 +215,18 @@ namespace ProgramManager.Plugins.IconsEditor.Bin
                 // Icon data packing to saving.
                 IconModel iconModel = new IconModel
                 {
-                    Name = CommonProperties.IconNames.SingleOrDefault(n => n == name) != null ? name : name + Buttons.Count + 1,
-                    BgroundColor = ColorBrush.Content.ToString().FormatStringToSolidColor(),
-                    FgroundColor = "#FFFFFF".FormatStringToSolidColor(),
-                    Category = obj == null ? "Вся коллекция" : (string)obj,
+                    Name = name,
+                    BgroundColor = ColorBrush.Content.ToString().StringFormatToSolidColor(),
+                    FgroundColor = "#FFFFFF".StringFormatToSolidColor(),
+                    CollectionName = _currentCollection,
                     PathList = paths,
                     Scale = 64
                 };
                 IconsDataWriter.Save(iconModel);
-                LoadIcons();
+                LoadCollection();
             }
         });
+        
         /// <summary>
         /// Command assign new name for icon.
         /// </summary>
@@ -229,88 +245,109 @@ namespace ProgramManager.Plugins.IconsEditor.Bin
             Buttons = Buttons.OrderBy(p => p.IconName.Substring(0, 2)).ToObservableCollection();
             Components.InputBox.InputBox.Close();
         });
+        
         #endregion
 
         #region Functions
+
         /// <summary>
-        /// Filters collection by collection name.
+        /// Updating the icon collection menu when changing
+        /// the collection in the IconCollection base class.
         /// </summary>
-        /// <param name="category">Collection name.</param>
-        public void FilterCollection(string category)
+        private void UpdateCollection()
         {
-            var filtered
-                = new ObservableCollection<ButtonExtension>();
-
-            var query = from button in ButtonsClone
-                        where button.Category.ToLower().Contains(category.ToLower())
-                        select button;
-
-            foreach (var button in query)
-                filtered.Add(button);
-            Buttons = filtered;
-
-            IconsCollectionModel collectionModel = (IconCategory.Single(o => o.CollectionName == category));
-            SelectIndex = IconCategory.IndexOf(collectionModel);
-            if (category == "Вся коллекция")
-                Buttons = ButtonsClone;
+            IconCollection = IconsCollectionModel.GetCollection();
+            AddMenuItem();
         }
+
         /// <summary>
-        /// Loading icons in the icon editor.
+        /// Loads collection that is selected in the collection menu.
         /// </summary>
-        public void LoadIcons()
+        private void LoadCollection()
         {
-            using (IconsDataReader icon = new IconsDataReader())
+            var buttons = new ObservableCollection<ButtonExtension>();
+            IconsDataReader dataReader = new IconsDataReader();
+            _currentCollection = IconCollection.ElementAt(_selectIndex).CollectionName;
+            List<IconModel> icons = dataReader.GetIcons(_currentCollection);
+
+            foreach (var icon in icons)
             {
-                icon.Dispose();
-                Buttons = icon.GetIcons();
-                // Initializes button properties and adds in the collection it. 
-                foreach (var bt in Buttons)
+                buttons.Add(new ButtonExtension
                 {
-                    bt.CommandParameter = bt;
-                    bt.RemoveIcon = new RelayCommand(obj =>
-                    {
-                        IconsDataModifier.Remove(bt.Id, bt.Category);
-                        Buttons.Remove(obj as ButtonExtension);
-                    });
-                    bt.RanameIcon = new RelayCommand(obj =>
-                    {
-                        _buttonExtension = obj as ButtonExtension;
-                        Components.InputBox.InputBox.Show(RemaneIcon, Components.InputBox.Actions.Change, (obj as ButtonExtension)?.IconName);
-                    });
-                    bt.Color = "#1A1E24".FormatStringToSolidColor();
-                    bt.Template = EnableColourIcon 
-                        ? Application.Current.TryFindResource("IconTemplateEditorColour") 
-                        : Application.Current.TryFindResource("IconTemplateEditor");
-                    bt.Style = EnableColourIcon 
-                        ? (Style)Application.Current.TryFindResource("IconStylesEditorColour") 
-                        : (Style)Application.Current.TryFindResource("IconStylesEditor");
-                }
+                    Id = icon.Id,
+                    IconName = icon.Name,
+                    Brush = icon.Brush,
+                    CollectionName = icon.CollectionName,
+                    Path = icon.Path,
+                    ToolTip = icon.Name
+                });
             }
-            // Sorts icons alphabetically and packs them into a collection.
-            Buttons = Buttons.OrderBy(p => p.IconName.Substring(0, 2)).ToObservableCollection();
-            // Select current collection.
-            SelectIndex = 0;
-            SelectItem = "";
-            // Clones a collection in order to restore the collection as needed.
+
+            #region Initializes button properties.
+
+            foreach (var bt in buttons)
+            {
+                bt.CommandParameter = bt;
+                bt.RemoveIcon = new RelayCommand(obj =>
+                {
+                    IconDataModifier.Remove(bt.Id, bt.CollectionName);
+                    Buttons.Remove(obj as ButtonExtension);
+                });
+                bt.RenameIcon = new RelayCommand(obj =>
+                {
+                    _buttonExtension = obj as ButtonExtension;
+                    Components.InputBox.InputBox.Show(RemaneIcon, Components.InputBox.Actions.Change, (obj as ButtonExtension)?.IconName);
+                });
+                bt.ReplaceIcon = new RelayCommand(obj =>
+                {
+                    IconsDataWriter.IconReplace(((ButtonExtension)obj).Id, "Неподшитые", "Игры");
+                    Buttons.Remove((ButtonExtension)obj);
+                });
+                bt.Color = "#1A1E24".StringFormatToSolidColor();
+                bt.Template = EnableColorIcon
+                    ? Application.Current.FindResource("IconTemplateEditorColor")
+                    : Application.Current.FindResource("IconTemplateEditor");
+                bt.Style = EnableColorIcon
+                    ? (Style)Application.Current.FindResource("IconStylesEditorColor")
+                    : (Style)Application.Current.FindResource("IconStylesEditor");
+            }
+
+            #endregion
+
+            Buttons = buttons.OrderBy(p => p.IconName.Substring(0, 2)).ToObservableCollection();
             ButtonsClone = Buttons;
-            // Add forbidden words to exclude unwanted names in the collection.
-            Components.InputBox.InputBox.AddForditWord(CommonProperties.IconNames);
         }
+
         /// <summary>
         /// Adds contextmenu item for the command of adding.
         /// </summary>
         private void AddMenuItem()
         {
-            foreach (var category in IconCategory)
+            foreach (var category in IconCollection)
             {
                 category.NameContextMenu.Items.Insert(0, new MenuItem
                 {
-                    Header = "Add new icon",
-                    Command = AddNewFileIconCommand,
+                    Header = "Добавить иконку",
+                    Command = AddNewIconCommand,
                     CommandParameter = category.CollectionName
                 });
             }
-        } 
+        }
+
+        /// <summary>
+        /// Serializes icons data in the file optimization data load.
+        /// </summary>
+        /// <param name="iconData">Expect packed data icons.</param>
+        private void SerializeIconData(ObservableCollection<ButtonExtension> iconData)
+        {
+            object data = null;
+            if (!File.Exists("button_icons"))
+                Serialization.BinSerialize(iconData, "button_icons");
+            else
+                Serialization.BinDeserialize(out data, "button_icons");
+            Buttons = (ObservableCollection<ButtonExtension>)data;
+        }
+
         /// <summary>
         /// Clear fields after build object.
         /// </summary>
@@ -318,6 +355,7 @@ namespace ProgramManager.Plugins.IconsEditor.Bin
         {
             Singleton.Status = true;
         }
+        
         #endregion
     }
 }
