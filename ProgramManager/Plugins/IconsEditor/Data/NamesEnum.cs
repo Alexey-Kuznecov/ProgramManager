@@ -1,7 +1,9 @@
-﻿namespace ProgramManager.Plugins.IconsEditor.Data
+﻿using System.Diagnostics;
+
+namespace ProgramManager.Plugins.IconsEditor.Data
 {
     /// <summary>
-    /// Names of collection.
+    /// Names of icon collection.
     /// </summary>
     enum NamesEnum : byte
     {
@@ -11,10 +13,9 @@
     static class Names
     {
         /// <summary>
-        /// 
+        /// Returns the Russian version of the name of the collection menu.
         /// </summary>
-        /// <param name="code"></param>
-        /// <returns></returns>
+        [DebuggerStepThrough]
         public static string GetName(this NamesEnum code)
         {
             switch (code)

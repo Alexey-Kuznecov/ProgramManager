@@ -134,9 +134,12 @@
     <Compile Include="Converters\BaseConverter.cs" />
     <Compile Include="Models\CategoryModelOb.cs" />
     <Compile Include="Plugins\IconsEditor\Bin\DragDrop.cs" />
+    <Compile Include="Plugins\IconsEditor\Bin\IconControl.xaml.cs">
+      <DependentUpon>IconControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Plugins\IconsEditor\Bin\IconEditorPatial.cs" />
     <Compile Include="Plugins\IconsEditor\Bin\NewControl.cs" />
-    <Compile Include="Plugins\IconsEditor\Data\IconDataModifier.cs" />
+    <Compile Include="Plugins\IconsEditor\Data\IconsDataModifier.cs" />
     <Compile Include="Plugins\IconsEditor\Data\IXmlWriter.cs" />
     <Compile Include="Plugins\IconsEditor\Data\NamesEnum.cs" />
     <Compile Include="Plugins\InteractonTagEditor.cs" />
@@ -202,6 +205,10 @@
     <Page Include="Components\InputBox\InputBox.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Plugins\IconsEditor\Bin\IconControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Plugins\IconsEditor\Bin\IconsEditor.xaml">
       <SubType>Designer</SubType>

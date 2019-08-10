@@ -24,14 +24,15 @@ namespace ProgramManager.Converters
             return null;
         }
     }
-    public class ScaleConverter : BaseConverter<ScaleConverter> {
-        public double Scale { get; set; }
+    public class ScaleConverter : BaseConverter<ScaleConverter>
+    {
+        public double Scale { get; set; } = 12;
 
         public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value != null)
             {
-                double num = (double)value;
+                double num = double.Parse(value.ToString());
                 return (num * (Scale / 100));
             }
             return null;

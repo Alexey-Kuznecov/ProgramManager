@@ -12,6 +12,7 @@ namespace ProgramManager.Plugins.IconsEditor.Data
     {
         private const string DocumentName = @"..\..\Plugins\IconsEditor\Data\IconsData.xml";
         private static int _id;
+        private static XElement _root;
         private static ArrayList _idList = new ArrayList();
         
         #region Function responsable for Icon.
@@ -103,16 +104,21 @@ namespace ProgramManager.Plugins.IconsEditor.Data
         #endregion
 
         #region Method for modification the collecton 
-        
+
+        private static void LoadDocument()
+        {
+            _root = XElement.Load(DocumentName);
+        }
+
         /// <summary>
         /// Adds new icons collection in the xml file.
         /// </summary>
         /// <param name="name">Name new collection.</param>
         public void AddNewCollection(string name)
         {
-            XElement root = XElement.Load(DocumentName);
-            root.Add(new XElement("Collection", new XAttribute("Name", name)));
-            root.Save(DocumentName);
+            LoadDocument();          
+           _root.Add(new XElement("Collection", new XAttribute("Name", name)));
+           _root.Save(DocumentName);
         }
         
         /// <summary>
@@ -121,48 +127,72 @@ namespace ProgramManager.Plugins.IconsEditor.Data
         /// <param name="name">Collection Name.</param>
         public void RemoveCollection(string name)
         {
-            XElement root = XElement.Load(DocumentName);
-            var query = from collect in root.Elements()
+            if (IconsDataReader.ContainsIcons(name))
+                ReplaceAllIcon(name);
+            LoadDocument();
+
+            var query = from collect in _root.Elements()
                         where collect.FirstAttribute.Value == name
                         select collect;
-
-            var xElements = query as XElement[] ?? query.ToArray();
-            ReplaceAllIcon(ref root, xElements, NamesEnum.Unsigned.GetName());
-            xElements.Remove();
-            root.Save(DocumentName);
+                 
+            query.Remove();
+            _root.Save(DocumentName);
         }
 
         /// <summary>
-        /// Перемещает все иконки из указынной коллекции в другую коллекцию.
+        /// Move all the icons from the specified collection to the unsigned collection.
         /// </summary>
-        /// <param name="root"></param>
-        /// <param name="source">Исходная коллекция.</param>
-        /// <param name="target">Коллекция куда необходимо переместить иконки.</param>
-        public static XElement ReplaceAllIcon(ref XElement root, IEnumerable<XElement> source, string target)
+        /// <param name="source">Source collection.</param>
+        public static void ReplaceAllIcon(string source)
         {
-            var queryTarget = from collect in root.Elements()
-                              where collect.FirstAttribute.Value == target
+            LoadDocument();
+            bool isExist = IsExistCollection(NamesEnum.Unsigned.GetName());
+            if (!isExist) new IconsDataWriter().AddNewCollection(NamesEnum.Unsigned.GetName());
+
+            // Find target collection.
+            var queryTarget = from collect in _root.Elements()
+                              where collect.FirstAttribute.Value == NamesEnum.Unsigned.GetName()
+                              select collect;
+            // Find source collection.
+            var querySource = from collect in _root.Elements()
+                              where collect.FirstAttribute.Value == source
                               select collect;
 
-            foreach (var elementS in source.Elements())
+            foreach (var elementS in querySource.Elements())
                 foreach (var elementTa in queryTarget)
                     elementTa.Add(elementS);
-            return root;
+            _root.Save(DocumentName);
         }
-        
+
+        /// <summary>
+        /// Checks if there is a collection with the given name.
+        /// </summary>
+        /// <param name="collectionName">Collection name.</param>
+        private static bool IsExistCollection(string collectionName)
+        {
+            XElement root = XElement.Load(DocumentName);
+            var query = from collect in root.Elements()
+                where collect.FirstAttribute.Value == collectionName
+                select collect;
+           
+            if (!query.Any())
+                return false;
+            return true;
+        }
+
         /// <summary>
         /// Changes old name on new.
         /// </summary>
         /// <param name="oldName">Old collection name.</param>
         /// <param name="newName">New collection name.</param>
-        public static void RenameCollection(string oldName, string newName)
+        public void RenameCollection(string oldName, string newName)
         {
             XElement root = XElement.Load(DocumentName);
             var queryCollection = from collect in root.Elements()
                                   where collect.FirstAttribute.Value == oldName
                                   select collect;
             foreach (var col in queryCollection)
-                col.Value = newName;
+                col.FirstAttribute.Value = newName;
             root.Save(DocumentName);
         }
         #endregion
@@ -189,7 +219,9 @@ namespace ProgramManager.Plugins.IconsEditor.Data
         public void Dispose()
         {
             _idList = new ArrayList();
+            _root = null;
         }
+        
         #endregion
     }
 }

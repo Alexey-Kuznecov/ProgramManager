@@ -82,7 +82,24 @@ namespace ProgramManager.Models
         {
             return color.StringFormatToSolidColor();
         }
-        
+        /// <summary>
+        /// Конвертирует кисть в полигоны.
+        /// </summary>
+        /// <param name="brush"></param>
+        private void ConvertBrushToPath(DrawingBrush brush)
+        {
+            PathList = new List<Path>();
+            var drawingGroup = (DrawingGroup) brush?.Drawing.CloneCurrentValue();
+
+            if (drawingGroup != null)
+            {
+                foreach (var child in drawingGroup.Children)
+                {
+                    var geo = child as GeometryDrawing;
+                    PathList.Add(new Path { Data = geo?.Geometry });
+                }
+            }
+        }
         #endregion
     }
 }

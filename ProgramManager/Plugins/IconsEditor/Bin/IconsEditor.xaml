@@ -35,7 +35,7 @@
                 <MenuItem Command="{Binding AddNewIconCommand}" Header="Открыть" />
                 <MenuItem Header="Сохранить" />
                 <Separator />
-                <MenuItem Command="{Binding Shutdown}" Header="Закрыть" />
+                <MenuItem Command="{Binding ShutdownCommand}" Header="Закрыть" />
             </MenuItem>
             <MenuItem FontSize="12" Header="Вид">
                 <MenuItem Header="Список" />
@@ -55,6 +55,7 @@
             Width="300"
             Height="35"
             Margin="10,11,246,9"
+            AllowDrop="True"
             FontSize="16"
             FontStyle="Italic"
             Tag="Имя..."
@@ -63,69 +64,53 @@
                 <KeyBinding Command="{Binding FilterText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Gesture="back" />
             </TextBox.InputBindings>-->
         </TextBox>
-
         <ListBox
             x:Name="ListBox"
             Grid.Row="1"
             Grid.RowSpan="2"
             Grid.Column="0"
-            AllowDrop="True"
-            ItemsSource="{Binding IconCollection}"
+            ContextMenu="{Binding IconCollectionName/ContextMenu}"
+            ItemsSource="{Binding IconCollectionName}"
             SelectedIndex="{Binding SelectIndex}"
             Style="{StaticResource ListBox}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <ContentControl
+                    <ItemsControl
                         Width="180"
                         Height="30"
                         VerticalAlignment="Center"
                         AllowDrop="True"
                         Cursor="Hand">
-                        <WrapPanel>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="150" />
-                                    <ColumnDefinition Width="30" />
-                                </Grid.ColumnDefinitions>
-                                <TextBlock
-                                    Padding="5"
-                                    AllowDrop="True"
-                                    ContextMenu="{Binding NameContextMenu}"
-                                    Cursor="Hand"
-                                    Text="{Binding CollectionName}" />
-                                <TextBlock
-                                    Grid.Column="1"
-                                    Padding="5"
-                                    Text="{Binding Icons.Count}"
-                                    TextAlignment="Right" />
-                            </Grid>
-                        </WrapPanel>
-                    </ContentControl>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="150" />
+                                <ColumnDefinition Width="30" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock
+                                Padding="5"
+                                AllowDrop="True"
+                                ContextMenu="{Binding CollectionContextMenu}"
+                                Cursor="Hand"
+                                DragEnter="{x:Static bin:DragDrop.DragEnterHandler}"
+                                DragLeave="{x:Static bin:DragDrop.DragLeaveHandler}"
+                                DragOver="{x:Static bin:DragDrop.DragOverHandler}"
+                                Drop="{x:Static bin:DragDrop.DropHandler}"
+                                MouseMove="{x:Static bin:DragDrop.MouseMoveHandler}"
+                                Text="{Binding CollectionName}" />
+                            <TextBlock Grid.Column="1" Text="{Binding Icons.Count}" />
+                        </Grid>
+                        <ItemContainerTemplate>
+                            <ListBoxItem Padding="5" Cursor="Hand" />
+                        </ItemContainerTemplate>
+                    </ItemsControl>
                 </DataTemplate>
             </ListBox.ItemTemplate>
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="Drop">
-                    <ei:CallMethodAction MethodName="Grid_OnDrop" TargetObject="{Binding}" />
-                </i:EventTrigger>
-                <i:EventTrigger EventName="DragEnter">
-                    <ei:CallMethodAction MethodName="Grid_OnDragEnter" TargetObject="{Binding}" />
-                </i:EventTrigger>
-                <i:EventTrigger EventName="DragOver">
-                    <ei:CallMethodAction MethodName="Grid_DragOver" TargetObject="{Binding}" />
-                </i:EventTrigger>
-                <i:EventTrigger EventName="MouseMove">
-                    <ei:CallMethodAction MethodName="OnMouseMove" TargetObject="{Binding}" />
-                </i:EventTrigger>
-                <i:EventTrigger EventName="GiveFeedback">
-                    <ei:CallMethodAction MethodName="Grid_GiveFeedback" TargetObject="{Binding}" />
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
         </ListBox>
         <ScrollViewer
             Grid.Row="2"
             Grid.Column="1"
             VerticalScrollBarVisibility="Visible">
-            <ItemsControl ItemsSource="{Binding Buttons, Mode=TwoWay}">
+            <ItemsControl ItemsSource="{Binding Icons, Mode=TwoWay}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Grid x:Name="grid">
@@ -145,31 +130,28 @@
                                         Header="Удалить" />
                                 </ContextMenu>
                             </Grid.ContextMenu>
-                            <Button
+                            <ContentControl
                                 x:Name="d"
-                                Command="{Binding DataContext.SelectIconCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}"
-                                CommandParameter="{Binding CommandParameter}"
+                                Uid="{Binding CollectionName}"
                                 Content="{Binding Brush}"
-                                DragEnter="UIElement_OnDragEnter"
-                                DragOver="UIElement_OnDragOver"
-                                Drop="UIElement_OnDrop"
-                                GiveFeedback="UIElement_OnGiveFeedback"
-                                MouseMove="UIElement_OnMouseMove"
+                                GiveFeedback="{x:Static bin:DragDrop.GiveFeedbackHandler}"
+                                MouseMove="{x:Static bin:DragDrop.MouseMoveHandler}"
                                 Style="{Binding Style}"
+                                Tag="{Binding Id}"
                                 Template="{Binding Template}">
-                                <Button.ToolTip>
+                                <ContentControl.ToolTip>
                                     <ToolTip>
                                         <Grid Margin="5">
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="*" />
                                                 <RowDefinition Height="30" />
                                             </Grid.RowDefinitions>
-                                            <Button
+                                            <ContentControl
                                                 Width="64"
                                                 Height="64"
                                                 Padding="10"
-                                                Background="{Binding Brush}"
                                                 BorderBrush="{x:Null}"
+                                                Content="{Binding Brush}"
                                                 Foreground="{x:Null}" />
                                             <TextBlock
                                                 Grid.Row="1"
@@ -180,8 +162,14 @@
                                                 TextAlignment="Center" />
                                         </Grid>
                                     </ToolTip>
-                                </Button.ToolTip>
-                            </Button>
+                                </ContentControl.ToolTip>
+                                <!--<ContentControl.InputBindings>
+                                    <MouseBinding
+                                        Command="{Binding DataContext.SelectIconCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}"
+                                        CommandParameter="{Binding CommandParameter}"
+                                        Gesture="LeftClick" />
+                                </ContentControl.InputBindings>-->
+                            </ContentControl>
                         </Grid>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
@@ -190,7 +178,6 @@
                         <WrapPanel Margin="20,10,10,0" />
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
-
             </ItemsControl>
         </ScrollViewer>
         <Grid
@@ -213,7 +200,7 @@
                     Margin="720,0,0,0"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Bottom"
-                    Content="{Binding ElementName=s, Path=Value}" />
+                    Content="{Binding ElementName=S, Path=Value}" />
             </Grid>
             <ComboBox
                 x:Name="ComboBox"
@@ -257,22 +244,23 @@
                     Cursor="Hand"
                     IsChecked="{Binding EnableColorIcon, Mode=TwoWay}" />
                 <Slider
-                    x:Name="s"
+                    x:Name="S"
                     Grid.Column="1"
                     Height="30"
                     VerticalAlignment="Center"
                     Maximum="256"
                     Minimum="12"
-                    Value="36" />
+                    Value="35" />
+
             </Grid>
-            <!--<Button
+            <Button
                 Grid.Row="1"
                 Grid.Column="2"
                 Width="100"
                 Height="35"
-                Command="{Binding ResetByDefault}"
+                Command="{Binding ResetByDefaultCommand}"
                 CommandParameter="{Binding ItemTemplate.Template, ElementName=ccc}"
-                Content="Сбросить" />-->
+                Content="Сбросить" />
             <Grid
                 Grid.Row="1"
                 Grid.Column="2"
@@ -303,13 +291,12 @@
                         <ei:CallMethodAction MethodName="Grid_GiveFeedback" TargetObject="{Binding}" />
                     </i:EventTrigger>
                 </i:Interaction.Triggers>-->
-                <ContentControl
-                    Content="{Binding CurrentButtonExtension.Path}"
-                    Style="{StaticResource IconStylesMain}"
-                    Template="{StaticResource IconTemplateMain}" />
+
             </Grid>
         </Grid>
 
     </Grid>
 </Window>
+
+
 

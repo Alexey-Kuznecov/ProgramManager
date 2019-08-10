@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Xml.Linq;
 using ProgramManager.Components.InputBox;
 using ProgramManager.Plugins.IconsEditor.Data;
 using ProgramManager.ViewModels.Base;
@@ -15,41 +14,80 @@ namespace ProgramManager.Plugins.IconsEditor.Bin
     /// </summary>
     class IconCollectionBase : PropertiesChanged
     {
-        public static event Action OnCollectionChanged;
+        public static event Action<ushort, string> OnCollectionChanged;
+        public static DragEventHandler DragDrop = MoveIcon;
 
-        public ObservableCollection<ButtonExtension> Icons { get; set; }
+        /// <summary>
+        /// Contains contextmenu of the icons collection.
+        /// </summary>
+        public ContextMenu CollectionContextMenu { get; set; }
+        public ContextMenu ContextMenu { get; set; }
 
-        public ContextMenu NameContextMenu { get; set; }
-
+        /// <summary>
+        /// Contains name of the icons collection.
+        /// </summary>
         public string CollectionName { get; set; }
 
+        /// <summary>
+        /// Command to add new icons.
+        /// </summary>
         public static ICommand AddNewCollection => new RelayCommand(name =>
         {
             using (IconsDataWriter dataWriter = new IconsDataWriter())
             {
-                dataWriter.AddNewCollection((string)name);
-                OnCollectionChanged?.Invoke();
+                dataWriter.AddNewCollection((string) name);
+                OnCollectionChanged?.Invoke(0, null);
                 InputBox.Close();
             }
         });
 
-        private void AddSeparator()
+        /// <summary>
+        /// Command rename the icon collection.
+        /// </summary>
+        private ICommand RenameCollection => new RelayCommand(oldName =>
         {
-            throw new NotImplementedException();
+            using (IconsDataWriter dataWriter = new IconsDataWriter())
+            {
+                dataWriter.RenameCollection(CollectionName, (string) oldName);
+                OnCollectionChanged?.Invoke(0, null);
+                InputBox.Close();
+            }
+        });
+
+        /// <summary>
+        /// Command moves the icon to another collection.
+        /// </summary>
+        /// <param name="sender">Expected the TextBlock object.</param>
+        /// <param name="e">Expected the ContentControl object.</param>
+        private static void MoveIcon(object sender, DragEventArgs e)
+        {
+            TextBlock collcetion = sender as TextBlock;
+            ContentControl button = (ContentControl)e.Data.GetData(typeof(ContentControl));
+
+            string targetName = collcetion?.Text;
+            string sourceName = button?.Uid;
+            if (button?.Tag != null)
+            {
+                ushort id = ushort.Parse(button.Tag.ToString());
+                IconsDataWriter.IconReplace(id, sourceName, targetName);
+
+                OnCollectionChanged?.Invoke(id, sourceName);
+
+                if (sourceName == NamesEnum.Unsigned.GetName())
+                    OnCollectionChanged?.Invoke(0, null);
+            }
         }
 
-        private void RenameCollection()
-        {
-            throw new NotImplementedException();
-        }
-
+        /// <summary>
+        /// Remove collection. If the collection already contains icons 
+        /// then moves icons to the Unsigned collection.
+        /// </summary>
         private void RemoveCollection(object obj)
         {
             using (IconsDataWriter dataWriter = new IconsDataWriter())
             {
                 dataWriter.RemoveCollection(CollectionName);
-                OnCollectionChanged?.Invoke();
-                InputBox.Close();
+                OnCollectionChanged?.Invoke(0, null);
             }
         }
 
@@ -58,15 +96,11 @@ namespace ProgramManager.Plugins.IconsEditor.Bin
         /// </summary>
         protected IconCollectionBase()
         {
-            NameContextMenu = new ContextMenu();
-            NameContextMenu.Items.Add(newItem: new MenuItem
-            {
-                Header = "Добавить категорию",
-                Command = new RelayCommand(obj => InputBox.Show(AddNewCollection, Actions.Add))
-            });
-            NameContextMenu.Items.Add(new MenuItem { Header = "Добавить разделитель", Command = new RelayCommand(AddSeparator) });
-            NameContextMenu.Items.Add(new MenuItem { Header = "Переименовать", Command = new RelayCommand(RenameCollection) });
-            NameContextMenu.Items.Add(new MenuItem { Header = "Удалить", Command = new RelayCommand(RemoveCollection) });
+            CollectionContextMenu = new ContextMenu();
+            ContextMenu = new ContextMenu();
+            ContextMenu.Items.Add(new MenuItem { Header = "Добавить категорию", Command = new RelayCommand(obj => InputBox.Show(AddNewCollection, Actions.Add))});
+            CollectionContextMenu.Items.Add(new MenuItem { Header = "Переименовать", Command = new RelayCommand(obj => InputBox.Show(RenameCollection, Actions.Change, CollectionName))});
+            CollectionContextMenu.Items.Add(new MenuItem { Header = "Удалить", Command = new RelayCommand(RemoveCollection) });
         }
     }
     class IconsCollectionModel : IconCollectionBase
@@ -82,7 +116,18 @@ namespace ProgramManager.Plugins.IconsEditor.Bin
             using (IconsDataReader dataReader = new IconsDataReader())
             {
                 foreach (var name in dataReader.GetCollection())
-                    cat.Add(new IconsCollectionModel { CollectionName = name });
+                {
+                    if (name == NamesEnum.Unsigned.GetName())
+                    {
+                        if (!IconsDataReader.ContainsIcons(NamesEnum.Unsigned.GetName()))
+                            continue;
+                        cat.Add(new IconsCollectionModel { CollectionName = name, CollectionContextMenu = new ContextMenu() });
+                    }
+                    else
+                    {
+                        cat.Add(new IconsCollectionModel { CollectionName = name });
+                    }
+                }
             }
             return cat;
         }

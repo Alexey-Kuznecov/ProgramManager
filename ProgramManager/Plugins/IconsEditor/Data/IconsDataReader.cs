@@ -97,7 +97,22 @@ namespace ProgramManager.Plugins.IconsEditor.Data
             }
             return iconList;
         }
-        
+
+        /// <summary>
+        /// Checks if the collection contains icons.
+        /// </summary>
+        public static bool ContainsIcons(string collectionName)
+        {
+            XElement root = XElement.Load(DocumentName);
+            var query = from collect in root.Elements()
+                        where collect.FirstAttribute.Value == collectionName
+                        select collect;
+            int count = query.Count(p => p.HasElements);
+            if (count == 0)
+                return false;
+            return true;
+        }
+
         #region Methods Gets Icon Data To Packing
 
         /// <summary>

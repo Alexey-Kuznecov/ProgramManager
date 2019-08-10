@@ -115,3 +115,5 @@ D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\ko\Micro
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\ru\Microsoft.Expression.Interactions.resources.dll
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\zh-Hans\Microsoft.Expression.Interactions.resources.dll
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\zh-Hant\Microsoft.Expression.Interactions.resources.dll
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Plugins\IconsEditor\Bin\IconControl.g.cs
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Plugins\IconsEditor\Bin\IconControl.baml

@@ -32,6 +32,7 @@ namespace ProgramManager.Services
             while (result != path);
             return result;
         }
+        
         /// <summary>
         /// Преобразует шестнадцатеричное значение в цвет кисти.
         /// </summary>
@@ -44,6 +45,7 @@ namespace ProgramManager.Services
             SolidColorBrush solid = (SolidColorBrush)converter.ConvertFromString(value);
             return solid;
         }
+        
         /// <summary>
         /// Решает проблему: Указанный элемент уже является логическим дочерним для другого элемента. Сначала отсоедините его.
         /// </summary>
@@ -54,6 +56,7 @@ namespace ProgramManager.Services
             var parentItemsControl = (WrapPanel) item?.Parent;
             parentItemsControl?.Children.Remove(item as UIElement);
         }
+        
         /// <summary>
         /// Ищет словарь по ссылкам объяденненых словарей ресурсов,
         /// данным метод не ищет ресурсы в главном словаре App.xaml.
@@ -67,6 +70,7 @@ namespace ProgramManager.Services
             ResourceDictionary resourceDictionary = collMergedDictionaries.Single(p => p.Source.ToString().Contains(resourceName));
             return resourceDictionary;
         }
+        
         /// <summary>
         /// Выводит хеш-код и тип.
         /// </summary>
@@ -75,6 +79,7 @@ namespace ProgramManager.Services
         {
             MessageBox.Show(obj.GetHashCode().ToString(), obj.GetType().FullName);
         }
+        
         /// <summary>
         /// Упаковывает элементы перечислителя в отслеживаемую коллекцию. 
         /// Используется как и стандартный метод расширения ToList.
@@ -90,6 +95,7 @@ namespace ProgramManager.Services
                 ob.Add(item);
             return ob;
         }
+        
         /// <summary>
         /// Joins two collection to one.
         /// </summary>
@@ -104,15 +110,17 @@ namespace ProgramManager.Services
                 container.Add(item);
             return container;
         }
+        
         /// <summary>
         /// Find the maximum number in an array or collections consisting of integers.
         /// </summary>
-        /// <param name="ob"></param>
-        /// <returns></returns>
-        public static int MaxValue(this IEnumerable ob)
+        /// <param name="collection">Collection IEnumerable interface.</param>
+        /// <returns>Return max number.</returns>
+        [DebuggerStepThrough]
+        public static int MaxValue(this IEnumerable collection)
         {
             int max = 0;
-            foreach (var o in ob)
+            foreach (var o in collection)
                 if ((int)o > max)
                     max = (int)o;
             return max;

@@ -33,6 +33,10 @@ namespace ProgramManager.ViewModels.Base
         {
             _execute.Invoke(parameter);
         }
+        public void Execute()
+        {
+            _command.Invoke();
+        }
         public void RaiseCanExecuteChanged()
         {
             CanExecuteChanged?.Invoke(this, EventArgs.Empty);

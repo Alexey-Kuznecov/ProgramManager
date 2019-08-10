@@ -4,7 +4,7 @@ using System.Xml.Linq;
 
 namespace ProgramManager.Plugins.IconsEditor.Data
 {
-    class IconDataModifier
+    class IconsDataModifier
     {
         private const string DocumentName = @"..\..\Plugins\IconsEditor\Data\IconsData.xml";
 
