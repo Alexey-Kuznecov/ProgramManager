@@ -5,7 +5,6 @@
     <CompanySite>https://www.Adobe.com/</CompanySite>
     <Description>Программа для оформления фотографий</Description>
     <License>5Q86W-TFPN7-K8VCJ-PH3CT</License>
-    <Image Source="../Resources/User/Images/19572.jpg" />
     <Name>Photoshop</Name>
     <Tag>Редакторы графики</Tag>
     <Version>Cloud CC6</Version>
@@ -36,17 +35,15 @@
   <Package Id="4" Category="Программы">
     <Author>Mozilla</Author>
     <Description>Программа для просмотра вебстраниц</Description>
-    <Image Source="../Resources/User/Images/Firefoxalt.png" />
     <Name>Firefox</Name>
-    <Tag>Не подшитые</Tag>
+    <Tag>Браузеры</Tag>
     <Version>7.9.4</Version>
   </Package>
   <Package Id="5" Category="Программы">
     <Author>Google</Author>
     <Description>Программа для просмотра вебстраниц</Description>
-    <Image Source="../Resources/User/Images/GoogleChromealt2.png" />
     <Name>Chrome</Name>
-    <Tag>Не подшитые</Tag>
+    <Tag>Браузеры</Tag>
     <Userfield Label="sadasdd">sadasdd</Userfield>
     <Version>8.5.0</Version>
   </Package>

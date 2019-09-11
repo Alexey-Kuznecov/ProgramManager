@@ -7,7 +7,7 @@ using ProgramManager.ViewModels.Base;
 
 namespace ProgramManager.Plugins
 {
-    class DataSync : PropertiesChanged
+    public class DataSync : PropertiesChanged
     {
         /// <summary>
         /// Transfers icon data:

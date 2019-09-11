@@ -3,7 +3,7 @@ using ProgramManager.ViewModels.Base;
 
 namespace ProgramManager.Plugins
 {
-    class CommonProperties : PropertiesChanged
+    public class CommonProperties : PropertiesChanged
     {
         public static List<string> _iconNames;
         /// <summary>

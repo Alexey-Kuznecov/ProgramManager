@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
@@ -8,7 +9,7 @@ using ProgramManager.Services;
 
 namespace ProgramManager.Plugins.IconsEditor.Converter
 {
-    [DebuggerStepThrough]
+    //[DebuggerStepThrough]
     class ConverterForeignPlugins
     {
         /// <summary>
@@ -58,7 +59,13 @@ namespace ProgramManager.Plugins.IconsEditor.Converter
                         if (child is Path)
                             paths.Add(new Path { Fill = (child as Path).Fill, Data = (child as Path).Data });
                         else
-                            canvas = (Canvas)child;
+                        {
+                            var check2 = child as Canvas;
+                            if (check2 != null)
+                                canvas = (Canvas)child;
+                            else
+                               throw new InvalidCastException("Неудалось прочитать файл, недопустимая разметка: " + child);
+                        }
                     }
             }
             return paths;

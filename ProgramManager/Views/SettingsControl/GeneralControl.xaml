@@ -1,0 +1,38 @@
+﻿<UserControl
+    x:Class="ProgramManager.Views.SettingsControl.GeneralControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:ProgramManager.Views.SettingsControl"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:ProgramManager.ViewModels.Settings"
+    d:DataContext="{d:DesignInstance vm:GeneralViewModel}"
+    d:DesignHeight="300"
+    d:DesignWidth="300"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <DataTemplate DataType="{x:Type vm:GeneralViewModel}" />
+    </UserControl.Resources>
+    <UserControl.DataContext>
+        <vm:GeneralViewModel />
+    </UserControl.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100" />
+            <RowDefinition Height="50" />
+        </Grid.RowDefinitions>
+        <WrapPanel Margin="10" ItemHeight="25">
+            <CheckBox Content="Запускать приложение вмести с системой." IsChecked="{Binding AutoStartApp}" />
+            <CheckBox Content="Автоматический проверять обновления." IsChecked="{Binding UpdateNotify}" />
+            <CheckBox Content="Показывать обложку папекета." IsChecked="{Binding ShownPackBack}" />
+        </WrapPanel>
+        <StackPanel Background="AliceBlue" Grid.Row="1" Margin="0,0,0,-32">
+            <Label Margin="10" Content="Сменить тему:" />
+            <ComboBox
+                Height="25"
+                Width="200"
+                ItemsSource="{Binding Themes}"
+                SelectedValue="{Binding Theme}" />
+        </StackPanel>
+    </Grid>
+</UserControl>

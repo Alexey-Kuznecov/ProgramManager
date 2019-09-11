@@ -9,16 +9,6 @@ namespace ProgramManager.Models
 {
     public class ImageCover
     {
-        public ImageCover(IconModel icon)
-        {
-            _background = icon.BgroundColor;
-            _foreground = icon.FgroundColor;
-            _iconBrush = icon.Brush;
-            Size = icon.Scale;
-            Name = icon.Name;
-            Dpi = 96;
-            CreateImageFromBrush();
-        }
         public ImageCover(string path)
         {
             Uri = path;
@@ -34,6 +24,18 @@ namespace ProgramManager.Models
         public string Name { get; set; }
         public int Dpi { get; set; }
         public int Id { get; set; }
+
+        public ImageCover(IconModel icon)
+        {
+            _background = icon.BgroundColor;
+            _foreground = icon.FgroundColor;
+            _iconBrush = icon.Brush;
+            Size = icon.Scale;
+            Name = icon.Name;
+            Dpi = 96;
+            CreateImageFromBrush();
+        }
+
         /// <summary>
         /// Saves the image to a file.
         /// </summary>
@@ -44,6 +46,7 @@ namespace ProgramManager.Models
             using (FileStream stream = new FileStream(url + Name + format, FileMode.Create))
                 encoder.Save(stream);
         }
+        
         /// <summary>
         /// Creates an image from a brush.
         /// </summary>
@@ -55,6 +58,7 @@ namespace ProgramManager.Models
             Image.Source = _bitmapSource;
             Source = _bitmapSource;
         }
+        
         /// <summary>
         /// Converts a brush to images.
         /// </summary>

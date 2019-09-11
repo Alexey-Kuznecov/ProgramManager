@@ -163,12 +163,12 @@
                                         </Grid>
                                     </ToolTip>
                                 </ContentControl.ToolTip>
-                                <!--<ContentControl.InputBindings>
+                                <ContentControl.InputBindings>
                                     <MouseBinding
                                         Command="{Binding DataContext.SelectIconCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}, Mode=FindAncestor}}"
                                         CommandParameter="{Binding CommandParameter}"
                                         Gesture="LeftClick" />
-                                </ContentControl.InputBindings>-->
+                                </ContentControl.InputBindings>
                             </ContentControl>
                         </Grid>
                     </DataTemplate>

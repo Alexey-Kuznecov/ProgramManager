@@ -9,6 +9,6 @@ namespace ProgramManager.Services
         {
             Package = param;
         }
-        public object Package { get; private set; }
+        public object Package { get; }
     }
 }

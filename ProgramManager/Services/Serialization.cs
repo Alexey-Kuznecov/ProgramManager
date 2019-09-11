@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace ProgramManager.Services
 {
     [DebuggerStepThrough]
-    class Serialization
+    public class Serialization
     {
         /// <summary>
         /// Бинарная сериализация данных объектов.

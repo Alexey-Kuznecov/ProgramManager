@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Settings>
+  <AutoStartApp IsEnable="True" />
+  <UpdateNotify IsEnable="True" />
+  <ShownPackBack IsEnable="False" />
+  <Themes Default="Windows 10">
+    <Theme Name="Windows Vista" Resource="Themes/WindowsVistaTheme.xaml" />
+    <Theme Name="Windows 10" Resource="Themes/Windows10Theme.xaml" />
+    <Theme Name="FlexibleThemes" Resource="Themes/FlexibleTheme.xaml" />
+  </Themes>
+  <Laguages Default="En">
+    <Laguage Culture="En" Resource="Local/en.ls" />
+    <Laguage Culture="Ru" Resource="Local/ru.ls" />
+  </Laguages>
+</Settings>

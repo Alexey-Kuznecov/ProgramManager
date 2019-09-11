@@ -8,7 +8,7 @@ using System.Windows.Markup;
 namespace ProgramManager.Services
 {
     [DebuggerStepThrough]
-    class XamlFileService : IFileService
+    public class XamlFileService : IFileService
     {
         /// <summary>
         /// Загружает корневой элемент из файла словаря ресурсов.

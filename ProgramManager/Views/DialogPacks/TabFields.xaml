@@ -16,7 +16,7 @@
         <!--  Элементы из данного шаблона будет созданы для каждого элемента списка  -->
         <DataTemplate DataType="{x:Type packageModel:TextFieldModel}">
             <StackPanel>
-                <Label Grid.Row="0">
+                <Label>
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="300*" />

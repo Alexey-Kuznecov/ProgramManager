@@ -11,8 +11,20 @@ namespace ProgramManager.Plugins.IconsEditor.Bin
     {
         public static void RunPlugin(object src)
         {
-            IconsEditor singleInstense = Singleton.GetSingleInstance<IconsEditor>() ?? Singleton.SingleInstance<IconsEditor>();
-            singleInstense.ShowDialog();
+            try
+            {
+                IconsEditor singleInstense = Singleton.GetSingleInstance<IconsEditor>() ?? Singleton.SingleInstance<IconsEditor>();
+                singleInstense.ShowDialog();
+            }
+            catch (InvalidCastException e)
+            {
+                MessageBox.Show(e.Message, "Файл не был загружен.");
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+                throw;
+            }
         }
     }
 }

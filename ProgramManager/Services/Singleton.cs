@@ -6,7 +6,7 @@ using ProgramManager.ViewModels;
 namespace ProgramManager.Services
 {
     [DebuggerStepThrough]
-    struct Singleton  
+    public struct Singleton  
     {
         public static object Back = null;
         public static int Count = 0;

@@ -2,17 +2,14 @@
 using System.Windows.Input;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Drawing.Imaging;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using ProgramManager.Models.PackageModel;
 using ProgramManager.Views.DialogPacks;
 using ProgramManager.ViewModels.Base;
-using ProgramManager.Services;
 using GalaSoft.MvvmLight.Messaging;
 using ProgramManager.Models;
 using ProgramManager.Plugins;
-using ProgramManager.Plugins.IconsEditor.Bin;
 
 namespace ProgramManager.ViewModels
 {
@@ -20,6 +17,7 @@ namespace ProgramManager.ViewModels
     {
         private const string AutocompleteIcon = "../../Resources/Icons/Businessman_48px.png";
         private const string DeleteIcon = "../../Resources/Icons/Delete_48px.png";
+        private IconModel _iconModelBack;
         private string _description;
         private string _packageTitle;
         private static InputName _windowInputName;
@@ -170,14 +168,13 @@ namespace ProgramManager.ViewModels
         #region Functions
         /// <summary>
         /// Function sets icon on button that open the icon editor. 
-        /// <see cref="IconsEditorViewModel.SelectIconCommand">Command to add icon.</see>
         /// </summary>
         /// <param name="icon">Custom icon selected in the icon editor.</param>
         private void LoadSelectIcon(IconModel icon)
         {
             // Save button source state.
-            if (Singleton.Back == null)
-                Singleton.Back = new IconModel(Name, IconPath, IconForeground, IconBackground);
+            if (_iconModelBack == null)
+                _iconModelBack = new IconModel(Name, IconPath, IconForeground, IconBackground);
             
             // Sets flag to null to restore button source state. If user remove been set icon.
             if (icon != null)
@@ -186,16 +183,17 @@ namespace ProgramManager.ViewModels
                 IconPath = icon.Path;
                 IconBackground = icon.BgroundColor;
                 IconForeground = icon.FgroundColor;       
-                ImageCover = new ImageCover(icon);
+                //ImageCover = new ImageCover(icon);
                 //ImageCover?.Save(".png", "../../Resources/User/Images/");
             }
             else
             {
-                IconModel iconBack = (IconModel)Singleton.Back;
+                IconModel iconBack = _iconModelBack;
                 Name = iconBack.Name;
                 IconPath = iconBack.Path;
                 IconBackground = iconBack.BgroundColor;
                 IconForeground = iconBack.FgroundColor;
+                _iconModelBack = null;
             }
         }
         #endregion

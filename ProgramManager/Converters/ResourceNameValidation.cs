@@ -6,7 +6,7 @@ using ProgramManager.Plugins;
 namespace ProgramManager.Converters
 {
     //[DebuggerStepThrough]
-    class ResourceNameValidation : BaseConverter<ResourceNameValidation>
+    public class ResourceNameValidation : BaseConverter<ResourceNameValidation>
     {
         private static string _temp;
         private static List<string> _storeName;

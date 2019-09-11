@@ -10,6 +10,7 @@ using ProgramManager.Plugins;
 using ProgramManager.Plugins.IconsEditor.Bin;
 using ProgramManager.Services;
 using ProgramManager.ViewModels.Base;
+using ProgramManager.Views;
 using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace ProgramManager.ViewModels
@@ -175,11 +176,18 @@ namespace ProgramManager.ViewModels
         });
         public ICommand CmdUpdatePackage => new RelayCommand(obj => { UpdatePackage(); });
         public ICommand CmdRemovePackage => new RelayCommand(obj => { RemovePackage(); });
+
         public ICommand OpenIconEditor => new RelayCommand(obj =>
         {
             Plugin plugin = PluginManager.Execute(PluginType.IconEditor);
             plugin.ExecuteAction(null);
         });
+        public ICommand OpenSettings => new RelayCommand(obj =>
+        {
+            SettingsView settings = new SettingsView();
+            settings.ShowDialog();
+        });
+
         #endregion
 
         #region Methods

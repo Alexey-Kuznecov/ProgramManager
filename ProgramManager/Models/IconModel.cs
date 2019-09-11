@@ -16,8 +16,8 @@ namespace ProgramManager.Models
         public IconModel(string name, string fg, string bg, string path)
         {
             Name = name;
-            FgroundColor = ConvertFromStringToColor(fg);
-            BgroundColor = ConvertFromStringToColor(bg);
+            FgroundColor = HelperFunctions.StringFormatToSolidColor(fg);
+            BgroundColor = HelperFunctions.StringFormatToSolidColor(bg);
             Path = new Path { Data = Geometry.Parse(path) };
             //StringPath = path;
             DrawIcon();
@@ -74,13 +74,6 @@ namespace ProgramManager.Models
                 }
             }
             Brush = dBrush;
-        }
-        /// <summary>
-        /// Преобразует строку формата #FFFFFF в цвет для кисти.
-        /// </summary>
-        private SolidColorBrush ConvertFromStringToColor(string color)
-        {
-            return color.StringFormatToSolidColor();
         }
         /// <summary>
         /// Конвертирует кисть в полигоны.

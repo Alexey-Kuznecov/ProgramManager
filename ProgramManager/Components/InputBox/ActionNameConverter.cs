@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Globalization;
 using System.Windows.Data;
-using ProgramManager.Converters;
 
 namespace ProgramManager.Components.InputBox
 {

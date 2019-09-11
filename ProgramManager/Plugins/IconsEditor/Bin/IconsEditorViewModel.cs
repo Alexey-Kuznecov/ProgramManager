@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Drawing;
-using System.IO;
+using System.Windows.Shapes;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
 using ProgramManager.Contracts;
 using ProgramManager.Converters;
 using ProgramManager.Models;
@@ -15,12 +13,11 @@ using ProgramManager.Plugins.IconsEditor.Converter;
 using ProgramManager.Plugins.IconsEditor.Data;
 using ProgramManager.Services;
 using ProgramManager.ViewModels.Base;
-using Path = System.Windows.Shapes.Path;
 
 namespace ProgramManager.Plugins.IconsEditor.Bin
 {
     /// <summary>
-    /// View model for window IconsEditor. 
+    /// View model for window <see cref="IconsEditor"/>. 
     /// </summary>
     partial class IconsEditorViewModel : PropertiesChanged
     {
@@ -32,10 +29,15 @@ namespace ProgramManager.Plugins.IconsEditor.Bin
         private static ButtonExtension _buttonExtension;
         private int _selectIndex;
         private bool _enableColorIcon;
+
+        /// <summary>
+        /// </summary>
         private static string _currentCollection;
 
         #region Constructors
 
+        /// <summary>
+        /// </summary>
         public IconsEditorViewModel()
         {
             _dialogService = Singleton.SingleInstance<DefaultDialogService>();
@@ -66,7 +68,7 @@ namespace ProgramManager.Plugins.IconsEditor.Bin
         }
 
         /// <summary>
-        /// Contains a copy of the Icon object.
+        /// Contains a copy of the Icon <c>object</c>.
         /// </summary>
         public ObservableCollection<ButtonExtension> IconClone { get; set; }
 
@@ -89,7 +91,7 @@ namespace ProgramManager.Plugins.IconsEditor.Bin
         public ComboBoxItem ColorBrush { get; set; }
         
         /// <summary>
-        /// Contains a corrent index of the icon collection.
+        /// Contains a correct index of the icon collection.
         /// </summary>
         public int SelectIndex
         {
@@ -105,7 +107,7 @@ namespace ProgramManager.Plugins.IconsEditor.Bin
         }
 
         /// <summary>
-        /// Filters colection by icon name.
+        /// Filters collection by icon name.
         /// </summary>
         public string FilterText
         {
@@ -171,7 +173,7 @@ namespace ProgramManager.Plugins.IconsEditor.Bin
                 Brush = bt?.Brush
             };
             OnPropertyChanged("CurrnButtonExtension");
-            DataSync.IconLoad.Invoke(iconModel);
+            //DataSync.IconLoad.Invoke(iconModel);
         });
 
         /// <summary>
@@ -344,7 +346,7 @@ namespace ProgramManager.Plugins.IconsEditor.Bin
         private void SerializeIconData(ObservableCollection<ButtonExtension> iconData)
         {
             object data = null;
-            if (!File.Exists("button_icons"))
+            if (!System.IO.File.Exists("button_icons"))
                 Serialization.BinSerialize(iconData, "button_icons");
             else
                 Serialization.BinDeserialize(out data, "button_icons");

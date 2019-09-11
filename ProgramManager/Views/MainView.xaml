@@ -72,7 +72,7 @@
                 <MenuItem Header="Редактор конфигурации" />
             </MenuItem>
             <MenuItem FontSize="12" Header="Настройки">
-                <MenuItem Header="Параметры" />
+                <MenuItem Command="{Binding OpenSettings}" Header="Параметры" />
                 <MenuItem Header="Скины">
                     <MenuItem Header="По умолчанию" />
                     <MenuItem Header="TotalCommander" />
