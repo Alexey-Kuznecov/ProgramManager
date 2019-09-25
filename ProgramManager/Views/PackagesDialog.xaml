@@ -75,7 +75,7 @@
                 Height="50"
                 Background="WhiteSmoke">
                 <Button
-                    Command="{Binding CmdOpenDialogIcon}"
+                    Command="{Binding OpenDialogIcon}"
                     Foreground="{Binding IconForeground}"
                     Template="{StaticResource IconTemplateDialogPack}" />
             </Grid>

@@ -3,4 +3,7 @@
   <PropertyGroup>
     <ProjectView>ProjectFiles</ProjectView>
   </PropertyGroup>
+  <PropertyGroup>
+    <ReferencePath>D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\backup\Plugins\</ReferencePath>
+  </PropertyGroup>
 </Project>

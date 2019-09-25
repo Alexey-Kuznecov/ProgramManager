@@ -5,7 +5,7 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/IconMaker;component/Resources/IconsEditorDefaultStyles.xaml" />
+                <ResourceDictionary Source="/IconMaker;component/Resources/DefaultStyles.xaml" />
                 <ResourceDictionary Source="/IconMaker;component/Resources/Icons.xaml" />
                 <ResourceDictionary Source="/IconMaker;component/Resources/Generic.xaml" />
             </ResourceDictionary.MergedDictionaries>

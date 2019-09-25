@@ -1,0 +1,5 @@
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\Plugins\IconEditor\IconEditor.dll
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\Plugins\IconEditor\IconEditor.pdb
+D:\iWork\%projs%\ProgramManager\ProgramManager\IconEditor\obj\Release\IconEditor.csproj.CoreCompileInputs.cache
+D:\iWork\%projs%\ProgramManager\ProgramManager\IconEditor\obj\Release\IconEditor.dll
+D:\iWork\%projs%\ProgramManager\ProgramManager\IconEditor\obj\Release\IconEditor.pdb

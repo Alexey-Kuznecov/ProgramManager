@@ -3,7 +3,7 @@
   <AutoStartApp IsEnable="True" />
   <UpdateNotify IsEnable="True" />
   <ShownPackBack IsEnable="False" />
-  <Themes Default="Windows 10">
+  <Themes Default="Windows Vista">
     <Theme Name="Windows Vista" Resource="Themes/WindowsVistaTheme.xaml" />
     <Theme Name="Windows 10" Resource="Themes/Windows10Theme.xaml" />
     <Theme Name="FlexibleThemes" Resource="Themes/FlexibleTheme.xaml" />

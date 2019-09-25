@@ -1,13 +1,19 @@
-﻿using System.Windows;
-using ProgramManager.Plugins;
-using ProgramManager.Views;
+﻿
 namespace ProgramManager
 {
+    using System.Windows;
+    using InteractionLib;
+    using Views;
+
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
     public partial class App : Application
     {
+        /// <summary>
+        /// The on startup.
+        /// </summary>
+        /// <param name="e"> The e. </param>
         protected override void OnStartup(StartupEventArgs e)
         {
             PluginManager.PluginReader();

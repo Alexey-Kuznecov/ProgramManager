@@ -27,8 +27,8 @@ namespace ProgramManager.Models
 
         public ImageCover(IconModel icon)
         {
-            _background = icon.BgroundColor;
-            _foreground = icon.FgroundColor;
+            _background = icon.BackgroundColor;
+            _foreground = icon.ForegroundColor;
             _iconBrush = icon.Brush;
             Size = icon.Scale;
             Name = icon.Name;

@@ -53,7 +53,7 @@
                             <Button
                                 Height="28"
                                 Margin="5,0,0,0"
-                                Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Path=DataContext.CmdRemoveTextField}"
+                                Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Path=DataContext.CommandRemoveTextField}"
                                 CommandParameter="{Binding}">
                                 <ContentControl>
                                     <Image Height="24" Source="{Binding Path=DeleteTextFieldIcon}" />

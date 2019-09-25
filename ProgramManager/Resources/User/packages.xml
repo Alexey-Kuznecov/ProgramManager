@@ -6,7 +6,8 @@
     <Description>Программа для оформления фотографий</Description>
     <License>5Q86W-TFPN7-K8VCJ-PH3CT</License>
     <Name>Photoshop</Name>
-    <Tag>Редакторы графики</Tag>
+    <Tag>Не подшитые</Tag>
+    <Userfield Label="вацыа">вацыа</Userfield>
     <Version>Cloud CC6</Version>
   </Package>
   <Package Id="1" Category="Программы">
@@ -80,11 +81,10 @@
     <Version>8.16</Version>
   </Package>
   <Package Id="10" Category="Программы">
-    <Author>Неизвестно</Author>
+    <Author>Не указанно</Author>
     <Description>Программа организации задач</Description>
-    <Image Source="../Resources/User/Images/Programs.png" />
     <Name>LeaderTask</Name>
-    <Tag>Органазеры</Tag>
+    <Tag>Не подшитые</Tag>
     <Version>6.0</Version>
   </Package>
   <Package Id="11" Category="Программы">
@@ -224,22 +224,5 @@
     <Name>фвфыф</Name>
     <Tag>Не подшитые</Tag>
     <Version>фывфывф</Version>
-  </Package>
-  <Package Id="30" Category="Программы">
-    <Author>This is Author2</Author>
-    <Description>awdwad</Description>
-    <Name>awdawd</Name>
-    <Tag>Не подшитые</Tag>
-    <UserfieldList>
-      <Userfield Label="awdawd">awdawd</Userfield>
-      <Userfield Label="awdawdww">awdawdww</Userfield>
-      <Userfield Label="awdawdww22">awdawdww22</Userfield>
-      <Userfield Label="awdawdww22333">awdawdww22333</Userfield>
-      <Userfield Label="22222wd">22222wd</Userfield>
-      <Userfield Label="22222wdeqweq">22222wdeqweq</Userfield>
-      <Userfield Label="2223355">2223355</Userfield>
-      <Userfield Label="2132ddadd">2132ddadd</Userfield>
-    </UserfieldList>
-    <Version>This is Versiwadaon</Version>
   </Package>
 </Packages>

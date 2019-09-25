@@ -1,14 +1,18 @@
-﻿using System;
-using System.Diagnostics.CodeAnalysis;
-using System.Windows.Media;
-using System.Globalization;
-using System.Windows.Controls;
-using System.Windows.Shapes;
-using ProgramManager.Models;
-using static System.Windows.Media.ColorConverter;
-
+﻿
 namespace ProgramManager.Converters
 {
+    using System;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Globalization;
+    using System.Windows.Controls;
+    using System.Windows.Media;
+    using System.Windows.Shapes;
+    using Models;
+    using static System.Windows.Media.ColorConverter;
+
+    /// <summary>
+    /// The color converter solid color.
+    /// </summary>
     public class ColorConverterSolidColor : BaseConverter<ColorConverterSolidColor>
     {
         public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -24,6 +28,10 @@ namespace ProgramManager.Converters
             return null;
         }
     }
+
+    /// <summary>
+    /// The scale converter.
+    /// </summary>
     public class ScaleConverter : BaseConverter<ScaleConverter>
     {
         public double Scale { get; set; } = 12;
@@ -51,8 +59,8 @@ namespace ProgramManager.Converters
             if (icon != null)
             {
                 Brush brush = parameter?.ToString() == "rect" 
-                    ? icon.BgroundColor 
-                    : icon.FgroundColor;
+                    ? icon.BackgroundColor 
+                    : icon.ForegroundColor;
                 return brush;
             }
             return value;

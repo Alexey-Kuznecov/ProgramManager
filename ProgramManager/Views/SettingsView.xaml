@@ -7,8 +7,8 @@
     xmlns:view="clr-namespace:ProgramManager.Views.SettingsControl"
     xmlns:vm="clr-namespace:ProgramManager.ViewModels"
     Title="SettingsView"
-    Width="600"
-    Height="450"
+    Width="800"
+    Height="500"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
     <Window.DataContext>
@@ -31,7 +31,7 @@
                 <TreeViewItem Header="Основыне" IsSelected="True">
                     <TreeViewItem.InputBindings>
                         <MouseBinding
-                            Command="{Binding GenaralSelection}"
+                            Command="{Binding GeneralSettings}"
                             CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
                             Gesture="LeftClick" />
                     </TreeViewItem.InputBindings>
@@ -40,7 +40,7 @@
                 <TreeViewItem Header="Темы" IsExpanded="True">
                     <TreeViewItem Header="Значки">
                         <TreeViewItem.InputBindings>
-                            <MouseBinding Command="{Binding ThemesSelection}" Gesture="LeftClick" />
+                            <MouseBinding Command="{Binding ThemesSettings}" Gesture="LeftClick" />
                         </TreeViewItem.InputBindings>
                     </TreeViewItem>
                     <TreeViewItem Header="Цветовая схема" />
@@ -55,6 +55,11 @@
                     <TreeViewItem Header="Обновление программ" />
                 </TreeViewItem>
                 <TreeViewItem Header="Плагины" IsExpanded="True">
+                    <TreeViewItem Header="Настройки плагинов">
+                        <TreeViewItem.InputBindings>
+                            <MouseBinding Command="{Binding PluginSettings}" Gesture="LeftClick" />
+                        </TreeViewItem.InputBindings>
+                    </TreeViewItem>
                     <TreeViewItem Header="Редактор иконок" />
                     <TreeViewItem Header="Редактор тегов" />
                     <TreeViewItem Header="Редактор скриптов" />

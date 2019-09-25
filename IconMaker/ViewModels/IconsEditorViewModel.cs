@@ -230,7 +230,7 @@ namespace IconMaker.ViewModels
             }
             // Sort by name and updated the collection.
             this.Icons = this.Icons.OrderBy(p => p.IconName.Substring(0, 2)).ToObservableCollection();
-            ProgramManager.Components.InputBox.InputBox.Close();
+            AlexLibWpf.Components.InputBox.InputBox.Close();
         });
 
         #endregion
@@ -295,7 +295,7 @@ namespace IconMaker.ViewModels
                 bt.RenameIcon = new RelayCommand(obj =>
                 {
                     _buttonExtension = obj as ButtonExtension;
-                    ProgramManager.Components.InputBox.InputBox.Show(this.RemaneIconCommand, ProgramManager.Components.InputBox.Actions.Change, (obj as ButtonExtension)?.IconName);
+                    AlexLibWpf.Components.InputBox.InputBox.Show(this.RemaneIconCommand, AlexLibWpf.Components.InputBox.Actions.Change, (obj as ButtonExtension)?.IconName);
                 });
                 bt.ReplaceIcon = new RelayCommand(obj =>
                 {

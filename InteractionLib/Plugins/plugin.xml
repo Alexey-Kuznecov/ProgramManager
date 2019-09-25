@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Cofiguration>
+  <Plugin Status="IsEnable" Location="External" Name="IconEditor" Type="IconEditor" StartPath="IconsMaker.Views.MainView" Execute="InitializeComponent">
+    <Author>AlexSofar</Author>
+    <Version>1.0</Version>
+    <Description>PluginExecute to manage icons.</Description>
+   </Plugin>
+   <Plugin Status="IsDesable" Location="Internal," Name="TagEditor" Type="TagEditor" StartPath="ProgramManager.Plugins.TagsEditor.TagList" Execute="SetTags" StartPriority="LoadTags">
+    <Author>AlexSofar</Author>
+    <Version>1.0</Version>
+    <Description>Load list tags.</Description>
+  </Plugin>
+</Cofiguration>

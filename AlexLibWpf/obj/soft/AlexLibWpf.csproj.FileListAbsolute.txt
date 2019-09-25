@@ -1,0 +1,14 @@
+D:\iWork\%projs%\ProgramManager\ProgramManager\AlexLibWpf\bin\soft\AlexLibWpf.dll
+D:\iWork\%projs%\ProgramManager\ProgramManager\AlexLibWpf\bin\soft\AlexLibWpf.pdb
+D:\iWork\%projs%\ProgramManager\ProgramManager\AlexLibWpf\obj\soft\AlexLibWpf.csprojAssemblyReference.cache
+D:\iWork\%projs%\ProgramManager\ProgramManager\AlexLibWpf\obj\soft\Components\InputBox\InputBox.g.cs
+D:\iWork\%projs%\ProgramManager\ProgramManager\AlexLibWpf\obj\soft\GeneratedInternalTypeHelper.g.cs
+D:\iWork\%projs%\ProgramManager\ProgramManager\AlexLibWpf\obj\soft\AlexLibWpf_MarkupCompile.cache
+D:\iWork\%projs%\ProgramManager\ProgramManager\AlexLibWpf\obj\soft\AlexLibWpf_MarkupCompile.lref
+D:\iWork\%projs%\ProgramManager\ProgramManager\AlexLibWpf\obj\soft\Components\InputBox\InputBox.baml
+D:\iWork\%projs%\ProgramManager\ProgramManager\AlexLibWpf\obj\soft\AlexLibWpf.g.resources
+D:\iWork\%projs%\ProgramManager\ProgramManager\AlexLibWpf\obj\soft\AlexLibWpf.Properties.Resources.resources
+D:\iWork\%projs%\ProgramManager\ProgramManager\AlexLibWpf\obj\soft\AlexLibWpf.csproj.GenerateResource.cache
+D:\iWork\%projs%\ProgramManager\ProgramManager\AlexLibWpf\obj\soft\AlexLibWpf.csproj.CoreCompileInputs.cache
+D:\iWork\%projs%\ProgramManager\ProgramManager\AlexLibWpf\obj\soft\AlexLibWpf.dll
+D:\iWork\%projs%\ProgramManager\ProgramManager\AlexLibWpf\obj\soft\AlexLibWpf.pdb

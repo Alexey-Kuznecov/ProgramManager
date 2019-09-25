@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace ProgramManager.Data
 {
-    struct Themes
+    /// <summary>
+    /// The themes.
+    /// </summary>
+    public struct Themes
     {
-
     }
 }

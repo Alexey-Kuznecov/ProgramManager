@@ -26,10 +26,19 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\ProgramManager\bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'soft|AnyCPU'">
+    <OutputPath>bin\soft\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -57,12 +66,17 @@
     <Compile Include="Components\InputBox\InputBoxViewModel.cs" />
     <Compile Include="Contracts\IDialogService.cs" />
     <Compile Include="Contracts\IFileService.cs" />
+    <Compile Include="Converters\BaseConverter.cs" />
+    <Compile Include="Converters\IconConverters.cs" />
+    <Compile Include="Filters\FilterProperties.cs" />
     <Compile Include="Models\IconModel.cs" />
     <Compile Include="Help\HelperFunctions.cs" />
     <Compile Include="Mvvm\Base\PropertiesChanged.cs" />
     <Compile Include="Mvvm\Base\RelayCommand.cs" />
     <Compile Include="Patterns\Singleton.cs" />
+    <Compile Include="Services\BaseEventArgs.cs" />
     <Compile Include="Services\DefaultDialogService.cs" />
+    <Compile Include="Services\Serialization.cs" />
     <Compile Include="Services\XamlFileService.cs" />
   </ItemGroup>
   <ItemGroup>

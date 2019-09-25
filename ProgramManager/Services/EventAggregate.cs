@@ -1,92 +1,109 @@
-﻿using System;
-using ProgramManager.Models;
-using ProgramManager.ViewModels;
-
+﻿
 namespace ProgramManager.Services
 {
+    using System;
+
     /// <summary>
-    /// EventAggregate is  
+    /// The main events that occur in the program.
     /// </summary>
     public class EventAggregate
     {
-        #region Icon Editor Event
-
-        public static event EventHandler<BaseEventArgs> UpdateCollectionNames;
         /// <summary>
-        /// The event raise when creating objects Icon.
+        /// The package changed.
         /// </summary>
-        /// <param name="collectionNames"></param>
-        public void OnUpdateCollectionNames(object collectionNames)
-        {
-            UpdateCollectionNames?.Invoke(this, new BaseEventArgs(collectionNames));
-        }
-        #endregion
-
-        #region Package Event
-
         public static event EventHandler<BaseEventArgs> PackageChanged;
-        public static event EventHandler<BaseEventArgs> NewPackage;
-        public static event EventHandler<BaseEventArgs> LoadTagList;
-        public static event EventHandler<BaseEventArgs> RemovePackage;
-        public static event EventHandler<BaseEventArgs> CategoryChanged;
-        public static event EventHandler<BaseEventArgs> ImageLaod;
-        public static event Action<string> LoadPackage;
+
         /// <summary>
-        /// The event raise when the package was changed.
+        /// The new package.
+        /// </summary>
+        public static event EventHandler<BaseEventArgs> NewPackage;
+
+        /// <summary>
+        /// The load tag list.
+        /// </summary>
+        public static event EventHandler<BaseEventArgs> LoadTagList;
+
+        /// <summary>
+        /// The remove package.
+        /// </summary>
+        public static event EventHandler<BaseEventArgs> RemovePackage;
+
+        /// <summary>
+        /// The category changed.
+        /// </summary>
+        public static event EventHandler<BaseEventArgs> CategoryChanged;
+
+        /// <summary>
+        /// The image load.
+        /// </summary>
+        public static event EventHandler<BaseEventArgs> ImageLoad;
+
+        /// <summary>
+        /// The load package.
+        /// </summary>
+        public static event Action<string> LoadPackage;
+
+        /// <summary>
+        /// The event raise when the Package was changed.
         /// </summary>
         /// <param name="package">Package that was changed.</param>
         public void OnPackageChanged(object package)
         {
             PackageChanged?.Invoke(this, new BaseEventArgs(package));
         }
+
         /// <summary>
-        /// The event raise when the package was added.
+        /// The event raise when the Package was added.
         /// </summary>
         /// <param name="package">Package that was added.</param>
         public void OnNewPackage(object package)
         {
             NewPackage?.Invoke(this, new BaseEventArgs(package));
         }
+
         /// <summary>
         /// The event raise when tags load in edit tags window.
         /// </summary>
-        /// <param name="package">Package that conains tags.</param>
+        /// <param name="package">Package that contains tags.</param>
         public void OnLoadTagsList(object package)
         {
             LoadTagList?.Invoke(this, new BaseEventArgs(package));
         }
+
         /// <summary>
-        /// The event raise when user delete package of list package.
+        /// The event raise when user delete Package of list Package.
         /// </summary>
         /// <param name="package">Package that to be delete.</param>
         public void OnRemovePackage(object package)
         {
             RemovePackage?.Invoke(this, new BaseEventArgs(package));
         }
+
         /// <summary>
         /// The event raise when the package was loaded.
         /// </summary>
-        /// <param name="message">Can notify the user of any message on load package.</param>
+        /// <param name="message">Can notify the user of any Message on load package.</param>
         public void OnLoadPackage(string message)
         {
             LoadPackage?.Invoke(message);
         }
+
         /// <summary>
-        /// The event raise when the user selected category in combobox.
+        /// The event raise when the user selected Category in combo box.
         /// </summary>
-        /// <param name="category">Сategory that was selected.</param>
+        /// <param name="category">Category that was selected.</param>
         public void OnCategoryChanged(object category)
         {
             CategoryChanged?.Invoke(this, new BaseEventArgs(category));
         }
+
         /// <summary>
         /// The event raise when the user selected images in package dialog.
         /// </summary>
         /// <param name="imageCover">Image object type ImageCover.</param>
         public void OnImageLoad(object imageCover)
         {
-            ImageLaod?.Invoke(this, new BaseEventArgs(imageCover));
+            ImageLoad?.Invoke(this, new BaseEventArgs(imageCover));
         }
-        #endregion
     }
 }

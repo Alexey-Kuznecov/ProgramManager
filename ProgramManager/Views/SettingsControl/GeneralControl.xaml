@@ -22,9 +22,9 @@
             <RowDefinition Height="50" />
         </Grid.RowDefinitions>
         <WrapPanel Margin="10" ItemHeight="25">
-            <CheckBox Content="Запускать приложение вмести с системой." IsChecked="{Binding AutoStartApp}" />
+            <CheckBox Content="Запускать приложение вмести с системой." IsChecked="{Binding AutoStart}" />
             <CheckBox Content="Автоматический проверять обновления." IsChecked="{Binding UpdateNotify}" />
-            <CheckBox Content="Показывать обложку папекета." IsChecked="{Binding ShownPackBack}" />
+            <CheckBox Content="Показывать обложку папекета." IsChecked="{Binding ShownPackBackground}" />
         </WrapPanel>
         <StackPanel Background="AliceBlue" Grid.Row="1" Margin="0,0,0,-32">
             <Label Margin="10" Content="Сменить тему:" />

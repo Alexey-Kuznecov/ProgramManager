@@ -1,0 +1,16 @@
+D:\iWork\%projs%\ProgramManager\ProgramManager\InteractionLib\bin\Debug\InteractionLib.dll
+D:\iWork\%projs%\ProgramManager\ProgramManager\InteractionLib\bin\Debug\InteractionLib.pdb
+D:\iWork\%projs%\ProgramManager\ProgramManager\InteractionLib\obj\Debug\InteractionLib.csprojAssemblyReference.cache
+D:\iWork\%projs%\ProgramManager\ProgramManager\InteractionLib\obj\Debug\GeneratedInternalTypeHelper.g.cs
+D:\iWork\%projs%\ProgramManager\ProgramManager\InteractionLib\obj\Debug\InteractionLib_MarkupCompile.cache
+D:\iWork\%projs%\ProgramManager\ProgramManager\InteractionLib\obj\Debug\InteractionLib_MarkupCompile.lref
+D:\iWork\%projs%\ProgramManager\ProgramManager\InteractionLib\obj\Debug\Themes\Generic.baml
+D:\iWork\%projs%\ProgramManager\ProgramManager\InteractionLib\obj\Debug\InteractionLib.g.resources
+D:\iWork\%projs%\ProgramManager\ProgramManager\InteractionLib\obj\Debug\InteractionLib.Properties.Resources.resources
+D:\iWork\%projs%\ProgramManager\ProgramManager\InteractionLib\obj\Debug\InteractionLib.csproj.GenerateResource.cache
+D:\iWork\%projs%\ProgramManager\ProgramManager\InteractionLib\obj\Debug\InteractionLib.csproj.CoreCompileInputs.cache
+D:\iWork\%projs%\ProgramManager\ProgramManager\InteractionLib\obj\Debug\InteractionLib.dll
+D:\iWork\%projs%\ProgramManager\ProgramManager\InteractionLib\obj\Debug\InteractionLib.pdb
+D:\iWork\%projs%\ProgramManager\ProgramManager\InteractionLib\bin\Debug\AlexLibWpf.dll
+D:\iWork\%projs%\ProgramManager\ProgramManager\InteractionLib\bin\Debug\AlexLibWpf.pdb
+D:\iWork\%projs%\ProgramManager\ProgramManager\InteractionLib\obj\Debug\InteractionLib.csproj.CopyComplete

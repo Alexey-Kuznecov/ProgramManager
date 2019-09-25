@@ -1,0 +1,10 @@
+D:\iWork\%projs%\ProgramManager\ProgramManager\SimplePlugin\bin\Release\SimplePlugin.dll
+D:\iWork\%projs%\ProgramManager\ProgramManager\SimplePlugin\bin\Release\SimplePlugin.pdb
+D:\iWork\%projs%\ProgramManager\ProgramManager\SimplePlugin\obj\Release\SimplePlugin.csproj.CoreCompileInputs.cache
+D:\iWork\%projs%\ProgramManager\ProgramManager\SimplePlugin\obj\Release\SimplePlugin.dll
+D:\iWork\%projs%\ProgramManager\ProgramManager\SimplePlugin\obj\Release\SimplePlugin.pdb
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\Plugins\SimplePlugin\SimplePlugin.dll
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\Plugins\SimplePlugin\SimplePlugin.pdb
+D:\iWork\%projs%\ProgramManager\ProgramManager\SimplePlugin\obj\Release\SimplePlugin.csprojAssemblyReference.cache
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\Plugins\SimplePlugin\SimplePlugin.dll
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\Plugins\SimplePlugin\SimplePlugin.pdb

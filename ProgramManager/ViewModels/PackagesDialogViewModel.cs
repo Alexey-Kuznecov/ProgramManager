@@ -1,171 +1,243 @@
-﻿using System.Windows.Controls;
-using System.Windows.Input;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Windows.Media;
-using System.Windows.Shapes;
-using ProgramManager.Models.PackageModel;
-using ProgramManager.Views.DialogPacks;
-using ProgramManager.ViewModels.Base;
-using GalaSoft.MvvmLight.Messaging;
-using ProgramManager.Models;
-using ProgramManager.Plugins;
-
+﻿
 namespace ProgramManager.ViewModels
 {
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Diagnostics;
+    using System.Windows.Controls;
+    using System.Windows.Input;
+    using System.Windows.Media;
+    using System.Windows.Shapes;
+    using AlexLibWpf.Models;
+    using Base;
+    using GalaSoft.MvvmLight.Messaging;
+    using InteractionLib;
+    using Models.PackageModel;
+    using Views;
+    using Views.DialogPacks;
+
+    /// <summary>
+    /// The packages dialog view model.
+    /// </summary>
     public partial class PackagesDialogViewModel : PropertiesChanged
     {
+        /// <summary>
+        /// The autocomplete icon.
+        /// </summary>
         private const string AutocompleteIcon = "../../Resources/Icons/Businessman_48px.png";
-        private const string DeleteIcon = "../../Resources/Icons/Delete_48px.png";
-        private IconModel _iconModelBack;
-        private string _description;
-        private string _packageTitle;
-        private static InputName _windowInputName;
-        private SolidColorBrush _iconForeground;
-        private SolidColorBrush _iconBackground;
-        private Path _iconPath;
-        private ImageCover _image;
 
-        #region Constructor
+        /// <summary>
+        /// The delete icon.
+        /// </summary>
+        private const string DeleteIcon = "../../Resources/Icons/Delete_48px.png";
+
+        /// <summary>
+        /// The _window input name.
+        /// </summary>
+        private static InputName _windowInputName;
+
+        /// <summary>
+        /// The _icon model back.
+        /// </summary>
+        private IconModel _iconModelBack;
+
+        /// <summary>
+        /// The _tag dialog.
+        /// </summary>
+        private TagDialog _tagDialog;
+
+        /// <summary>
+        /// The _description.
+        /// </summary>
+        private string _description;
+
+        /// <summary>
+        /// The _package title.
+        /// </summary>
+        private string _packageTitle;
+
+        /// <summary>
+        /// The _icon foreground.
+        /// </summary>
+        private SolidColorBrush _iconForeground;
+
+        /// <summary>
+        /// The _icon background.
+        /// </summary>
+        private SolidColorBrush _iconBackground;
+
+        /// <summary>
+        /// The _icon path.
+        /// </summary>
+        private Path _iconPath;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PackagesDialogViewModel"/> class.
+        /// </summary>
         public PackagesDialogViewModel()
         {
             // Initial fields.
             _windowInputName = new InputName();
 
             // Initial data.
-            InitializePackageDialog();
+            this.InitializePackageDialog();
 
             // Activate commands.
-            CmdRemoveTextField = new RelayCommand(RemoveTextField);
+            this.CommandRemoveTextField = new RelayCommand(RemoveTextField);
 
             // Registration to receive data.
             Messenger.Default.Register<InputNameViewModel>(this, action => InputCustomName(action.Name));
             Messenger.Default.Register<InputName>(this, action => _windowInputName = action);
-            Messenger.Default.Register<PackageBase>(this, LoadPackage);
-            DataSync.TagLoad = InitialTagLs;
-            DataSync.IconLoad = LoadSelectIcon;
+            Messenger.Default.Register<PackageBase>(this, this.LoadPackage);
+            DataSync.TagLoad = this.InitialTagLs;
+            DataSync.IconLoad = this.LoadSelectIcon;
         }
 
-        #endregion
-
         #region Properties
+
         /// <summary>
-        /// Контекстное меню для вкладки поля.
-        /// </summary>
-        public List<MenuItem> MenuItem { get; set; }
-        /// <summary>
-        /// Collection fields that user add in the package.
+        /// Gets or sets the collection fields that user add in the package.
         /// </summary>
         public static ObservableCollection<TextFieldModel> TextField { get; set; }
+
         /// <summary>
-        /// Set an discription of current package.
-        /// Get description to add it in db.
+        /// Gets or sets the context menu for the field tab.
+        /// </summary>
+        public List<MenuItem> MenuItem { get; set; }
+
+        /// <summary>
+        /// Gets or sets an description of current package..
         /// </summary>
         public string Description
         {
-            get { return _description;  }
-            set { SetProperty(ref _description, value, () => Description); }
+            get => this._description;
+            set { this.SetProperty(ref this._description, value, () => this.Description); }
         }
+
         /// <summary>
-        /// Set an name of current package.
+        /// Gets or sets name of current package.
         /// </summary>
         public string PackageTitle
         {
-            get { return _packageTitle; }
+            get => this._packageTitle;
             set
             {
-                SetProperty(ref _packageTitle, value, () => PackageTitle);
+                this.SetProperty(ref this._packageTitle, value, () => this.PackageTitle);
             }
         }
+
         /// <summary>
-        /// Contain an icon background, 
-        /// that can be set in the icon editor.
+        /// Gets or sets an icon background of package.
         /// </summary>
         public SolidColorBrush IconBackground
         {
-            get { return _iconBackground; }
+            get => this._iconBackground;
             set
             {
-                _iconBackground = value;
-                OnPropertyChanged("IconBackground");
+                this._iconBackground = value;
+                this.OnPropertyChanged("IconBackground");
             }
         }
+
         /// <summary>
-        /// Contain an icon color.
-        /// that can be set in the icon editor.
+        /// Gets or sets an icon foreground of package.
         /// </summary>
         public SolidColorBrush IconForeground
         {
-            get { return _iconForeground; }
+            get => this._iconForeground;
             set
             {
-                _iconForeground = value;
-                OnPropertyChanged("IconForeground");
+                this._iconForeground = value;
+                this.OnPropertyChanged("IconForeground");
             }
         }
+
         /// <summary>
-        /// Contain an icon geometry path that displayed in the View.
-        /// Property can be set from the icon editor.
+        /// Gets or sets an icon geometry of package.
         /// </summary>
         public Path IconPath
         {
-            get { return _iconPath; }
+            get => this._iconPath;
             set
             {
-                _iconPath = value;
-                OnPropertyChanged("IconPath");
+                this._iconPath = value;
+                this.OnPropertyChanged("IconPath");
             }
         }
+
         /// <summary>
-        /// Icon name that to be used to add to the database. Package remembers its icon name 
+        /// Gets or sets icon name that to be used to add to the database. Package remembers its icon name 
         /// that to be displayed then next loading package. 
         /// </summary>
-        public string Name  { get; set; }
-        public ImageCover ImageCover
-        {
-            get { return _image; }
-            set
-            {
-                _image = value;
-            }
-        }
+        public string IconName { get; set; }
 
         #endregion
 
         #region Commands
 
-        public ICommand CmdRemoveTextField { get; }
-        public static ICommand SavePackage { get; set; }
+        /// <summary>
+        /// The command to cancel change.
+        /// </summary>
+        public ICommand CancelChange => new RelayCommand(obj =>
+        {
+            DataSync.IconLoad.Invoke(null);
+        });
+
+        /// <summary>
+        /// Gets or sets the command to save package.
+        /// </summary>
+        public ICommand SavePackage { get; set; }
+
+        /// <summary>
+        /// The context menu commands for adding fields.
+        /// </summary>
+        public ICommand MenuCommand => new RelayCommand(type =>
+        {
+            if (type != null)
+            {
+                AddTextField((string)type);
+            }
+        });
+
+        /// <summary>
+        /// Gets the command to remove text field.
+        /// </summary>
+        public ICommand CommandRemoveTextField { get; }
+
+        /// <summary>
+        /// The command to open input name.
+        /// </summary>
         public ICommand OpenInputName => new RelayCommand(obj => 
         {
             InputName windowInputName = new InputName();
             windowInputName.ShowDialog();
         });
-        public ICommand OpenTagDialog => new RelayCommand(obj => 
-        {
-            Plugin plugin = PluginManager.Execute(PluginType.TagEditor);
-            plugin.ExecuteAction(this);
-        });
+
         /// <summary>
-        /// Контекстное меню, команды для добавления полей.
+        /// The command to open tag dialog.
         /// </summary>
-        public static ICommand MenuCommand => new RelayCommand(type =>
+        public ICommand OpenTagDialog => new RelayCommand(obj =>
         {
-            if (type != null)
-                AddTextField((string)type);
+            _tagDialog = new TagDialog();
+            _tagDialog.Show();
+            
+            //Plugin plugin = PluginManager.Execute(PluginType.TagEditor);
+            //plugin.ExecuteAction(this);
         });
-        public static ICommand CancelChange => new RelayCommand(obj =>
+
+        /// <summary>
+        /// The command to open dialog icon.
+        /// </summary>
+        public ICommand OpenDialogIcon => new RelayCommand(obj =>
         {
-            DataSync.IconLoad.Invoke(null);
+            Process.Start(@"..\..\..\IconMaker\bin\Debug\IconMaker.exe");
+            
+            //Plugin plugin = PluginManager.Execute(PluginType.IconEditor);
+            //plugin.ExecuteAction(this);
         });
-        public ICommand CmdOpenDialogIcon => new RelayCommand(obj =>
-        {
-            Plugin plugin = PluginManager.Execute(PluginType.IconEditor);
-            plugin.ExecuteAction(this);
-        });
+        
         #endregion
 
-        #region Functions
         /// <summary>
         /// Function sets icon on button that open the icon editor. 
         /// </summary>
@@ -173,29 +245,31 @@ namespace ProgramManager.ViewModels
         private void LoadSelectIcon(IconModel icon)
         {
             // Save button source state.
-            if (_iconModelBack == null)
-                _iconModelBack = new IconModel(Name, IconPath, IconForeground, IconBackground);
+            if (this._iconModelBack == null)
+            {
+                this._iconModelBack = new IconModel(this.IconName, this.IconPath, this.IconForeground, this.IconBackground);
+            }
             
             // Sets flag to null to restore button source state. If user remove been set icon.
             if (icon != null)
             {
-                Name = icon.Name;
-                IconPath = icon.Path;
-                IconBackground = icon.BgroundColor;
-                IconForeground = icon.FgroundColor;       
+                this.IconName = icon.Name;
+                this.IconPath = icon.Path;
+                this.IconBackground = icon.BgroundColor;
+                this.IconForeground = icon.FgroundColor;       
+                
                 //ImageCover = new ImageCover(icon);
                 //ImageCover?.Save(".png", "../../Resources/User/Images/");
             }
             else
             {
-                IconModel iconBack = _iconModelBack;
-                Name = iconBack.Name;
-                IconPath = iconBack.Path;
-                IconBackground = iconBack.BgroundColor;
-                IconForeground = iconBack.FgroundColor;
-                _iconModelBack = null;
+                IconModel iconBack = this._iconModelBack;
+                this.IconName = iconBack.Name;
+                this.IconPath = iconBack.Path;
+                this.IconBackground = iconBack.BgroundColor;
+                this.IconForeground = iconBack.FgroundColor;
+                this._iconModelBack = null;
             }
         }
-        #endregion
     }
 }
