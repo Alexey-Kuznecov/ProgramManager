@@ -12,7 +12,10 @@
                             <xs:element name="Copyright" type="xs:string" minOccurs="0" />
                             <xs:element name="Description" type="xs:string" minOccurs="0" />
                             <xs:element name="HashSumm" type="xs:string" minOccurs="0" />
+<<<<<<< HEAD
                             <xs:element name="Icon" type="IconAttributes" minOccurs="0" />
+=======
+>>>>>>> ca87b0a1458075bdb18f5e61aba52b5e947baa11
                             <xs:element name="License" type="xs:string" minOccurs="0" />
                             <xs:element name="Image" type="ImageAttributes" minOccurs="0" />
                             <xs:element name="Name" type="xs:string" />
@@ -40,11 +43,14 @@
     <xs:complexType name="ImageAttributes">
         <xs:attribute name="Source" type="ImagePath" use="required"/>
     </xs:complexType>
+<<<<<<< HEAD
     <xs:complexType name="IconAttributes">
         <xs:attribute name="Name" type="xs:string" use="required"/>
         <xs:attribute name="Foreground" type="FormatHEX" use="required"/>
         <xs:attribute name="Background" type="FormatHEX" use="required"/>
     </xs:complexType>
+=======
+>>>>>>> ca87b0a1458075bdb18f5e61aba52b5e947baa11
     <!--ТЕГИ-->
     <xs:group name="TagGroup">
         <xs:choice>
@@ -85,6 +91,7 @@
     </xs:simpleType>
     <xs:simpleType name="ImagePath">
         <xs:restriction base="xs:string">
+<<<<<<< HEAD
             <xs:pattern value="\.\./Resources/User/Images/[-a-zA-Z0-9\-_]+\.(jpg|png|jpeg)" />
         </xs:restriction>
     </xs:simpleType>
@@ -94,6 +101,11 @@
         </xs:restriction>
     </xs:simpleType>
     
+=======
+            <xs:pattern value="\.\./Resources/User/Images/[-a-zA-Z0-9\-_]+\.(jpg|png)" />
+        </xs:restriction>
+    </xs:simpleType>
+>>>>>>> ca87b0a1458075bdb18f5e61aba52b5e947baa11
     <!--<xs:simpleType name="Birthday">
     <xs:restriction base="xs:date">
       <xs:minInclusive value="1950-01-01" />

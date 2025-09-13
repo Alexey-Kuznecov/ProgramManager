@@ -9,12 +9,19 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ProgramManager</RootNamespace>
     <AssemblyName>ProgramManager</AssemblyName>
+<<<<<<< HEAD
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+=======
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+>>>>>>> ca87b0a1458075bdb18f5e61aba52b5e947baa11
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+<<<<<<< HEAD
     <TargetFrameworkProfile />
+=======
+>>>>>>> ca87b0a1458075bdb18f5e61aba52b5e947baa11
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -35,6 +42,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+<<<<<<< HEAD
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'soft|AnyCPU'">
     <OutputPath>bin\soft\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
@@ -60,22 +68,82 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+=======
+  <ItemGroup>
+    <Reference Include="AsyncMvvmMessenger, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AsyncMvvmMessenger.0.1.0.0\lib\portable-net4+wp8+win8+wpa81+MonoAndroid+MonoTouch\AsyncMvvmMessenger.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight, Version=4.4.32.26491, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Portable.MvvmLightLibs.4.4.32.1\lib\net45\GalaSoft.MvvmLight.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Extras, Version=4.4.32.26494, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Portable.MvvmLightLibs.4.4.32.1\lib\net45\GalaSoft.MvvmLight.Extras.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Platform, Version=4.4.32.26493, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Portable.MvvmLightLibs.4.4.32.1\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Portable.MvvmLightLibs.4.4.32.1\lib\net45\System.Windows.Interactivity.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+>>>>>>> ca87b0a1458075bdb18f5e61aba52b5e947baa11
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
+<<<<<<< HEAD
+=======
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+>>>>>>> ca87b0a1458075bdb18f5e61aba52b5e947baa11
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+<<<<<<< HEAD
+=======
+    <Reference Include="Xceed.Wpf.AvalonDock, Version=3.5.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.5.0\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero, Version=3.5.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.5.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro, Version=3.5.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.5.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010, Version=3.5.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.5.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Toolkit, Version=3.5.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.5.0\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+>>>>>>> ca87b0a1458075bdb18f5e61aba52b5e947baa11
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+<<<<<<< HEAD
     <Compile Include="Contracts\IDialogService.cs" />
     <Compile Include="Contracts\IFileService.cs" />
     <Compile Include="Contracts\IPluginStarter.cs" />
@@ -106,6 +174,17 @@
     </Compile>
     <Compile Include="ViewModels\TagDialogViewModel.cs" />
     <Compile Include="Models\PackageModel\PackageDrtails.cs" />
+=======
+    <Compile Include="Contracts\ISearchable.cs" />
+    <Compile Include="Converters\IconConverters.cs" />
+    <Compile Include="Converters\FieldConverter.cs" />
+    <Compile Include="Dict\CategoryDict.cs" />
+    <Compile Include="Enums\FieldTypes.cs" />
+    <Compile Include="Enums\Keywords.cs" />
+    <Compile Include="Filters\FilterProperties.cs" />
+    <Compile Include="Converters\ConverterBase.cs" />
+    <Compile Include="Models\PackageDrtails.cs" />
+>>>>>>> ca87b0a1458075bdb18f5e61aba52b5e947baa11
     <Compile Include="Models\PackageModel\CategoryModel.cs" />
     <Compile Include="Models\Func\FuncHelper.cs" />
     <Compile Include="Models\PackagesReader.cs" />
@@ -117,21 +196,35 @@
     <Compile Include="Models\PackageModel\PackageBase.cs" />
     <Compile Include="Models\PackageModel\PluginModel.cs" />
     <Compile Include="Models\PackageModel\ProgramModel.cs" />
+<<<<<<< HEAD
     <Compile Include="Models\IconModel.cs" />
+=======
+    <Compile Include="Resources\IconResources .cs" />
+    <Compile Include="Services\ProcessManager.cs" />
+>>>>>>> ca87b0a1458075bdb18f5e61aba52b5e947baa11
     <Compile Include="Services\EventAggregate.cs" />
     <Compile Include="Services\BaseEventArgs.cs" />
     <Compile Include="Converters\KeywordToTextConverter.cs" />
     <Compile Include="Enums\Categories.cs" />
     <Compile Include="Converters\ConverterExtension.cs" />
     <Compile Include="Services\PackagesManager.cs" />
+<<<<<<< HEAD
     <Compile Include="Models\PackagesWriter.cs" />
     <Compile Include="Models\PackageModel\TextFieldModel.cs" />
     <Compile Include="ViewModels\Base\PropertiesChanged.cs" />
+=======
+    <Compile Include="Models\PackageAccess.cs" />
+    <Compile Include="Models\PackageModel\TextFieldModel.cs" />
+    <Compile Include="ViewModels\Base\PropertiesChanged.cs" />
+    <Compile Include="ViewModels\IconEditorViewModel.cs" />
+    <Compile Include="ViewModels\IconViewModel.cs" />
+>>>>>>> ca87b0a1458075bdb18f5e61aba52b5e947baa11
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\PackagesDialogPartial.cs" />
     <Compile Include="ViewModels\PackagesDialogViewModel.cs" />
     <Compile Include="ViewModels\InputNameViewModel.cs" />
     <Compile Include="ViewModels\Base\RelayCommand.cs" />
+<<<<<<< HEAD
     <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\Settings\GeneralViewModel.cs" />
     <Compile Include="ViewModels\Settings\ThemesViewModel.cs" />
@@ -161,6 +254,9 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\IconsEditorDefaultStyles.xaml">
+=======
+    <Page Include="Resources\IconStyle.xaml">
+>>>>>>> ca87b0a1458075bdb18f5e61aba52b5e947baa11
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -172,6 +268,21 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+<<<<<<< HEAD
+=======
+    <Page Include="Views\DialogIcons.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DialogPacks\IconCanvas.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DialogPacks\TagDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+>>>>>>> ca87b0a1458075bdb18f5e61aba52b5e947baa11
     <Page Include="Views\PackagesDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -197,6 +308,19 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Services\PackagesDialogVisibility.cs" />
+<<<<<<< HEAD
+=======
+    <Compile Include="ViewModels\TagDialogViewModel.cs" />
+    <Compile Include="Views\DialogIcons.xaml.cs">
+      <DependentUpon>DialogIcons.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DialogPacks\IconCanvas.xaml.cs">
+      <DependentUpon>IconCanvas.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DialogPacks\TagDialog.xaml.cs">
+      <DependentUpon>TagDialog.xaml</DependentUpon>
+    </Compile>
+>>>>>>> ca87b0a1458075bdb18f5e61aba52b5e947baa11
     <Compile Include="Views\PackagesDialog.xaml.cs">
       <DependentUpon>PackagesDialog.xaml</DependentUpon>
     </Compile>
@@ -212,6 +336,7 @@
     <Compile Include="Views\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
+<<<<<<< HEAD
     <Page Include="Views\SettingsControl\GeneralControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -224,6 +349,8 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+=======
+>>>>>>> ca87b0a1458075bdb18f5e61aba52b5e947baa11
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -239,6 +366,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+<<<<<<< HEAD
     <Resource Include="Resources\Settings.xml" />
     <Resource Include="Resources\User\Images\Empire_Earth_2_Искусство_побеждать.png" />
     <Resource Include="Resources\User\Images\GoogleChromealt2.png" />
@@ -250,11 +378,17 @@
     <Resource Include="Resources\User\Images\preview.png" />
     <Resource Include="Resources\User\Images\webdesign.png" />
     <Resource Include="Resources\User\Images\1.png" />
+=======
+>>>>>>> ca87b0a1458075bdb18f5e61aba52b5e947baa11
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+<<<<<<< HEAD
     <Content Include="Plugins\plugin.xml" />
+=======
+    <None Include="packages.config" />
+>>>>>>> ca87b0a1458075bdb18f5e61aba52b5e947baa11
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -268,6 +402,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <Resource Include="Resources\User\Images\19572.jpg" />
   </ItemGroup>
   <ItemGroup>
@@ -286,20 +421,67 @@
     <Resource Include="Resources\Icons\Delete_48px.png" />
     <Resource Include="Resources\Icons\Edit_48px.png" />
     <Resource Include="Resources\Icons\Expand_Arrow_48px.png" />
+=======
+    <Resource Include="Resources\Icons\Aard.png" />
+    <Resource Include="Resources\Icons\Add_Folder_48px.png" />
+    <Resource Include="Resources\Icons\Add_Tag_48px.png" />
+    <Resource Include="Resources\Icons\Add_to_Favorites_48px.png" />
+    <Resource Include="Resources\Icons\Categorize_48px.png" />
+    <Resource Include="Resources\Icons\Delete_48px.png" />
+    <Resource Include="Resources\Icons\Edit_48px.png" />
+>>>>>>> ca87b0a1458075bdb18f5e61aba52b5e947baa11
     <Resource Include="Resources\Icons\Open_48px.png" />
     <Resource Include="Resources\Icons\Optional_48px.png" />
     <Resource Include="Resources\Icons\Plus_Math_48px.png" />
     <Resource Include="Resources\Icons\Rename_48px.png" />
+<<<<<<< HEAD
     <Resource Include="Resources\Icons\Save_48px.png" />
     <Resource Include="Resources\Icons\Search_48px.png" />
     <Resource Include="Resources\Icons\Settings_48px.png" />
     <Resource Include="Resources\Icons\User_48px.png" />
     <Resource Include="Resources\User\Images\AdobePhotoshop.png" />
+=======
+    <Resource Include="Resources\Icons\Search_48px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\19572.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\User\Images\Adobe Photoshop.png" />
+>>>>>>> ca87b0a1458075bdb18f5e61aba52b5e947baa11
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\User\packages.xml" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
+=======
+    <Resource Include="Resources\Icons\Save_48px.png" />
+    <Resource Include="Resources\Icons\Settings_48px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\Businessman_48px.png" />
+    <Resource Include="Resources\Icons\Customer_48px.png" />
+    <Resource Include="Resources\Icons\User_48px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\Add_48px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\Collapse_Arrow_48px.png" />
+    <Resource Include="Resources\Icons\Expand_Arrow_48px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\Add_Textfield_48px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\Category_40px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\Category_48px_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+>>>>>>> ca87b0a1458075bdb18f5e61aba52b5e947baa11
     <Resource Include="Resources\User\ContextMenu.xml" />
   </ItemGroup>
   <ItemGroup>
@@ -309,6 +491,7 @@
     <Resource Include="Resources\User\Images\Plugins.png" />
     <Resource Include="Resources\User\Images\Programs.png" />
   </ItemGroup>
+<<<<<<< HEAD
   <ItemGroup>
     <Resource Include="Resources\User\packageIcons.xml" />
   </ItemGroup>
@@ -326,6 +509,9 @@
       <Name>InteractionLib</Name>
     </ProjectReference>
   </ItemGroup>
+=======
+  <ItemGroup />
+>>>>>>> ca87b0a1458075bdb18f5e61aba52b5e947baa11
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

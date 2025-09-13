@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Settings>
+  <AutoStartApp IsEnable="True" />
+  <UpdateNotify IsEnable="True" />
+  <ShownPackBack IsEnable="False" />
+  <Themes Default="Windows Vista">
+    <Theme Name="Windows Vista" Resource="Themes/WindowsVistaTheme.xaml" />
+    <Theme Name="Windows 10" Resource="Themes/Windows10Theme.xaml" />
+    <Theme Name="FlexibleThemes" Resource="Themes/FlexibleTheme.xaml" />
+  </Themes>
+  <Laguages Default="En">
+    <Laguage Culture="En" Resource="Local/en.ls" />
+    <Laguage Culture="Ru" Resource="Local/ru.ls" />
+  </Laguages>
+  <Plugins>
+    <Plugin Name="SimplePlugin" IsEnable="True">
+      <Author>Bandit</Author>
+      <Version>1.0</Version>
+      <Description>PluginExecute to manage icons.</Description>
+    </Plugin>
+    <Plugin Name="IconEditor" IsEnable="True">
+      <Author>AlexSofar</Author>
+      <Version>1.0</Version>
+      <Description>PluginExecute to manage icons.</Description>
+    </Plugin>
+    <Plugin Name="TagEditor" IsEnable="True">
+      <Author>AlexSofar</Author>
+      <Version>1.0</Version>
+      <Description>PluginExecute to manage icons.</Description>
+    </Plugin>
+  </Plugins>
+</Settings>

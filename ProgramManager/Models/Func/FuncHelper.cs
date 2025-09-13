@@ -1,6 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+<<<<<<< HEAD
 using System.Diagnostics;
+=======
+>>>>>>> ca87b0a1458075bdb18f5e61aba52b5e947baa11
 using System.Linq;
 using System.Reflection;
 using System.Xml.Linq;
@@ -8,7 +11,10 @@ using ProgramManager.Converters;
 
 namespace ProgramManager.Models.Func
 {
+<<<<<<< HEAD
     [DebuggerStepThrough]
+=======
+>>>>>>> ca87b0a1458075bdb18f5e61aba52b5e947baa11
     public static class FuncHelper 
     {
         private static XElement _document;
@@ -107,7 +113,11 @@ namespace ProgramManager.Models.Func
                         {
                             Name = entry.Key,
                             Id = count++,
+<<<<<<< HEAD
                             FieldName = PackageFieldConverter.Dictionary.Single(p => p.Key.ToString() == entry.Key.ToString()).Value
+=======
+                            FieldName = FieldConverter.Dictionary.Single(p => p.Key.ToString() == entry.Key.ToString()).Value
+>>>>>>> ca87b0a1458075bdb18f5e61aba52b5e947baa11
                         };
                         dictionary.Add(key, entry.Value.ToString());
                     }
@@ -129,11 +139,16 @@ namespace ProgramManager.Models.Func
             XDocument node = XDocument.Parse(str);
             var names = node.Elements().Elements().Select(e => e);
 
+<<<<<<< HEAD
             #region Поиск элементов с одинаковыми именами..
 
             var xElements = names as XElement[] ?? names.ToArray();
 
             foreach (var name in xElements)
+=======
+            // Поиск элементов с одинаковыми именами
+            foreach (var name in names)
+>>>>>>> ca87b0a1458075bdb18f5e61aba52b5e947baa11
             {
                 foreach (var element in node.Elements().Elements())
                 {
@@ -146,10 +161,16 @@ namespace ProgramManager.Models.Func
             }
             foreach (var item in nameList)
             {
+<<<<<<< HEAD
                 foreach (var name in xElements)
                 {
                     #region Группирование одинаковых элементов в отдельные узлы.
 
+=======
+                foreach (var name in names)
+                {
+                    // Группирование одинаковых элементов в отдельные узлы.
+>>>>>>> ca87b0a1458075bdb18f5e61aba52b5e947baa11
                     if (name.Name == item.ToString())
                     {
                         if (!nested.HasElements)
@@ -167,14 +188,19 @@ namespace ProgramManager.Models.Func
                                 nested.Add(new XElement(name.Name, name));
                         }
                     }
+<<<<<<< HEAD
 
                     #region Элементы с уникальными именами.
                     
+=======
+                    // Элементы с уникальными именами.
+>>>>>>> ca87b0a1458075bdb18f5e61aba52b5e947baa11
                     if (!nameList.Contains(name.Name))
                     {
                         if (!document.Elements().Contains(document.Element(name.Name)))
                             document.Add(name);
                     }
+<<<<<<< HEAD
 
                     #endregion
                     
@@ -184,6 +210,10 @@ namespace ProgramManager.Models.Func
 
             #endregion
 
+=======
+                }
+            }
+>>>>>>> ca87b0a1458075bdb18f5e61aba52b5e947baa11
             // Добавление узлов в общий узел.
             document.Add(nested.Elements());
 

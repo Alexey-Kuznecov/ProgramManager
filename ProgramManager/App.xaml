@@ -1,6 +1,7 @@
 ﻿<Application
     x:Class="ProgramManager.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+<<<<<<< HEAD
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Application.Resources>
         <ResourceDictionary>
@@ -10,6 +11,17 @@
                 <ResourceDictionary Source="/ProgramManager;component/Resources/IconsEditorDefaultStyles.xaml" />
                 <ResourceDictionary Source="/ProgramManager;component/Resources/Icons.xaml" />
                 <ResourceDictionary Source="/ProgramManager;component/Resources/Generic.xaml" />
+=======
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:ProgramManager"
+    xmlns:views="clr-namespace:ProgramManager.Views">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/ProgramManager;component/Resources/Icons.xaml" />
+                <ResourceDictionary Source="/ProgramManager;component/Resources/Generic.xaml" />
+                <ResourceDictionary Source="/ProgramManager;component/Resources/IconStyle.xaml" />
+>>>>>>> ca87b0a1458075bdb18f5e61aba52b5e947baa11
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

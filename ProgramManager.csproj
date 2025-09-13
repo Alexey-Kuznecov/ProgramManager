@@ -1,0 +1,372 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{5C8FC49C-B768-4353-BD89-7A771479118D}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ProgramManager</RootNamespace>
+    <AssemblyName>ProgramManager</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'soft|AnyCPU'">
+    <OutputPath>bin\soft\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="GalaSoft.MvvmLight, Version=4.4.32.26491, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Portable.MvvmLightLibs.4.4.32.1\lib\net45\GalaSoft.MvvmLight.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Extras, Version=4.4.32.26494, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Portable.MvvmLightLibs.4.4.32.1\lib\net45\GalaSoft.MvvmLight.Extras.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Platform, Version=4.4.32.26493, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Portable.MvvmLightLibs.4.4.32.1\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Contracts\IDialogService.cs" />
+    <Compile Include="Contracts\IFileService.cs" />
+    <Compile Include="Contracts\IPluginStarter.cs" />
+    <Compile Include="Contracts\ISearchable.cs" />
+    <Compile Include="Converters\IconConverters.cs" />
+    <Compile Include="Converters\PackageFieldConverter.cs" />
+    <Compile Include="Associations\CategoryDictionary.cs" />
+    <Compile Include="Models\ImageCover.cs" />
+    <Compile Include="Models\PackageModel\KeyboardModel.cs" />
+    <Compile Include="Models\Settings\PluginModel.cs" />
+    <Compile Include="Models\Settings\GeneralModel.cs" />
+    <Compile Include="Models\Settings\ThemesModel.cs" />
+    <Compile Include="Plugins\Exceptions\PluginNotFoundException.cs" />
+    <Compile Include="Plugins\Exceptions\PluginTypeDoubleDefinedException.cs" />
+    <Compile Include="Data\Settings.cs" />
+    <Compile Include="Data\Themes.cs" />
+    <Compile Include="Enums\FieldTypes.cs" />
+    <Compile Include="Enums\Keywords.cs" />
+    <Compile Include="Converters\BaseConverter.cs" />
+    <Compile Include="Models\CategoryModelOb.cs" />
+    <Compile Include="Plugins\InteractonPackageEditor.cs" />
+    <Compile Include="Plugins\Exceptions\PluginMissingException.cs" />
+    <Compile Include="Plugins\Exceptions\XmlElementNotFoundException.cs" />
+    <Compile Include="ViewModels\Settings\PluginViewModel.cs" />
+    <Compile Include="ViewModels\TableEditorViewModel.cs" />
+    <Compile Include="Views\MainControls\InfoPanelDefaultView.xaml.cs">
+      <DependentUpon>InfoPanelDefaultView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainControls\InfoPanelPostView.xaml.cs">
+      <DependentUpon>InfoPanelPostView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainControls\InfoPanelProgramView.xaml.cs">
+      <DependentUpon>InfoPanelProgramView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SettingsControl\PluginControl.xaml.cs">
+      <DependentUpon>PluginControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TableEditorView.xaml.cs">
+      <DependentUpon>TableEditorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TagDialog.xaml.cs">
+      <DependentUpon>TagDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\TagDialogViewModel.cs" />
+    <Compile Include="Models\PackageModel\PackageDrtails.cs" />
+    <Compile Include="Models\PackageModel\CategoryModel.cs" />
+    <Compile Include="Models\Func\FuncHelper.cs" />
+    <Compile Include="Models\PackagesReader.cs" />
+    <Compile Include="Models\BaseXML.cs" />
+    <Compile Include="Models\WrapPackage.cs" />
+    <Compile Include="Models\PackageModel\DriverModel.cs" />
+    <Compile Include="Models\PackageModel\GameModel.cs" />
+    <Compile Include="Models\PackageModel\ModModel.cs" />
+    <Compile Include="Models\PackageModel\PackageBase.cs" />
+    <Compile Include="Models\PackageModel\PluginModel.cs" />
+    <Compile Include="Models\PackageModel\ProgramModel.cs" />
+    <Compile Include="Models\IconModel.cs" />
+    <Compile Include="Services\EventAggregate.cs" />
+    <Compile Include="Services\BaseEventArgs.cs" />
+    <Compile Include="Converters\KeywordToTextConverter.cs" />
+    <Compile Include="Enums\Categories.cs" />
+    <Compile Include="Converters\ConverterExtension.cs" />
+    <Compile Include="Services\PackagesManager.cs" />
+    <Compile Include="Models\PackagesWriter.cs" />
+    <Compile Include="Models\PackageModel\TextFieldModel.cs" />
+    <Compile Include="ViewModels\Base\PropertiesChanged.cs" />
+    <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\PackagesDialogPartial.cs" />
+    <Compile Include="ViewModels\PackagesDialogViewModel.cs" />
+    <Compile Include="ViewModels\InputNameViewModel.cs" />
+    <Compile Include="ViewModels\Base\RelayCommand.cs" />
+    <Compile Include="ViewModels\SettingsViewModel.cs" />
+    <Compile Include="ViewModels\Settings\GeneralViewModel.cs" />
+    <Compile Include="ViewModels\Settings\ThemesViewModel.cs" />
+    <Compile Include="Views\SettingsControl\GeneralControl.xaml.cs">
+      <DependentUpon>GeneralControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SettingsControl\ThemeControl.xaml.cs">
+      <DependentUpon>ThemeControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SettingsView.xaml.cs">
+      <DependentUpon>SettingsView.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Views\MainControls\InfoPanelDefaultView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MainControls\InfoPanelPostView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MainControls\InfoPanelProgramView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SettingsControl\PluginControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TableEditorView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TagDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\MainStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\PackageDialogStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\IconsEditorDefaultStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Generic.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Icons.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PackagesDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DialogPacks\InputName.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DialogPacks\TabFields.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DialogPacks\TabFiles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MainView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\PackagesDialogVisibility.cs" />
+    <Compile Include="Views\PackagesDialog.xaml.cs">
+      <DependentUpon>PackagesDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DialogPacks\InputName.xaml.cs">
+      <DependentUpon>InputName.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DialogPacks\TabFields.xaml.cs">
+      <DependentUpon>TabFields.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DialogPacks\TabFiles.xaml.cs">
+      <DependentUpon>TabFiles.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainView.xaml.cs">
+      <DependentUpon>MainView.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Views\SettingsControl\GeneralControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SettingsControl\ThemeControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Resource Include="Resources\Icons\icons8_Insert_Row_48px.png" />
+    <Resource Include="Resources\Icons\icons8_New_Window_48px.png" />
+    <Resource Include="Resources\Icons\icons8_Replicate_Rows_48px_1.png" />
+    <Resource Include="Resources\Icons\icons8_Thumbnails_48px.png" />
+    <Resource Include="Resources\User\Images\GeraltFromRivia.png" />
+    <Resource Include="Resources\Settings.xml" />
+    <Resource Include="Resources\User\Images\Empire_Earth_2_Искусство_побеждать.png" />
+    <Resource Include="Resources\User\Images\GoogleChromealt2.png" />
+    <Resource Include="Resources\User\Images\Firefoxalt3.png" />
+    <Resource Include="Resources\User\Images\Firefoxalt.png" />
+    <Resource Include="Resources\User\Images\00480175.jpeg" />
+    <Resource Include="Resources\User\Images\0_30e92_4a2e5eef_XL.png" />
+    <Resource Include="Resources\User\Images\938.jpg" />
+    <Resource Include="Resources\User\Images\preview.png" />
+    <Resource Include="Resources\User\Images\webdesign.png" />
+    <Resource Include="Resources\User\Images\1.png" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <Content Include="Plugins\plugin.xml" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+    <None Include="Resources\User\ContextMenu.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Resources\User\packages.xsd">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\User\Images\19572.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\Aard.png" />
+    <Resource Include="Resources\Icons\Add_48px.png" />
+    <Resource Include="Resources\Icons\Add_Folder_48px.png" />
+    <Resource Include="Resources\Icons\Add_Tag_48px.png" />
+    <Resource Include="Resources\Icons\Add_Textfield_48px.png" />
+    <Resource Include="Resources\Icons\Add_to_Favorites_48px.png" />
+    <Resource Include="Resources\Icons\Businessman_48px.png" />
+    <Resource Include="Resources\Icons\Categorize_48px.png" />
+    <Resource Include="Resources\Icons\Category_40px.png" />
+    <Resource Include="Resources\Icons\Category_48px_1.png" />
+    <Resource Include="Resources\Icons\Collapse_Arrow_48px.png" />
+    <Resource Include="Resources\Icons\Customer_48px.png" />
+    <Resource Include="Resources\Icons\Delete_48px.png" />
+    <Resource Include="Resources\Icons\Edit_48px.png" />
+    <Resource Include="Resources\Icons\Expand_Arrow_48px.png" />
+    <Resource Include="Resources\Icons\Open_48px.png" />
+    <Resource Include="Resources\Icons\Optional_48px.png" />
+    <Resource Include="Resources\Icons\Plus_Math_48px.png" />
+    <Resource Include="Resources\Icons\Rename_48px.png" />
+    <Resource Include="Resources\Icons\Save_48px.png" />
+    <Resource Include="Resources\Icons\Search_48px.png" />
+    <Resource Include="Resources\Icons\Settings_48px.png" />
+    <Resource Include="Resources\Icons\User_48px.png" />
+    <Resource Include="Resources\User\Images\AdobePhotoshop.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\User\packages.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\User\ContextMenu.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\User\Images\Drivers.png" />
+    <Resource Include="Resources\User\Images\Games.png" />
+    <Resource Include="Resources\User\Images\Mods.png" />
+    <Resource Include="Resources\User\Images\Plugins.png" />
+    <Resource Include="Resources\User\Images\Programs.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\User\packageIcons.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\Settings\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AlexLibWpf\AlexLibWpf.csproj">
+      <Project>{5220e741-c062-46dc-95f1-e4755f48e0ad}</Project>
+      <Name>AlexLibWpf</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\InteractionLib\InteractionLib.csproj">
+      <Project>{6183d8a0-f3ec-45f6-9fb9-b73662a2f5d5}</Project>
+      <Name>InteractionLib</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

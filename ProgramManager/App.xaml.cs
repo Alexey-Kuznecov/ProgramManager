@@ -1,4 +1,10 @@
+<<<<<<< HEAD
 ﻿
+=======
+﻿using System.Windows;
+using ProgramManager.Views;
+
+>>>>>>> ca87b0a1458075bdb18f5e61aba52b5e947baa11
 namespace ProgramManager
 {
     using System.Windows;

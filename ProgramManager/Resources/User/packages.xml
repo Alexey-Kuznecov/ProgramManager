@@ -5,37 +5,65 @@
     <CompanySite>https://www.Adobe.com/</CompanySite>
     <Description>Программа для оформления фотографий</Description>
     <License>5Q86W-TFPN7-K8VCJ-PH3CT</License>
+<<<<<<< HEAD
     <Name>Photoshop</Name>
     <Tag>Не подшитые</Tag>
     <Userfield Label="вацыа">вацыа</Userfield>
+=======
+    <Image Source="../Resources/User/Images/Adobe Photoshop.png" />
+    <Name>Photoshop</Name>
+    <Tag>Не подшитые</Tag>
+>>>>>>> ca87b0a1458075bdb18f5e61aba52b5e947baa11
     <Version>Cloud CC6</Version>
   </Package>
   <Package Id="1" Category="Программы">
     <Author>Adobe</Author>
     <Description>Программа для оформления фотографий</Description>
+<<<<<<< HEAD
     <Name>Illustrator</Name>
     <Tag>Редакторы графики</Tag>
+=======
+    <Image Source="../Resources/User/Images/Programs.png" />
+    <Name>Illustrator</Name>
+    <Tag>Офисные</Tag>
+>>>>>>> ca87b0a1458075bdb18f5e61aba52b5e947baa11
     <Version>Cloud CC6</Version>
   </Package>
   <Package Id="2" Category="Программы">
     <Author>Axure Software Solution</Author>
     <Description>Программа для создания прототипов сайтов</Description>
+<<<<<<< HEAD
     <Image Source="../Resources/User/Images/Add141.png" />
     <Name>Axure</Name>
     <Tag>Не подшитые</Tag>
+=======
+    <Image Source="../Resources/User/Images/Programs.png" />
+    <Name>Axure</Name>
+    <Tag>Инструменты вебразработчика</Tag>
+>>>>>>> ca87b0a1458075bdb18f5e61aba52b5e947baa11
     <Version>RP 8</Version>
   </Package>
   <Package Id="3" Category="Программы">
     <Author>Andrei Kulabukhau</Author>
     <Description>Программа для измерения времени</Description>
+<<<<<<< HEAD
     <Image Source="../Resources/User/Images/new_Clock.png" />
     <Name>LazyCure</Name>
     <Tag>Не подшитые</Tag>
+=======
+    <Image Source="../Resources/User/Images/Programs.png" />
+    <Name>LazyCure</Name>
+    <Tag>Органазеры</Tag>
+>>>>>>> ca87b0a1458075bdb18f5e61aba52b5e947baa11
     <Version>0.10</Version>
   </Package>
   <Package Id="4" Category="Программы">
     <Author>Mozilla</Author>
     <Description>Программа для просмотра вебстраниц</Description>
+<<<<<<< HEAD
+=======
+    <Image Source="../Resources/User/Images/Programs.png" />
+>>>>>>> ca87b0a1458075bdb18f5e61aba52b5e947baa11
     <Name>Firefox</Name>
     <Tag>Браузеры</Tag>
     <Version>7.9.4</Version>
@@ -43,15 +71,25 @@
   <Package Id="5" Category="Программы">
     <Author>Google</Author>
     <Description>Программа для просмотра вебстраниц</Description>
+<<<<<<< HEAD
     <Name>Chrome</Name>
     <Tag>Браузеры</Tag>
     <Userfield Label="sadasdd">sadasdd</Userfield>
+=======
+    <Image Source="../Resources/User/Images/Programs.png" />
+    <Name>Chrome</Name>
+    <Tag>Браузеры</Tag>
+>>>>>>> ca87b0a1458075bdb18f5e61aba52b5e947baa11
     <Version>8.5.0</Version>
   </Package>
   <Package Id="6" Category="Программы">
     <Author>Microsoft</Author>
     <Description>Программа для организации электронных писем</Description>
+<<<<<<< HEAD
     <Image Source="../Resources/User/Images/938.jpg" />
+=======
+    <Image Source="../Resources/User/Images/Programs.png" />
+>>>>>>> ca87b0a1458075bdb18f5e61aba52b5e947baa11
     <Name>Microsoft Outlook</Name>
     <Tag>Офисные</Tag>
     <Version>2017</Version>
@@ -59,7 +97,11 @@
   <Package Id="7" Category="Программы">
     <Author>Microsoft</Author>
     <Description>Программа для написания, редактирования, оформления текста и многое другое.</Description>
+<<<<<<< HEAD
     <Image Source="../Resources/User/Images/webdesign.png" />
+=======
+    <Image Source="../Resources/User/Images/Programs.png" />
+>>>>>>> ca87b0a1458075bdb18f5e61aba52b5e947baa11
     <Name>Microsoft Word</Name>
     <Tag>Офисные</Tag>
     <Version>2017</Version>
@@ -75,16 +117,28 @@
   <Package Id="9" Category="Программы">
     <Author>ChemTable Software</Author>
     <Description>Программа для оптимизации, отчиски, дефрагментации реестра и многое другое</Description>
+<<<<<<< HEAD
     <Image Source="../Resources/User/Images/preview.png" />
+=======
+    <Image Source="../Resources/User/Images/Programs.png" />
+>>>>>>> ca87b0a1458075bdb18f5e61aba52b5e947baa11
     <Name>Reg Organizer</Name>
     <Tag>Оптимизатры</Tag>
     <Version>8.16</Version>
   </Package>
   <Package Id="10" Category="Программы">
+<<<<<<< HEAD
     <Author>Не указанно</Author>
     <Description>Программа организации задач</Description>
     <Name>LeaderTask</Name>
     <Tag>Не подшитые</Tag>
+=======
+    <Author>Неизвестно</Author>
+    <Description>Программа организации задач</Description>
+    <Image Source="../Resources/User/Images/Programs.png" />
+    <Name>LeaderTask</Name>
+    <Tag>Органазеры</Tag>
+>>>>>>> ca87b0a1458075bdb18f5e61aba52b5e947baa11
     <Version>6.0</Version>
   </Package>
   <Package Id="11" Category="Программы">
@@ -117,9 +171,15 @@
   <Package Id="14" Category="Программы">
     <Author>Microsoft</Author>
     <Description>Интегрированая среда разработки</Description>
+<<<<<<< HEAD
     <Icon Name="ProgramIcon" Foreground="#FFFFFFFF" Background="#FF3676AE" />
     <Name>Microsoft Visual Studio</Name>
     <Tag>Офисные</Tag>
+=======
+    <Image Source="../Resources/User/Images/Programs.png" />
+    <Name>Microsoft Visual Studio</Name>
+    <Tag>Не подшитые</Tag>
+>>>>>>> ca87b0a1458075bdb18f5e61aba52b5e947baa11
     <Version>14.0</Version>
   </Package>
   <Package Id="15" Category="Программы">
@@ -141,8 +201,14 @@
   <Package Id="17" Category="Программы">
     <Author>Discord Team</Author>
     <Description>Программа для создания сообществ</Description>
+<<<<<<< HEAD
     <Name>Discord</Name>
     <Tag>Не подшитые</Tag>
+=======
+    <Image Source="../Resources/User/Images/Programs.png" />
+    <Name>Discord</Name>
+    <Tag>Меседжеры</Tag>
+>>>>>>> ca87b0a1458075bdb18f5e61aba52b5e947baa11
     <Version>3.0</Version>
   </Package>
   <Package Id="18" Category="Программы">
@@ -164,7 +230,11 @@
   <Package Id="20" Category="Игры">
     <Author>Mod Doc Software</Author>
     <Description>Игра для настоящих царей</Description>
+<<<<<<< HEAD
     <Image Source="../Resources/User/Images/Empire_Earth_2_Искусство_побеждать.png" />
+=======
+    <Image Source="../Resources/User/Images/Games.png" />
+>>>>>>> ca87b0a1458075bdb18f5e61aba52b5e947baa11
     <Name>Empire Earth 2</Name>
     <Tag>Не подшитые</Tag>
     <Version>2.2</Version>
@@ -194,6 +264,7 @@
   <Package Id="25" Category="Игры">
     <Author>Valve</Author>
     <Description>Игра для настоящих ассов</Description>
+<<<<<<< HEAD
     <Image Source="../Resources/User/Images/CSGO291.png" />
     <Name>Counter Strike GO</Name>
     <Tag>Не подшитые</Tag>
@@ -204,6 +275,31 @@
     <Description>Среда разработки XML проектов.</Description>
     <License>EMBRACED XXXXXXX</License>
     <Image Source="../Resources/User/Images/Programs.png" />
+=======
+    <Image Source="../Resources/User/Images/Games.png" />
+    <Name>Counter Strike GO</Name>
+    <Tag>Shooter</Tag>
+    <Version>2.2</Version>
+  </Package>
+  <Package Id="26" Category="Программы">
+    <Author>Mindjet</Author>
+    <CompanySite>https://www.mindjet.com/ru/</CompanySite>
+    <Description>MindManager — самая мощная в мире программа.</Description>
+    <Image Source="../Resources/User/Images/Programs.png" />
+    <Name>MindManager</Name>
+    <Tag>Не подшитые</Tag>
+    <UserfieldList>
+      <Userfield Label="Лозунг">Распознавайте.  Объединяйте.  Стимулируйте.</Userfield>
+      <Userfield Label="Лозунг2">Лозунг2</Userfield>
+    </UserfieldList>
+    <Version>7.7.0</Version>
+  </Package>
+  <Package Id="27" Category="Программы">
+    <Author>Liquid Technogies Limited</Author>
+    <Description>Среда разработки XML проектов.</Description>
+    <Image Source="../Resources/User/Images/Programs.png" />
+    <License>EMBRACED XXXXXXX</License>
+>>>>>>> ca87b0a1458075bdb18f5e61aba52b5e947baa11
     <Name>XML Studio Developer</Name>
     <Tag>IDE</Tag>
     <Userfield Label="Лозунг">Build on 28.02.2011 (Build No : 3078)</Userfield>

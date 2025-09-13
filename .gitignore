@@ -2,8 +2,69 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
-/ProgramManager/obj/Debug
-/.vs/ProgramManager/v14/.suo
-/ProgramManager/Test
-/ProgramManager/Plugins/IconsEditor/Bin/IconEditorPatial.cs
-/.vs/ProgramManager
+## Временные папки Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+## Bin/obj
+bin/
+obj/
+[Bb]uild/
+[Bb]uilds/
+Debug/
+Release/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+
+## Кэш и логи
+*.log
+*.tlog
+*.lastcodeanalysissucceeded
+*.VC.db
+*.VC.VC.opendb
+
+## Конфиги среды
+*.userprefs
+*.ncrunchsolution
+*.ncrunchproject
+
+## Резервные файлы
+*.bak
+*.backup
+*.tmp
+*.temp
+*.swp
+
+## Пакеты NuGet (можно хранить только *.config)
+*.nupkg
+*.snupkg
+*.nuspec
+*.nuget.props
+*.nuget.targets
+packages/
+
+## Rider/Resharper
+.idea/
+_ReSharper.Caches/
+*.DotSettings.user
+
+## Тестовые результаты
+TestResult*/
+*.VisualState.xml
+*.coverage
+*.coveragexml
+
+## Публикация
+publish/
+*.pubxml
+*.pubxml.user
+
+## Azure, IIS, Docker
+.publishsettings
+*.azurePubxml
+Generated\ Files/

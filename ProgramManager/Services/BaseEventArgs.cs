@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿
 namespace ProgramManager.Services
 {
@@ -24,5 +25,19 @@ namespace ProgramManager.Services
         /// Gets the package.
         /// </summary>
         public object Package { get; }
+=======
+﻿using ProgramManager.Models.PackageModel;
+using System;
+
+namespace ProgramManager.Services
+{
+    public class BaseEventArgs : EventArgs
+    {
+        public BaseEventArgs(object param)
+        {
+            Package = param;
+        }
+        public object Package { get; private set; }
+>>>>>>> ca87b0a1458075bdb18f5e61aba52b5e947baa11
     }
 }

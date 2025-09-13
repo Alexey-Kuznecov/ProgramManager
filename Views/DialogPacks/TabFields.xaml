@@ -1,0 +1,91 @@
+﻿<UserControl
+    x:Class="ProgramManager.Views.DialogPacks.TabFields"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converters="clr-namespace:ProgramManager.Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:packageModel="clr-namespace:ProgramManager.Models.PackageModel"
+    xmlns:vm="clr-namespace:ProgramManager.ViewModels"
+    d:DataContext="{d:DesignInstance vm:PackagesDialogViewModel}"
+    d:DesignHeight="300"
+    d:DesignWidth="500"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <converters:PackageFieldConverter x:Key="FieldConverter" />
+        <!--  Элементы из данного шаблона будет созданы для каждого элемента списка  -->
+        <DataTemplate DataType="{x:Type packageModel:TextFieldModel}">
+            <StackPanel>
+                <Label>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="300*" />
+                            <ColumnDefinition Width="80*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <StackPanel
+                            Grid.RowSpan="2"
+                            Grid.Column="0"
+                            Width="380">
+                            <TextBlock
+                                Height="20"
+                                Margin="10,5,168,0"
+                                Text="{Binding Converter={StaticResource FieldConverter}, StringFormat={}{0}:}" />
+                            <TextBox
+                                Height="35"
+                                Margin="10,5,30,5"
+                                Tag="{Binding Converter={StaticResource FieldConverter}}"
+                                Text="{Binding Path=FieldValue}" />
+                        </StackPanel>
+                        <WrapPanel
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Width="80"
+                            Margin="0,22,0,0">
+                            <Button Height="28">
+                                <ContentControl>
+                                    <Image Height="24" Source="{Binding Path=AutoCompleteIcon}" />
+                                </ContentControl>
+                            </Button>
+                            <Button
+                                Height="28"
+                                Margin="5,0,0,0"
+                                Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Path=DataContext.CommandRemoveTextField}"
+                                CommandParameter="{Binding}">
+                                <ContentControl>
+                                    <Image Height="24" Source="{Binding Path=DeleteTextFieldIcon}" />
+                                </ContentControl>
+                            </Button>
+                        </WrapPanel>
+                    </Grid>
+                </Label>
+            </StackPanel>
+        </DataTemplate>
+    </UserControl.Resources>
+    <!--  Привязка модели к представлению  -->
+    <DockPanel LastChildFill="True">
+        <StackPanel Name="StackPanel" DockPanel.Dock="Top">
+            <ItemsControl
+                x:Name="ItemsControl"
+                HorizontalContentAlignment="Stretch"
+                ItemsSource="{Binding TextField}" />
+            <StackPanel Orientation="Vertical">
+                <Button
+                    x:Name="AddField"
+                    Width="103"
+                    Height="25"
+                    Margin="0,10,34,10"
+                    HorizontalAlignment="Right"
+                    Command="{Binding OpenInputName}"
+                    Content="Добавить поле">
+                    <!--<Button.ContextMenu>
+                        <ContextMenu ItemsSource="{Binding MenuItem}" />
+                    </Button.ContextMenu>-->
+                </Button>
+            </StackPanel>
+        </StackPanel>
+    </DockPanel>
+</UserControl>

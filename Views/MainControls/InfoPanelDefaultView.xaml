@@ -1,0 +1,111 @@
+﻿<UserControl
+    x:Class="ProgramManager.Views.MainControls.InfoPanelDefaultView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converters="clr-namespace:AlexLibWpf.Converters;assembly=AlexLibWpf"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:ProgramManager.Views.MainControls"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100" />
+            <RowDefinition Height="10*" />
+        </Grid.RowDefinitions>
+        <Border
+            Grid.Row="0"
+            Width="60"
+            Height="60"
+            Margin="15"
+            HorizontalAlignment="Right"
+            BorderBrush="AliceBlue"
+            BorderThickness="4">
+            <Button Command="{Binding CommandOpenIconEditor, Mode=Default}">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <ControlTemplate.Resources>
+                            <converters:ContentConverter x:Key="ContentConverter" />
+                        </ControlTemplate.Resources>
+                        <Grid>
+                            <Path
+                                x:Name="rect"
+                                Fill="{Binding CurrentPackage.Icon.BackgroundColor, Mode=Default}"
+                                Stretch="Uniform">
+                                <Path.Data>
+                                    <RectangleGeometry Rect="0,0,50,50" />
+                                </Path.Data>
+                            </Path>
+                            <Path x:Name="overRect" Stretch="Uniform">
+                                <Path.Data>
+                                    <RectangleGeometry Rect="0,0,40,40" />
+                                </Path.Data>
+                            </Path>
+                            <Path
+                                x:Name="shape"
+                                Width="24"
+                                Height="24"
+                                Data="{Binding CurrentPackage.Icon.Path, Converter={StaticResource ContentConverter}, Mode=Default}"
+                                Fill="{Binding CurrentPackage.Icon.ForegroundColor, Mode=Default}"
+                                Stretch="Uniform" />
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="overRect" Property="Fill" Value="#4DCCCCFF" />
+                                <Setter TargetName="shape" Property="Fill" Value="White" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+        </Border>
+        <TabControl Grid.Row="1" BorderBrush="{x:Null}">
+            <TabItem Header="Общие" Template="{StaticResource InfoPanelTabsStyle}">
+                <ScrollViewer VerticalScrollBarVisibility="Hidden">
+                    <StackPanel Margin="5">
+                        <ItemsControl ItemsSource="{Binding CurrentPackage.TextField, Mode=Default}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="25" />
+                                            <RowDefinition />
+                                            <RowDefinition Height="10" />
+                                        </Grid.RowDefinitions>
+                                        <Label
+                                            Grid.Row="0"
+                                            Content="{Binding Label, Mode=Default, StringFormat={}{0}:}"
+                                            FontWeight="Bold" />
+                                        <Label
+                                            Name="PackageName"
+                                            Grid.Row="1"
+                                            Content="{Binding FieldValue, Mode=Default}" />
+                                        <Separator
+                                            Grid.Row="2"
+                                            Background="#FFF3F3F3"
+                                            BorderBrush="Azure" />
+                                    </Grid>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                        <Label Content="Описание" FontWeight="Bold" />
+                        <Label
+                            Width="250"
+                            Height="64"
+                            HorizontalAlignment="Left"
+                            Content="{Binding CurrentPackage.Description, Mode=Default}" />
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Header="Клавиши" Template="{StaticResource InfoPanelTabsStyle}">
+                <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Keyboard}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding Keys}" Header="Сочетание" />
+                        <DataGridTextColumn Binding="{Binding Description}" Header="Описание" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+            <TabItem Header="Свойства" Template="{StaticResource InfoPanelTabsStyle}" />
+            <TabItem Template="{StaticResource InfoPanelNewTabStyle}" />
+        </TabControl>
+    </Grid>
+</UserControl>

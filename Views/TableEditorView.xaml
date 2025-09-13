@@ -1,0 +1,17 @@
+﻿<Window x:Class="ProgramManager.Views.TableEditorView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ProgramManager.Views"
+        mc:Ignorable="d"
+        Title="TableEditorView" Height="450" Width="800">
+    <Grid>
+        <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Keyboard, Mode=Default}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Keys, Mode=Default}" Header="Сочетание" />
+                <DataGridTextColumn Binding="{Binding Description, Mode=Default}" Header="Описание" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>

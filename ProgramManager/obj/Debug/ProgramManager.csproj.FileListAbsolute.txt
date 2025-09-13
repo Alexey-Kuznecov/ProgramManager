@@ -38,28 +38,50 @@ C:\Users\Алексей\Documents\Visual Studio 2015\Projects\ProgramManager\Pro
 C:\Users\Алексей\Documents\Visual Studio 2015\Projects\ProgramManager\ProgramManager\obj\Debug\Views\DialogPacks\TagDialog.g.cs
 C:\Users\Алексей\Documents\Visual Studio 2015\Projects\ProgramManager\ProgramManager\obj\Debug\Views\DialogPacks\TagDialog.baml
 C:\Users\Алексей\Documents\Visual Studio 2015\Projects\ProgramManager\ProgramManager\obj\Debug\ProgramManager.csprojResolveAssemblyReference.cache
+<<<<<<< HEAD
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\ProgramManager.exe
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\ProgramManager.pdb
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\GalaSoft.MvvmLight.dll
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\GalaSoft.MvvmLight.Extras.dll
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\GalaSoft.MvvmLight.Platform.dll
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\System.Windows.Interactivity.dll
+=======
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\ProgramManager.exe
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\ProgramManager.pdb
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\ProgramManager.exe
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\ProgramManager.pdb
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\AsyncMvvmMessenger.dll
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\GalaSoft.MvvmLight.dll
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\GalaSoft.MvvmLight.Extras.dll
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\GalaSoft.MvvmLight.Platform.dll
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\Microsoft.Practices.ServiceLocation.dll
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\System.Windows.Interactivity.dll
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\AsyncMvvmMessenger.xml
+>>>>>>> ca87b0a1458075bdb18f5e61aba52b5e947baa11
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\GalaSoft.MvvmLight.pdb
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\GalaSoft.MvvmLight.xml
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\GalaSoft.MvvmLight.Extras.pdb
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\GalaSoft.MvvmLight.Extras.xml
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\GalaSoft.MvvmLight.Platform.pdb
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\GalaSoft.MvvmLight.Platform.xml
+<<<<<<< HEAD
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Resources\Generic.baml
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Resources\Icons.baml
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Views\DialogPacks\TabFiles.baml
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\App.baml
+=======
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\Microsoft.Practices.ServiceLocation.pdb
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\Microsoft.Practices.ServiceLocation.xml
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Views\DialogPacks\TabFiles.baml
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Views\DialogPacks\TagDialog.g.cs
+>>>>>>> ca87b0a1458075bdb18f5e61aba52b5e947baa11
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Views\PackagesDialog.g.cs
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Views\DialogPacks\InputName.g.cs
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Views\DialogPacks\TabFields.g.cs
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Views\DialogPacks\TabFiles.g.cs
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Views\MainView.g.cs
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\App.g.cs
+<<<<<<< HEAD
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\ProgramManager_Content.g.cs
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\GeneratedInternalTypeHelper.g.cs
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\ProgramManager_MarkupCompile.cache
@@ -67,6 +89,13 @@ D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\ProgramM
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Resources\MainStyles.baml
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Resources\PackageDialogStyles.baml
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Resources\IconsEditorDefaultStyles.baml
+=======
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\GeneratedInternalTypeHelper.g.cs
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\ProgramManager_MarkupCompile.cache
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\ProgramManager_MarkupCompile.lref
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\App.baml
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Views\DialogPacks\TagDialog.baml
+>>>>>>> ca87b0a1458075bdb18f5e61aba52b5e947baa11
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Views\PackagesDialog.baml
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Views\DialogPacks\InputName.baml
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Views\DialogPacks\TabFields.baml
@@ -74,6 +103,7 @@ D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Views\Ma
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\ProgramManager.g.resources
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\ProgramManager.Properties.Resources.resources
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\ProgramManager.csproj.GenerateResource.Cache
+<<<<<<< HEAD
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\ProgramManager.exe
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\ProgramManager.pdb
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Views\SettingsView.g.cs
@@ -93,3 +123,28 @@ D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Views\Ta
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Views\TagDialog.baml
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Views\SettingsControl\PluginControl.g.cs
 D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Views\SettingsControl\PluginControl.baml
+=======
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Views\DialogIcons.g.cs
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Views\DialogIcons.baml
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Resources\Generic.baml
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\Xceed.Wpf.AvalonDock.dll
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\Xceed.Wpf.AvalonDock.Themes.Aero.dll
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\Xceed.Wpf.AvalonDock.Themes.Metro.dll
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\Xceed.Wpf.AvalonDock.Themes.VS2010.dll
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\Xceed.Wpf.Toolkit.dll
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\de\Xceed.Wpf.AvalonDock.resources.dll
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\es\Xceed.Wpf.AvalonDock.resources.dll
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\fr\Xceed.Wpf.AvalonDock.resources.dll
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\hu\Xceed.Wpf.AvalonDock.resources.dll
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\it\Xceed.Wpf.AvalonDock.resources.dll
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\pt-BR\Xceed.Wpf.AvalonDock.resources.dll
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\ro\Xceed.Wpf.AvalonDock.resources.dll
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\ru\Xceed.Wpf.AvalonDock.resources.dll
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\sv\Xceed.Wpf.AvalonDock.resources.dll
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\bin\Debug\zh-Hans\Xceed.Wpf.AvalonDock.resources.dll
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Resources\Icons.baml
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Views\DialogPacks\IconCanvas.g.cs
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Views\DialogPacks\IconCanvas.baml
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\ProgramManager.csprojResolveAssemblyReference.cache
+D:\iWork\%projs%\ProgramManager\ProgramManager\ProgramManager\obj\Debug\Resources\IconStyle.baml
+>>>>>>> ca87b0a1458075bdb18f5e61aba52b5e947baa11

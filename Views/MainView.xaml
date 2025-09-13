@@ -1,0 +1,363 @@
+﻿<Window
+    x:Class="ProgramManager.Views.MainView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mcontrol="clr-namespace:ProgramManager.Views.MainControls"
+    xmlns:vm="clr-namespace:ProgramManager.ViewModels"
+    Title="Pragram Manager"
+    Width="1053"
+    Height="703"
+    MinWidth="870"
+    MinHeight="584"
+    MaxWidth="1053"
+    MaxHeight="703"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
+    <Window.DataContext>
+        <vm:MainViewModel />
+    </Window.DataContext>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="240" />
+            <ColumnDefinition Width="1.4*" />
+            <ColumnDefinition Width="1.5*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25" />
+            <RowDefinition Height="35" />
+            <RowDefinition Height="2" />
+            <RowDefinition Height="45" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Menu Grid.ColumnSpan="3">
+            <MenuItem
+                Height="20"
+                FontSize="12"
+                Header="Действие">
+                <MenuItem Header="Восстановить" />
+                <MenuItem Header="Создать резевную копию" />
+                <MenuItem Header="Обновить список" />
+                <MenuItem Header="Удалить из списка" />
+                <Separator />
+                <MenuItem Header="Добавить">
+                    <MenuItem Header="Добавить в избранное" />
+                    <MenuItem Header="Добавить тег" />
+                    <MenuItem Header="Добавить категорию" />
+                    <MenuItem Header="Добавить информацию" />
+                </MenuItem>
+                <Separator />
+                <MenuItem Header="Инпортировать" />
+                <MenuItem Header="Экспортировать" />
+                <Separator />
+                <MenuItem Command="{Binding CommandExit, Mode=Default}" Header="Выход" />
+            </MenuItem>
+            <MenuItem FontSize="12" Header="Команды">
+                <MenuItem Command="{Binding CommandCreatePackage, Mode=Default}" Header="Собрать пакет" />
+                <MenuItem Command="{Binding CommandUpdatePackage, Mode=Default}" Header="Отредактировать пакет" />
+                <MenuItem Header="Переименовать пакет" />
+                <MenuItem Header="Устнановка пакета" />
+                <MenuItem Command="{Binding CommandRemovePackage, Mode=Default}" Header="Удаление пакета" />
+                <Separator />
+                <MenuItem Header="Редактировать теги" />
+                <MenuItem Header="Редактировать категории" />
+                <MenuItem Header="Редактировать избранные" />
+            </MenuItem>
+            <MenuItem FontSize="12" Header="Инструменты">
+                <MenuItem Header="Мастер установки" />
+                <MenuItem Command="{Binding CommandOpenIconEditor, Mode=Default}" Header="Редактор иконок" />
+                <MenuItem Header="Редактор конфигурации" />
+            </MenuItem>
+            <MenuItem FontSize="12" Header="Настройки">
+                <MenuItem Command="{Binding CommandOpenSettings, Mode=Default}" Header="Параметры" />
+                <MenuItem Header="Скины">
+                    <MenuItem Header="По умолчанию" />
+                    <MenuItem Header="TotalCommander" />
+                    <MenuItem Header="Vista" />
+                    <MenuItem Header="Fenix Black" />
+                    <MenuItem Header="Fenix Light" />
+                    <MenuItem Header="Xoma" />
+                    <MenuItem Header="Monokai" />
+                    <MenuItem Header="Zirael Black" />
+                    <MenuItem Header="Zirael Light" />
+                </MenuItem>
+                <Separator />
+                <MenuItem Header="Боковая панель" />
+                <MenuItem Header="Cтрока состояния" />
+                <MenuItem Header="Панель инструментов" />
+            </MenuItem>
+            <MenuItem FontSize="12" Header="Справка">
+                <MenuItem Header="Руководство" />
+                <MenuItem Header="Скачать моды" />
+                <Separator />
+                <MenuItem Header="О программе" />
+            </MenuItem>
+        </Menu>
+        <WrapPanel
+            Grid.Row="1"
+            Grid.Column="0"
+            Grid.ColumnSpan="3"
+            VerticalAlignment="Center">
+            <Button
+                Height="30"
+                Margin="5,0,0,0"
+                Command="{Binding CommandExit, Mode=Default}"
+                Style="{StaticResource btIcon}">
+                <Button.Content>
+                    <ContentControl>
+                        <WrapPanel>
+                            <Image Width="18" Source="../Resources/Icons/Open_48px.png" />
+                            <Label
+                                Height="24"
+                                BorderBrush="{x:Null}"
+                                Content="Открыть" />
+                        </WrapPanel>
+                    </ContentControl>
+                </Button.Content>
+            </Button>
+            <Button
+                Height="30"
+                Command="{Binding CommandCreatePackage, Mode=Default}"
+                Style="{StaticResource btIcon}">
+                <Button.Content>
+                    <ContentControl>
+                        <WrapPanel>
+                            <Image Width="18" Source="../Resources/Icons/Add_Folder_48px.png" />
+                            <Label
+                                Height="24"
+                                BorderBrush="{x:Null}"
+                                Content="Создать" />
+                        </WrapPanel>
+                    </ContentControl>
+                </Button.Content>
+            </Button>
+            <Button
+                Height="30"
+                Command="{Binding CommandUpdatePackage, Mode=Default}"
+                Style="{StaticResource btIcon}">
+                <Button.Content>
+                    <ContentControl>
+                        <WrapPanel>
+                            <Image Width="18" Source="../Resources/Icons/Edit_48px.png" />
+                            <Label
+                                Height="24"
+                                BorderBrush="{x:Null}"
+                                Content="Редактировать" />
+                        </WrapPanel>
+                    </ContentControl>
+                </Button.Content>
+            </Button>
+            <Button Height="30" Style="{StaticResource btIcon}">
+                <Button.Content>
+                    <ContentControl>
+                        <WrapPanel>
+                            <Image Width="18" Source="../Resources/Icons/Rename_48px.png" />
+                            <Label
+                                Height="24"
+                                BorderBrush="{x:Null}"
+                                Content="Переименовать" />
+                        </WrapPanel>
+                    </ContentControl>
+                </Button.Content>
+            </Button>
+            <Button
+                Height="30"
+                Command="{Binding CommandRemovePackage, Mode=Default}"
+                Style="{StaticResource btIcon}">
+                <Button.Content>
+                    <ContentControl>
+                        <WrapPanel>
+                            <Image Width="18" Source="../Resources/Icons/Delete_48px.png" />
+                            <Label
+                                Height="24"
+                                BorderBrush="{x:Null}"
+                                Content="Удалить" />
+                        </WrapPanel>
+                    </ContentControl>
+                </Button.Content>
+            </Button>
+            <Rectangle
+                Width="1"
+                Height="25"
+                Margin="5"
+                Fill="#CDCDCD" />
+            <Button Height="30" Style="{StaticResource btIcon}">
+                <Button.Content>
+                    <ContentControl>
+                        <WrapPanel>
+                            <Image Width="18" Source="../Resources/Icons/Categorize_48px.png" />
+                            <Label
+                                Height="24"
+                                BorderBrush="{x:Null}"
+                                Content="Добавить в категории" />
+                        </WrapPanel>
+                    </ContentControl>
+                </Button.Content>
+            </Button>
+            <Button Height="30" Style="{StaticResource btIcon}">
+                <Button.Content>
+                    <ContentControl>
+                        <WrapPanel>
+                            <Image Width="18" Source="../Resources/Icons/Add_Tag_48px.png" />
+                            <Label
+                                Height="24"
+                                BorderBrush="{x:Null}"
+                                Content="Добавить тег" />
+                        </WrapPanel>
+                    </ContentControl>
+                </Button.Content>
+            </Button>
+        </WrapPanel>
+        <!--  Боковая панель  -->
+        <Rectangle
+            Grid.Row="2"
+            Grid.Column="0"
+            Grid.ColumnSpan="3"
+            Height="1"
+            Fill="#CDCDCD" />
+        <ComboBox
+            Grid.Row="3"
+            Grid.Column="0"
+            Margin="5,5,5,5"
+            Padding="10,7"
+            VerticalAlignment="Center"
+            ItemsSource="{Binding Categories, Mode=Default}"
+            SelectedIndex="0"
+            SelectedItem="{Binding CurrentCategory, Mode=Default}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock
+                            Width="auto"
+                            Height="30"
+                            Padding="5,3"
+                            Text="{Binding Name, Mode=Default}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <ListBox
+            Grid.Row="4"
+            Grid.Column="0"
+            Margin="5,0"
+            IsSynchronizedWithCurrentItem="True"
+            ItemsSource="{Binding WrapPackage, Mode=Default}"
+            SelectedIndex="{Binding IndexTag, Mode=Default}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <WrapPanel>
+                        <TextBlock
+                            Width="190"
+                            Height="30"
+                            Padding="5,8"
+                            Text="{Binding Name, Mode=Default}" />
+                        <Label Content="{Binding Packages.Count, Mode=Default}" />
+                    </WrapPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <!--  Центральная панель  -->
+        <StackPanel
+            Grid.Row="3"
+            Grid.Column="1"
+            Margin="0,5,0,0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="32" />
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="32" />
+                </Grid.ColumnDefinitions>
+                <Image Height="16" Source="../Resources/Icons/Search_48px.png" />
+                <TextBox
+                    Grid.Column="1"
+                    Tag="Искать..."
+                    Text="{Binding FilterText, Mode=Default, UpdateSourceTrigger=PropertyChanged}" />
+                <Button
+                    Grid.Column="2"
+                    Margin="4"
+                    Style="{StaticResource btIcon}">
+                    <Button.Content>
+                        <ContentControl>
+                            <Image Height="16" Source="../Resources/Icons/Delete_48px.png" />
+                        </ContentControl>
+                    </Button.Content>
+                </Button>
+            </Grid>
+        </StackPanel>
+        <!--  Список программ  -->
+        <ListBox
+            Grid.Row="4"
+            Grid.Column="1"
+            ItemsSource="{Binding WrapPackage/Packages, Mode=Default}"
+            SelectedIndex="{Binding IndexPackage, Mode=Default}"
+            SelectedItem="{Binding CurrentPackage, Mode=TwoWay}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <WrapPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="45" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Viewbox>
+                                <ContentControl
+                                    Content="{Binding Icon, Mode=Default}"
+                                    Style="{StaticResource IconStylesMain}"
+                                    Template="{StaticResource IconTemplateMain}" />
+                            </Viewbox>
+                            <TextBlock
+                                Grid.Column="1"
+                                Height="45"
+                                Margin="5,0,0,0"
+                                Padding="15,15"
+                                Text="{Binding Name, Mode=Default}" />
+                        </Grid>
+                    </WrapPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <Grid
+            Grid.Row="3"
+            Grid.RowSpan="2"
+            Grid.Column="2"
+            Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="50" />
+            </Grid.RowDefinitions>
+            <!--  Панель с информацией об моде  -->
+            <ContentPresenter
+                Grid.Row="0"
+                Margin="0"
+                VerticalAlignment="Top">
+                <ContentPresenter.Content>
+                    <mcontrol:InfoPanelDefaultView />
+                </ContentPresenter.Content>
+            </ContentPresenter>
+            <!--  Понель состояния  -->
+            <StackPanel
+                Grid.Row="1"
+                Margin="5,0,0,10"
+                HorizontalAlignment="Center">
+                <Button
+                    Width="100"
+                    Height="30"
+                    Margin="5,10,5,10"
+                    Command="{Binding CommandTestCommand, Mode=Default}"
+                    Content="Установить" />
+                <Rectangle Width="240" Height="1" />
+            </StackPanel>
+            <!--  Понель состояния  -->
+            <WrapPanel
+                Grid.Row="2"
+                Margin="0,0,0,10"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center">
+                <Label Content="Установлено: 5" FontSize="11" />
+                <Label Content="Пакеты: 13" FontSize="11" />
+            </WrapPanel>
+        </Grid>
+    </Grid>
+</Window>

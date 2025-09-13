@@ -12,11 +12,19 @@
     d:DesignWidth="500"
     mc:Ignorable="d">
     <UserControl.Resources>
+<<<<<<< HEAD
         <converters:PackageFieldConverter x:Key="FieldConverter" />
         <!--  Элементы из данного шаблона будет созданы для каждого элемента списка  -->
         <DataTemplate DataType="{x:Type packageModel:TextFieldModel}">
             <StackPanel>
                 <Label>
+=======
+        <converters:FieldConverter x:Key="FieldConverter" />
+        <!--  Элементы из данного шаблона будет созданы для каждого элемента списка  -->
+        <DataTemplate DataType="{x:Type packageModel:TextFieldModel}">
+            <StackPanel>
+                <Label Grid.Row="0">
+>>>>>>> ca87b0a1458075bdb18f5e61aba52b5e947baa11
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="300*" />
@@ -53,7 +61,11 @@
                             <Button
                                 Height="28"
                                 Margin="5,0,0,0"
+<<<<<<< HEAD
                                 Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Path=DataContext.CommandRemoveTextField}"
+=======
+                                Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}, Path=DataContext.CmdRemoveTextField}"
+>>>>>>> ca87b0a1458075bdb18f5e61aba52b5e947baa11
                                 CommandParameter="{Binding}">
                                 <ContentControl>
                                     <Image Height="24" Source="{Binding Path=DeleteTextFieldIcon}" />
